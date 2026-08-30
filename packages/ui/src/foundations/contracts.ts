@@ -20,7 +20,7 @@ export const surfaceVariants = [
 
 export type SurfaceVariant = (typeof surfaceVariants)[number];
 
-export type SurfaceLevelInput = number | `${number}`;
+export type SurfaceLevelInput = number | string;
 
 export const overlayPhases = [
   'closed',

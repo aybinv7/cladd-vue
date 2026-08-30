@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { Chip } from '@cladd-vue/ui';
-import type { Color } from '@cladd-vue/ui';
+import type { Color, SurfaceVariant, UiSize } from '@cladd-vue/ui';
 import { computed, ref } from 'vue';
 
 import CatalogSection from '../components/CatalogSection.vue';
@@ -18,8 +18,8 @@ const props = defineProps<{
 const color = ref<Color>('neutral');
 const disabled = ref(false);
 const rounded = ref(false);
-const size = ref('md');
-const variant = ref('gradient');
+const size = ref<UiSize>('md');
+const variant = ref<SurfaceVariant>('gradient');
 const sizes = ['2xs', 'xs', 'sm', 'md', 'lg', 'xl', '2xl'] as const;
 const variants = ['gradient', 'solid', 'transparent', 'gradient-fill'] as const;
 const code = computed(

@@ -33,6 +33,6 @@ function onClosed(toast: ToastsPortalData): void {
     :timeout="toast.timeout"
     :title="toast.title"
     @closed="onClosed(toast)"
-    @update:open="(open: boolean) => setOpen(toast, open)"
+    @update:open="(open?: boolean) => setOpen(toast, open ?? false)"
   />
 </template>

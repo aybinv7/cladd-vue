@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { Segmented, SegmentedButton } from '@cladd-vue/ui';
-import type { Color } from '@cladd-vue/ui';
+import type { Color, UiSize } from '@cladd-vue/ui';
 import { computed, ref } from 'vue';
 
 import CatalogSection from '../components/CatalogSection.vue';
@@ -20,7 +20,7 @@ const segmentedOptions = ['Grid', 'List', 'Table'] as const;
 const segmentedActive = ref<(typeof segmentedOptions)[number]>('Grid');
 const segmentedRounded = ref(true);
 const segmentedDisabled = ref(false);
-const segmentedSize = ref('md');
+const segmentedSize = ref<UiSize>('md');
 const segmentedCode = computed(
   () => `<Segmented ${segmentedRounded.value ? '' : ':rounded="false"'} size="${segmentedSize.value}">
 ${segmentedOptions

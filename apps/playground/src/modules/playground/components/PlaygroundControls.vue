@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { Button, Select } from '@cladd-vue/ui';
-import type { Color, UiTheme } from '@cladd-vue/ui';
+import type { Color, SelectValue, UiTheme } from '@cladd-vue/ui';
 
 const props = defineProps<{
   accent: Color;
@@ -33,8 +33,9 @@ const accentOptions = accents.map((accent) => ({
   value: accent,
 }));
 
-function changeAccent(value: string): void {
-  emit('updateAccent', value as Color);
+function changeAccent(value: SelectValue | SelectValue[]): void {
+  if (Array.isArray(value)) return;
+  emit('updateAccent', String(value) as Color);
 }
 </script>
 

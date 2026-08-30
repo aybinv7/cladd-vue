@@ -261,7 +261,8 @@ test('keeps top-level popovers mutually exclusive', async () => {
             Popover,
             {
               open: first.value,
-              'onUpdate:open': (value: boolean) => (first.value = value),
+              'onUpdate:open': (value?: boolean) =>
+                (first.value = value ?? false),
             },
             { default: () => 'first popover' },
           ),
@@ -269,7 +270,8 @@ test('keeps top-level popovers mutually exclusive', async () => {
             Popover,
             {
               open: second.value,
-              'onUpdate:open': (value: boolean) => (second.value = value),
+              'onUpdate:open': (value?: boolean) =>
+                (second.value = value ?? false),
             },
             { default: () => 'second popover' },
           ),

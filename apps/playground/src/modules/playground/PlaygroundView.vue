@@ -46,7 +46,7 @@ watchEffect(() => {
         <SectionNav :entries="catalogEntries" />
         <main class="playground-main">
           <PlaygroundControls
-            :color="accent"
+            :accent="accent"
             :interactions-enabled="interactionsEnabled"
             :theme="theme"
             @update-accent="accent = $event"
@@ -58,7 +58,7 @@ watchEffect(() => {
               <component
                 :is="Component"
                 :key="route.path"
-                :color="accent"
+                :accent="accent"
                 :interactions-enabled="interactionsEnabled"
               />
             </Transition>

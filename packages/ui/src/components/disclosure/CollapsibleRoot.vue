@@ -27,7 +27,7 @@ const baseId = useId();
 const internalOpen = shallowRef(d.value.defaultOpen);
 const isControlled = computed(() => d.value.open !== undefined);
 const open = computed(() =>
-  isControlled.value ? d.value.open : internalOpen.value,
+  isControlled.value ? (d.value.open ?? false) : internalOpen.value,
 );
 
 function setOpen(next: boolean): void {

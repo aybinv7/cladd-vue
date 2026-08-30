@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { Tab, TabPanel, Tabs, TabsList } from '@cladd-vue/ui';
-import type { Color } from '@cladd-vue/ui';
+import type { Color, UiSize } from '@cladd-vue/ui';
 import { computed, ref } from 'vue';
 
 import CatalogSection from '../components/CatalogSection.vue';
@@ -15,7 +15,7 @@ defineProps<{
 }>();
 
 const tabValue = ref('overview');
-const size = ref('md');
+const size = ref<UiSize>('md');
 const rounded = ref(true);
 const keepMounted = ref(false);
 const sizes = ['sm', 'md', 'lg'] as const;

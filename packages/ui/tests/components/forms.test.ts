@@ -324,7 +324,7 @@ test('maps native slider input to the scalar model', async () => {
     h(Slider, {
       'aria-label': 'Sampling rate',
       'data-testid': 'slider',
-      'onUpdate:modelValue': (next: number) => (value.value = next),
+      'onUpdate:modelValue': (next?: number) => (value.value = next ?? 0),
       step: 5,
     }),
   );
@@ -356,7 +356,7 @@ test('matches Cladd slider scale and track contracts', async () => {
       rangeFill: true,
       rounded: true,
       scale: 'log',
-      'onUpdate:modelValue': (next: number) => (value.value = next),
+      'onUpdate:modelValue': (next?: number) => (value.value = next ?? 0),
       variant: 'track',
     }),
   );

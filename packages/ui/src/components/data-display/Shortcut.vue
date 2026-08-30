@@ -209,7 +209,7 @@ onBeforeMount(() => {
 </script>
 
 <template>
-  <component :is="d.as" v-bind="$attrs" class="cladd-shortcut">
+  <component :is="d.as" v-bind="$attrs" :class="rootClass">
     <Surface
       v-for="(entry, index) in shortcutEntries()"
       :key="index"

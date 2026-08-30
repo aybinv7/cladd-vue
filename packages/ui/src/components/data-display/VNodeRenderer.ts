@@ -4,11 +4,11 @@ export default defineComponent({
   name: 'VNodeRenderer',
   props: {
     node: {
-      type: Object as PropType<VNode>,
-      required: true,
+      type: Object as PropType<VNode | undefined>,
+      default: undefined,
     },
   },
   setup(props) {
-    return () => props.node;
+    return () => props.node ?? null;
   },
 });

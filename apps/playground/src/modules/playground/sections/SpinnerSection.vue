@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { Spinner } from '@cladd-vue/ui';
-import type { Color } from '@cladd-vue/ui';
+import type { Color, UiSize } from '@cladd-vue/ui';
 import { computed, ref } from 'vue';
 
 import CatalogSection from '../components/CatalogSection.vue';
@@ -15,7 +15,7 @@ defineProps<{
 }>();
 
 const color = ref<Color>('neutral');
-const size = ref('md');
+const size = ref<UiSize>('md');
 const sizes = ['2xs', 'xs', 'sm', 'md', 'lg', 'xl', '2xl'] as const;
 const code = computed(
   () => `<Spinner

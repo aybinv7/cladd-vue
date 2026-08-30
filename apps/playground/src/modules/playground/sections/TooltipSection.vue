@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { Button, Tooltip } from '@cladd-vue/ui';
-import type { Color } from '@cladd-vue/ui';
+import type { Color, TooltipPosition } from '@cladd-vue/ui';
 import { computed, ref } from 'vue';
 
 import CatalogSection from '../components/CatalogSection.vue';
@@ -13,7 +13,7 @@ const props = defineProps<{
   interactionsEnabled: boolean;
 }>();
 
-const tooltipPosition = ref('top');
+const tooltipPosition = ref<TooltipPosition>('top');
 const tooltipPositions = ['top', 'bottom'] as const;
 
 const tooltipCode = computed(

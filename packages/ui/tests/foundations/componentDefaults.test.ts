@@ -304,7 +304,7 @@ test('threads defaults through Popover and TooltipPrimitive', async () => {
         {
           'data-testid': 'popover',
           open: open.value,
-          'onUpdate:open': (v: boolean) => (open.value = v),
+          'onUpdate:open': (v?: boolean) => (open.value = v ?? false),
         },
         { default: () => 'content' },
       ),
@@ -325,7 +325,7 @@ test('threads defaults through Popover and TooltipPrimitive', async () => {
         {
           'data-testid': 'tooltip',
           open: open.value,
-          'onUpdate:open': (v: boolean) => (open.value = v),
+          'onUpdate:open': (v?: boolean) => (open.value = v ?? false),
         },
         { default: () => 'hint' },
       ),
@@ -345,7 +345,7 @@ test('threads defaults through Dialog', async () => {
       {
         'data-testid': 'dialog',
         open: open.value,
-        'onUpdate:open': (v: boolean) => (open.value = v),
+        'onUpdate:open': (v?: boolean) => (open.value = v ?? false),
       },
       { default: () => 'content' },
     ),
@@ -367,7 +367,7 @@ test('threads defaults through Popup', async () => {
       {
         'data-testid': 'popup',
         open: open.value,
-        'onUpdate:open': (v: boolean) => (open.value = v),
+        'onUpdate:open': (v?: boolean) => (open.value = v ?? false),
       },
       { default: () => 'content' },
     ),

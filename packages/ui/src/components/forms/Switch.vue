@@ -68,7 +68,6 @@ const isReadOnly = computed(
 );
 const checked = computed(() => d.value.checked ?? model.value);
 const currentAccent = computed(() => d.value.color ?? ui.accentColor.value);
-const hoverable = computed(() => d.value.hoverable ?? d.value.as === 'label');
 const focusable = computed(
   () => d.value.focusable ?? (d.value.as === 'label' || d.value.input),
 );

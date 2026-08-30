@@ -10,7 +10,7 @@ import {
   PopoverRoot,
   PopoverTrigger,
 } from '@cladd-vue/ui';
-import type { Color } from '@cladd-vue/ui';
+import type { Color, PopoverPosition } from '@cladd-vue/ui';
 import { computed, ref } from 'vue';
 
 import CatalogSection from '../components/CatalogSection.vue';
@@ -25,7 +25,7 @@ const props = defineProps<{
 }>();
 
 const popoverOpen = ref(false);
-const popoverPosition = ref('bottom');
+const popoverPosition = ref<PopoverPosition>('bottom');
 const popoverBackdrop = ref(false);
 
 const popoverPositions = ['top', 'bottom', 'left', 'right', 'center'] as const;

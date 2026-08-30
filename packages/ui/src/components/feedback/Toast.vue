@@ -1,12 +1,5 @@
 <script setup lang="ts">
-import {
-  computed,
-  onMounted,
-  onUnmounted,
-  shallowRef,
-  useAttrs,
-  type Component,
-} from 'vue';
+import { computed, onMounted, onUnmounted, shallowRef, useAttrs } from 'vue';
 
 import { useComponentDefaults } from '../../composables/useComponentDefaults.ts';
 import { useOverlayLifecycle } from '../../composables/useOverlayLifecycle.ts';

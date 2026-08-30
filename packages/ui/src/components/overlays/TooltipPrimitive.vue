@@ -132,6 +132,7 @@ provideSurfaceColorReset();
         :data-open="opened || undefined"
         :data-position="d.position"
         :level="currentSurfaceLevel"
+        :style="surfaceStyle"
         outline
         variant="gradient"
       >
