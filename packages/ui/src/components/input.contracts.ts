@@ -4,6 +4,9 @@ import type { UiSize } from '../foundations/contracts.ts';
 import type { Color } from '../types.ts';
 import type { FieldSize } from './form.contracts.ts';
 
+/** Input size token, spelled out as upstream declares it. */
+export type InputSize = 'sm' | 'md' | 'lg' | 'xl' | '2xl';
+
 export interface InputProps {
   /** Polymorphic wrapper element. Defaults to `'div'`. */
   as?: string | Component;

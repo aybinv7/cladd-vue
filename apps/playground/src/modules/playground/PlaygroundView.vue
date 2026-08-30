@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { CladdProvider } from '@cladd-vue/ui';
-import type { Color, UiTheme } from '@cladd-vue/ui';
+import type { Color } from '@cladd-vue/ui';
 import { ref, watchEffect } from 'vue';
 import { RouterView } from 'vue-router';
 
@@ -12,8 +12,9 @@ import {
   catalogEntries,
   catalogStateCount,
 } from './playground.data';
+import type { PlaygroundTheme } from './playground.types.ts';
 
-const theme = ref<UiTheme>('dark');
+const theme = ref<PlaygroundTheme>('dark');
 const accent = ref<Color>('neutral');
 const interactionsEnabled = ref(true);
 

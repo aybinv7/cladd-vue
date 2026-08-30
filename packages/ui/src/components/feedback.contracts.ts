@@ -7,6 +7,9 @@ import type {
 } from '../foundations/contracts.ts';
 import type { Color } from '../types.ts';
 
+/** Spinner size token, spelled out as upstream declares it. */
+export type SpinnerSize = '2xs' | 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl';
+
 export interface SpinnerProps {
   /** Accent color for the spinning ring. Default: theme accent. */
   color?: Color;

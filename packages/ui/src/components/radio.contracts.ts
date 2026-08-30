@@ -3,6 +3,9 @@ import type { Component } from 'vue';
 import type { Color } from '../types.ts';
 import type { ChoiceSize } from './form.contracts.ts';
 
+/** Radio size token, spelled out as upstream declares it. */
+export type RadioSize = 'xs' | 'sm' | 'md';
+
 export interface RadioProps {
   /** Polymorphic root element. Defaults to `'label'`. */
   as?: string | Component;

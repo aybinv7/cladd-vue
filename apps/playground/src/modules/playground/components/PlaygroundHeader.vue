@@ -1,11 +1,12 @@
 <script setup lang="ts">
 import { Button, Chip, Shortcut } from '@cladd-vue/ui';
-import type { UiTheme } from '@cladd-vue/ui';
+
+import type { PlaygroundTheme } from '../playground.types.ts';
 
 defineProps<{
   componentCount: number;
   stateCount: number;
-  theme: UiTheme;
+  theme: PlaygroundTheme;
 }>();
 
 const emit = defineEmits<{

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { Toolbar, ToolbarButton, ToolbarSeparator } from '@cladd-vue/ui';
-import type { Color, UiSize } from '@cladd-vue/ui';
+import type { Color, ButtonSize } from '@cladd-vue/ui';
 import { computed, ref } from 'vue';
 
 import CatalogSection from '../components/CatalogSection.vue';
@@ -15,7 +15,7 @@ const props = defineProps<{
 
 const sizes = ['2xs', 'xs', 'sm', 'md', 'lg', 'xl', '2xl'] as const;
 
-const toolbarSize = ref<UiSize>('md');
+const toolbarSize = ref<ButtonSize>('md');
 const toolbarCode = computed(
   () => `<Toolbar size="${toolbarSize.value}">
   <ToolbarButton>Copy</ToolbarButton>

@@ -1,12 +1,7 @@
 <script setup lang="ts">
-import {
-  Surface,
-  SurfaceCut,
-  CladdProvider,
-  type UiTheme,
-} from '../../src/index.ts';
+import { Surface, SurfaceCut, CladdProvider } from '../../src/index.ts';
 
-const themes: UiTheme[] = ['dark', 'light'];
+const themes: ('dark' | 'light')[] = ['dark', 'light'];
 </script>
 
 <template>

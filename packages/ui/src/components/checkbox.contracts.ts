@@ -3,6 +3,9 @@ import type { Component } from 'vue';
 import type { Color } from '../types.ts';
 import type { ChoiceSize } from './form.contracts.ts';
 
+/** Checkbox size token, spelled out as upstream declares it. */
+export type CheckboxSize = 'xs' | 'sm' | 'md';
+
 export interface CheckboxProps {
   /** Polymorphic root element. Defaults to `'label'`. */
   as?: string | Component;

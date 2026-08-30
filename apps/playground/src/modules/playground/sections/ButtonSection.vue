@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { Button } from '@cladd-vue/ui';
-import type { Color, SurfaceVariant, UiSize } from '@cladd-vue/ui';
+import type { Color, SurfaceVariant, ButtonSize } from '@cladd-vue/ui';
 import { computed, ref } from 'vue';
 
 import CatalogSection from '../components/CatalogSection.vue';
@@ -18,7 +18,7 @@ const props = defineProps<{
 const color = ref<Color>('neutral');
 const disabled = ref(false);
 const readOnly = ref(false);
-const size = ref<UiSize>('md');
+const size = ref<ButtonSize>('md');
 const variant = ref<SurfaceVariant>('gradient');
 const sizes = ['2xs', 'xs', 'sm', 'md', 'lg', 'xl', '2xl'] as const;
 const variants = ['gradient', 'solid', 'transparent', 'gradient-fill'] as const;

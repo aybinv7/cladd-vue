@@ -3,6 +3,9 @@ import type { Component } from 'vue';
 import type { Color } from '../types.ts';
 import type { FieldSize } from './form.contracts.ts';
 
+/** Textarea size token, spelled out as upstream declares it. */
+export type TextareaSize = 'sm' | 'md' | 'lg' | 'xl' | '2xl';
+
 export interface TextareaProps {
   /** Polymorphic wrapper element. Defaults to `'div'`. */
   as?: string | Component;

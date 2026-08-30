@@ -6,11 +6,11 @@ import {
   SurfaceCut,
   SurfaceCutContent,
 } from '@cladd-vue/ui';
-import type { Color, SurfaceLevel, SurfaceVariant } from '@cladd-vue/ui';
+import type { Color, SurfaceVariant } from '@cladd-vue/ui';
 
 import CatalogSection from '../components/CatalogSection.vue';
 
-const surfaceLevels: SurfaceLevel[] = [1, 2, 3, 4, 5];
+const surfaceLevels = [1, 2, 3, 4, 5];
 const surfaceVariants: SurfaceVariant[] = [
   'transparent',
   'solid',

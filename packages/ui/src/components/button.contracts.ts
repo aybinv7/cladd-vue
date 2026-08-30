@@ -7,6 +7,9 @@ import type {
 } from '../foundations/contracts.ts';
 import type { Color } from '../types.ts';
 
+/** Button size token, spelled out as upstream declares it. */
+export type ButtonSize = '2xs' | 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl';
+
 export const buttonSpinnerSizes: Record<UiSize, UiSize> = {
   '2xs': '2xs',
   xs: '2xs',

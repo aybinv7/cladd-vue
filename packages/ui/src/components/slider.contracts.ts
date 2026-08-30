@@ -5,6 +5,9 @@ import type {
   SliderVariant,
 } from './form.contracts.ts';
 
+/** Slider size token, spelled out as upstream declares it. */
+export type SliderSize = 'xs' | 'sm' | 'md';
+
 export interface SliderProps {
   /** Accent color for the active track segment and thumb. Default: theme accent for `variant="thumb"`. */
   color?: Color;

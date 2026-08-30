@@ -69,32 +69,53 @@ test.skipIf(!upstreamHydrated)('keeps the not-yet-ported list honest', () => {
 });
 
 /**
- * Type exports the port does not ship yet. Same rule as `notYetPorted`: this is
- * a queue, not a decision.
+ * Type exports the port does not ship yet. Same rule as `notYetPorted`: a queue,
+ * not a decision. Each of these is a props interface declared inline in its
+ * `.vue` via `defineProps<{...}>()` rather than in a contracts file, so there is
+ * nothing to re-export. Lifting one into its contracts file removes it here.
  */
-const typesNotYetPorted = new Set<string>();
+const typesNotYetPorted = new Set([
+  'AccordionIndicatorProps',
+  'AccordionIndicatorState',
+  'AccordionPanelDefaultProps',
+  'AccordionPanelProps',
+  'AccordionTriggerProps',
+  'BackdropDefaultProps',
+  'BackdropProps',
+  'CladdProviderProps',
+  'CollapsibleTriggerProps',
+  'DialogCloseProps',
+  'DialogRootProps',
+  'DialogTriggerProps',
+  'ListItemProps',
+  'ListProps',
+  'ListSeparatorProps',
+  'ListTitleProps',
+  'PopoverCloseProps',
+  'PopoverRootProps',
+  'PopoverTriggerProps',
+  'PopupCloseProps',
+  'PopupRootProps',
+  'PopupTriggerProps',
+  'SectionTitleProps',
+  'TabsListProps',
+  'ToastCloseProps',
+  'ToastRootProps',
+  'ToastTriggerProps',
+  'ToggleButtonProps',
+  'ToolbarButtonProps',
+  'ToolbarSeparatorDefaultProps',
+  'ToolbarSeparatorProps',
+]);
 
 /**
  * Type exports the port ships that upstream does not. Every one is debt, listed
  * in plans/upstream-parity-realignment.md. Do not add without a plan entry.
  */
 const allowedExtraTypeExports = new Set([
-  // Upstream declares a size union per component (ButtonSize, CheckboxSize,
-  // ChipSize, InputSize, RadioSize, ...). The port centralised them instead.
-  'ChoiceSize',
-  'FieldSize',
-  'UiSize',
-  // Upstream has no theme, surface-level or overlay-phase union at all.
-  'OverlayPhase',
-  'SurfaceLevel',
-  'SurfaceLevelInput',
-  'UiTheme',
-  // Declared upstream but not exported from its index.
-  'ButtonSurface',
-  'SliderScale',
-  'PopoverOffset',
-  'OverlayOffsetValue',
-  // Vue-side Select and useDialog surfaces with no upstream counterpart.
+  // Vue-side surfaces with no upstream counterpart. A Vue consumer needs these
+  // to type `v-model` bindings and slot props; React's inference covers the
+  // same ground without a named export.
   'DialogApi',
   'SelectOption',
   'SelectOptionInput',
@@ -118,6 +139,18 @@ test.skipIf(!upstreamHydrated)(
     );
   },
 );
+
+test.skipIf(!upstreamHydrated)('exports every upstream type', () => {
+  const upstream = typeExports(join(upstreamRoot, 'src', 'index.ts'));
+  const port = typeExports(join(packageRoot, 'src', 'index.ts'));
+
+  const missing = [...upstream]
+    .filter((name) => !port.has(name))
+    .filter((name) => !typesNotYetPorted.has(name))
+    .sort();
+
+  expect(missing, 'upstream type exports with no counterpart').toEqual([]);
+});
 
 test.skipIf(!upstreamHydrated)('keeps the type-export queue honest', () => {
   const port = typeExports(join(packageRoot, 'src', 'index.ts'));

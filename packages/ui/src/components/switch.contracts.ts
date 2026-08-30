@@ -5,7 +5,9 @@ import type {
   SurfaceVariant,
 } from '../foundations/contracts.ts';
 import type { Color } from '../types.ts';
-import type { SwitchSize } from './form.contracts.ts';
+
+/** Switch size token, spelled out as upstream declares it. */
+export type SwitchSize = 'sm' | 'md';
 
 export interface SwitchProps {
   /** Polymorphic root element. Defaults to `'label'`. */

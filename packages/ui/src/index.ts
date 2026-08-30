@@ -1,13 +1,6 @@
 export { type Color } from './types.ts';
 
-export type {
-  OverlayPhase,
-  SurfaceLevel,
-  SurfaceLevelInput,
-  SurfaceVariant,
-  UiSize,
-  UiTheme,
-} from './foundations/contracts.ts';
+export type { SurfaceVariant } from './foundations/contracts.ts';
 
 export { useSurface } from './contexts/surfaceContext.ts';
 export {
@@ -97,7 +90,6 @@ export type {
   SurfaceCutContentDefaultProps,
 } from './components/surface.contracts.ts';
 export { default as Button } from './components/Button.vue';
-export type { ButtonSurface } from './components/button.contracts.ts';
 export { default as Segmented } from './components/Segmented.vue';
 export { default as SegmentedButton } from './components/SegmentedButton.vue';
 export { default as Toolbar } from './components/Toolbar.vue';
@@ -160,18 +152,24 @@ export { default as PopupTrigger } from './components/PopupTrigger.vue';
 export { default as Tooltip } from './components/Tooltip.vue';
 export { default as TooltipPrimitive } from './components/TooltipPrimitive.vue';
 export type {
-  OverlayOffsetValue,
-  PopoverOffset,
   PopoverPosition,
   TooltipPosition,
 } from './components/overlay.contracts.ts';
+export type { SliderVariant } from './components/form.contracts.ts';
+
+// Upstream declares a size union per component rather than a shared one.
+export type { ButtonSize } from './components/button.contracts.ts';
+export type { CheckboxSize } from './components/checkbox.contracts.ts';
 export type {
-  ChoiceSize,
-  FieldSize,
-  SliderScale,
-  SliderVariant,
-  SwitchSize,
-} from './components/form.contracts.ts';
+  ChipSize,
+  ShortcutSize,
+} from './components/dataDisplay.contracts.ts';
+export type { SpinnerSize } from './components/feedback.contracts.ts';
+export type { InputSize } from './components/input.contracts.ts';
+export type { RadioSize } from './components/radio.contracts.ts';
+export type { SliderSize } from './components/slider.contracts.ts';
+export type { SwitchSize } from './components/switch.contracts.ts';
+export type { TextareaSize } from './components/textarea.contracts.ts';
 
 export { default as CloseIcon } from './components/icons/CloseIcon.vue';
 export { default as SearchIcon } from './components/icons/SearchIcon.vue';
@@ -180,3 +178,118 @@ export { default as CheckIcon } from './components/icons/CheckIcon.vue';
 
 export { cn } from './shared/cn.ts';
 export { nextTick } from './shared/nextTick.ts';
+
+// Upstream exports the props type of every component.
+export type {
+  AccordionItemDefaultProps,
+  AccordionItemProps,
+  AccordionRootDefaultProps,
+  AccordionRootProps,
+} from './components/accordion.contracts.ts';
+export type {
+  ButtonDefaultProps,
+  ButtonProps,
+} from './components/button.contracts.ts';
+export type {
+  CheckboxDefaultProps,
+  CheckboxProps,
+} from './components/checkbox.contracts.ts';
+export type {
+  CollapsibleIndicatorDefaultProps,
+  CollapsibleIndicatorProps,
+  CollapsiblePanelDefaultProps,
+  CollapsiblePanelProps,
+  CollapsibleRootDefaultProps,
+  CollapsibleRootProps,
+} from './components/collapsible.contracts.ts';
+export type {
+  ChipDefaultProps,
+  ChipProps,
+  ListButtonDefaultProps,
+  ListButtonProps,
+  ListDefaultProps,
+  ListItemDefaultProps,
+  ListSeparatorDefaultProps,
+  ListTitleDefaultProps,
+  SectionTitleDefaultProps,
+  ShortcutDefaultProps,
+  ShortcutProps,
+} from './components/dataDisplay.contracts.ts';
+export type {
+  SpinnerDefaultProps,
+  SpinnerProps,
+  ToastDefaultProps,
+  ToastProps,
+} from './components/feedback.contracts.ts';
+export type {
+  InputDefaultProps,
+  InputProps,
+} from './components/input.contracts.ts';
+export type {
+  DialogDefaultProps,
+  DialogProps,
+  PopoverDefaultProps,
+  PopoverProps,
+  TooltipDefaultProps,
+  TooltipPrimitiveDefaultProps,
+  TooltipPrimitiveProps,
+  TooltipProps,
+} from './components/overlay.contracts.ts';
+export type {
+  PopupContentDefaultProps,
+  PopupContentProps,
+  PopupDefaultProps,
+  PopupProps,
+} from './components/popup.contracts.ts';
+export type {
+  RadioDefaultProps,
+  RadioProps,
+} from './components/radio.contracts.ts';
+export type {
+  SearchFieldDefaultProps,
+  SearchFieldProps,
+} from './components/searchField.contracts.ts';
+export type {
+  SegmentedButtonDefaultProps,
+  SegmentedButtonProps,
+  SegmentedDefaultProps,
+  SegmentedProps,
+} from './components/segmented.contracts.ts';
+export type { SelectDefaultProps } from './components/select.contracts.ts';
+export type {
+  SliderDefaultProps,
+  SliderProps,
+} from './components/slider.contracts.ts';
+export type {
+  SurfaceCutDefaultProps,
+  SurfaceCutProps,
+  SurfaceDefaultProps,
+  SurfaceProps,
+} from './components/surface.contracts.ts';
+export type {
+  SwitchDefaultProps,
+  SwitchProps,
+} from './components/switch.contracts.ts';
+export type {
+  TabDefaultProps,
+  TabPanelDefaultProps,
+  TabPanelProps,
+  TabProps,
+  TabsDefaultProps,
+  TabsListDefaultProps,
+  TabsProps,
+} from './components/tabs.contracts.ts';
+export type {
+  TextareaDefaultProps,
+  TextareaProps,
+} from './components/textarea.contracts.ts';
+export type {
+  ToggleButtonDefaultProps,
+  ToggleGroupDefaultProps,
+  ToggleGroupProps,
+} from './components/toggleGroup.contracts.ts';
+export type {
+  ToolbarButtonDefaultProps,
+  ToolbarDefaultProps,
+  ToolbarProps,
+} from './components/toolbar.contracts.ts';

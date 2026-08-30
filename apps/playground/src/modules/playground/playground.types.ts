@@ -1,9 +1,12 @@
-import type { Color, UiTheme } from '@cladd-vue/ui';
+import type { Color } from '@cladd-vue/ui';
+
+/** The library takes `'dark' | 'light'`; upstream declares no theme union to import. */
+export type PlaygroundTheme = 'dark' | 'light';
 
 export interface PlaygroundPreferences {
   accent: Color;
   interactionsEnabled: boolean;
-  theme: UiTheme;
+  theme: PlaygroundTheme;
 }
 
 export interface CatalogEntry {

@@ -7,6 +7,12 @@ import type {
 } from '../foundations/contracts.ts';
 import type { Color } from '../types.ts';
 
+/** Shortcut size token, spelled out as upstream declares it. */
+export type ShortcutSize = '2xs' | 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl';
+
+/** Chip size token, spelled out as upstream declares it. */
+export type ChipSize = '2xs' | 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl';
+
 export interface ChipProps {
   /** Polymorphic root element. Defaults to `'span'`. */
   as?: string | Component;

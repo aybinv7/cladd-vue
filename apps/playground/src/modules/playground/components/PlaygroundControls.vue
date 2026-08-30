@@ -1,17 +1,19 @@
 <script setup lang="ts">
 import { Button, Select } from '@cladd-vue/ui';
-import type { Color, SelectValue, UiTheme } from '@cladd-vue/ui';
+import type { Color, SelectValue } from '@cladd-vue/ui';
+
+import type { PlaygroundTheme } from '../playground.types.ts';
 
 const props = defineProps<{
   accent: Color;
   interactionsEnabled: boolean;
-  theme: UiTheme;
+  theme: PlaygroundTheme;
 }>();
 
 const emit = defineEmits<{
   updateAccent: [accent: Color];
   updateInteractions: [enabled: boolean];
-  updateTheme: [theme: UiTheme];
+  updateTheme: [theme: PlaygroundTheme];
 }>();
 
 const accents: Color[] = [

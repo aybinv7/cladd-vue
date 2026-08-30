@@ -128,12 +128,23 @@ Every upstream file with no React in it is a direct copy. Copied so far and veri
 `shared/color.ts` is 402 lines of HSV conversion and was the stated blocker for `ColorEditor` and
 `ColorPicker`. It was never a blocker; it was a copy.
 
-Debt this surfaced: the port exports 16 types upstream does not. Upstream declares a size union per
-component (`ButtonSize`, `CheckboxSize`, `ChipSize`, `InputSize`, `RadioSize`, ...) where the port
-centralised `UiSize`, `ChoiceSize` and `FieldSize`; upstream has no `UiTheme`, `SurfaceLevel`,
-`SurfaceLevelInput` or `OverlayPhase` union at all; and `SelectValue`, `SelectOption*` and `DialogApi`
-are Vue-side surfaces with no upstream counterpart. Listed as `allowedExtraTypeExports` in
-`tests/parity/upstreamExports.test.ts`.
+That debt is now paid. The port used to export 16 types upstream does not; it exports 5, and each is a
+Vue-side surface a consumer needs to type a `v-model` binding or slot props (`DialogApi`,
+`SelectValue`, `SelectOption`, `SelectOptionInput`, `SelectOptionParams`).
+
+- `ButtonSize`, `CheckboxSize`, `ChipSize`, `InputSize`, `RadioSize`, `ShortcutSize`, `SliderSize`,
+  `SpinnerSize`, `SwitchSize` and `TextareaSize` are declared per component, spelled out as upstream
+  spells them. The centralised `UiSize`, `ChoiceSize` and `FieldSize` stay internal.
+- `UiTheme`, `SurfaceLevel`, `SurfaceLevelInput` and `OverlayPhase` are no longer exported; upstream
+  has no such unions. The playground declares its own `PlaygroundTheme`.
+- `ButtonSurface`, `SliderScale`, `PopoverOffset` and `OverlayOffsetValue` are declared upstream but
+  not exported from its index, so they are internal here too.
+
+The other half of the gap was larger: upstream exports the props type of every component and the port
+exported almost none. 75 `XProps` / `XDefaultProps` types now ship. The remaining 31 are declared
+inline in their `.vue` via `defineProps<{...}>()`, so there is nothing to re-export; they are listed
+as `typesNotYetPorted` and a new test fails if an upstream type export goes missing without being on
+that list.
 
 ## 7. Prop-level parity
 

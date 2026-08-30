@@ -17,7 +17,6 @@ export const choiceSizes = [
 export type ChoiceSize = (typeof choiceSizes)[number];
 
 export const switchSizes = ['sm', 'md'] as const satisfies readonly UiSize[];
-export type SwitchSize = (typeof switchSizes)[number];
 
 export const sliderVariants = ['thumb', 'track'] as const;
 export type SliderVariant = (typeof sliderVariants)[number];

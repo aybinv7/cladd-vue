@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { Select } from '@cladd-vue/ui';
-import type { Color, UiSize } from '@cladd-vue/ui';
+import type { ButtonSize, Color } from '@cladd-vue/ui';
 import { computed, ref } from 'vue';
 
 import CatalogSection from '../components/CatalogSection.vue';
@@ -25,7 +25,7 @@ const fruits = [
 ] as const;
 const sizes = ['2xs', 'xs', 'sm', 'md', 'lg', 'xl', '2xl'] as const;
 
-const size = ref<UiSize>('md');
+const size = ref<ButtonSize>('md');
 const color = ref<Color>('brand');
 const rounded = ref(false);
 const multiple = ref(false);

@@ -6,10 +6,10 @@ import {
   Spinner,
   Surface,
   CladdProvider,
-  type UiSize,
+  type ButtonSize,
 } from '../../src/index.ts';
 
-const sizes: UiSize[] = ['2xs', 'xs', 'sm', 'md', 'lg', 'xl', '2xl'];
+const sizes: ButtonSize[] = ['2xs', 'xs', 'sm', 'md', 'lg', 'xl', '2xl'];
 </script>
 
 <template>
