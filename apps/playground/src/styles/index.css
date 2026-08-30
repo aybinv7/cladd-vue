@@ -412,6 +412,18 @@ kbd {
   min-width: 0;
 }
 
+.color-editor-frame {
+  display: grid;
+  gap: 10px;
+  justify-items: center;
+  width: 100%;
+  max-width: 280px;
+}
+
+.color-picker-slot {
+  width: 180px;
+}
+
 .playground-hint {
   color: var(--playground-muted);
   font-size: 12px;

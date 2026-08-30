@@ -87,6 +87,11 @@ export const router = createRouter({
             import('./modules/playground/sections/AccordionSection.vue'),
         },
         {
+          path: 'color',
+          component: () =>
+            import('./modules/playground/sections/ColorSection.vue'),
+        },
+        {
           path: 'link',
           component: () =>
             import('./modules/playground/sections/LinkSection.vue'),

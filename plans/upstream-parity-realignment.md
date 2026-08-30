@@ -90,31 +90,29 @@ Comparing _export lists_ instead of filenames leaves a much shorter list:
 
 ## 5. Not yet ported
 
-Ported since this plan was written: `Backdrop` and `useCollapsibleContext` (both were implemented,
-just missing from the index), then `Link`, `SurfaceContent`, `SurfaceCutContent`,
-`SurfaceContextProvider`, `OTPField`, `OTPFieldInput`, `OTPFieldSeparator` and `NumberScrubber`.
+**Done. Every upstream export has a Vue counterpart, and `notYetPorted` in
+`tests/parity/upstreamExports.test.ts` is empty.**
 
-Three upstream exports remain, tracked as `notYetPorted` in
-`tests/parity/upstreamExports.test.ts`:
+Ported on this branch: `Backdrop` and `useCollapsibleContext` (implemented but missing from the
+index), then `Link`, `SurfaceContent`, `SurfaceCutContent`, `SurfaceContextProvider`, `OTPField`,
+`OTPFieldInput`, `OTPFieldSeparator`, `NumberScrubber`, `NumberField`, `ColorEditor` and
+`ColorPicker`.
 
-- [ ] `NumberField` (275 lines upstream)
-- [ ] `ColorPicker` (487 lines upstream)
-- [ ] `ColorEditor` (1105 lines upstream)
-
-`shared/color.ts` is already in place, so the colour pair has no remaining dependency.
-
-Notes from the ports so far:
+Notes from the ports:
 
 - OTP cell indexing is the one place React and Vue genuinely diverge. Upstream walks `children`,
   spots cells by a `__OTPFieldInput` marker and injects `index` through `cloneElement`. Vue has no
   equivalent, so cells claim their index from the field context during setup.
 - `Input` gained `inputProps` (upstream's `inputComponentProps`) and exposes its inner element as
-  `inputElement` (upstream's `inputRef`). Both were needed by the OTP cells and both are upstream
-  props, not inventions.
+  `inputElement` (upstream's `inputRef`). Both are upstream props, not inventions.
 - NumberScrubber exposed a Button defect: upstream puts the consumer's `className` last in its
   `cn(...)` so consumer utilities win, while the port forwarded `class` to Surface where it landed
   before Button's own classes and tailwind-merge dropped it. Fixed on Button; **the other components
   that forward `$attrs` next to their own `:class` still need the same sweep.**
+- `ColorEditor` keeps upstream's internal HSV model, its signature guard against controlled-value
+  echoes, and the debounce/throttle emission with a trailing call. `v-model` carries the CSS string;
+  `change` carries upstream's full structured value.
+- `shared/color.ts` was copied, not ported, so every conversion is upstream's byte for byte.
 
 ## 8. Pure files are copied, not ported
 
@@ -153,6 +151,12 @@ Real divergences it found and that are now fixed:
 Deliberate transpositions are listed in the test with what each became: `open` is `v-model:open`,
 ReactNode props are slots, `*Ref` props are template refs, and hyphenated `aria-*` props are the
 camelCase spellings Vue normalises onto.
+
+The reader now also tries `<Name>BaseProps`, which brought `Select`, `ColorEditor` and `ColorPicker`
+into the comparison for the first time. A handful of upstream props (`value`, `defaultValue`,
+`gradient`, `multiple`) live on discriminated `type` union members rather than the shared interface,
+so the reader cannot see them; those carry a "union member" note instead of being mislabelled as
+inventions.
 
 Upstream props with no Vue equivalent yet, tracked as `notImplemented` in the same test:
 

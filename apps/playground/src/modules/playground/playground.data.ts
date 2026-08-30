@@ -107,6 +107,13 @@ export const catalogEntries: CatalogEntry[] = [
     path: '/components/accordion',
   },
   {
+    count: 16,
+    description: 'Colour editing and gradients',
+    id: 'color',
+    label: 'Color',
+    path: '/components/color',
+  },
+  {
     count: 8,
     description: 'Text-weight polymorphic action',
     id: 'link',
@@ -129,7 +136,7 @@ export const catalogEntries: CatalogEntry[] = [
   },
 ];
 
-export const catalogComponentCount = 48;
+export const catalogComponentCount = 51;
 export const catalogStateCount = catalogEntries.reduce(
   (sum, entry) => sum + entry.count,
   0,

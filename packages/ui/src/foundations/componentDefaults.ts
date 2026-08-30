@@ -9,6 +9,8 @@ import type {
   CollapsiblePanelDefaultProps,
   CollapsibleRootDefaultProps,
 } from '../components/collapsible.contracts.ts';
+import type { ColorEditorDefaultProps } from '../components/colorEditor.contracts.ts';
+import type { ColorPickerDefaultProps } from '../components/colorPicker.contracts.ts';
 import type {
   ChipDefaultProps,
   ListButtonDefaultProps,
@@ -113,6 +115,8 @@ export interface ComponentDefaults {
   Shortcut?: ShortcutDefaultProps;
   Slider?: SliderDefaultProps;
   Spinner?: SpinnerDefaultProps;
+  ColorEditor?: ColorEditorDefaultProps;
+  ColorPicker?: ColorPickerDefaultProps;
   Link?: LinkDefaultProps;
   NumberField?: NumberFieldDefaultProps;
   NumberScrubber?: NumberScrubberDefaultProps;

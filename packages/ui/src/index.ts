@@ -37,6 +37,31 @@ export { default as SurfaceContent } from './components/SurfaceContent.vue';
 export { default as SurfaceContextProvider } from './components/SurfaceContextProvider.vue';
 export { default as SurfaceCut } from './components/SurfaceCut.vue';
 export { default as SurfaceCutContent } from './components/SurfaceCutContent.vue';
+export { default as ColorEditor } from './components/ColorEditor.vue';
+export type {
+  ColorEditorProps,
+  ColorEditorDefaultProps,
+  ColorEditorControlSize,
+  ColorEditorFormat,
+} from './components/colorEditor.contracts.ts';
+export type {
+  ColorEditorValue,
+  ColorInput,
+  ColorValue,
+  GradientInput,
+  GradientStop,
+  GradientStopInput,
+  GradientValue,
+  HSB,
+  HSL,
+  RGB,
+  SolidValue,
+} from './shared/color.ts';
+export { default as ColorPicker } from './components/ColorPicker.vue';
+export type {
+  ColorPickerProps,
+  ColorPickerDefaultProps,
+} from './components/colorPicker.contracts.ts';
 export { default as Link } from './components/Link.vue';
 export { default as NumberField } from './components/NumberField.vue';
 export type {

@@ -14,7 +14,7 @@ import { typeExports, valueExports } from '../support/upstream.ts';
  * decision: shrink this list, never grow it. Adding a name here without porting
  * the component is how a gap becomes permanent.
  */
-const notYetPorted = new Set(['ColorEditor', 'ColorPicker']);
+const notYetPorted = new Set<string>();
 
 /**
  * Names the port exports that upstream does not. This must stay empty: the
