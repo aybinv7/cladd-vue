@@ -90,19 +90,31 @@ Comparing _export lists_ instead of filenames leaves a much shorter list:
 
 ## 5. Not yet ported
 
-Upstream exports the port does not, taken from upstream's `index.ts` rather than its filenames:
+Ported since this plan was written: `Backdrop` and `useCollapsibleContext` (both were implemented,
+just missing from the index), then `Link`, `SurfaceContent`, `SurfaceCutContent`,
+`SurfaceContextProvider`, `OTPField`, `OTPFieldInput`, `OTPFieldSeparator` and `NumberScrubber`.
 
-`Backdrop`, `ColorEditor`, `ColorPicker`, `Link`, `NumberField`, `NumberScrubber`, `OTPField`,
-`OTPFieldInput`, `OTPFieldSeparator`, `SurfaceContent`, `SurfaceContextProvider`, `SurfaceCutContent`,
-and the `calendar/` entrypoint (`Calendar`, `CalendarIcon`, `DatePicker`).
+Three upstream exports remain, tracked as `notYetPorted` in
+`tests/parity/upstreamExports.test.ts`:
 
-`Backdrop` and `useCollapsibleContext` were implemented but not exported, and now are, leaving eleven
-genuine gaps. `ColorEditor` and `ColorPicker` also need `shared/color.ts`, roughly 300 lines of HSV
-conversion that is not ported.
+- [ ] `NumberField` (275 lines upstream)
+- [ ] `ColorPicker` (487 lines upstream)
+- [ ] `ColorEditor` (1105 lines upstream)
 
-`tests/parity/upstreamExports.test.ts` locks this: it fails when an upstream export has no
-counterpart, when the port exports something upstream does not, and when the not-yet-ported list goes
-stale. The list is the work queue; it may only shrink.
+`shared/color.ts` is already in place, so the colour pair has no remaining dependency.
+
+Notes from the ports so far:
+
+- OTP cell indexing is the one place React and Vue genuinely diverge. Upstream walks `children`,
+  spots cells by a `__OTPFieldInput` marker and injects `index` through `cloneElement`. Vue has no
+  equivalent, so cells claim their index from the field context during setup.
+- `Input` gained `inputProps` (upstream's `inputComponentProps`) and exposes its inner element as
+  `inputElement` (upstream's `inputRef`). Both were needed by the OTP cells and both are upstream
+  props, not inventions.
+- NumberScrubber exposed a Button defect: upstream puts the consumer's `className` last in its
+  `cn(...)` so consumer utilities win, while the port forwarded `class` to Surface where it landed
+  before Button's own classes and tailwind-merge dropped it. Fixed on Button; **the other components
+  that forward `$attrs` next to their own `:class` still need the same sweep.**
 
 ## 8. Pure files are copied, not ported
 
