@@ -8,7 +8,7 @@ export default defineConfig({
     environment: 'happy-dom',
   },
   pack: {
-    entry: ['src/index.ts'],
+    entry: ['src/index.ts', 'src/calendar/index.ts'],
     format: ['esm'],
     outExtensions: () => ({ js: '.mjs' }),
     dts: { vue: true },

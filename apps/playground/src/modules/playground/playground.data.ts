@@ -107,6 +107,13 @@ export const catalogEntries: CatalogEntry[] = [
     path: '/components/accordion',
   },
   {
+    count: 10,
+    description: 'Month grid and date triggers',
+    id: 'calendar',
+    label: 'Calendar',
+    path: '/components/calendar',
+  },
+  {
     count: 16,
     description: 'Colour editing and gradients',
     id: 'color',
@@ -136,7 +143,7 @@ export const catalogEntries: CatalogEntry[] = [
   },
 ];
 
-export const catalogComponentCount = 51;
+export const catalogComponentCount = 54;
 export const catalogStateCount = catalogEntries.reduce(
   (sum, entry) => sum + entry.count,
   0,

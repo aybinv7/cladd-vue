@@ -9,15 +9,8 @@ import {
   upstreamRoot,
 } from '../support/paths.ts';
 
-/**
- * Subpaths upstream publishes that the port does not. A queue, not a decision.
- *
- * `./calendar` wraps `react-day-picker`: upstream owns the styling and the DOM,
- * the library owns the month grid, selection modes and keyboard navigation.
- * There is no verbatim Vue port of that, so this needs a call on what to depend
- * on before any code is written. See plans/upstream-parity-realignment.md.
- */
-const subpathsNotYetPorted = new Set(['./calendar']);
+/** Subpaths upstream publishes that the port does not. A queue, not a decision. */
+const subpathsNotYetPorted = new Set<string>();
 
 function exportKeys(packageJsonPath: string): Set<string> {
   const manifest = JSON.parse(readFileSync(packageJsonPath, 'utf8')) as {

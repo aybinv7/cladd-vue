@@ -1,0 +1,149 @@
+import type { ButtonSize } from '../components/button.contracts.ts';
+import type {
+  PopoverOffset,
+  PopoverPosition,
+} from '../components/overlay.contracts.ts';
+import type { SurfaceLevelInput } from '../foundations/contracts.ts';
+import type { Color } from '../types.ts';
+
+/** Sizing token for the calendar grid. */
+export type CalendarSize = '2xl' | 'lg' | 'md' | 'sm' | 'xl';
+
+export type DatePickerSize = ButtonSize;
+
+/**
+ * A start/end pair, matching the shape upstream re-exports from its calendar
+ * dependency. The Vue picker models a range as a two-element array; `Calendar`
+ * converts between the two so the public contract stays upstream's.
+ */
+export interface DateRange {
+  from: Date | undefined;
+  to?: Date | undefined;
+}
+
+export type CalendarMode = 'multiple' | 'range' | 'single';
+
+export type CalendarValue = Date | Date[] | DateRange | undefined;
+
+export interface CalendarSizeTokens {
+  box: string;
+  captionText: string;
+  col: string;
+  dayText: string;
+  weekdayText: string;
+}
+
+/** Copied from upstream `Calendar.tsx:41-77`. */
+export const calendarSizes: Record<CalendarSize, CalendarSizeTokens> = {
+  sm: {
+    box: 'size-cladd-sm',
+    col: 'w-cladd-sm',
+    dayText: 'text-cladd-2xs',
+    weekdayText: 'text-cladd-2xs',
+    captionText: 'text-cladd-xs',
+  },
+  md: {
+    box: 'size-cladd-md',
+    col: 'w-cladd-md',
+    dayText: 'text-cladd-xs',
+    weekdayText: 'text-cladd-2xs',
+    captionText: 'text-cladd-xs',
+  },
+  lg: {
+    box: 'size-cladd-lg',
+    col: 'w-cladd-lg',
+    dayText: 'text-cladd-xs',
+    weekdayText: 'text-cladd-xs',
+    captionText: 'text-cladd-xs',
+  },
+  xl: {
+    box: 'size-cladd-xl',
+    col: 'w-cladd-xl',
+    dayText: 'text-cladd-sm',
+    weekdayText: 'text-cladd-xs',
+    captionText: 'text-cladd-sm',
+  },
+  '2xl': {
+    box: 'size-cladd-2xl',
+    col: 'w-cladd-2xl',
+    dayText: 'text-cladd-sm',
+    weekdayText: 'text-cladd-xs',
+    captionText: 'text-cladd-sm',
+  },
+};
+
+export interface CalendarProps {
+  /** Accent color token. Sets the `cladd-color-{name}` class - drives selected fill, today, and focus ring. Default: theme accent. */
+  color?: Color;
+  /** Size of the nav buttons and caption dropdowns. Default `'sm'`. */
+  controlSize?: ButtonSize;
+  /** Dim the calendar and block interaction. */
+  disabled?: boolean;
+  /** Extra classes for the `footer` element. */
+  footerClassName?: string;
+  /** Extra classes for the `header` wrapper. */
+  headerClassName?: string;
+  /** Hide the previous/next month buttons. Default `false`. */
+  hideNavigation?: boolean;
+  /** Latest selectable date. */
+  maxDate?: Date;
+  /** Earliest selectable date. */
+  minDate?: Date;
+  /** Selection mode. Default `'single'`. */
+  mode?: CalendarMode;
+  /** Block selection while keeping the grid visible. */
+  readOnly?: boolean;
+  /** Mark today's date with an accent ring and label. Default `true`. */
+  showToday?: boolean;
+  /** Sizing token. Drives day-cell size and font sizes. Default `'md'`. */
+  size?: CalendarSize;
+  /** First day of the week, `0` for Sunday. Default `1`. */
+  weekStart?: number;
+}
+
+/** Shape of `Calendar` defaults that can be supplied via `CladdProvider`'s `defaults` prop. */
+export type CalendarDefaultProps = Partial<CalendarProps>;
+
+export interface DatePickerProps {
+  /** Calendar size inside the popover. Default `'lg'`. */
+  calendarSize?: CalendarSize;
+  /** Extra classes for the trigger's inner content row. */
+  contentClassName?: string;
+  /** Accent color token. Drives the trigger and the calendar. Default: theme accent. */
+  color?: Color;
+  /** Dim the trigger and block opening. */
+  disabled?: boolean;
+  /** Show the chevron indicator on the right of the trigger. Default `true`. */
+  dropdownIcon?: boolean;
+  /** Extra classes for the icon wrapper. */
+  iconClassName?: string;
+  /** Latest selectable date. */
+  maxDate?: Date;
+  /** Earliest selectable date. */
+  minDate?: Date;
+  /** Selection mode. Default `'single'`. */
+  mode?: CalendarMode;
+  /** Trigger surface outline ring. Forwarded to `Button.outline`. */
+  outline?: boolean;
+  /** Shown in the trigger when nothing is selected. Default `'Select date'`. */
+  placeholder?: string;
+  /** Extra classes for the popover surface. Default `'w-auto'`. */
+  popoverClassName?: string;
+  /** Accent color for the popover. Defaults to `color`. */
+  popoverColor?: Color;
+  /** Popover spacing from the trigger. Default `['-50%', 4]`. */
+  popoverOffset?: PopoverOffset;
+  /** Popover anchor side + alignment. Default `'bottom-end'`. */
+  popoverPosition?: PopoverPosition;
+  /** Surface level for the popover. */
+  popoverSurfaceLevel?: SurfaceLevelInput;
+  /** Show the value but block opening the popover. */
+  readOnly?: boolean;
+  /** Pill-style trigger. Forwarded to `Button.rounded`. */
+  rounded?: boolean;
+  /** Trigger button size. Forwarded to `Button.size`. Default `'md'`. */
+  size?: DatePickerSize;
+}
+
+/** Shape of `DatePicker` defaults that can be supplied via `CladdProvider`'s `defaults` prop. */
+export type DatePickerDefaultProps = Partial<DatePickerProps>;

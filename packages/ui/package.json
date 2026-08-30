@@ -39,6 +39,11 @@
       "types": "./dist/index.d.mts",
       "import": "./dist/index.mjs"
     },
+    "./calendar": {
+      "source": "./src/calendar/index.ts",
+      "types": "./dist/calendar/index.d.mts",
+      "import": "./dist/calendar/index.mjs"
+    },
     "./css": "./src/cladd.css",
     "./package.json": "./package.json"
   },
@@ -53,6 +58,7 @@
     "prepublishOnly": "vp run build"
   },
   "dependencies": {
+    "@vuepic/vue-datepicker": "catalog:",
     "clsx": "catalog:",
     "tailwind-merge": "catalog:"
   },

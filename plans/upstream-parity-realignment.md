@@ -124,30 +124,32 @@ Notes from the ports:
 ## 9. The calendar subpath
 
 The parity tests only ever read `src/index.ts`, so they never saw that upstream publishes three export
-subpaths and the port publishes two. `tests/parity/upstreamSubpaths.test.ts` now compares the
-`exports` maps, with `./calendar` recorded as the one gap.
+subpaths and the port published two. `tests/parity/upstreamSubpaths.test.ts` now compares the
+`exports` maps. **Its queue is empty**: `./calendar` ships.
 
-`./calendar` exports `Calendar`, `DatePicker`, `CalendarProps`, `CalendarSize`, `DatePickerProps`,
-`DatePickerSize` and re-exports `DateRange` from `react-day-picker`.
+This is the one component that is not a verbatim port, and the reason is structural rather than a
+shortcut. Upstream's `Calendar.tsx` is 425 lines of styling over `react-day-picker`'s `DayPicker`: it
+supplies `classNames` and swaps in its own `Chevron`, `DayButton`, `Dropdown`, `Nav` and `Root`, while
+the library owns the month grid, the selection modes, range handling and keyboard navigation. That
+logic is upstream's _dependency_, not upstream's code, so there is nothing to copy.
 
-This is the one component that cannot be ported verbatim. Upstream's `Calendar.tsx` is 425 lines of
-styling over `react-day-picker`'s `DayPicker`: it supplies `classNames` and swaps in its own `Chevron`,
-`DayButton`, `Dropdown`, `Nav` and `Root`, while the library owns the month grid, the selection modes,
-range handling and keyboard navigation. `DatePicker.tsx` is upstream's own Popover plus Button around
-it, and ports cleanly once `Calendar` exists.
+The port takes the same shape one framework over: `@vuepic/vue-datepicker` plays the part
+`react-day-picker` plays upstream, and `Calendar.vue` supplies the styling through its `ui` hook.
+What stays upstream's:
 
-There is no Vue `react-day-picker`, so this needs a decision before any code is written:
+- the public prop names and their JSDoc, and the `calendarSizes` table copied from `Calendar.tsx:41-77`
+- the `DateRange` shape. The Vue picker models a range as `[start, end]`; `Calendar` converts both
+  ways so callers see `{ from, to }`.
+- `DatePicker.vue`, which is upstream's own Button and Popover around the calendar and ports cleanly
+- `CalendarIcon.vue`, ported verbatim from the upstream SVG
 
-1. **Wrap a Vue date-picker library.** Fastest, and keeps the calendar logic someone else's problem,
-   but the DOM will not match upstream and the styling layer has to be re-derived against whatever
-   that library renders. It also adds a runtime dependency the package has so far avoided.
-2. **Port the grid ourselves.** Keeps the DOM and the dependency list, but the month grid, selection
-   modes, range logic and keyboard navigation are upstream's _dependency_, not upstream's code, so
-   there is nothing to port verbatim. It would be the one place the port genuinely invents.
-3. **Leave it out.** `@cladd-vue/ui` ships everything upstream's main entry ships, and the calendar
-   stays a documented gap.
+What differs, and cannot be checked by the parity tests: the rendered DOM inside the grid belongs to
+the dependency, so upstream's per-part `classNames` map has no counterpart. The tests cover the
+wrapper — container, accent cascade, slots, trigger, label formatting — and say so in a comment.
+`@vuepic/vue-datepicker` renders nothing under happy-dom, so the grid is not asserted at all.
 
-Nothing here is blocked on code. It is blocked on that choice.
+This also makes the package's first runtime dependency beyond `clsx` and `tailwind-merge`, matching
+upstream's own choice to depend on a calendar library rather than write one.
 
 ## 8. Pure files are copied, not ported
 

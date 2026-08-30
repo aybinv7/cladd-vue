@@ -1,4 +1,8 @@
 import type {
+  CalendarDefaultProps,
+  DatePickerDefaultProps,
+} from '../calendar/calendar.contracts.ts';
+import type {
   AccordionItemDefaultProps,
   AccordionRootDefaultProps,
 } from '../components/accordion.contracts.ts';
@@ -115,7 +119,9 @@ export interface ComponentDefaults {
   Shortcut?: ShortcutDefaultProps;
   Slider?: SliderDefaultProps;
   Spinner?: SpinnerDefaultProps;
+  Calendar?: CalendarDefaultProps;
   ColorEditor?: ColorEditorDefaultProps;
+  DatePicker?: DatePickerDefaultProps;
   ColorPicker?: ColorPickerDefaultProps;
   Link?: LinkDefaultProps;
   NumberField?: NumberFieldDefaultProps;

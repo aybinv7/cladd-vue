@@ -428,6 +428,16 @@ kbd {
   max-width: 280px;
 }
 
+.calendar-frame {
+  display: grid;
+  gap: 10px;
+  justify-items: center;
+}
+
+.date-picker-slot {
+  width: 200px;
+}
+
 .color-picker-slot {
   width: 180px;
 }

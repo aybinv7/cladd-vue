@@ -87,6 +87,11 @@ export const router = createRouter({
             import('./modules/playground/sections/AccordionSection.vue'),
         },
         {
+          path: 'calendar',
+          component: () =>
+            import('./modules/playground/sections/CalendarSection.vue'),
+        },
+        {
           path: 'color',
           component: () =>
             import('./modules/playground/sections/ColorSection.vue'),
