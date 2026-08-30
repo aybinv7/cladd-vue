@@ -16,16 +16,24 @@
 
 * {
   box-sizing: border-box;
+  -webkit-tap-highlight-color: rgb(0 0 0 / 0);
+  -webkit-touch-callout: none;
+  -webkit-font-smoothing: antialiased;
 }
 
 html {
   scroll-behavior: smooth;
 }
 
+/* Upstream's playground applies `text-sm` here. The `cladd-*` font sizes are
+   font-size only, so every control inherits its line height from this rule —
+   without it inputs fall back to `normal` and their text sits high in the box. */
 body {
   min-width: 320px;
   min-height: 100vh;
   margin: 0;
+  font-size: 14px;
+  line-height: calc(1.25 / 0.875);
   background: #101010;
 }
 
