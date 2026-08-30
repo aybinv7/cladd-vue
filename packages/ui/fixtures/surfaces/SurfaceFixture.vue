@@ -53,7 +53,7 @@ const themes: UiTheme[] = ['dark', 'light'];
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 16px;
-  font-family: Geist, sans-serif;
+  font-family: Inter, sans-serif;
 }
 
 .cladd-fixture-shell {

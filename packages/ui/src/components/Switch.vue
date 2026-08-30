@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed } from 'vue';
+import { computed, useAttrs } from 'vue';
 
 import { useComponentDefaults } from '../composables/useComponentDefaults.ts';
 import { useUiContext } from '../contexts/uiContext.ts';
@@ -102,10 +102,17 @@ function handleFallbackKeydown(event: KeyboardEvent): void {
   setChecked(!checked.value, event);
 }
 
+const attrs = useAttrs();
+const rootAttrs = computed(() => {
+  const { class: _consumerClass, ...rest } = attrs;
+  return rest;
+});
+
 const rootClass = computed(() =>
   cn(
     'cladd-switch group/cladd-switch relative flex shrink-0 rounded-full select-none',
     switchRootSizes[d.value.size],
+    attrs.class,
   ),
 );
 
@@ -170,7 +177,7 @@ const secondGlyphLineClass = computed(() =>
 <template>
   <component
     :is="d.as"
-    v-bind="$attrs"
+    v-bind="rootAttrs"
     :class="rootClass"
     :aria-checked="!d.input ? checked : undefined"
     :aria-disabled="!d.input && d.disabled ? 'true' : undefined"

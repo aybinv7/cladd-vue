@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, type Component } from 'vue';
+import { computed, useAttrs, type Component } from 'vue';
 
 import { useComponentDefaults } from '../composables/useComponentDefaults.ts';
 import type { SurfaceVariant, UiSize } from '../foundations/contracts.ts';
@@ -59,6 +59,12 @@ const isFill = computed(
   () => d.value.variant === 'solid-fill' || d.value.variant === 'gradient-fill',
 );
 
+const attrs = useAttrs();
+const rootAttrs = computed(() => {
+  const { class: _consumerClass, ...rest } = attrs;
+  return rest;
+});
+
 const rootClass = computed(() =>
   cn(
     'cladd-chip group/cladd-chip relative inline-flex font-semibold select-none focus:ring-0 focus:outline-0 focus:outline-none',
@@ -68,6 +74,7 @@ const rootClass = computed(() =>
     clickable.value && d.value.as === 'a' ? 'cursor-pointer' : 'cursor-auto',
     nestedSizeClasses(d.value.size, 'height'),
     chipFontSizes[d.value.size],
+    attrs.class,
   ),
 );
 
@@ -83,7 +90,7 @@ const chipContentClass = computed(() =>
 
 <template>
   <Surface
-    v-bind="$attrs"
+    v-bind="rootAttrs"
     :as="d.as"
     :class="rootClass"
     :clickable="clickable"

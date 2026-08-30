@@ -107,8 +107,12 @@ Notes from the ports:
   `inputElement` (upstream's `inputRef`). Both are upstream props, not inventions.
 - NumberScrubber exposed a Button defect: upstream puts the consumer's `className` last in its
   `cn(...)` so consumer utilities win, while the port forwarded `class` to Surface where it landed
-  before Button's own classes and tailwind-merge dropped it. Fixed on Button; **the other components
-  that forward `$attrs` next to their own `:class` still need the same sweep.**
+  before Button's own classes and tailwind-merge dropped it. Swept across every component with the
+  same shape — `Checkbox`, `Chip`, `Radio`, `Segmented`, `Shortcut` and `Switch` — each of which now
+  strips `class` from the forwarded attrs and appends it last. `Tab` and `ToggleButton` were already
+  fine: they forward straight to `SegmentedButton` without a class of their own.
+  `tests/components/classPrecedence.test.ts` locks the contract for nine components, verified to fail
+  by reverting one.
 - `ColorEditor` keeps upstream's internal HSV model, its signature guard against controlled-value
   echoes, and the debounce/throttle emission with a trailing call. `v-model` carries the CSS string;
   `change` carries upstream's full structured value.

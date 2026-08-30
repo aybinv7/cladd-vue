@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed } from 'vue';
+import { computed, useAttrs } from 'vue';
 
 import { useComponentDefaults } from '../composables/useComponentDefaults.ts';
 import { useSurface } from '../contexts/surfaceContext.ts';
@@ -54,12 +54,19 @@ provideSegmentedContext(
   })),
 );
 
+const attrs = useAttrs();
+const rootAttrs = computed(() => {
+  const { class: _consumerClass, ...rest } = attrs;
+  return rest;
+});
+
 const rootClass = computed(() =>
   cn(
     d.value.color && `cladd-color-${d.value.color}`,
     'cladd-segmented',
     d.value.disabled && 'pointer-events-none opacity-40',
     'flex items-center justify-center',
+    attrs.class,
   ),
 );
 </script>
@@ -67,7 +74,7 @@ const rootClass = computed(() =>
 <template>
   <component
     :is="d.as"
-    v-bind="$attrs"
+    v-bind="rootAttrs"
     :class="rootClass"
     @contextmenu.capture.prevent
   >

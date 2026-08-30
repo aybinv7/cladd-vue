@@ -307,7 +307,7 @@ function onSubmit(event: Event): void {
 .checkbox-grid__readout {
   margin: 0;
   color: var(--cladd-fg-softer);
-  font-family: 'Geist Mono', ui-monospace, monospace;
+  font-family: 'Inter Mono', ui-monospace, monospace;
   font-size: 11px;
 }
 </style>

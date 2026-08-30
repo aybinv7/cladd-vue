@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed } from 'vue';
+import { computed, useAttrs } from 'vue';
 
 import { useComponentDefaults } from '../composables/useComponentDefaults.ts';
 import { useUiContext } from '../contexts/uiContext.ts';
@@ -89,11 +89,18 @@ function handleFallbackKeydown(event: KeyboardEvent): void {
   setChecked(!checked.value);
 }
 
+const attrs = useAttrs();
+const rootAttrs = computed(() => {
+  const { class: _consumerClass, ...rest } = attrs;
+  return rest;
+});
+
 const rootClass = computed(() =>
   cn(
     'cladd-checkbox group/cladd-checkbox relative flex shrink-0 items-center justify-center rounded-full select-none',
     checkboxRootSizes[d.value.size],
     d.value.disabled && 'opacity-50',
+    attrs.class,
   ),
 );
 
@@ -131,7 +138,7 @@ const indicatorClass = computed(() =>
 <template>
   <component
     :is="d.as"
-    v-bind="$attrs"
+    v-bind="rootAttrs"
     :class="rootClass"
     :aria-checked="!d.input ? checked : undefined"
     :aria-disabled="!d.input && d.disabled ? 'true' : undefined"

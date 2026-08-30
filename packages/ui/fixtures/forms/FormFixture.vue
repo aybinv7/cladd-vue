@@ -278,7 +278,7 @@ function emitSubmittedEntries(event: Event): void {
 .cladd-form-fixture {
   padding: 24px;
   background: var(--cladd-background);
-  font-family: Geist, sans-serif;
+  font-family: Inter, sans-serif;
 }
 
 .cladd-form-fixture__form {

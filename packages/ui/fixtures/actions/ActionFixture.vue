@@ -58,7 +58,7 @@ const sizes: UiSize[] = ['2xs', 'xs', 'sm', 'md', 'lg', 'xl', '2xl'];
 .cladd-action-fixture {
   padding: 24px;
   background: var(--cladd-background);
-  font-family: Geist, sans-serif;
+  font-family: Inter, sans-serif;
 }
 
 .cladd-action-fixture__panel {

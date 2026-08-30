@@ -2,10 +2,11 @@
 import {
   Fragment,
   Text,
-  isVNode,
   computed,
+  isVNode,
   onBeforeMount,
   ref,
+  useAttrs,
   useSlots,
   type Component,
   type VNode,
@@ -70,9 +71,16 @@ const isFill = computed(
   () => d.value.variant === 'solid-fill' || d.value.variant === 'gradient-fill',
 );
 
+const attrs = useAttrs();
+const rootAttrs = computed(() => {
+  const { class: _consumerClass, ...rest } = attrs;
+  return rest;
+});
+
 const rootClass = computed(() =>
   cn(
     'cladd-shortcut inline-flex shrink-0 items-center gap-0.5 self-center align-middle font-mono leading-0 tabular-nums',
+    attrs.class,
   ),
 );
 
@@ -209,7 +217,7 @@ onBeforeMount(() => {
 </script>
 
 <template>
-  <component :is="d.as" v-bind="$attrs" :class="rootClass">
+  <component :is="d.as" v-bind="rootAttrs" :class="rootClass">
     <Surface
       v-for="(entry, index) in shortcutEntries()"
       :key="index"
