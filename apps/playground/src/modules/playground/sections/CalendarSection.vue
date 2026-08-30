@@ -74,10 +74,12 @@ const code = computed(
             :mode="mode"
             :size="size"
           />
-          <span class="playground-hint">{{ selectionLabel }}</span>
         </div>
       </template>
       <template #controls>
+        <PlaygroundToolbar>
+          <span class="playground-hint">{{ selectionLabel }}</span>
+        </PlaygroundToolbar>
         <PlaygroundToolbar>
           <PlaygroundSegmented v-model="mode" :items="modes" label="Mode" />
         </PlaygroundToolbar>

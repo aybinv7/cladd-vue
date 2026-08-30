@@ -237,12 +237,7 @@ const ui = computed(() => ({
             {{ monthLabel(asHeader(slotProps).month) }}
             {{ asHeader(slotProps).year }}
           </span>
-          <Toolbar
-            class="ml-auto"
-            :outline="false"
-            :size="d.controlSize"
-            variant="transparent"
-          >
+          <Toolbar class="ml-auto" :size="d.controlSize">
             <ToolbarButton
               aria-label="Previous month"
               :disabled="asHeader(slotProps).isDisabled(false)"

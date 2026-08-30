@@ -72,22 +72,48 @@
   border-bottom: 0;
 }
 
-/* Weekday row: upstream renders it soft and small, not bold. */
+/* Weekday row: upstream renders it soft and small, not bold, and sizes it from
+   the `weekdayText` token rather than the caption size. */
 .cladd-calendar .dp--calendar-header {
   font-weight: 500;
   color: var(--cladd-fg-softest);
 }
 
-/* Cell sizing comes from the Cladd size token on the wrapper. */
+.cladd-calendar .dp--calendar-header-item {
+  width: var(--dp-cell-size);
+  font-size: var(--cladd-calendar-weekday-size);
+}
+
+.cladd-calendar[data-size="sm"],
+.cladd-calendar[data-size="md"] {
+  --cladd-calendar-weekday-size: var(--text-cladd-2xs);
+}
+
+.cladd-calendar[data-size="lg"],
+.cladd-calendar[data-size="xl"],
+.cladd-calendar[data-size="2xl"] {
+  --cladd-calendar-weekday-size: var(--text-cladd-xs);
+}
+
+/* Upstream's day cell is a `square rounded` Button, so the hit area has to stay
+   square or the selected fill renders as an oval (Calendar.tsx:284-289). */
 .cladd-calendar .dp--cell-inner {
-  width: 100%;
-  height: 100%;
+  width: var(--dp-cell-size);
+  height: var(--dp-cell-size);
+  margin: 0 auto;
   border: 0;
   font-weight: 500;
 }
 
+.cladd-calendar .dp--active {
+  font-weight: 600;
+}
+
+/* Today is a ring, not a fill, and upstream insets it (`ring-1 ring-inset`). */
 .cladd-calendar .dp--today:not(.dp--active) {
-  border: 1px solid var(--cladd-primary);
+  box-shadow: inset 0 0 0 1px var(--cladd-primary);
+  border: 0;
+  font-weight: 600;
   color: var(--cladd-primary);
 }
 
