@@ -44,6 +44,7 @@ const transposed: Record<string, Record<string, string>> = {
     prefix: 'the prefix slot',
     suffix: 'the suffix slot',
     inputRef: 'a template ref; the element is exposed as inputElement',
+    displayValue: 'the displayValue slot',
     inputComponentProps: 'inputProps',
     inputProps: 'extra: the Vue spelling of inputComponentProps',
   },
@@ -159,12 +160,7 @@ const transposed: Record<string, Record<string, string>> = {
  * real gaps. Shrink the list; adding to it needs a reason in
  * plans/upstream-parity-realignment.md.
  */
-const notImplemented: Record<string, string[]> = {
-  DialogProps: ['inertContainer', 'lazy', 'stopPropagationOnClick'],
-  InputProps: ['displayValue', 'inputComponent'],
-  SwitchProps: ['event'],
-  TextareaProps: ['inputPadding'],
-};
+const notImplemented: Record<string, string[]> = {};
 
 function stripReact(props: Set<string>): string[] {
   return [...props].filter(

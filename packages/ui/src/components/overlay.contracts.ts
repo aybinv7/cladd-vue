@@ -151,6 +151,9 @@ export const popoverFallbackPosition: PopoverPosition = 'right-start';
 
 export const popoverChildOverlaySelector = '.cladd-popover, .cladd-dialog';
 
+/** Overlays that keep the app container inert once the dialog itself closes. */
+export const dialogInertHoldSelector = '.cladd-popover, .cladd-popup';
+
 export const dialogChildOverlaySelector =
   '.cladd-popover, .cladd-dialog, .cladd-popup';
 
@@ -268,6 +271,16 @@ export interface DialogProps {
   confirmButtonColor?: Color;
   confirmButtonText?: string;
   contentClassName?: string;
+  /**
+   * Selector for the container made `inert` while the dialog is open. Default `'.app-container'`.
+   *
+   * Used to block focus/interaction with the rest of the app while the modal is shown.
+   */
+  inertContainer?: string;
+  /** Set to `true` when the dialog is rendered behind an async boundary so it opens on the next tick (after the chunk has resolved and mounted). */
+  lazy?: boolean;
+  /** Stop click propagation on backdrop and surface. Useful when the dialog is rendered inside a clickable parent. */
+  stopPropagationOnClick?: boolean;
   text?: string;
   /** Outline ring on the dialog surface. Default `true` for dark, `false` for light. */
   outline?: boolean;

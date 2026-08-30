@@ -162,12 +162,18 @@ into the comparison for the first time. A handful of upstream props (`value`, `d
 so the reader cannot see them; those carry a "union member" note instead of being mislabelled as
 inventions.
 
-Upstream props with no Vue equivalent yet, tracked as `notImplemented` in the same test:
+**`notImplemented` is empty.** Every upstream prop now has a Vue counterpart:
 
-- `Dialog`: `inertContainer`, `lazy`, `stopPropagationOnClick`
-- `Input`: `displayValue`, `inputComponent`, `inputComponentProps`
-- `Switch`: `event`
-- `Textarea`: `inputPadding`
+- `Dialog.inertContainer` sets `inert` on the matched container while open, and only the last overlay
+  clears it (upstream `Dialog.tsx:318-340`). `Dialog.lazy` feeds the existing `lazy` option on
+  `useOverlayLifecycle`. `Dialog.stopPropagationOnClick` guards the backdrop and surface handlers.
+- `Input.inputComponent` makes the inner control polymorphic; `inputComponentProps` is `inputProps`;
+  `displayValue` is the `displayValue` slot the port already had.
+- `Textarea.inputPadding` is declared with upstream's own JSDoc, which says it is reserved and not
+  applied in the rendered output. Porting it means declaring it, not inventing behaviour for it.
+- `Switch.event` was never a prop. The reader was counting parameters inside upstream's multi-line
+  `onChange?: (checked, event?) => void` type. Fixed by tracking paren depth, which is the same class
+  of reader bug as comparing filenames instead of exports.
 
 ## 6. Type safety
 

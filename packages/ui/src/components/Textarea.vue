@@ -28,6 +28,7 @@ const props = withDefaults(defineProps<TextareaProps>(), {
   iconClassName: undefined,
   infoMessage: undefined,
   inputClassName: undefined,
+  inputPadding: undefined,
   maxLength: undefined,
   placeholder: undefined,
   placeholderClassName: undefined,

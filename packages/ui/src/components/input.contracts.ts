@@ -29,6 +29,8 @@ export interface InputProps {
   inputClassName?: string;
   /** `id` for the inner `<input>`. */
   inputId?: string;
+  /** Polymorphic inner control. Defaults to `'input'`. */
+  inputComponent?: string | Component;
   /** Extra props spread onto the inner `<input>`. Upstream's `inputComponentProps`. */
   inputProps?: Record<string, unknown>;
   /** Native `inputMode` hint. */

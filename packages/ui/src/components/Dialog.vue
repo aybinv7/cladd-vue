@@ -1,5 +1,12 @@
 <script setup lang="ts">
-import { computed, shallowRef, useAttrs, useId, useSlots } from 'vue';
+import {
+  computed,
+  onBeforeUnmount,
+  shallowRef,
+  useAttrs,
+  useId,
+  useSlots,
+} from 'vue';
 
 import { useComponentDefaults } from '../composables/useComponentDefaults.ts';
 import { useFocusTrap } from '../composables/useFocusTrap.ts';
@@ -16,6 +23,7 @@ import {
   dialogButtonContentClasses,
   dialogButtonsClasses,
   dialogChildOverlaySelector,
+  dialogInertHoldSelector,
   dialogContainerClasses,
   dialogContentClasses,
   dialogHiddenClasses,
@@ -48,6 +56,9 @@ const props = withDefaults(defineProps<DialogProps>(), {
   cancelButtonText: undefined,
   closeOnBackdropClick: undefined,
   closeOnEscape: undefined,
+  inertContainer: undefined,
+  lazy: undefined,
+  stopPropagationOnClick: undefined,
   color: undefined,
   confirmButtonColor: undefined,
   confirmButtonText: undefined,
@@ -96,6 +107,9 @@ const d = useComponentDefaults('Dialog', props, {
   cancelButtonColor: 'neutral' as NonNullable<DialogProps['cancelButtonColor']>,
   closeOnBackdropClick: true,
   closeOnEscape: true,
+  inertContainer: '.app-container',
+  lazy: false,
+  stopPropagationOnClick: false,
   surfaceLevel: 1,
   variant: 'gradient' as NonNullable<DialogProps['variant']>,
 });
@@ -165,16 +179,39 @@ function hasChildOverlay(): boolean {
   return Boolean(next?.matches(dialogChildOverlaySelector));
 }
 
+function inertTarget(): HTMLElement | null {
+  return document.querySelector<HTMLElement>(d.value.inertContainer);
+}
+
+function setInert(next: boolean): void {
+  const container = inertTarget();
+  if (!container) return;
+  // Another overlay may still need the app blocked, so only the last one clears it.
+  if (!next && document.querySelectorAll(dialogInertHoldSelector).length > 0) {
+    return;
+  }
+  container.inert = next;
+}
+
+onBeforeUnmount(() => setInert(false));
+
 const { opened } = useOverlayLifecycle({
   closeOnEscape: () => d.value.closeOnEscape && !hasChildOverlay(),
   element: surface,
-  onClose: () => emit('closing'),
+  lazy: () => d.value.lazy,
+  onClose: () => {
+    setInert(false);
+    emit('closing');
+  },
   onClosed: () => {
     confirmationValue.value = '';
     emit('closed');
   },
   onOpen: () => emit('opening'),
-  onOpened: () => emit('opened'),
+  onOpened: () => {
+    setInert(true);
+    emit('opened');
+  },
   phase,
   setPhase,
 });
@@ -205,8 +242,13 @@ const backdropClass = computed(() =>
   ),
 );
 
-function onBackdropClick(): void {
+function onBackdropClick(event: MouseEvent): void {
+  if (d.value.stopPropagationOnClick) event.stopPropagation();
   if (d.value.closeOnBackdropClick) close();
+}
+
+function onSurfaceClick(event: MouseEvent): void {
+  if (d.value.stopPropagationOnClick) event.stopPropagation();
 }
 
 const triggerNode = computed(() =>
@@ -242,6 +284,7 @@ provideSurfaceColorReset();
         :level="d.surfaceLevel"
         :outline="currentOutline"
         :variant="d.variant"
+        @click="onSurfaceClick"
       >
         <div
           v-if="d.title || $slots.title"

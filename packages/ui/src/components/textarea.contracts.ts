@@ -16,6 +16,8 @@ export interface TextareaProps {
   errorMessage?: string;
   /** Extra classes for the icon wrapper. */
   iconClassName?: string;
+  /** Reserved - currently not applied in the rendered output. */
+  inputPadding?: string;
   /** Floating label shown above the editor on focus. */
   infoMessage?: string;
   /** Extra classes for the editable `[contenteditable]` `<div>`. */

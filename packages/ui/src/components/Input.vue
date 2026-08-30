@@ -38,6 +38,7 @@ const props = withDefaults(defineProps<InputProps>(), {
   infoMessage: undefined,
   inputClassName: undefined,
   inputId: undefined,
+  inputComponent: undefined,
   inputProps: undefined,
   inputMode: undefined,
   max: undefined,
@@ -76,6 +77,7 @@ const ui = useUiContext();
 const attrs = useAttrs();
 const d = useComponentDefaults('Input', props, {
   as: 'div' as NonNullable<InputProps['as']>,
+  inputComponent: 'input' as NonNullable<InputProps['inputComponent']>,
   autoFocus: false,
   clearButton: false,
   clearLabel: 'Clear',
@@ -252,7 +254,8 @@ defineExpose({
       </div>
 
       <div class="relative flex w-full">
-        <input
+        <component
+          :is="d.inputComponent"
           :id="d.inputId"
           ref="inputElement"
           v-bind="d.inputProps"

@@ -79,6 +79,7 @@ export function interfaceProps(filePath: string, name: string): Set<string> {
 
   const props = new Set<string>();
   let depth = 1;
+  let parens = 0;
   let index = header.index + header[0].length;
   let line = '';
 
@@ -87,9 +88,11 @@ export function interfaceProps(filePath: string, name: string): Set<string> {
 
     if (char === '{') depth += 1;
     if (char === '}') depth -= 1;
+    if (char === '(') parens += 1;
+    if (char === ')') parens -= 1;
 
     if (char === '\n') {
-      if (depth === 1) collectProp(line, props);
+      if (depth === 1 && parens === 0) collectProp(line, props);
       line = '';
     } else {
       line += char;
