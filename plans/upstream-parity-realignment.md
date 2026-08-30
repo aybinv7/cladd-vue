@@ -48,9 +48,9 @@ Comparing _export lists_ instead of filenames leaves a much shorter list:
 - [x] `SelectDropdownIcon` deleted. Upstream's `Select.tsx:17,648` renders `icons/DropdownIcon`.
 - [x] `forms/SearchIcon.vue` and `feedback/CloseIcon.vue` deleted; they shadowed the copies in
       `components/icons/`, which is where upstream keeps them and which already matched upstream.
-- [ ] `RadioGroup` is the only component the port exports that upstream does not. Upstream groups
-      radios with the native `name` attribute (`Radio.tsx:29-30,175`). Removing it changes `Radio`,
-      the form fixture, the playground and three tests, so it lands on its own.
+- [x] `RadioGroup` deleted along with `radioGroupContext.ts`. Upstream groups radios with the native
+      `name` attribute (`Radio.tsx:29-30,175`) and has no group component; `Radio` no longer injects a
+      group, and the fixture and tests bind `checked` per radio the way a caller has to.
 
 ## 3. Code shape
 
@@ -102,10 +102,12 @@ see. `vp run typecheck` (vue-tsc) now surfaces them and is wired into `ready`.
 - [x] `defineModel<boolean>('open', { default: undefined })` widened to `boolean | undefined`.
       Keeping the runtime options identical matters: dropping `{ default: undefined }` instead breaks
       `ToastRoot`.
-- [ ] 15 errors remain, listed by `vp run typecheck`. Three are unused locals that look like real
-      defects rather than dead code: `Shortcut.vue` computes `rootClass` and never applies it,
-      `Switch.vue` computes `hoverable` and never applies it, `TooltipPrimitive.vue` computes
-      `surfaceStyle` and never applies it. Each needs checking against upstream before deletion.
+- [x] Zero errors. Two of the unused locals were real defects: `Shortcut` never applied its root
+      class (upstream `Shortcut.tsx:225`), and `TooltipPrimitive` never applied its anchor positioning
+      style (upstream `TooltipPrimitive.tsx:201`). The third mirrored upstream's own dead
+      `hoverableComputed` and was dropped as an unobservable deviation.
+- [x] `SurfaceLevelInput` widened from `number | \`${number}\``to upstream's`number | string`
+(`Surface.tsx:67`, `Popover.tsx:340`), which is what makes `'+1'`and`'-1'` legal.
 
 ## Sequencing
 

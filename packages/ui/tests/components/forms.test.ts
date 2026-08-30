@@ -50,7 +50,6 @@ import {
   Checkbox,
   Input,
   Radio,
-  RadioGroup,
   Select,
   Slider,
   Switch,
@@ -261,32 +260,35 @@ test('matches Cladd checkbox input-less and customization APIs', async () => {
   mounted.app.unmount();
 });
 
-test('coordinates radio selection through RadioGroup', async () => {
+test('groups radios with the native name attribute like Cladd', async () => {
   const selected = ref('physical');
   const mounted = mountTree(
-    h(
-      RadioGroup,
-      {
-        'onUpdate:modelValue': (value: string) => (selected.value = value),
+    h('div', null, [
+      h(Radio, {
+        checked: selected.value === 'physical',
+        'data-testid': 'physical',
         name: 'target',
-      },
-      {
-        default: () => [
-          h(Radio, { 'data-testid': 'physical', value: 'physical' }),
-          h(Radio, { 'data-testid': 'emulator', value: 'emulator' }),
-        ],
-      },
-    ),
+        onChange: () => (selected.value = 'physical'),
+        value: 'physical',
+      }),
+      h(Radio, {
+        checked: selected.value === 'emulator',
+        'data-testid': 'emulator',
+        name: 'target',
+        onChange: () => (selected.value = 'emulator'),
+        value: 'emulator',
+      }),
+    ]),
   );
 
   await click(byTestId(mounted.root, 'emulator'));
 
   expect(selected.value).toBe('emulator');
-  expect(byTestId(mounted.root, 'emulator').getAttribute('data-state')).toBe(
-    'checked',
+  expect(byTestId(mounted.root, 'physical').querySelector('input')?.name).toBe(
+    'target',
   );
-  expect(byTestId(mounted.root, 'physical').getAttribute('data-state')).toBe(
-    'unchecked',
+  expect(byTestId(mounted.root, 'emulator').querySelector('input')?.name).toBe(
+    'target',
   );
   mounted.app.unmount();
 });

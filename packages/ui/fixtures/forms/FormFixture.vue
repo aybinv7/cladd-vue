@@ -5,7 +5,6 @@ import {
   Checkbox,
   Input,
   Radio,
-  RadioGroup,
   Select,
   Slider,
   Switch,
@@ -167,17 +166,19 @@ function emitSubmittedEntries(event: Event): void {
           </label>
         </div>
 
-        <RadioGroup
-          v-model="targetKind"
+        <div
           class="cladd-form-fixture__group"
-          name="targetKind"
-          orientation="horizontal"
+          data-orientation="horizontal"
+          role="radiogroup"
         >
           <div class="cladd-form-fixture__row">
             <Radio
+              :checked="targetKind === 'physical'"
               data-testid="target-physical"
               input-id="cladd-form-fixture-target-physical"
+              name="targetKind"
               value="physical"
+              @change="targetKind = 'physical'"
             />
             <label
               class="cladd-form-fixture__label"
@@ -188,9 +189,12 @@ function emitSubmittedEntries(event: Event): void {
           </div>
           <div class="cladd-form-fixture__row">
             <Radio
+              :checked="targetKind === 'emulator'"
               data-testid="target-emulator"
               input-id="cladd-form-fixture-target-emulator"
+              name="targetKind"
               value="emulator"
+              @change="targetKind = 'emulator'"
             />
             <label
               class="cladd-form-fixture__label"
@@ -199,7 +203,7 @@ function emitSubmittedEntries(event: Event): void {
               Emulator
             </label>
           </div>
-        </RadioGroup>
+        </div>
 
         <div class="cladd-form-fixture__row">
           <Switch

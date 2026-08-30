@@ -38,16 +38,6 @@ export interface RadioProps {
 
 export type RadioDefaultProps = Partial<Omit<RadioProps, 'as'>>;
 
-export interface RadioGroupProps {
-  disabled?: boolean;
-  loop?: boolean;
-  name?: string;
-  orientation?: 'horizontal' | 'vertical';
-  required?: boolean;
-}
-
-export type RadioGroupDefaultProps = Partial<RadioGroupProps>;
-
 export const radioRootSizes: Record<ChoiceSize, string> = {
   xs: 'size-cladd-thumb-xs p-0',
   sm: 'size-cladd-thumb-sm p-1',

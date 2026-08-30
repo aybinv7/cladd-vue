@@ -37,10 +37,7 @@ import type {
 } from '../components/feedback/feedback.contracts.ts';
 import type { CheckboxDefaultProps } from '../components/forms/checkbox.contracts.ts';
 import type { InputDefaultProps } from '../components/forms/input.contracts.ts';
-import type {
-  RadioDefaultProps,
-  RadioGroupDefaultProps,
-} from '../components/forms/radio.contracts.ts';
+import type { RadioDefaultProps } from '../components/forms/radio.contracts.ts';
 import type { SearchFieldDefaultProps } from '../components/forms/searchField.contracts.ts';
 import type { SelectDefaultProps } from '../components/forms/select.contracts.ts';
 import type { SliderDefaultProps } from '../components/forms/slider.contracts.ts';
@@ -98,7 +95,6 @@ export interface ComponentDefaults {
   Popup?: PopupDefaultProps;
   PopupContent?: PopupContentDefaultProps;
   Radio?: RadioDefaultProps;
-  RadioGroup?: RadioGroupDefaultProps;
   SearchField?: SearchFieldDefaultProps;
   SectionTitle?: SectionTitleDefaultProps;
   Segmented?: SegmentedDefaultProps;

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, inject } from 'vue';
+import { computed } from 'vue';
 
 import { useComponentDefaults } from '../../composables/useComponentDefaults.ts';
 import { useUiContext } from '../../contexts/uiContext.ts';
@@ -11,7 +11,6 @@ import {
   radioRootSizes,
   type RadioProps,
 } from './radio.contracts.ts';
-import { radioGroupKey } from './radioGroupContext.ts';
 
 defineOptions({ inheritAttrs: false });
 
@@ -39,7 +38,6 @@ const emit = defineEmits<{
   change: [checked: boolean, event?: Event];
   'update:checked': [checked: boolean];
 }>();
-const group = inject(radioGroupKey, undefined);
 const ui = useUiContext();
 const d = useComponentDefaults('Radio', props, {
   as: 'label' as NonNullable<RadioProps['as']>,
@@ -52,17 +50,10 @@ const d = useComponentDefaults('Radio', props, {
 const isReadOnly = computed(
   () => d.value.readOnly ?? d.value.readonly ?? false,
 );
-const checked = computed(() => {
-  if (group) return group.value.value === d.value.value;
-  return d.value.checked ?? model.value;
-});
-const disabled = computed(
-  () => d.value.disabled || group?.disabled.value === true,
-);
-const name = computed(() => d.value.name ?? group?.name.value);
-const required = computed(
-  () => d.value.required || group?.required.value === true,
-);
+const checked = computed(() => d.value.checked ?? model.value);
+const disabled = computed(() => d.value.disabled);
+const name = computed(() => d.value.name);
+const required = computed(() => d.value.required);
 const currentAccent = computed(() => d.value.color ?? ui.accentColor.value);
 const hoverable = computed(() => d.value.hoverable ?? d.value.as === 'label');
 const focusable = computed(
@@ -73,13 +64,8 @@ const inputId = computed(() => d.value.inputId ?? d.value.id);
 function setChecked(next: boolean, event?: Event): void {
   if (disabled.value || isReadOnly.value) return;
 
-  if (group) {
-    if (d.value.value !== undefined) group.value.value = d.value.value;
-  } else {
-    model.value = next;
-    emit('update:checked', next);
-  }
-
+  model.value = next;
+  emit('update:checked', next);
   emit('change', next, event);
 }
 

@@ -32,7 +32,7 @@ const listView = ref(true);
 | `hoverable`, `focusable`    | `boolean`              | computed        | Override interaction and focus affordances.                       |
 | `thumbOutline`              | `boolean`              | `true`          | Toggles the thumb outline.                                        |
 
-`RadioGroup` remains as a Vue convenience for shared value selection. It supplies a shared model, name, disabled state, and required state to nested radios; `Radio` itself does not require it.
+Radios are grouped by the native `name` attribute, exactly as upstream does it (`Radio.tsx:29-30,175`). There is no group component: the caller owns the selected value and binds `checked` per radio.
 
 ## Upstream evidence
 

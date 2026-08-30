@@ -79,7 +79,6 @@ export { default as Spinner } from './components/feedback/Spinner.vue';
 export { default as Checkbox } from './components/forms/Checkbox.vue';
 export { default as Input } from './components/forms/Input.vue';
 export { default as Radio } from './components/forms/Radio.vue';
-export { default as RadioGroup } from './components/forms/RadioGroup.vue';
 export { default as SearchField } from './components/forms/SearchField.vue';
 export { default as Slider } from './components/forms/Slider.vue';
 export { default as Select } from './components/forms/Select.vue';
