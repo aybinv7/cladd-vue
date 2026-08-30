@@ -3,9 +3,9 @@ import type { Component } from 'vue';
 import type {
   SurfaceLevelInput,
   SurfaceVariant,
-  UiAccent,
   UiSize,
 } from '../../foundations/contracts.ts';
+import type { Color } from '../../types.ts';
 import type { ButtonProps } from './button.contracts.ts';
 
 export interface ToolbarProps {
@@ -16,7 +16,7 @@ export interface ToolbarProps {
   /** Surface variant applied to child `ToolbarButton`s through context. Default `'transparent'`. */
   buttonVariant?: SurfaceVariant;
   /** Accent color token. Sets the toolbar's `cladd-color-{name}` class. */
-  color?: UiAccent;
+  color?: Color;
   /** Extra classes for the inner content wrapper. */
   contentClassName?: string;
   /** Outline ring on the toolbar container. Default `true`. */

@@ -6,7 +6,7 @@ import {
   Dialog,
   Popover,
   Tooltip,
-  UiProvider,
+  CladdProvider,
 } from '../../src/index.ts';
 
 const dialogOpen = ref(false);
@@ -18,7 +18,7 @@ const closedCount = ref(0);
 </script>
 
 <template>
-  <UiProvider accent-color="brand" theme="dark">
+  <CladdProvider accent-color="brand" theme="dark">
     <Dialog
       v-model:open="dialogOpen"
       description="Dialog description"
@@ -80,5 +80,5 @@ const closedCount = ref(0);
     </Tooltip>
 
     <output data-testid="closed-count">{{ closedCount }}</output>
-  </UiProvider>
+  </CladdProvider>
 </template>

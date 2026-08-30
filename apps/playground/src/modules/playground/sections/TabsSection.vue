@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { Tab, TabPanel, Tabs, TabsList } from '@cladd-vue/ui';
-import type { UiAccent } from '@cladd-vue/ui';
+import type { Color } from '@cladd-vue/ui';
 import { computed, ref } from 'vue';
 
 import CatalogSection from '../components/CatalogSection.vue';
@@ -10,7 +10,7 @@ import PlaygroundSwitchControl from '../components/PlaygroundSwitchControl.vue';
 import PlaygroundToolbar from '../components/PlaygroundToolbar.vue';
 
 defineProps<{
-  accent: UiAccent;
+  accent: Color;
   interactionsEnabled: boolean;
 }>();
 

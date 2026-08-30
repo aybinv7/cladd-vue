@@ -56,7 +56,7 @@ bun add @cladd-vue/ui
 ```
 
 ```ts
-import '@cladd-vue/ui/styles.css';
+import '@cladd-vue/ui/css';
 ```
 
 ```vue

@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { Button, type UiAccent } from '@cladd-vue/ui';
+import { Button, type Color } from '@cladd-vue/ui';
 
-const colors: readonly UiAccent[] = [
+const colors: readonly Color[] = [
   'neutral',
   'brand',
   'red',
@@ -15,7 +15,7 @@ const colors: readonly UiAccent[] = [
   'orange',
 ];
 
-const model = defineModel<UiAccent>({ required: true });
+const model = defineModel<Color>({ required: true });
 </script>
 
 <template>
@@ -23,7 +23,7 @@ const model = defineModel<UiAccent>({ required: true });
     <Button
       v-for="color in colors"
       :key="color"
-      :accent="color"
+      :color="color"
       :aria-label="color"
       :aria-pressed="model === color"
       :outline="model === color"

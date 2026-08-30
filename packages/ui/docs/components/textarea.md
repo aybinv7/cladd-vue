@@ -31,7 +31,7 @@ matching upstream. Consequences are deliberate and load-bearing:
 | `errorMessage`          | `string`                                | —         | Shown when `valid` is `false`, wired via `aria-describedby`.         |
 | `updateContentOnChange` | `boolean`                               | `true`    | Write external model changes back into the editor DOM.               |
 | `tightFocusRing`        | `boolean`                               | `false`   | Ring flush against the element instead of offset outside it.         |
-| `accent` / `color`      | `UiAccent`                              | context   | `color` wins, then `accent`, then the provider accent.               |
+| `color` / `color`       | `Color`                                 | context   | `color` wins, then `accent`, then the provider accent.               |
 | `contentClassName`      | `string`                                | —         | Classes for the inner content row.                                   |
 | `inputClassName`        | `string`                                | —         | Classes for the editor element.                                      |
 | `placeholderClassName`  | `string`                                | —         | Classes for the placeholder layer.                                   |

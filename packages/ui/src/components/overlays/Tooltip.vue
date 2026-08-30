@@ -28,7 +28,6 @@ import {
 defineOptions({ inheritAttrs: false });
 
 const props = withDefaults(defineProps<TooltipProps>(), {
-  accent: undefined,
   ariaLabel: undefined,
   color: undefined,
   contentClassName: undefined,
@@ -199,7 +198,6 @@ const primitiveAttrs = computed(() => {
   <TooltipPrimitive
     v-bind="primitiveAttrs.attrs"
     v-model:open="model"
-    :accent="d.accent"
     :anchor-element="anchorElement"
     :aria-label="d.ariaLabel"
     :class="primitiveAttrs.class"

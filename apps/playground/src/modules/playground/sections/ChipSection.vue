@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { Chip } from '@cladd-vue/ui';
-import type { UiAccent } from '@cladd-vue/ui';
+import type { Color } from '@cladd-vue/ui';
 import { computed, ref } from 'vue';
 
 import CatalogSection from '../components/CatalogSection.vue';
@@ -11,11 +11,11 @@ import PlaygroundSwitchControl from '../components/PlaygroundSwitchControl.vue';
 import PlaygroundToolbar from '../components/PlaygroundToolbar.vue';
 
 const props = defineProps<{
-  accent: UiAccent;
+  accent: Color;
   interactionsEnabled: boolean;
 }>();
 
-const color = ref<UiAccent>('neutral');
+const color = ref<Color>('neutral');
 const disabled = ref(false);
 const rounded = ref(false);
 const size = ref('md');

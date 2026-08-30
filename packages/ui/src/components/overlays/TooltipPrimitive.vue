@@ -27,7 +27,6 @@ import {
 defineOptions({ inheritAttrs: false });
 
 const props = withDefaults(defineProps<TooltipPrimitiveProps>(), {
-  accent: undefined,
   anchorElement: undefined,
   color: undefined,
   contentClassName: undefined,
@@ -62,7 +61,7 @@ const d = useComponentDefaults('TooltipPrimitive', props, {
 const { phase, setPhase } = useOverlayPhase(model);
 
 const mounted = computed(() => phase.value !== 'closed');
-const currentAccent = computed(() => d.value.color ?? d.value.accent);
+const currentAccent = computed(() => d.value.color);
 const currentSurfaceLevel = computed(
   () => d.value.surfaceLevel ?? (ui.theme.value === 'light' ? 1 : 5),
 );
@@ -127,7 +126,7 @@ provideSurfaceColorReset();
       <Surface
         v-bind="surfaceAttrs"
         :ref="setSurface"
-        :accent="currentAccent"
+        :color="currentAccent"
         :class="surfaceClass"
         :content-class-name="contentClass"
         :data-open="opened || undefined"

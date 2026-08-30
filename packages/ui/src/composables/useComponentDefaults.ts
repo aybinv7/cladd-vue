@@ -6,7 +6,7 @@ import type { ComponentDefaults } from '../foundations/componentDefaults.ts';
 /**
  * Resolves a component's effective props, upstream's precedence:
  *
- * > explicit prop → `UiProvider`'s `defaults[componentName]` → the component's built-in default
+ * > explicit prop → `CladdProvider`'s `defaults[componentName]` → the component's built-in default
  *
  * A prop passed explicitly as `undefined` still falls back to the default — important so wrapper
  * components forwarding `:prop="prop"` don't clobber app-wide defaults.

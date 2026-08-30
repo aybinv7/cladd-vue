@@ -19,7 +19,6 @@ import {
 } from './list.contracts.ts';
 
 const props = withDefaults(defineProps<ListButtonProps>(), {
-  accent: undefined,
   as: undefined,
   color: undefined,
   contentClassName: undefined,
@@ -85,7 +84,6 @@ const afterClass = computed(() =>
 
 <template>
   <Button
-    :accent="d.accent"
     :as="d.as"
     :class="rootClass"
     :color="d.color"

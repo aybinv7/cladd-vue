@@ -9,13 +9,14 @@ import {
 } from 'vue';
 
 import type { ComponentDefaults } from '../foundations/componentDefaults.ts';
-import type { UiAccent, UiTheme } from '../foundations/contracts.ts';
+import type { UiTheme } from '../foundations/contracts.ts';
+import type { Color } from '../types.ts';
 
 /** Upstream default: `'#app, #__next, #root'` — the first match wins. */
 export const defaultOverlaysRoot = '#app, #__next, #root';
 
 export interface UiContextValue {
-  accentColor: Readonly<Ref<UiAccent>>;
+  accentColor: Readonly<Ref<Color>>;
   defaults: Readonly<Ref<ComponentDefaults>>;
   overlaysRoot: Readonly<Ref<string>>;
   theme: Readonly<Ref<UiTheme>>;
@@ -31,7 +32,7 @@ const defaultUiContext: UiContextValue = {
 };
 
 export interface ProvideUiContextOptions {
-  accentColor: MaybeRefOrGetter<UiAccent>;
+  accentColor: MaybeRefOrGetter<Color>;
   defaults?: MaybeRefOrGetter<ComponentDefaults | undefined>;
   overlaysRoot?: MaybeRefOrGetter<string | undefined>;
   theme: MaybeRefOrGetter<UiTheme>;
@@ -63,7 +64,7 @@ export function useTheme(): Readonly<Ref<UiTheme>> {
 }
 
 /** Upstream `useAccentColor()`. */
-export function useAccentColor(): Readonly<Ref<UiAccent>> {
+export function useAccentColor(): Readonly<Ref<Color>> {
   return useUiContext().accentColor;
 }
 

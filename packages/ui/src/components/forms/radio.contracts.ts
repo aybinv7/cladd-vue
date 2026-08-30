@@ -1,16 +1,15 @@
 import type { Component } from 'vue';
 
-import type { UiAccent } from '../../foundations/contracts.ts';
+import type { Color } from '../../types.ts';
 import type { ChoiceSize } from './form.contracts.ts';
 
 export interface RadioProps {
-  accent?: UiAccent;
   /** Polymorphic root element. Defaults to `'label'`. */
   as?: string | Component;
   /** Controlled checked state. Default `false`. */
   checked?: boolean;
   /** Accent color for the checked state. Default: theme accent. */
-  color?: UiAccent;
+  color?: Color;
   /** Visually dim the radio and disable interaction. Default `false`. */
   disabled?: boolean;
   /** Auto-computed when omitted: `true` if `as === 'label'` OR `input` is `true`. */

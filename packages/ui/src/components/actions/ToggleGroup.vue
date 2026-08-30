@@ -9,7 +9,6 @@ import { provideToggleGroupContext } from './toggleGroupContext.ts';
 defineOptions({ inheritAttrs: false });
 
 const props = withDefaults(defineProps<ToggleGroupProps>(), {
-  accent: undefined,
   activeColor: undefined,
   activeOutline: undefined,
   activeVariant: undefined,
@@ -76,7 +75,6 @@ provideToggleGroupContext(
 );
 
 const segmentedProps = computed(() => ({
-  accent: d.value.accent,
   activeColor: d.value.activeColor,
   activeOutline: d.value.activeOutline,
   activeVariant: d.value.activeVariant,

@@ -19,8 +19,7 @@ Vue-native port of Cladd `Chip` at pinned commit `fadd8efe935111f31d7c933238db5c
 | ------------------ | ------------------------- | ---------- | -------------------------------------------------------------------- |
 | `as`               | `string \| Component`     | `span`     | Polymorphic root. `button` and `a` enable interaction automatically. |
 | `clickable`        | `boolean`                 | inferred   | Overrides automatic clickable state.                                 |
-| `color`            | `UiAccent`                | inherited  | Cladd-compatible accent name.                                        |
-| `accent`           | `UiAccent`                | inherited  | Existing Vue alias for `color`. `color` wins when both exist.        |
+| `color`            | `Color`                   | inherited  | Cladd-compatible accent name.                                        |
 | `contentClassName` | `string`                  | none       | Class applied to inner content row.                                  |
 | `disabled`         | `boolean`                 | `false`    | Reserved and intentionally unused, matching Cladd 0.18.5.            |
 | `hoverable`        | `boolean`                 | `false`    | Enables hover overlay. Clickable chips enable it automatically.      |

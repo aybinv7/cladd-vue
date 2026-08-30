@@ -8,7 +8,7 @@ import {
   type Ref,
 } from 'vue';
 
-import type { UiAccent } from '../foundations/contracts.ts';
+import type { Color } from '../types.ts';
 
 /**
  * Tracks the surface depth of the current subtree. Each `Surface` publishes its own level (or
@@ -21,7 +21,7 @@ export interface SurfaceContextValue {
    * cascade so descendants can read the region color in JS. `undefined` when no surface up the
    * tree set a color.
    */
-  color: Readonly<Ref<UiAccent | undefined>>;
+  color: Readonly<Ref<Color | undefined>>;
   /** Current surface depth (1–5). `0` outside any `Surface`. */
   level: Readonly<Ref<number>>;
 }
@@ -36,7 +36,7 @@ const defaultSurfaceContext: SurfaceContextValue = {
 
 export function provideSurfaceContext(
   level: MaybeRefOrGetter<number>,
-  color: MaybeRefOrGetter<UiAccent | undefined>,
+  color: MaybeRefOrGetter<Color | undefined>,
 ): SurfaceContextValue {
   const value: SurfaceContextValue = {
     color: computed(() => toValue(color)),

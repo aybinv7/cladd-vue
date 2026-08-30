@@ -9,7 +9,6 @@ import { useToolbarContext } from './toolbarContext.ts';
 defineOptions({ inheritAttrs: false });
 
 const props = withDefaults(defineProps<ButtonProps>(), {
-  accent: undefined,
   as: undefined,
   clickable: undefined,
   color: undefined,
@@ -41,7 +40,6 @@ const toolbar = useToolbarContext();
 const d = useComponentDefaults('ToolbarButton', props, {});
 
 const buttonProps = computed(() => ({
-  accent: d.value.accent,
   as: d.value.as,
   clickable: d.value.clickable,
   color: d.value.color,

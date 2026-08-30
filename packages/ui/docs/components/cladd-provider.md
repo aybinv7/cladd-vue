@@ -1,27 +1,27 @@
-# UiProvider
+# CladdProvider
 
-`UiProvider` is the native Vue port of Cladd's provider. It renders the theme root element and publishes the color scheme and the app-wide accent to every descendant through Vue provide/inject, so surfaces and controls can resolve their default accent and every token can be scoped to a theme.
+`CladdProvider` is the native Vue port of Cladd's provider. It renders the theme root element and publishes the color scheme and the app-wide accent to every descendant through Vue provide/inject, so surfaces and controls can resolve their default accent and every token can be scoped to a theme.
 
 ```vue
 <script setup lang="ts">
-import { UiProvider, Surface } from '@cladd-vue/ui';
-import '@cladd-vue/ui/styles.css';
+import { CladdProvider, Surface } from '@cladd-vue/ui';
+import '@cladd-vue/ui/css';
 </script>
 
 <template>
-  <UiProvider accent="brand" theme="dark">
+  <CladdProvider accent="brand" theme="dark">
     <Surface variant="gradient" outline>Application shell</Surface>
-  </UiProvider>
+  </CladdProvider>
 </template>
 ```
 
 ## API
 
-| Prop     | Type                  | Default   | Description                                       |
-| -------- | --------------------- | --------- | ------------------------------------------------- |
-| `as`     | `string \| Component` | `"div"`   | Polymorphic root element or Vue component.        |
-| `theme`  | `UiTheme`             | `"dark"`  | Color scheme published to descendants.            |
-| `accent` | `UiAccent`            | `"brand"` | App-wide accent used as the default accent token. |
+| Prop    | Type                  | Default   | Description                                       |
+| ------- | --------------------- | --------- | ------------------------------------------------- |
+| `as`    | `string \| Component` | `"div"`   | Polymorphic root element or Vue component.        |
+| `theme` | `UiTheme`             | `"dark"`  | Color scheme published to descendants.            |
+| `color` | `Color`               | `"brand"` | App-wide accent used as the default accent token. |
 
 | Slot      | Purpose                       |
 | --------- | ----------------------------- |
@@ -37,7 +37,7 @@ The root element carries the class `cladd-theme`, the accent class `cladd-accent
 - Light mode is only selected by `.cladd-theme[data-cladd-theme="light"]`, so a light region requires a provider (or an equivalent hand-written root) — setting `theme` alone on a component does nothing.
 - `color-scheme` is set from `data-cladd-theme`, which is what makes native scrollbars and form chrome match.
 
-Import `@cladd-vue/ui/styles.css` once in the application entry; the provider does not inject styles.
+Import `@cladd-vue/ui/css` once in the application entry; the provider does not inject styles.
 
 ## Reading the context
 
@@ -63,17 +63,17 @@ Providers nest, and each one re-roots the theme for its subtree. That is the sup
 
 ```vue
 <script setup lang="ts">
-import { UiProvider, Surface } from '@cladd-vue/ui';
+import { CladdProvider, Surface } from '@cladd-vue/ui';
 </script>
 
 <template>
-  <UiProvider theme="dark" accent="brand">
+  <CladdProvider theme="dark" accent="brand">
     <Surface variant="gradient" outline>Dark shell</Surface>
 
-    <UiProvider as="section" theme="light" accent="cyan">
+    <CladdProvider as="section" theme="light" accent="cyan">
       <Surface variant="gradient" outline>Light inspector</Surface>
-    </UiProvider>
-  </UiProvider>
+    </CladdProvider>
+  </CladdProvider>
 </template>
 ```
 
@@ -83,7 +83,7 @@ The contract follows the pinned Cladd `CladdProvider.tsx` and `ThemeContext.tsx`
 
 Divergences from upstream that are intentional or not yet implemented in this package:
 
-- **No per-component default props.** Upstream accepts `defaults={{ Button: { outline: false, size: 'lg' } }}` and every component reads it through `useComponentDefaults`. `UiProvider` has no `defaults` prop, and no component in this package consults one, so an app-wide default has to be applied by the consumer (a local wrapper component, for example). This is the one upstream provider capability that is missing rather than reshaped.
+- **No per-component default props.** Upstream accepts `defaults={{ Button: { outline: false, size: 'lg' } }}` and every component reads it through `useComponentDefaults`. `CladdProvider` has no `defaults` prop, and no component in this package consults one, so an app-wide default has to be applied by the consumer (a local wrapper component, for example). This is the one upstream provider capability that is missing rather than reshaped.
 - Upstream `accentColor` is named `accent` here, matching the `accent` prop used across this package.
 - There is no provider-level overlay root. Upstream `CladdProvider` takes `overlaysRoot` and mounts shared dialog and toast portals; in this package the overlay components own their portal target and re-apply the `cladd-theme` root on their portaled content, and the provider renders no portals of its own.
 - The provider renders a real element (`as`, default `div`) because the `cladd-theme` class and `data-cladd-theme` attribute are the CSS anchor for tokens and `color-scheme`. Upstream's provider renders no element: its stylesheet keys light and dark tokens off `.light` / `.dark` classes that the application puts on its own element, separately from the React context.

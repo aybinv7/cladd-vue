@@ -38,7 +38,7 @@ export const sliderApi: readonly ComponentApiEntry[] = [
     defaultValue: '"thumb"',
     description: 'Hairline thumb or recessed track.',
   },
-  { name: 'accent', type: 'UiAccent', description: 'Inherited when omitted.' },
+  { name: 'accent', type: 'Color', description: 'Inherited when omitted.' },
   {
     name: 'disabled',
     type: 'boolean',

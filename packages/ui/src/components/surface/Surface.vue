@@ -6,7 +6,6 @@ import {
   provideSurfaceContext,
   useSurface,
 } from '../../contexts/surfaceContext.ts';
-import { useUiContext } from '../../contexts/uiContext.ts';
 import type { SurfaceVariant } from '../../foundations/contracts.ts';
 import { resolveSurfaceLevel } from '../../foundations/surfaceLevel.ts';
 import { cn } from '../../shared/cn.ts';
@@ -16,7 +15,6 @@ import { resolveSurfaceInnerElement } from './surface.shared.ts';
 defineOptions({ inheritAttrs: false });
 
 const props = withDefaults(defineProps<SurfaceProps>(), {
-  accent: undefined,
   as: undefined,
   bgClassName: undefined,
   clickable: undefined,
@@ -59,7 +57,7 @@ const currentLevel = computed(() =>
 );
 // Upstream's `color = ''` — no accent-color fallback here; a Surface is only "colored" when the
 // consumer says so. The published region color is `color || inheritedColor`.
-const explicitColor = computed(() => d.value.color ?? d.value.accent);
+const explicitColor = computed(() => d.value.color);
 const providedColor = computed(
   () => explicitColor.value ?? parentSurface.color.value,
 );

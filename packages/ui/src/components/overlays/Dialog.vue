@@ -42,15 +42,14 @@ import { cloneTriggerNode } from './overlayTrigger.ts';
 defineOptions({ inheritAttrs: false });
 
 const props = withDefaults(defineProps<DialogProps>(), {
-  accent: undefined,
   backdropTransparent: undefined,
   contentClassName: undefined,
-  cancelAccent: undefined,
+  cancelButtonColor: undefined,
   cancelText: undefined,
   closeOnBackdropClick: undefined,
   closeOnEscape: undefined,
   color: undefined,
-  confirmAccent: undefined,
+  confirmButtonColor: undefined,
   confirmText: undefined,
   description: undefined,
   outline: undefined,
@@ -92,7 +91,7 @@ const ui = useUiContext();
 const root = useOverlayRootContext(dialogRootContextKey);
 const d = useComponentDefaults('Dialog', props, {
   backdropTransparent: false,
-  cancelAccent: 'neutral' as DialogProps['cancelAccent'],
+  cancelButtonColor: 'neutral' as DialogProps['cancelButtonColor'],
   closeOnBackdropClick: true,
   closeOnEscape: true,
   surfaceLevel: 1,
@@ -116,11 +115,7 @@ const { phase, setPhase } = useOverlayPhase(model);
 
 const mounted = computed(() => phase.value !== 'closed');
 const currentAccent = computed(
-  () =>
-    d.value.confirmAccent ??
-    d.value.color ??
-    d.value.accent ??
-    ui.accentColor.value,
+  () => d.value.confirmButtonColor ?? d.value.color ?? ui.accentColor.value,
 );
 const currentOutline = computed(
   () => d.value.outline ?? ui.theme.value === 'dark',
@@ -268,7 +263,7 @@ provideSurfaceColorReset();
         <Input
           v-if="d.requireConfirmText && d.confirmText"
           v-model="confirmationValue"
-          :accent="currentAccent"
+          :color="currentAccent"
           data-part="input"
           :info-message="`Type ${d.requireConfirmText} to confirm`"
           :placeholder="`Type ${d.requireConfirmText} to confirm`"
@@ -282,7 +277,7 @@ provideSurfaceColorReset();
           <slot name="actions" :close="close">
             <Button
               v-if="d.cancelText"
-              :accent="d.cancelAccent"
+              :color="d.cancelButtonColor"
               :content-class-name="dialogButtonContentClasses"
               data-part="cancel"
               rounded
@@ -294,7 +289,7 @@ provideSurfaceColorReset();
             </Button>
             <Button
               v-if="d.confirmText"
-              :accent="currentAccent"
+              :color="currentAccent"
               :content-class-name="dialogButtonContentClasses"
               data-part="confirm"
               :disabled="!confirmationValid"

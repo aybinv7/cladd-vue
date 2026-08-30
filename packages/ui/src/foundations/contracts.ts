@@ -2,22 +2,6 @@ export const uiSizes = ['2xs', 'xs', 'sm', 'md', 'lg', 'xl', '2xl'] as const;
 
 export type UiSize = (typeof uiSizes)[number];
 
-export const uiAccents = [
-  'neutral',
-  'brand',
-  'red',
-  'pink',
-  'purple',
-  'blue',
-  'cyan',
-  'lime',
-  'green',
-  'yellow',
-  'orange',
-] as const;
-
-export type UiAccent = (typeof uiAccents)[number];
-
 export const uiThemes = ['dark', 'light'] as const;
 
 export type UiTheme = (typeof uiThemes)[number];

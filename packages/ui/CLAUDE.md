@@ -63,7 +63,7 @@ Read these files before implementation:
 
 - Export consumers' API only through `src/index.ts` and documented subpath exports.
 - Component names, prop names, type names, and slot names are upstream's. `color`, not `accent`.
-  `CladdProvider`, not `UiProvider`. Do not add an alias "for clarity"; an alias is a second public
+  `CladdProvider`, not `CladdProvider`. Do not add an alias "for clarity"; an alias is a second public
   contract to keep in sync forever.
 - Do not add compound sub-components upstream does not ship. If upstream exposes `Dialog` as one
   component, the port exposes one component.

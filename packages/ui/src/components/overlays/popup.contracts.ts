@@ -1,8 +1,8 @@
 import type {
   SurfaceLevelInput,
   SurfaceVariant,
-  UiAccent,
 } from '../../foundations/contracts.ts';
+import type { Color } from '../../types.ts';
 
 export interface PopupProps {
   ariaDescribedby?: string;
@@ -13,7 +13,7 @@ export interface PopupProps {
   backdropClassName?: string;
   /** Default `true`. */
   closeButton?: boolean;
-  closeButtonColor?: UiAccent;
+  closeButtonColor?: Color;
   /** Default `true`. */
   closeOnBackdropClick?: boolean;
   /** Default `true`. */

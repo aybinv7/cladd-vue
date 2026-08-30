@@ -20,7 +20,6 @@ import {
 defineOptions({ inheritAttrs: false });
 
 const props = withDefaults(defineProps<TextareaProps>(), {
-  accent: undefined,
   as: undefined,
   color: undefined,
   contentClassName: undefined,
@@ -66,9 +65,7 @@ const d = useComponentDefaults('Textarea', props, {
   updateContentOnChange: true,
   valid: true,
 });
-const currentAccent = computed(
-  () => d.value.color ?? d.value.accent ?? ui.accentColor.value,
-);
+const currentAccent = computed(() => d.value.color ?? ui.accentColor.value);
 const controlElement = ref<HTMLElement>();
 const text = ref<string>();
 const editable = computed(() => !d.value.disabled && !d.value.readOnly);
@@ -190,7 +187,6 @@ defineExpose({ focus: () => controlElement.value?.focus() });
 <template>
   <SurfaceCut
     v-bind="attrs"
-    :accent="d.accent"
     :as="d.as"
     :class="rootClass"
     :color="d.color"

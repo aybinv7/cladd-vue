@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { Spinner } from '@cladd-vue/ui';
-import type { UiAccent } from '@cladd-vue/ui';
+import type { Color } from '@cladd-vue/ui';
 import { computed, ref } from 'vue';
 
 import CatalogSection from '../components/CatalogSection.vue';
@@ -10,11 +10,11 @@ import PlaygroundSegmented from '../components/PlaygroundSegmented.vue';
 import PlaygroundToolbar from '../components/PlaygroundToolbar.vue';
 
 defineProps<{
-  accent: UiAccent;
+  accent: Color;
   interactionsEnabled: boolean;
 }>();
 
-const color = ref<UiAccent>('neutral');
+const color = ref<Color>('neutral');
 const size = ref('md');
 const sizes = ['2xs', 'xs', 'sm', 'md', 'lg', 'xl', '2xl'] as const;
 const code = computed(

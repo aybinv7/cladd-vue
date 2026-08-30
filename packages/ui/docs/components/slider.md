@@ -25,7 +25,7 @@ const volume = ref(40);
 | `scale`                     | `"linear" \| "log" \| mapping` | `"linear"`             | Value-position mapping.                             |
 | `variant`                   | `"thumb" \| "track"`           | `"thumb"`              | Thin thumb or thick track presentation.             |
 | `size`                      | `"xs" \| "sm" \| "md"`         | `"sm"`                 | Track and thumb dimensions.                         |
-| `color`                     | `UiAccent`                     | theme accent for thumb | Accent of the thumb/range.                          |
+| `color`                     | `Color`                        | theme accent for thumb | Accent of the thumb/range.                          |
 | `rounded`                   | `boolean`                      | `false`                | Makes track-variant ends fully rounded.             |
 | `rangeFill`, `rangeOutline` | `boolean`                      | `false`, `true`        | Track-variant range presentation.                   |
 | `thumbOutline`              | `boolean`                      | `true`                 | Thumb outline.                                      |

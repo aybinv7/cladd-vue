@@ -3,14 +3,13 @@ import type { Component } from 'vue';
 import type {
   SurfaceLevelInput,
   SurfaceVariant,
-  UiAccent,
   UiSize,
 } from '../../foundations/contracts.ts';
+import type { Color } from '../../types.ts';
 
 export interface SpinnerProps {
-  accent?: UiAccent;
   /** Accent color for the spinning ring. Default: theme accent. */
-  color?: UiAccent;
+  color?: Color;
   /** Spinner dimension. Default `'sm'`. */
   size?: UiSize;
 }
@@ -18,8 +17,7 @@ export interface SpinnerProps {
 export type SpinnerDefaultProps = Partial<SpinnerProps>;
 
 export interface FocusRingProps {
-  accent?: UiAccent;
-  color?: UiAccent;
+  color?: Color;
   /** Show the ring regardless of focus state. Default `false`. */
   force?: boolean;
   /** Peer group name the ring watches for focus. Default `'input'`. */
@@ -36,7 +34,7 @@ export interface ToastProps {
   /** Render the auto close button on the right. Default `true`. */
   closeButton?: boolean;
   /** Default `'neutral'`. */
-  color?: UiAccent;
+  color?: Color;
   /** Icon component rendered before the text content. Receives `iconProps`. */
   icon?: Component;
   iconProps?: Record<string, unknown>;

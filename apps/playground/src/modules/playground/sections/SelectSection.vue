@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { Select } from '@cladd-vue/ui';
-import type { UiAccent, UiSize } from '@cladd-vue/ui';
+import type { Color, UiSize } from '@cladd-vue/ui';
 import { computed, ref } from 'vue';
 
 import CatalogSection from '../components/CatalogSection.vue';
@@ -11,7 +11,7 @@ import PlaygroundSwitchControl from '../components/PlaygroundSwitchControl.vue';
 import PlaygroundToolbar from '../components/PlaygroundToolbar.vue';
 
 const props = defineProps<{
-  accent: UiAccent;
+  accent: Color;
   interactionsEnabled: boolean;
 }>();
 
@@ -26,7 +26,7 @@ const fruits = [
 const sizes = ['2xs', 'xs', 'sm', 'md', 'lg', 'xl', '2xl'] as const;
 
 const size = ref<UiSize>('md');
-const color = ref<UiAccent>('brand');
+const color = ref<Color>('brand');
 const rounded = ref(false);
 const multiple = ref(false);
 const search = ref(false);

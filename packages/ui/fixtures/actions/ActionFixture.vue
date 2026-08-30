@@ -5,7 +5,7 @@ import {
   Shortcut,
   Spinner,
   Surface,
-  UiProvider,
+  CladdProvider,
   type UiSize,
 } from '../../src/index.ts';
 
@@ -13,7 +13,7 @@ const sizes: UiSize[] = ['2xs', 'xs', 'sm', 'md', 'lg', 'xl', '2xl'];
 </script>
 
 <template>
-  <UiProvider accent-color="brand" theme="dark">
+  <CladdProvider accent-color="brand" theme="dark">
     <div class="cladd-action-fixture dark">
       <Surface
         class="cladd-action-fixture__panel"
@@ -29,7 +29,7 @@ const sizes: UiSize[] = ['2xs', 'xs', 'sm', 'md', 'lg', 'xl', '2xl'];
         >
           <span class="cladd-action-fixture__label">{{ size }}</span>
           <Button :size="size">Save</Button>
-          <Button accent="green" :size="size" variant="gradient-fill"
+          <Button color="green" :size="size" variant="gradient-fill"
             >Publish</Button
           >
           <Button aria-label="Refresh" :size="size" square>
@@ -39,7 +39,7 @@ const sizes: UiSize[] = ['2xs', 'xs', 'sm', 'md', 'lg', 'xl', '2xl'];
               />
             </svg>
           </Button>
-          <Chip accent="cyan" :size="size">Connected</Chip>
+          <Chip color="cyan" :size="size">Connected</Chip>
           <Shortcut :size="size">ctrl k</Shortcut>
           <Spinner :size="size" />
         </Surface>
@@ -51,7 +51,7 @@ const sizes: UiSize[] = ['2xs', 'xs', 'sm', 'md', 'lg', 'xl', '2xl'];
         </Surface>
       </Surface>
     </div>
-  </UiProvider>
+  </CladdProvider>
 </template>
 
 <style scoped>

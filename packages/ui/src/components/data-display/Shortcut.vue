@@ -15,7 +15,6 @@ import { useComponentDefaults } from '../../composables/useComponentDefaults.ts'
 import type {
   SurfaceLevelInput,
   SurfaceVariant,
-  UiAccent,
   UiSize,
 } from '../../foundations/contracts.ts';
 import { cn } from '../../shared/cn.ts';
@@ -46,7 +45,6 @@ type ShortcutEntry =
 defineOptions({ inheritAttrs: false });
 
 const props = withDefaults(defineProps<ShortcutProps>(), {
-  accent: undefined,
   as: undefined,
   color: undefined,
   iconClassName: undefined,
@@ -215,7 +213,6 @@ onBeforeMount(() => {
     <Surface
       v-for="(entry, index) in shortcutEntries()"
       :key="index"
-      :accent="d.accent"
       :color="d.color"
       as="kbd"
       :class="keyClass"

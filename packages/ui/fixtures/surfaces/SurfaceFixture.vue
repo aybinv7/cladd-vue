@@ -2,7 +2,7 @@
 import {
   Surface,
   SurfaceCut,
-  UiProvider,
+  CladdProvider,
   type UiTheme,
 } from '../../src/index.ts';
 
@@ -12,14 +12,14 @@ const themes: UiTheme[] = ['dark', 'light'];
 <template>
   <div class="cladd-fixture-grid">
     <!-- The theme cascade lives on the app's own element (`dark`/`light` + `cladd-color-*`), like a
-         Cladd app; `UiProvider` only publishes context. -->
+         Cladd app; `CladdProvider` only publishes context. -->
     <div
       v-for="theme in themes"
       :key="theme"
       class="cladd-fixture-shell cladd-color-cyan"
       :class="theme"
     >
-      <UiProvider accent-color="cyan" :theme="theme">
+      <CladdProvider accent-color="cyan" :theme="theme">
         <Surface
           class="cladd-fixture-panel"
           :level="1"
@@ -35,7 +35,7 @@ const themes: UiTheme[] = ['dark', 'light'];
             <span class="cladd-fixture-status">connected</span>
           </Surface>
           <Surface variant="transparent" class="cladd-fixture-group">
-            <Surface class="cladd-fixture-inspector" accent="purple" outline>
+            <Surface class="cladd-fixture-inspector" color="purple" outline>
               <span>Storage inspector</span>
               <SurfaceCut class="cladd-fixture-cut"
                 >IndexedDB / 14 stores</SurfaceCut
@@ -43,7 +43,7 @@ const themes: UiTheme[] = ['dark', 'light'];
             </Surface>
           </Surface>
         </Surface>
-      </UiProvider>
+      </CladdProvider>
     </div>
   </div>
 </template>

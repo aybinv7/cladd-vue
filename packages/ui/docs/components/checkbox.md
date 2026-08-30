@@ -29,8 +29,7 @@ const subscribed = ref(false);
 | `as`                     | `string \| Component`  | `"label"`       | Root element.                                                     |
 | `input`                  | `boolean`              | `true`          | Enables native form input; false enables ARIA keyboard mode.      |
 | `inputId`                | `string`               | —               | Native input id. `id` remains a compatibility alias.              |
-| `color`                  | `UiAccent`             | provider accent | Checked-state accent.                                             |
-| `accent`                 | `UiAccent`             | provider accent | Port alias; `color` takes precedence.                             |
+| `color`                  | `Color`                | provider accent | Checked-state accent.                                             |
 | `size`                   | `"xs" \| "sm" \| "md"` | `"sm"`          | Thumb and glyph dimension.                                        |
 | `disabled`               | `boolean`              | `false`         | Dims and blocks interaction.                                      |
 | `readOnly`               | `boolean`              | `false`         | Blocks interaction without dimming.                               |

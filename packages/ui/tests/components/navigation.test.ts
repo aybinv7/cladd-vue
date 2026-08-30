@@ -1,8 +1,8 @@
 import { expect, test } from 'vite-plus/test';
 import { defineComponent, h, nextTick, ref } from 'vue';
 
-import { Tab, TabPanel, Tabs, TabsList } from '../src/index.ts';
-import { byTestId, click, mountTree } from './support/mountTree.ts';
+import { Tab, TabPanel, Tabs, TabsList } from '../../src/index.ts';
+import { byTestId, click, mountTree } from '../support/mountTree.ts';
 
 function mountTabs(defaultValue = 'overview') {
   return mountTree(

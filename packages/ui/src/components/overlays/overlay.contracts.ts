@@ -1,8 +1,8 @@
 import type {
   SurfaceLevelInput,
   SurfaceVariant,
-  UiAccent,
 } from '../../foundations/contracts.ts';
+import type { Color } from '../../types.ts';
 
 export const popoverPositions = [
   'top-start',
@@ -220,7 +220,6 @@ export const dialogButtonContentClasses = 'px-4';
 export const overlayTriggerClasses = 'cladd-overlay-trigger contents';
 
 export interface PopoverProps {
-  accent?: UiAccent;
   anchorElement?: HTMLElement;
   anchorRect?: DOMRectReadOnly;
   /** Render a backdrop behind the popover. Default `false`. */
@@ -231,7 +230,7 @@ export interface PopoverProps {
   /** Default `true`. Suppressed automatically when this popover has a child popover/dialog open. */
   closeOnEscape?: boolean;
   /** Accent color token. Sets the popover's `cladd-color-{name}` class. */
-  color?: UiAccent;
+  color?: Color;
   /** Extra classes for the inner scrollable content area. */
   contentClassName?: string;
   disabled?: boolean;
@@ -258,16 +257,15 @@ export type PopoverDefaultProps = Partial<
 >;
 
 export interface DialogProps {
-  accent?: UiAccent;
   backdropTransparent?: boolean;
-  cancelAccent?: UiAccent;
+  cancelButtonColor?: Color;
   cancelText?: string;
   /** Default `true`. */
   closeOnBackdropClick?: boolean;
   /** Default `true`. */
   closeOnEscape?: boolean;
-  color?: UiAccent;
-  confirmAccent?: UiAccent;
+  color?: Color;
+  confirmButtonColor?: Color;
   confirmText?: string;
   contentClassName?: string;
   description?: string;
@@ -285,9 +283,8 @@ export type DialogDefaultProps = Partial<
 >;
 
 export interface TooltipPrimitiveProps {
-  accent?: UiAccent;
   anchorElement?: HTMLElement;
-  color?: UiAccent;
+  color?: Color;
   contentClassName?: string;
   offset?: OverlayOffsetValue;
   position?: TooltipPosition;
@@ -301,9 +298,8 @@ export type TooltipPrimitiveDefaultProps = Partial<
 >;
 
 export interface TooltipProps {
-  accent?: UiAccent;
   ariaLabel?: string;
-  color?: UiAccent;
+  color?: Color;
   contentClassName?: string;
   disabled?: boolean;
   offset?: OverlayOffsetValue;

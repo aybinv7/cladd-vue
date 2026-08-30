@@ -3,17 +3,16 @@ import type { Component } from 'vue';
 import type {
   SurfaceLevelInput,
   SurfaceVariant,
-  UiAccent,
 } from '../../foundations/contracts.ts';
+import type { Color } from '../../types.ts';
 
 export interface SurfaceProps {
-  accent?: UiAccent;
   /** Polymorphic root element. Defaults to `'div'`. */
   as?: string | Component;
   bgClassName?: string;
   clickable?: boolean;
   /** Accent color token. Sets the surface's `cladd-color-{name}` class. */
-  color?: UiAccent;
+  color?: Color;
   contentClassName?: string;
   hoverable?: boolean;
   /** Absolute (1–5) or relative (`'+1'`/`'-1'`) depth. Defaults to parent + 1. */
@@ -33,11 +32,10 @@ export interface SurfaceProps {
 export type SurfaceDefaultProps = Partial<Omit<SurfaceProps, 'as' | 'level'>>;
 
 export interface SurfaceCutProps {
-  accent?: UiAccent;
   as?: string | Component;
   bgClassName?: string;
   clickable?: boolean;
-  color?: UiAccent;
+  color?: Color;
   contentClassName?: string;
   hoverable?: boolean;
   outline?: boolean;

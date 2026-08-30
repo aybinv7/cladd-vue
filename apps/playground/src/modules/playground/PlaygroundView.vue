@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { UiProvider } from '@cladd-vue/ui';
-import type { UiAccent, UiTheme } from '@cladd-vue/ui';
+import { CladdProvider } from '@cladd-vue/ui';
+import type { Color, UiTheme } from '@cladd-vue/ui';
 import { ref, watchEffect } from 'vue';
 import { RouterView } from 'vue-router';
 
@@ -14,7 +14,7 @@ import {
 } from './playground.data';
 
 const theme = ref<UiTheme>('dark');
-const accent = ref<UiAccent>('neutral');
+const accent = ref<Color>('neutral');
 const interactionsEnabled = ref(true);
 
 function toggleTheme(): void {
@@ -34,7 +34,7 @@ watchEffect(() => {
 </script>
 
 <template>
-  <UiProvider :accent-color="accent" :theme="theme">
+  <CladdProvider :accent-color="accent" :theme="theme">
     <div class="playground-shell">
       <PlaygroundHeader
         :component-count="catalogComponentCount"
@@ -46,7 +46,7 @@ watchEffect(() => {
         <SectionNav :entries="catalogEntries" />
         <main class="playground-main">
           <PlaygroundControls
-            :accent="accent"
+            :color="accent"
             :interactions-enabled="interactionsEnabled"
             :theme="theme"
             @update-accent="accent = $event"
@@ -58,7 +58,7 @@ watchEffect(() => {
               <component
                 :is="Component"
                 :key="route.path"
-                :accent="accent"
+                :color="accent"
                 :interactions-enabled="interactionsEnabled"
               />
             </Transition>
@@ -66,5 +66,5 @@ watchEffect(() => {
         </main>
       </div>
     </div>
-  </UiProvider>
+  </CladdProvider>
 </template>

@@ -14,12 +14,11 @@ import { Spinner } from '@cladd-vue/ui';
 
 ## API
 
-| Prop     | Type            | Default         | Description                               |
-| -------- | --------------- | --------------- | ----------------------------------------- |
-| `size`   | `UiSize`        | `"sm"`          | Ring dimension from `2xs` through `2xl`.  |
-| `color`  | `UiAccent`      | provider accent | Cladd-compatible accent API.              |
-| `accent` | `UiAccent`      | provider accent | Port alias; `color` takes precedence.     |
-| `class`  | Vue class value | none            | Extra classes forwarded to the root span. |
+| Prop    | Type            | Default         | Description                               |
+| ------- | --------------- | --------------- | ----------------------------------------- |
+| `size`  | `UiSize`        | `"sm"`          | Ring dimension from `2xs` through `2xl`.  |
+| `color` | `Color`         | provider accent | Cladd-compatible accent API.              |
+| `class` | Vue class value | none            | Extra classes forwarded to the root span. |
 
 The component forwards normal Vue attributes to its root span. It renders one `20 × 20` SVG using Cladd's exact path and rotates it linearly once every `1.5s`.
 

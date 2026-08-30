@@ -10,7 +10,6 @@ import { useSegmentedContext } from './segmentedContext.ts';
 defineOptions({ inheritAttrs: false });
 
 const props = withDefaults(defineProps<ButtonProps & SegmentedButtonProps>(), {
-  accent: undefined,
   active: undefined,
   as: undefined,
   clickable: undefined,
@@ -64,7 +63,6 @@ const buttonProps = computed(() => ({
     d.value.outline ?? (d.value.active ? activeOutline.value : outline.value),
   surfaceLevel: d.value.surfaceLevel ?? (d.value.active ? '+2' : undefined),
   readOnly: d.value.readOnly ?? d.value.active,
-  accent: d.value.accent,
   as: d.value.as,
   clickable: d.value.clickable,
   contentClassName: d.value.contentClassName,

@@ -16,7 +16,8 @@
   },
   "devDependencies": {
     "vite": "catalog:",
-    "vite-plus": "catalog:"
+    "vite-plus": "catalog:",
+    "vue-tsc": "catalog:"
   },
   "overrides": {
     "vite": "catalog:"

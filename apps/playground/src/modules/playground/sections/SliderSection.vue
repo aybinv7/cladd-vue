@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { Slider } from '@cladd-vue/ui';
-import type { UiAccent } from '@cladd-vue/ui';
+import type { Color } from '@cladd-vue/ui';
 import { computed, ref } from 'vue';
 
 import { createSliderCode } from '../component-docs';
@@ -12,12 +12,12 @@ import PlaygroundSwitchControl from '../components/PlaygroundSwitchControl.vue';
 import PlaygroundToolbar from '../components/PlaygroundToolbar.vue';
 
 const props = defineProps<{
-  accent: UiAccent;
+  accent: Color;
   interactionsEnabled: boolean;
 }>();
 
 const value = ref(50);
-const color = ref<UiAccent>('neutral');
+const color = ref<Color>('neutral');
 const disabled = ref(false);
 const readOnly = ref(false);
 const size = ref<'xs' | 'sm' | 'md'>('md');

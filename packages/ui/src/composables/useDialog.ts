@@ -1,6 +1,6 @@
 import { useDialogsPortalContext } from '../components/provider/dialogsPortalContext.ts';
 import { useAccentColor } from '../contexts/uiContext.ts';
-import type { UiAccent } from '../foundations/contracts.ts';
+import type { Color } from '../types.ts';
 
 export interface UseDialogOptions {
   /** Defer rendering until first opened, and unmount after close. Default `false`. */
@@ -9,11 +9,11 @@ export interface UseDialogOptions {
 
 export interface UseDialogConfirmOptions {
   /** Cancel button color. Default `'neutral'`. */
-  cancelButtonColor?: UiAccent;
+  cancelButtonColor?: Color;
   /** Cancel button label. Default `'Cancel'`. */
   cancelButtonText?: string;
   /** Confirm button color. Default: theme accent color. */
-  confirmButtonColor?: UiAccent;
+  confirmButtonColor?: Color;
   /** Confirm button label. Default `'Confirm'`. */
   confirmButtonText?: string;
   /** Fires when the cancel button is pressed. Always called with `false`. */
@@ -53,7 +53,7 @@ export interface DialogApi {
   confirm: (options: UseDialogConfirmOptions) => void;
 }
 
-/** Imperative handle onto the `DialogsPortal` that `UiProvider` renders. */
+/** Imperative handle onto the `DialogsPortal` that `CladdProvider` renders. */
 export function useDialog({ lazy }: UseDialogOptions = {}): DialogApi {
   const { data, state } = useDialogsPortalContext();
   const accentColor = useAccentColor();

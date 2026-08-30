@@ -16,9 +16,9 @@ import {
   focusTrapTopmostModalSelector,
   getFocusTrapFocusable,
   isFocusTrapVisible,
-} from '../src/composables/focusTrap.contracts.ts';
-import { useFocusTrap } from '../src/composables/useFocusTrap.ts';
-import { byTestId, type MountedTree } from './support/mountTree.ts';
+} from '../../src/composables/focusTrap.contracts.ts';
+import { useFocusTrap } from '../../src/composables/useFocusTrap.ts';
+import { byTestId, type MountedTree } from '../support/mountTree.ts';
 
 interface TrapHarnessConfig {
   children?: () => VNode[];

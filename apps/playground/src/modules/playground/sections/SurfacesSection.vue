@@ -5,12 +5,12 @@ import {
   surfaceLevels,
   surfaceVariants,
 } from '@cladd-vue/ui';
-import type { UiAccent } from '@cladd-vue/ui';
+import type { Color } from '@cladd-vue/ui';
 
 import CatalogSection from '../components/CatalogSection.vue';
 
 defineProps<{
-  accent: UiAccent;
+  accent: Color;
   interactionsEnabled: boolean;
 }>();
 </script>

@@ -4,7 +4,7 @@ import { join } from 'node:path';
 import { expect, test } from 'vite-plus/test';
 import { defineComponent, h, nextTick, ref } from 'vue';
 
-import OverlayFixture from '../fixtures/overlays/OverlayFixture.vue';
+import OverlayFixture from '../../fixtures/overlays/OverlayFixture.vue';
 import {
   backdropClasses,
   buildPopoverPositionStyle,
@@ -18,7 +18,7 @@ import {
   popoverSurfaceClasses,
   tooltipOrigins,
   tooltipSurfaceClasses,
-} from '../src/components/overlays/overlay.contracts.ts';
+} from '../../src/components/overlays/overlay.contracts.ts';
 import {
   popupCardClasses,
   popupCardContentClasses,
@@ -28,9 +28,9 @@ import {
   popupWrapperClasses,
   popupWrapperClosedClasses,
   popupWrapperOpenedClasses,
-} from '../src/components/overlays/popup.contracts.ts';
-import { Popover } from '../src/index.ts';
-import { byTestId, click, mountTree } from './support/mountTree.ts';
+} from '../../src/components/overlays/popup.contracts.ts';
+import { Popover } from '../../src/index.ts';
+import { byTestId, click, mountTree } from '../support/mountTree.ts';
 
 const colorsCss = readFileSync(
   join(process.cwd(), 'src', 'styles', 'colors.css'),

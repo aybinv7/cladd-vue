@@ -62,7 +62,6 @@ import SelectDropdownIcon from './SelectDropdownIcon.vue';
 defineOptions({ inheritAttrs: false });
 
 const props = withDefaults(defineProps<SelectProps>(), {
-  accent: undefined,
   anchorElement: undefined,
   closeOnSelect: undefined,
   color: undefined,
@@ -91,7 +90,7 @@ const props = withDefaults(defineProps<SelectProps>(), {
   outline: undefined,
   placeholder: undefined,
   placeholderClassName: undefined,
-  popoverAccent: undefined,
+  popoverColor: undefined,
   popoverClassName: undefined,
   popoverOffset: undefined,
   popoverPosition: undefined,
@@ -527,7 +526,6 @@ onBeforeUnmount(() => document.removeEventListener('keydown', onKeydown));
     v-if="!d.anchorElement"
     v-bind="triggerAttrs"
     :ref="setTriggerElement"
-    :accent="d.accent"
     :aria-activedescendant="
       open && selectedItemIndex >= 0
         ? `${optionIdPrefix}-${selectedItemIndex}`
@@ -576,7 +574,7 @@ onBeforeUnmount(() => document.removeEventListener('keydown', onKeydown));
   <Popover
     v-if="!d.readOnly && !d.disabled"
     v-model:open="open"
-    :accent="d.popoverAccent"
+    :color="d.popoverColor"
     :anchor-element="d.anchorElement ?? triggerElement"
     :class="popoverClass"
     :offset="d.popoverOffset"

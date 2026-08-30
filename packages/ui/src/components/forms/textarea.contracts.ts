@@ -1,14 +1,13 @@
 import type { Component } from 'vue';
 
-import type { UiAccent } from '../../foundations/contracts.ts';
+import type { Color } from '../../types.ts';
 import type { FieldSize } from './form.contracts.ts';
 
 export interface TextareaProps {
-  accent?: UiAccent;
   /** Polymorphic wrapper element. Defaults to `'div'`. */
   as?: string | Component;
   /** Accent color token. Drives the focus ring and `infoMessage` colors. Default: theme accent. */
-  color?: UiAccent;
+  color?: Color;
   /** Extra classes for the inner content row. */
   contentClassName?: string;
   /** Visually dim the textarea and remove `contenteditable`. Default `false`. */

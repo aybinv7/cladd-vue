@@ -55,6 +55,9 @@ Focused runs use the package name: `vp run @cladd-vue/ui#test`, `vp run playgrou
 - Do not run dev servers or application builds unless the user explicitly asks.
 - Do not claim build, browser, accessibility, or device evidence unless that validation actually ran.
 - Ask before committing.
+- **Never reference the assistant in git history.** No `Co-Authored-By` trailer, no "generated with",
+  no tool or model name anywhere in a commit message, branch name, PR body, or code comment. The
+  author and committer are the human running the work. This is not negotiable and has no exceptions.
 
 <!--VITE PLUS START-->
 

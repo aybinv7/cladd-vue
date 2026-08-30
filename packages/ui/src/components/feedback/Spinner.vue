@@ -12,7 +12,6 @@ defineOptions({ inheritAttrs: false });
 // Every prop defaults to `undefined` so `useComponentDefaults` can tell "not passed" from a value,
 // then applies the built-ins below. See that helper for the precedence chain.
 const props = withDefaults(defineProps<SpinnerProps>(), {
-  accent: undefined,
   color: undefined,
   size: undefined,
 });
@@ -20,9 +19,7 @@ const props = withDefaults(defineProps<SpinnerProps>(), {
 const ui = useUiContext();
 const attrs = useAttrs();
 const d = useComponentDefaults('Spinner', props, { size: 'sm' as const });
-const currentAccent = computed(
-  () => d.value.color ?? d.value.accent ?? ui.accentColor.value,
-);
+const currentAccent = computed(() => d.value.color ?? ui.accentColor.value);
 const rootAttrs = computed(() => {
   const { class: _consumerClass, ...rest } = attrs;
   return rest;

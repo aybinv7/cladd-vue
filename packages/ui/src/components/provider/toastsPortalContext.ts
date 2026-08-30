@@ -7,7 +7,7 @@ import {
   type Ref,
 } from 'vue';
 
-import type { UiAccent } from '../../foundations/contracts.ts';
+import type { Color } from '../../types.ts';
 
 /**
  * Shape of a queued toast in the imperative toast portal. Mirrors `Toast`'s props but adds an
@@ -17,7 +17,7 @@ export interface ToastsPortalData {
   className?: string;
   /** Render the auto close button. Default `true` (in `Toast`). */
   closeButton?: boolean;
-  color?: UiAccent;
+  color?: Color;
   /** Icon component rendered before the text content. Receives `iconProps`. */
   icon?: Component;
   iconProps?: Record<string, unknown>;

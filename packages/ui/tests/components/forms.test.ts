@@ -4,8 +4,8 @@ import { join } from 'node:path';
 import { expect, test } from 'vite-plus/test';
 import { h, nextTick, ref } from 'vue';
 
-import FormFixture from '../fixtures/forms/FormFixture.vue';
-import { sectionTitleClasses } from '../src/components/data-display/list.contracts.ts';
+import FormFixture from '../../fixtures/forms/FormFixture.vue';
+import { sectionTitleClasses } from '../../src/components/data-display/list.contracts.ts';
 import {
   inputClearButtonSizes,
   inputClearGlyphSizes,
@@ -13,8 +13,8 @@ import {
   inputIconWrapClasses,
   inputPaddingNoIcon,
   inputPaddingWithIcon,
-} from '../src/components/forms/input.contracts.ts';
-import { searchFieldClasses } from '../src/components/forms/searchField.contracts.ts';
+} from '../../src/components/forms/input.contracts.ts';
+import { searchFieldClasses } from '../../src/components/forms/searchField.contracts.ts';
 import {
   selectDropdownIconClasses,
   selectEmptyClasses,
@@ -33,19 +33,19 @@ import {
   selectTriggerClasses,
   selectTriggerContentClasses,
   selectTriggerDropdownPaddingClasses,
-} from '../src/components/forms/select.contracts.ts';
+} from '../../src/components/forms/select.contracts.ts';
 import {
   sliderRangeInsets,
   sliderThumbSpacingVars,
   sliderTrackBarClasses,
   sliderValueOffsets,
-} from '../src/components/forms/slider.contracts.ts';
+} from '../../src/components/forms/slider.contracts.ts';
 import {
   textareaIconWrapClasses,
   textareaPaddingNoIcon,
   textareaPaddingVertical,
   textareaPaddingWithIcon,
-} from '../src/components/forms/textarea.contracts.ts';
+} from '../../src/components/forms/textarea.contracts.ts';
 import {
   Checkbox,
   Input,
@@ -55,10 +55,10 @@ import {
   Slider,
   Switch,
   Textarea,
-} from '../src/index.ts';
-import type { SelectValue } from '../src/index.ts';
-import { byTestId, click, mountTree } from './support/mountTree.ts';
-import type { MountedTree } from './support/mountTree.ts';
+} from '../../src/index.ts';
+import type { SelectValue } from '../../src/index.ts';
+import { byTestId, click, mountTree } from '../support/mountTree.ts';
+import type { MountedTree } from '../support/mountTree.ts';
 
 const sliderCss = readFileSync(
   join(process.cwd(), 'src', 'styles', 'slider.css'),

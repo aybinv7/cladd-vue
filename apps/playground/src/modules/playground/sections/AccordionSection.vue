@@ -7,14 +7,14 @@ import {
   AccordionTrigger,
   Surface,
 } from '@cladd-vue/ui';
-import type { UiAccent } from '@cladd-vue/ui';
+import type { Color } from '@cladd-vue/ui';
 import { ref } from 'vue';
 
 import CatalogSection from '../components/CatalogSection.vue';
 import ComponentPlayground from '../components/ComponentPlayground.vue';
 
 defineProps<{
-  accent: UiAccent;
+  accent: Color;
   interactionsEnabled: boolean;
 }>();
 

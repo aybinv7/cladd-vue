@@ -7,31 +7,30 @@ import {
   buttonIconSizes,
   buttonPaddings,
   buttonVerticalPaddings,
-} from '../src/components/actions/button.contracts.ts';
+} from '../../src/components/actions/button.contracts.ts';
 import {
   chipFontSizes,
   chipIconSizes,
   chipRoundedClasses,
-} from '../src/components/data-display/chip.contracts.ts';
+} from '../../src/components/data-display/chip.contracts.ts';
 import {
   shortcutFontSizes,
   shortcutIconSizes,
   shortcutRoundedClasses,
-} from '../src/components/data-display/shortcut.contracts.ts';
+} from '../../src/components/data-display/shortcut.contracts.ts';
 import {
   overlayPhases,
   resolveSurfaceLevel,
   surfaceLevels,
   surfaceVariants,
-  uiAccents,
   uiSizes,
   uiThemes,
-} from '../src/index.ts';
-import { roundedClasses } from '../src/shared/roundedClasses.ts';
+} from '../../src/index.ts';
+import { roundedClasses } from '../../src/shared/roundedClasses.ts';
 import {
   nestedSizeClasses,
   rootSizeClasses,
-} from '../src/shared/sizeClasses.ts';
+} from '../../src/shared/sizeClasses.ts';
 
 const colorsCss = readFileSync(
   join(process.cwd(), 'src', 'styles', 'colors.css'),
@@ -103,7 +102,21 @@ function sectionFrom(css: string, marker: string, nextMarker: string): string {
 
 test('publishes stable foundation contracts', () => {
   expect(uiSizes).toEqual(['2xs', 'xs', 'sm', 'md', 'lg', 'xl', '2xl']);
-  expect(uiAccents).toHaveLength(11);
+  expect(
+    [...new Set(colorsCss.match(/\.cladd-color-[a-z]+/gu) ?? [])].sort(),
+  ).toEqual([
+    '.cladd-color-blue',
+    '.cladd-color-brand',
+    '.cladd-color-cyan',
+    '.cladd-color-green',
+    '.cladd-color-lime',
+    '.cladd-color-neutral',
+    '.cladd-color-orange',
+    '.cladd-color-pink',
+    '.cladd-color-purple',
+    '.cladd-color-red',
+    '.cladd-color-yellow',
+  ]);
   expect(uiThemes).toEqual(['dark', 'light']);
   expect(surfaceLevels).toEqual([1, 2, 3, 4, 5]);
   expect(surfaceVariants).toContain('gradient-fill');

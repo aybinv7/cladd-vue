@@ -1,8 +1,5 @@
-import type {
-  SurfaceVariant,
-  UiAccent,
-  UiSize,
-} from '../../foundations/contracts.ts';
+import type { SurfaceVariant, UiSize } from '../../foundations/contracts.ts';
+import type { Color } from '../../types.ts';
 import type { ButtonSurface } from '../actions/button.contracts.ts';
 import type {
   PopoverOffset,
@@ -30,21 +27,20 @@ export interface SelectOptionParams {
 }
 
 export interface SelectProps {
-  accent?: UiAccent;
   /**
    * External anchor element. When provided, the trigger button is **not rendered** — the caller
    * owns the trigger and the open state (upstream's `anchorRef`).
    */
   anchorElement?: HTMLElement;
   closeOnSelect?: boolean;
-  color?: UiAccent;
+  color?: Color;
   contentClassName?: string;
   disabled?: boolean;
   dropdownIcon?: boolean;
   focused?: boolean;
   getOptionValue?: (option: SelectOptionInput) => SelectValue;
   hoverable?: boolean;
-  indicatorColor?: UiAccent;
+  indicatorColor?: Color;
   isChecked?: (option: SelectOptionInput) => boolean;
   isOptionDisabled?: (option: SelectOptionInput) => boolean;
   iconClassName?: string;
@@ -56,14 +52,14 @@ export interface SelectProps {
   multiline?: boolean;
   multiple?: boolean;
   noneOptionValue?: SelectValue;
-  optionIndicatorColor?: (params: SelectOptionParams) => UiAccent | undefined;
+  optionIndicatorColor?: (params: SelectOptionParams) => Color | undefined;
   optionInfo?: (params: SelectOptionParams) => string | undefined;
   optionLabel?: (params: SelectOptionParams) => string;
   options?: readonly SelectOptionInput[];
   outline?: boolean;
   placeholder?: string;
   placeholderClassName?: string;
-  popoverAccent?: UiAccent;
+  popoverColor?: Color;
   popoverClassName?: string;
   popoverOffset?: PopoverOffset;
   popoverPosition?: PopoverPosition;

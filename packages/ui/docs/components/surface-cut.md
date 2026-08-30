@@ -23,8 +23,7 @@ import { Surface, SurfaceCut } from '@cladd-vue/ui';
 | ------------------ | --------------------- | ---------------- | --------------------------------------------------------- |
 | `as`               | `string \| Component` | `"div"`          | Polymorphic root element or Vue component.                |
 | `outline`          | `boolean`             | `true`           | Renders the inset cut outline ring.                       |
-| `color`            | `UiAccent`            | inherited accent | Cladd-compatible accent API.                              |
-| `accent`           | `UiAccent`            | inherited accent | Port alias; `color` takes precedence.                     |
+| `color`            | `Color`               | inherited accent | Cladd-compatible accent API.                              |
 | `hoverable`        | `boolean`             | `false`          | Enables the hover overlay.                                |
 | `clickable`        | `boolean`             | `false`          | Enables press feedback and content scale.                 |
 | `pressed`          | `boolean`             | `false`          | Forces the pressed visual state.                          |
@@ -65,16 +64,16 @@ Accent resolution matches `Surface`: `color`, then `accent`, then the accent pub
 
 ```vue
 <script setup lang="ts">
-import { Input, SurfaceCut, UiProvider } from '@cladd-vue/ui';
+import { Input, SurfaceCut, CladdProvider } from '@cladd-vue/ui';
 </script>
 
 <template>
-  <UiProvider accent="brand">
+  <CladdProvider accent="brand">
     <SurfaceCut accent="cyan" hoverable>
       <!-- the field inherits cyan through the surface context -->
       <Input placeholder="Filter targets" />
     </SurfaceCut>
-  </UiProvider>
+  </CladdProvider>
 </template>
 ```
 

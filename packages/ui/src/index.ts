@@ -1,8 +1,9 @@
+export { type Color } from './types.ts';
+
 export {
   overlayPhases,
   surfaceLevels,
   surfaceVariants,
-  uiAccents,
   uiSizes,
   uiThemes,
 } from './foundations/contracts.ts';
@@ -12,7 +13,6 @@ export type {
   SurfaceLevel,
   SurfaceLevelInput,
   SurfaceVariant,
-  UiAccent,
   UiSize,
   UiTheme,
 } from './foundations/contracts.ts';
@@ -22,14 +22,7 @@ export {
   resolveSurfaceLevel,
 } from './foundations/surfaceLevel.ts';
 export { useSurface } from './contexts/surfaceContext.ts';
-export {
-  defaultOverlaysRoot,
-  useAccentColor,
-  useOverlaysRoot,
-  useTheme,
-  useUiContext,
-} from './contexts/uiContext.ts';
-export type { UiContextValue } from './contexts/uiContext.ts';
+export { useAccentColor, useTheme } from './contexts/uiContext.ts';
 export { useComponentDefaults } from './composables/useComponentDefaults.ts';
 export { useDevice } from './composables/useDevice.ts';
 export type { DeviceInfo } from './composables/useDevice.ts';
@@ -47,7 +40,7 @@ export { default as ToastClose } from './components/feedback/ToastClose.vue';
 export { default as ToastRoot } from './components/feedback/ToastRoot.vue';
 export { default as ToastTrigger } from './components/feedback/ToastTrigger.vue';
 export type { ComponentDefaults } from './foundations/componentDefaults.ts';
-export { default as UiProvider } from './components/provider/UiProvider.vue';
+export { default as CladdProvider } from './components/provider/CladdProvider.vue';
 export { default as Surface } from './components/surface/Surface.vue';
 export { default as SurfaceCut } from './components/surface/SurfaceCut.vue';
 export { default as Button } from './components/actions/Button.vue';

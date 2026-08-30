@@ -26,7 +26,7 @@ const filter = ref('');
 | ---------------- | ------------------------------------------------------------------------------------- | --------------- | ---------------------------------------------------------- |
 | `v-model`        | `string`                                                                              | `""`            | Vue equivalent of Cladd's `value` / `onChange` pair.       |
 | `size`           | `FieldSize`                                                                           | `"lg"`          | Height, padding, and radius token.                         |
-| `accent`         | `UiAccent`                                                                            | provider accent | Focus ring and info-message accent.                        |
+| `color`          | `Color`                                                                               | provider accent | Focus ring and info-message accent.                        |
 | `type`           | `string`                                                                              | `"text"`        | Native input type.                                         |
 | `placeholder`    | `string`                                                                              | —               | Native placeholder.                                        |
 | `name`           | `string`                                                                              | —               | Native name used for form submission.                      |

@@ -3,9 +3,9 @@ import type { Component } from 'vue';
 import type {
   SurfaceLevelInput,
   SurfaceVariant,
-  UiAccent,
   UiSize,
 } from '../../foundations/contracts.ts';
+import type { Color } from '../../types.ts';
 
 export const buttonSpinnerSizes: Record<UiSize, UiSize> = {
   '2xs': '2xs',
@@ -60,13 +60,12 @@ export const buttonVerticalPaddings: Record<UiSize, string> = {
 export type ButtonSurface = 'surface' | 'cut';
 
 export interface ButtonProps {
-  accent?: UiAccent;
   /** Polymorphic root element. Defaults to `'button'`. */
   as?: string | Component;
   /** Default `true`. */
   clickable?: boolean;
   /** Accent color token. Sets the button's `cladd-color-{name}` class. */
-  color?: UiAccent;
+  color?: Color;
   contentClassName?: string;
   disabled?: boolean;
   /** Default `true`. */

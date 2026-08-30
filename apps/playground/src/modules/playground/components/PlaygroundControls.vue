@@ -1,26 +1,40 @@
 <script setup lang="ts">
-import { Button, Select, uiAccents } from '@cladd-vue/ui';
-import type { UiAccent, UiTheme } from '@cladd-vue/ui';
+import { Button, Select } from '@cladd-vue/ui';
+import type { Color, UiTheme } from '@cladd-vue/ui';
 
 const props = defineProps<{
-  accent: UiAccent;
+  accent: Color;
   interactionsEnabled: boolean;
   theme: UiTheme;
 }>();
 
 const emit = defineEmits<{
-  updateAccent: [accent: UiAccent];
+  updateAccent: [accent: Color];
   updateInteractions: [enabled: boolean];
   updateTheme: [theme: UiTheme];
 }>();
 
-const accentOptions = uiAccents.map((accent) => ({
+const accents: Color[] = [
+  'neutral',
+  'brand',
+  'red',
+  'pink',
+  'purple',
+  'blue',
+  'cyan',
+  'lime',
+  'green',
+  'yellow',
+  'orange',
+];
+
+const accentOptions = accents.map((accent) => ({
   label: accent,
   value: accent,
 }));
 
 function changeAccent(value: string): void {
-  emit('updateAccent', value as UiAccent);
+  emit('updateAccent', value as Color);
 }
 </script>
 
@@ -58,7 +72,7 @@ function changeAccent(value: string): void {
       </Button>
     </div>
     <Button
-      :accent="props.interactionsEnabled ? 'green' : 'neutral'"
+      :color="props.interactionsEnabled ? 'green' : 'neutral'"
       :pressed="props.interactionsEnabled"
       size="sm"
       @click="emit('updateInteractions', !props.interactionsEnabled)"

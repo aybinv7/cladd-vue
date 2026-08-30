@@ -2,12 +2,7 @@
 import { computed, useAttrs, type Component } from 'vue';
 
 import { useComponentDefaults } from '../../composables/useComponentDefaults.ts';
-import type {
-  SurfaceLevelInput,
-  SurfaceVariant,
-  UiAccent,
-  UiSize,
-} from '../../foundations/contracts.ts';
+import type { SurfaceVariant, UiSize } from '../../foundations/contracts.ts';
 import { cn } from '../../shared/cn.ts';
 import { roundedClasses } from '../../shared/roundedClasses.ts';
 import { rootSizeClasses } from '../../shared/sizeClasses.ts';
@@ -28,7 +23,6 @@ import {
 defineOptions({ inheritAttrs: false });
 
 const props = withDefaults(defineProps<ButtonProps>(), {
-  accent: undefined,
   as: undefined,
   clickable: undefined,
   color: undefined,
@@ -76,13 +70,12 @@ defineSlots<{
 }>();
 
 const inactive = computed(() => d.value.disabled || d.value.readOnly);
-const explicitAccent = computed(() => d.value.color ?? d.value.accent);
+const explicitAccent = computed(() => d.value.color);
 const attrs = useAttrs();
 const surfaceComponent = computed(() =>
   d.value.surface === 'cut' ? SurfaceCut : Surface,
 );
 const surfaceProps = computed(() => ({
-  accent: d.value.accent,
   as: d.value.as,
   clickable: d.value.clickable && !inactive.value,
   color: d.value.color,
@@ -180,14 +173,12 @@ function guardActivation(event: Event): void {
     <template #beforeContent>
       <Spinner
         v-if="d.loading"
-        :accent="d.accent"
         :class="spinnerClass"
         :color="d.color"
         :size="buttonSpinnerSizes[d.size]"
       />
       <FocusRing
         v-if="d.focused || (d.focusable && !inactive)"
-        :accent="d.accent"
         :class="focusRingClass"
         :color="d.color"
         :force="d.focused"

@@ -17,7 +17,6 @@ import type { ChipProps } from './dataDisplay.contracts.ts';
 defineOptions({ inheritAttrs: false });
 
 const props = withDefaults(defineProps<ChipProps>(), {
-  accent: undefined,
   as: undefined,
   clickable: undefined,
   color: undefined,
@@ -85,7 +84,6 @@ const chipContentClass = computed(() =>
 <template>
   <Surface
     v-bind="$attrs"
-    :accent="d.accent"
     :as="d.as"
     :class="rootClass"
     :clickable="clickable"

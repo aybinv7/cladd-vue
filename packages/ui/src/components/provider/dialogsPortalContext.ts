@@ -6,7 +6,7 @@ import {
   type ShallowRef,
 } from 'vue';
 
-import type { UiAccent } from '../../foundations/contracts.ts';
+import type { Color } from '../../types.ts';
 
 /**
  * Shape of the currently open dialog in the imperative dialog portal. The portal renders at most
@@ -14,10 +14,10 @@ import type { UiAccent } from '../../foundations/contracts.ts';
  */
 export interface DialogsPortalData {
   /** Label for the cancel button. When omitted, the cancel button is not rendered. */
-  cancelButtonColor?: UiAccent;
+  cancelButtonColor?: Color;
   cancelButtonText?: string;
   /** Color for the confirm button. Default: theme accent color. */
-  confirmButtonColor?: UiAccent;
+  confirmButtonColor?: Color;
   /** Label for the confirm button. When omitted, the confirm button is not rendered. */
   confirmButtonText?: string;
   /** Defer rendering until first opened, and unmount after close. */

@@ -18,7 +18,6 @@ defineOptions({ inheritAttrs: false });
 const props = withDefaults(
   defineProps<Omit<ButtonProps, 'as'> & ToggleButtonOwnProps>(),
   {
-    accent: undefined,
     activeColor: undefined,
     activeOutline: undefined,
     activeVariant: undefined,
@@ -109,7 +108,6 @@ function onClick(event: MouseEvent): void {
 <template>
   <SegmentedButton
     v-bind="$attrs"
-    :accent="d.accent"
     :active="selected"
     :aria-pressed="selected"
     :clickable="d.clickable"

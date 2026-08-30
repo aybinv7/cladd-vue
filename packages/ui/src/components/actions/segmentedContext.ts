@@ -6,17 +6,14 @@ import {
   type InjectionKey,
 } from 'vue';
 
-import type {
-  SurfaceVariant,
-  UiAccent,
-  UiSize,
-} from '../../foundations/contracts.ts';
+import type { SurfaceVariant, UiSize } from '../../foundations/contracts.ts';
+import type { Color } from '../../types.ts';
 
 export interface SegmentedContextValue {
-  activeColor?: UiAccent;
+  activeColor?: Color;
   activeOutline?: boolean;
   activeVariant?: SurfaceVariant;
-  color?: UiAccent;
+  color?: Color;
   outline?: boolean;
   rounded?: boolean;
   size?: UiSize;

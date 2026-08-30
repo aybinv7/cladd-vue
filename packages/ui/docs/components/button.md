@@ -21,8 +21,7 @@ import { Button } from '@cladd-vue/ui';
 | ------------------ | --------------------- | --------------- | ------------------------------------------------------ |
 | `as`               | `string \| Component` | `"button"`      | Polymorphic root element or Vue component.             |
 | `size`             | `UiSize`              | `"md"`          | Height, radius, padding, icon, and spinner scale.      |
-| `color`            | `UiAccent`            | provider accent | Cladd-compatible accent API.                           |
-| `accent`           | `UiAccent`            | provider accent | Port alias; `color` takes precedence.                  |
+| `color`            | `Color`               | provider accent | Cladd-compatible accent API.                           |
 | `variant`          | `SurfaceVariant`      | `"gradient"`    | Surface treatment.                                     |
 | `surface`          | `"surface" \| "cut"`  | `"surface"`     | Standard or recessed surface primitive.                |
 | `surfaceLevel`     | `string \| number`    | inherited       | Absolute or relative surface depth.                    |

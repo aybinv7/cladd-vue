@@ -13,8 +13,9 @@ import { useOverlayLifecycle } from '../../composables/useOverlayLifecycle.ts';
 import { useOverlayPhase } from '../../composables/useOverlayPhase.ts';
 import { provideSurfaceColorReset } from '../../contexts/surfaceContext.ts';
 import { useUiContext } from '../../contexts/uiContext.ts';
-import type { SurfaceVariant, UiAccent } from '../../foundations/contracts.ts';
+import type { SurfaceVariant } from '../../foundations/contracts.ts';
 import { cn } from '../../shared/cn.ts';
+import type { Color } from '../../types.ts';
 import Button from '../actions/Button.vue';
 import { resolveOverlayElement } from '../overlays/overlay.contracts.ts';
 import {
@@ -61,7 +62,7 @@ const props = withDefaults(defineProps<ToastProps>(), {
 
 const d = useComponentDefaults('Toast', props, {
   closeButton: true,
-  color: 'neutral' as UiAccent,
+  color: 'neutral' as Color,
   outline: true,
   stopPropagationOnClick: false,
   timeout: toastDefaultTimeout,

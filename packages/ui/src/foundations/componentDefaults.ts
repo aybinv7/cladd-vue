@@ -68,7 +68,7 @@ import type {
 } from '../components/surface/surface.contracts.ts';
 
 /**
- * Registry of per-component default props that can be supplied to `UiProvider` via the `defaults`
+ * Registry of per-component default props that can be supplied to `CladdProvider` via the `defaults`
  * prop — upstream's `ComponentDefaults` on `CladdProvider`.
  *
  * Each entry is a partial of that component's props, with polymorphic and per-instance props

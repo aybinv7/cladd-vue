@@ -45,7 +45,6 @@ import { usePopoverChain } from './popoverChain.ts';
 defineOptions({ inheritAttrs: false });
 
 const props = withDefaults(defineProps<PopoverProps>(), {
-  accent: undefined,
   anchorElement: undefined,
   anchorRect: undefined,
   backdrop: undefined,
@@ -113,7 +112,7 @@ const model = computed<boolean>({
 const { phase, setPhase } = useOverlayPhase(model);
 
 const mounted = computed(() => phase.value !== 'closed');
-const currentAccent = computed(() => d.value.color ?? d.value.accent);
+const currentAccent = computed(() => d.value.color);
 const currentVariant = computed(
   () => d.value.variant ?? (ui.theme.value === 'light' ? 'solid' : 'gradient'),
 );
@@ -254,7 +253,7 @@ provideSurfaceColorReset();
       <Surface
         v-bind="surfaceAttrs"
         :ref="setSurface"
-        :accent="currentAccent"
+        :color="currentAccent"
         :class="surfaceClass"
         :content-class-name="contentClass"
         data-part="content"

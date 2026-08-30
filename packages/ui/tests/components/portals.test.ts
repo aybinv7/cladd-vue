@@ -4,16 +4,16 @@ import { defineComponent, h, nextTick } from 'vue';
 import {
   toastOpenedClasses,
   toastSurfaceClasses,
-} from '../src/components/feedback/toast.contracts.ts';
+} from '../../src/components/feedback/toast.contracts.ts';
 import {
   Toast,
   ToastRoot,
   ToastTrigger,
-  UiProvider,
+  CladdProvider,
   useDialog,
   useToast,
-} from '../src/index.ts';
-import { byTestId, click, mountTree } from './support/mountTree.ts';
+} from '../../src/index.ts';
+import { byTestId, click, mountTree } from '../support/mountTree.ts';
 
 async function settle(): Promise<void> {
   await nextTick();
@@ -23,7 +23,7 @@ async function settle(): Promise<void> {
   await nextTick();
 }
 
-/** Mounts `UiProvider` with a child that hands its portal API back to the test. */
+/** Mounts `CladdProvider` with a child that hands its portal API back to the test. */
 function mountWithApi<T>(useApi: () => T) {
   let api!: T;
   const consumer = defineComponent({
@@ -33,7 +33,7 @@ function mountWithApi<T>(useApi: () => T) {
     },
   });
   const mounted = mountTree(
-    h(UiProvider, null, { default: () => h(consumer) }),
+    h(CladdProvider, null, { default: () => h(consumer) }),
   );
   return { api, mounted };
 }
@@ -51,7 +51,7 @@ test('locks the Cladd toast stacking utility strings', () => {
   );
 });
 
-test('UiProvider renders the dialogs portal and useDialog drives it', async () => {
+test('CladdProvider renders the dialogs portal and useDialog drives it', async () => {
   const { api, mounted } = mountWithApi(() => useDialog());
   const confirmed: boolean[] = [];
 
@@ -98,7 +98,7 @@ test('useDialog alert renders a single confirm affordance', async () => {
 
 test('drives a declarative toast through the ToastRoot compound', async () => {
   const mounted = mountTree(
-    h(UiProvider, null, {
+    h(CladdProvider, null, {
       default: () =>
         h(ToastRoot, null, {
           default: () => [
@@ -129,7 +129,7 @@ test('drives a declarative toast through the ToastRoot compound', async () => {
   mounted.root.remove();
 });
 
-test('UiProvider renders the toasts portal and useToast queues onto it', async () => {
+test('CladdProvider renders the toasts portal and useToast queues onto it', async () => {
   const { api, mounted } = mountWithApi(() => useToast());
 
   api({ text: 'IndexedDB cleared', timeout: 0, title: 'Storage' });

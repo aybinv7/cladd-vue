@@ -16,7 +16,6 @@ import { radioGroupKey } from './radioGroupContext.ts';
 defineOptions({ inheritAttrs: false });
 
 const props = withDefaults(defineProps<RadioProps>(), {
-  accent: undefined,
   as: undefined,
   checked: undefined,
   color: undefined,
@@ -64,9 +63,7 @@ const name = computed(() => d.value.name ?? group?.name.value);
 const required = computed(
   () => d.value.required || group?.required.value === true,
 );
-const currentAccent = computed(
-  () => d.value.color ?? d.value.accent ?? ui.accentColor.value,
-);
+const currentAccent = computed(() => d.value.color ?? ui.accentColor.value);
 const hoverable = computed(() => d.value.hoverable ?? d.value.as === 'label');
 const focusable = computed(
   () => d.value.focusable ?? (d.value.as === 'label' || d.value.input),

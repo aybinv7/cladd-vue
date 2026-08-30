@@ -1,7 +1,7 @@
 import type { Component } from 'vue';
 
 import { useToastsPortalContext } from '../components/provider/toastsPortalContext.ts';
-import type { UiAccent } from '../foundations/contracts.ts';
+import type { Color } from '../types.ts';
 
 export interface UseToastOptions {
   /** Extra classes applied to the toast root `Surface`. */
@@ -9,7 +9,7 @@ export interface UseToastOptions {
   /** Render the auto close button on the right. Default `true`. */
   closeButton?: boolean;
   /** Accent color token. Default `'neutral'`. */
-  color?: UiAccent;
+  color?: Color;
   /** Icon component rendered before the text content. Receives `iconProps`. */
   icon?: Component;
   iconProps?: Record<string, unknown>;
@@ -23,7 +23,7 @@ export interface UseToastOptions {
   title?: string;
 }
 
-/** Imperative handle onto the `ToastsPortal` that `UiProvider` renders. */
+/** Imperative handle onto the `ToastsPortal` that `CladdProvider` renders. */
 export function useToast(): (options: UseToastOptions) => void {
   const { data, state } = useToastsPortalContext();
 

@@ -26,7 +26,6 @@ const interactiveSelector =
 defineOptions({ inheritAttrs: false });
 
 const props = withDefaults(defineProps<InputProps>(), {
-  accent: undefined,
   as: undefined,
   autofocus: undefined,
   clearButton: undefined,
@@ -88,9 +87,7 @@ const d = useComponentDefaults('Input', props, {
   type: 'text',
   valid: true,
 });
-const currentAccent = computed(
-  () => d.value.color ?? d.value.accent ?? ui.accentColor.value,
-);
+const currentAccent = computed(() => d.value.color ?? ui.accentColor.value);
 const inputElement = ref<HTMLInputElement>();
 const focused = ref(false);
 
@@ -221,7 +218,6 @@ defineExpose({
 <template>
   <SurfaceCut
     v-bind="attrs"
-    :accent="d.accent"
     :as="d.as"
     :class="rootClass"
     :color="d.color"

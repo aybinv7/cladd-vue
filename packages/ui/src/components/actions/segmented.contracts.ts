@@ -1,22 +1,19 @@
 import type { Component } from 'vue';
 
-import type {
-  SurfaceVariant,
-  UiAccent,
-  UiSize,
-} from '../../foundations/contracts.ts';
+import type { SurfaceVariant, UiSize } from '../../foundations/contracts.ts';
+import type { Color } from '../../types.ts';
 
 export interface SegmentedProps {
   /** Polymorphic root element. Defaults to `'div'`. */
   as?: string | Component;
   /** Color applied to the **active** segment button. Defaults to the enclosing surface color, then theme accent. */
-  activeColor?: UiAccent;
+  activeColor?: Color;
   /** Outline ring on the **active** segment button. Default `true`. */
   activeOutline?: boolean;
   /** Surface variant applied to the **active** segment button. Default `'gradient'`. */
   activeVariant?: SurfaceVariant;
   /** Accent color applied to **inactive** segment buttons. */
-  color?: UiAccent;
+  color?: Color;
   /** Visually dim the entire group and disable pointer events. Default `false`. */
   disabled?: boolean;
   /** Outline ring on **inactive** segment buttons. Default `false`. */

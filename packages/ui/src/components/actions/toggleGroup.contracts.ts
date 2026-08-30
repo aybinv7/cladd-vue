@@ -1,4 +1,5 @@
-import type { UiAccent, SurfaceVariant } from '../../foundations/contracts.ts';
+import type { SurfaceVariant } from '../../foundations/contracts.ts';
+import type { Color } from '../../types.ts';
 import type { SegmentedProps } from './segmented.contracts.ts';
 
 export interface ToggleGroupOwnProps {
@@ -21,7 +22,7 @@ export type ToggleGroupDefaultProps = Partial<
 
 export interface ToggleButtonOwnProps {
   /** Accent color applied while pressed. Default: theme accent (or the group's `activeColor`). */
-  activeColor?: UiAccent;
+  activeColor?: Color;
   /** Outline ring while pressed. Default `true`. */
   activeOutline?: boolean;
   /** Surface variant applied while pressed. Default `'gradient'`. */

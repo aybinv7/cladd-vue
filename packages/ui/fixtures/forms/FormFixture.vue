@@ -10,7 +10,7 @@ import {
   Slider,
   Switch,
   Textarea,
-  UiProvider,
+  CladdProvider,
 } from '../../src/index.ts';
 import type { SelectOption, SelectValue } from '../../src/index.ts';
 
@@ -46,7 +46,7 @@ function emitSubmittedEntries(event: Event): void {
 </script>
 
 <template>
-  <UiProvider accent-color="brand" theme="dark">
+  <CladdProvider accent-color="brand" theme="dark">
     <div class="cladd-form-fixture dark">
       <form
         class="cladd-form-fixture__form"
@@ -267,7 +267,7 @@ function emitSubmittedEntries(event: Event): void {
         </div>
       </form>
     </div>
-  </UiProvider>
+  </CladdProvider>
 </template>
 
 <style scoped>

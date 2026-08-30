@@ -11,8 +11,8 @@ import {
   CollapsiblePanel,
   CollapsibleRoot,
   CollapsibleTrigger,
-} from '../src/index.ts';
-import { byTestId, click, mountTree } from './support/mountTree.ts';
+} from '../../src/index.ts';
+import { byTestId, click, mountTree } from '../support/mountTree.ts';
 
 test('CollapsibleRoot starts closed and opens on trigger click', async () => {
   const mounted = mountTree(

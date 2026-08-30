@@ -18,8 +18,7 @@ import { Shortcut } from '@cladd-vue/ui';
 | --------------------- | --------------------- | --------------- | ------------------------------------------------- |
 | `as`                  | `string \| Component` | `"div"`         | Root element or Vue component.                    |
 | `size`                | `UiSize`              | `"md"`          | Key height, width, radius, font, and glyph scale. |
-| `color`               | `UiAccent`            | provider accent | Cladd-compatible accent for every key.            |
-| `accent`              | `UiAccent`            | provider accent | Port alias; `color` takes precedence.             |
+| `color`               | `Color`               | provider accent | Cladd-compatible accent for every key.            |
 | `variant`             | `SurfaceVariant`      | `"gradient"`    | Surface treatment for every key.                  |
 | `outline`             | `boolean`             | `true`          | Toggles each key outline.                         |
 | `surfaceLevel`        | `string \| number`    | `"+2"`          | Relative or absolute surface depth.               |

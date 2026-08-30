@@ -32,7 +32,6 @@ defineOptions({ inheritAttrs: false });
 const sliderResolution = 1000;
 
 const props = withDefaults(defineProps<SliderProps>(), {
-  accent: undefined,
   color: undefined,
   debounce: undefined,
   defaultValue: undefined,
@@ -136,10 +135,7 @@ const progress = computed(() => {
   return Math.min(1, Math.max(0, position));
 });
 const effectiveColor = computed(
-  () =>
-    d.value.color ??
-    d.value.accent ??
-    (isTrack.value ? undefined : ui.accentColor.value),
+  () => d.value.color ?? (isTrack.value ? undefined : ui.accentColor.value),
 );
 const inputValue = computed(() =>
   scaleFns.value ? Math.round(progress.value * sliderResolution) : value.value,

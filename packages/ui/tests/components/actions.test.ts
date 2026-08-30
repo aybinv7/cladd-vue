@@ -1,7 +1,7 @@
 import { expect, test } from 'vite-plus/test';
 import { h, nextTick } from 'vue';
 
-import ActionFixture from '../fixtures/actions/ActionFixture.vue';
+import ActionFixture from '../../fixtures/actions/ActionFixture.vue';
 import {
   Button,
   Chip,
@@ -15,8 +15,8 @@ import {
   ToolbarButton,
   ToolbarSeparator,
   buttonSpinnerSizes,
-} from '../src/index.ts';
-import { byTestId, click, mountTree } from './support/mountTree.ts';
+} from '../../src/index.ts';
+import { byTestId, click, mountTree } from '../support/mountTree.ts';
 
 test('renders exact default button structure and loading replacement', () => {
   const mounted = mountTree(

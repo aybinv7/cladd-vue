@@ -1,7 +1,7 @@
-import type { UiAccent, UiTheme } from '@cladd-vue/ui';
+import type { Color, UiTheme } from '@cladd-vue/ui';
 
 export interface PlaygroundPreferences {
-  accent: UiAccent;
+  accent: Color;
   interactionsEnabled: boolean;
   theme: UiTheme;
 }

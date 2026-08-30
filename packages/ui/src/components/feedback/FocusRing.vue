@@ -3,8 +3,8 @@ import { computed } from 'vue';
 
 import { useComponentDefaults } from '../../composables/useComponentDefaults.ts';
 import { useUiContext } from '../../contexts/uiContext.ts';
-import type { UiAccent } from '../../foundations/contracts.ts';
 import { cn } from '../../shared/cn.ts';
+import type { Color } from '../../types.ts';
 import {
   focusRingGroupClasses,
   type FocusRingGroup,
@@ -12,14 +12,12 @@ import {
 
 const props = withDefaults(
   defineProps<{
-    accent?: UiAccent;
-    color?: UiAccent;
+    color?: Color;
     force?: boolean;
     group?: FocusRingGroup;
     offset?: boolean;
   }>(),
   {
-    accent: undefined,
     color: undefined,
     force: undefined,
     group: undefined,
@@ -32,9 +30,7 @@ const d = useComponentDefaults('FocusRing', props, {
   force: false,
   offset: true,
 });
-const currentAccent = computed(
-  () => d.value.color ?? d.value.accent ?? ui.accentColor.value,
-);
+const currentAccent = computed(() => d.value.color ?? ui.accentColor.value);
 const groupClasses = computed(() =>
   d.value.group ? (focusRingGroupClasses[d.value.group] ?? '') : '',
 );

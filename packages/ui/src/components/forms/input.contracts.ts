@@ -1,10 +1,10 @@
 import type { Component } from 'vue';
 
-import type { UiAccent, UiSize } from '../../foundations/contracts.ts';
+import type { UiSize } from '../../foundations/contracts.ts';
+import type { Color } from '../../types.ts';
 import type { FieldSize } from './form.contracts.ts';
 
 export interface InputProps {
-  accent?: UiAccent;
   /** Polymorphic wrapper element. Defaults to `'div'`. */
   as?: string | Component;
   /** Native `autoFocus` — focus the input on mount. Default `false`. */
@@ -14,7 +14,7 @@ export interface InputProps {
   /** Accessible label for the clear button. Default `'Clear'`. */
   clearLabel?: string;
   /** Accent color token. Drives the focus ring and `infoMessage` colors. Default: theme accent. */
-  color?: UiAccent;
+  color?: Color;
   /** Extra classes for the inner `SurfaceCut` content area. */
   contentClassName?: string;
   /** Visually dim the input and disable interaction. Default `false`. */

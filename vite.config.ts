@@ -38,8 +38,13 @@ export default defineConfig({
       'reference:cladd': {
         command: 'node scripts/reference-cladd.mjs',
       },
+      typecheck: {
+        command:
+          'vue-tsc --noEmit -p packages/ui/tsconfig.json && vue-tsc --noEmit -p apps/playground/tsconfig.app.json',
+      },
       ready: {
-        command: 'vp check && vp run -r test -- --run && vp run -r build',
+        command:
+          'vp check && vp run typecheck && vp run -r test -- --run && vp run -r build',
       },
     },
   },

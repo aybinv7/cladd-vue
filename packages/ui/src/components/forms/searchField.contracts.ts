@@ -1,4 +1,4 @@
-import type { UiAccent } from '../../foundations/contracts.ts';
+import type { Color } from '../../types.ts';
 import type { FieldSize } from './form.contracts.ts';
 
 export const searchFieldClasses = 'cladd-search-field w-full';
@@ -6,10 +6,9 @@ export const searchFieldClasses = 'cladd-search-field w-full';
 export const searchFieldIconClasses = 'text-cladd-fg-softer';
 
 export interface SearchFieldProps {
-  accent?: UiAccent;
   /** Default `true`. */
   clearButton?: boolean;
-  color?: UiAccent;
+  color?: Color;
   /** Default `'Search'`. */
   placeholder?: string;
   /** Default `true`. */

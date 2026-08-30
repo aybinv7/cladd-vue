@@ -1,4 +1,4 @@
-import type { UiAccent } from '../../foundations/contracts.ts';
+import type { Color } from '../../types.ts';
 import type {
   ChoiceSize,
   SliderScale,
@@ -6,9 +6,8 @@ import type {
 } from './form.contracts.ts';
 
 export interface SliderProps {
-  accent?: UiAccent;
   /** Accent color for the active track segment and thumb. Default: theme accent for `variant="thumb"`. */
-  color?: UiAccent;
+  color?: Color;
   /** Debounce onChange calls in ms. Default `0` (immediate). */
   debounce?: number;
   /** Initial value (uncontrolled). Default `0`. Ignored when `value` is provided. */

@@ -33,16 +33,16 @@ import {
   Toolbar,
   ToolbarButton,
   TooltipPrimitive,
-  UiProvider,
-} from '../src/index.ts';
-import type { ComponentDefaults } from '../src/index.ts';
-import { byTestId, click, mountTree } from './support/mountTree.ts';
+  CladdProvider,
+} from '../../src/index.ts';
+import type { ComponentDefaults } from '../../src/index.ts';
+import { byTestId, click, mountTree } from '../support/mountTree.ts';
 
 function mountWithDefaults(
   defaults: ComponentDefaults,
   node: ReturnType<typeof h>,
 ) {
-  return mountTree(h(UiProvider, { defaults }, { default: () => node }));
+  return mountTree(h(CladdProvider, { defaults }, { default: () => node }));
 }
 
 test("applies a provider default over the component's built-in default", () => {
@@ -280,7 +280,8 @@ function mountOpenOverlay(
   const open = ref(false);
   const harness = defineComponent({
     setup() {
-      return () => h(UiProvider, { defaults }, { default: () => render(open) });
+      return () =>
+        h(CladdProvider, { defaults }, { default: () => render(open) });
     },
   });
   const mounted = mountTree(h(harness));
@@ -470,7 +471,7 @@ test('threads defaults through ToggleGroup and ToggleButton', () => {
 
 test('leaves components untouched when no defaults are registered', () => {
   const mounted = mountTree(
-    h(UiProvider, null, {
+    h(CladdProvider, null, {
       default: () => h(Spinner, { 'data-testid': 'spinner' }),
     }),
   );

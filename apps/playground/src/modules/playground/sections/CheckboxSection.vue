@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { Checkbox } from '@cladd-vue/ui';
-import type { UiAccent } from '@cladd-vue/ui';
+import type { Color } from '@cladd-vue/ui';
 import { computed, ref } from 'vue';
 
 import CatalogSection from '../components/CatalogSection.vue';
@@ -11,7 +11,7 @@ import PlaygroundSwitchControl from '../components/PlaygroundSwitchControl.vue';
 import PlaygroundToolbar from '../components/PlaygroundToolbar.vue';
 
 const props = defineProps<{
-  accent: UiAccent;
+  accent: Color;
   interactionsEnabled: boolean;
 }>();
 
@@ -19,7 +19,7 @@ const choiceSizes = ['xs', 'sm', 'md'] as const;
 type ChoiceSize = (typeof choiceSizes)[number];
 
 const size = ref<ChoiceSize>('md');
-const color = ref<UiAccent>('brand');
+const color = ref<Color>('brand');
 const checked = ref(true);
 const disabled = ref(false);
 const readOnly = ref(false);
@@ -187,7 +187,7 @@ function onSubmit(event: Event): void {
               'green',
               'blue',
               'orange',
-            ] as UiAccent[]"
+            ] as Color[]"
             :key="entry"
             class="checkbox-grid__item"
           >

@@ -3,18 +3,17 @@ import type { Component } from 'vue';
 import type {
   SurfaceLevelInput,
   SurfaceVariant,
-  UiAccent,
 } from '../../foundations/contracts.ts';
+import type { Color } from '../../types.ts';
 import type { SwitchSize } from './form.contracts.ts';
 
 export interface SwitchProps {
-  accent?: UiAccent;
   /** Polymorphic root element. Defaults to `'label'`. */
   as?: string | Component;
   /** Controlled checked state. Default `false`. */
   checked?: boolean;
   /** Accent color for the checked state thumb fill. Default: theme accent. */
-  color?: UiAccent;
+  color?: Color;
   /** Visually dim the switch and disable interaction. Default `false`. */
   disabled?: boolean;
   /** Auto-computed when omitted: `true` if `as === 'label'` OR `input` is `true`. */

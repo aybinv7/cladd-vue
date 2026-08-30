@@ -23,8 +23,7 @@ const notifications = ref(false);
 | `checked`                                           | `boolean`               | —                            | Controlled state alias; listen for `update:checked` or `change`.  |
 | `as`                                                | `string \| Component`   | `"label"`                    | Root element.                                                     |
 | `input`                                             | `boolean`               | `true`                       | Enables native input; false enables ARIA keyboard mode.           |
-| `color`                                             | `UiAccent`              | provider accent              | Checked thumb-fill accent.                                        |
-| `accent`                                            | `UiAccent`              | provider accent              | Port alias; `color` takes precedence.                             |
+| `color`                                             | `Color`                 | provider accent              | Checked thumb-fill accent.                                        |
 | `size`                                              | `"sm" \| "md"`          | `"md"`                       | Track and thumb dimensions.                                       |
 | `disabled`                                          | `boolean`               | `false`                      | Blocks interaction and dims the thumb only.                       |
 | `readOnly`                                          | `boolean`               | `false`                      | Blocks interaction without dimming.                               |

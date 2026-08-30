@@ -22,8 +22,7 @@ import { Surface } from '@cladd-vue/ui';
 | `level`            | `SurfaceLevelInput`   | parent level `+ 1` | Absolute or relative surface depth, clamped to `1`–`5`.   |
 | `variant`          | `SurfaceVariant`      | `"solid"`          | Background treatment.                                     |
 | `outline`          | `boolean`             | `false`            | Renders the inset outline ring on the background layer.   |
-| `color`            | `UiAccent`            | inherited accent   | Cladd-compatible accent API.                              |
-| `accent`           | `UiAccent`            | inherited accent   | Port alias; `color` takes precedence.                     |
+| `color`            | `Color`               | inherited accent   | Cladd-compatible accent API.                              |
 | `hoverable`        | `boolean`             | `false`            | Enables the hover overlay.                                |
 | `clickable`        | `boolean`             | `false`            | Enables press feedback and content scale.                 |
 | `pressed`          | `boolean`             | `false`            | Forces the pressed visual state.                          |
@@ -76,22 +75,22 @@ The resolved values are observable on the DOM as `data-cladd-surface-level`, `da
 
 ## Accent scoping
 
-The effective accent is `color`, then `accent`, then the accent published by the enclosing surface, then the provider accent from `UiProvider`. The `cladd-accent-{name}` class is only applied when this surface sets `color` or `accent` explicitly, which keeps an accent scoped to its own subtree instead of leaking to siblings. The resolved value is always mirrored on `data-cladd-accent`, and it is what descendants read through the surface context.
+The effective accent is `color`, then `accent`, then the accent published by the enclosing surface, then the provider accent from `CladdProvider`. The `cladd-accent-{name}` class is only applied when this surface sets `color` or `accent` explicitly, which keeps an accent scoped to its own subtree instead of leaking to siblings. The resolved value is always mirrored on `data-cladd-accent`, and it is what descendants read through the surface context.
 
 ```vue
 <script setup lang="ts">
-import { Surface, UiProvider } from '@cladd-vue/ui';
+import { Surface, CladdProvider } from '@cladd-vue/ui';
 </script>
 
 <template>
-  <UiProvider accent="brand" theme="dark">
+  <CladdProvider accent="brand" theme="dark">
     <Surface accent="red">
       <!-- inherits red through the surface context -->
       <Surface />
     </Surface>
     <!-- still brand -->
     <Surface />
-  </UiProvider>
+  </CladdProvider>
 </template>
 ```
 

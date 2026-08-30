@@ -6,8 +6,6 @@ import {
   provideSurfaceContext,
   useSurface,
 } from '../../contexts/surfaceContext.ts';
-import { useUiContext } from '../../contexts/uiContext.ts';
-import type { UiAccent } from '../../foundations/contracts.ts';
 import { cn } from '../../shared/cn.ts';
 import type { SurfaceCutProps } from './surface.contracts.ts';
 import { resolveSurfaceInnerElement } from './surface.shared.ts';
@@ -15,7 +13,6 @@ import { resolveSurfaceInnerElement } from './surface.shared.ts';
 defineOptions({ inheritAttrs: false });
 
 const props = withDefaults(defineProps<SurfaceCutProps>(), {
-  accent: undefined,
   as: undefined,
   bgClassName: undefined,
   clickable: undefined,
@@ -51,7 +48,7 @@ const rootAttrs = computed(() => {
 });
 const parentSurface = useSurface();
 // Upstream's `color = ''` — no accent-color fallback; `color || inheritedColor` is published.
-const explicitColor = computed(() => d.value.color ?? d.value.accent);
+const explicitColor = computed(() => d.value.color);
 const providedColor = computed(
   () => explicitColor.value ?? parentSurface.color.value,
 );

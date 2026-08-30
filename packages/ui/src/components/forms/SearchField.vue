@@ -2,7 +2,6 @@
 import { computed, useAttrs } from 'vue';
 
 import { useComponentDefaults } from '../../composables/useComponentDefaults.ts';
-import type { UiAccent } from '../../foundations/contracts.ts';
 import { cn } from '../../shared/cn.ts';
 import type { FieldSize } from './form.contracts.ts';
 import Input from './Input.vue';
@@ -16,7 +15,6 @@ import SearchIcon from './SearchIcon.vue';
 defineOptions({ inheritAttrs: false });
 
 const props = withDefaults(defineProps<SearchFieldProps>(), {
-  accent: undefined,
   clearButton: undefined,
   color: undefined,
   placeholder: undefined,
@@ -69,7 +67,6 @@ function onKeydown(event: KeyboardEvent): void {
   <Input
     v-bind="rootAttrs"
     v-model="model"
-    :accent="d.accent"
     :class="rootClass"
     :clear-button="d.clearButton"
     :color="d.color"

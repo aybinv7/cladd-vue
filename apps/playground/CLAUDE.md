@@ -18,8 +18,8 @@ Do not add npm, pnpm, direct Vite, direct TypeScript, or direct test-runner comm
 - Add every public component to the catalog in the same change that exports it.
 - Show the complete size, accent, variant, interactive, disabled, loading, focus, and reduced-motion contracts that apply to the component.
 - Use deterministic local state. This app must not require ADB, CDP, Tauri, a backend, or network data.
-- Use `UiProvider` controls to verify global theme and accent inheritance.
-- Import components only from `@cladd-vue/ui` and styles only from `@cladd-vue/ui/styles.css`.
+- Use `CladdProvider` controls to verify global theme and accent inheritance.
+- Import components only from `@cladd-vue/ui` and styles only from `@cladd-vue/ui/css`.
 - Keep catalog sections inside `src/modules/playground/sections` and reusable playground chrome inside `src/modules/playground/components`.
 - Do not duplicate package component styles in the playground. Playground CSS may arrange specimens but must not repair a broken package component.
 - Native controls are allowed only when the equivalent package primitive has not been implemented. Replace them when that primitive lands.

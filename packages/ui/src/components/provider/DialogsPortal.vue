@@ -15,9 +15,9 @@ function onClosed(): void {
   <Dialog
     v-if="data"
     v-model:open="state"
-    :cancel-accent="data.cancelButtonColor"
+    :cancel-button-color="data.cancelButtonColor"
     :cancel-text="data.cancelButtonText"
-    :confirm-accent="data.confirmButtonColor"
+    :confirm-button-color="data.confirmButtonColor"
     :confirm-text="data.confirmButtonText"
     :description="data.text"
     :require-confirm-text="

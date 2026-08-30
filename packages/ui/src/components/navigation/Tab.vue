@@ -10,7 +10,6 @@ import { tabId, tabPanelId, useTabsContext } from './tabsContext.ts';
 defineOptions({ inheritAttrs: false });
 
 const props = withDefaults(defineProps<ButtonProps & TabProps>(), {
-  accent: undefined,
   as: undefined,
   clickable: undefined,
   color: undefined,
@@ -49,7 +48,6 @@ function onClick(): void {
 <template>
   <SegmentedButton
     v-bind="$attrs"
-    :accent="d.accent"
     :active="selected"
     :aria-controls="tabPanelId(baseId, d.value)"
     :aria-selected="selected"

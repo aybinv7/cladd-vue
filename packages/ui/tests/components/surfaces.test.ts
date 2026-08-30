@@ -1,9 +1,10 @@
 import { expect, test } from 'vite-plus/test';
 import { defineComponent, h } from 'vue';
 
-import SurfaceFixture from '../fixtures/surfaces/SurfaceFixture.vue';
-import { Surface, SurfaceCut, UiProvider, useUiContext } from '../src/index.ts';
-import { byTestId, mountTree } from './support/mountTree.ts';
+import SurfaceFixture from '../../fixtures/surfaces/SurfaceFixture.vue';
+import { useUiContext } from '../../src/contexts/uiContext.ts';
+import { Surface, SurfaceCut, CladdProvider } from '../../src/index.ts';
+import { byTestId, mountTree } from '../support/mountTree.ts';
 
 test('publishes theme and accent as context without rendering an element', () => {
   const probe = defineComponent({
@@ -20,7 +21,7 @@ test('publishes theme and accent as context without rendering an element', () =>
   });
   const mounted = mountTree(
     h(
-      UiProvider,
+      CladdProvider,
       { accentColor: 'cyan', theme: 'light' },
       { default: () => h(probe) },
     ),
@@ -60,7 +61,7 @@ test('uses root context defaults without injection warnings', () => {
 
 test('resolves nested, relative, and clamped surface levels', () => {
   const mounted = mountTree(
-    h(UiProvider, null, {
+    h(CladdProvider, null, {
       default: () =>
         h(
           Surface,
@@ -148,11 +149,11 @@ test('keeps transparent groups and recessed cuts at their parent depth', () => {
 test('scopes explicit accents without adding them to siblings', () => {
   const mounted = mountTree(
     h(
-      UiProvider,
+      CladdProvider,
       { accentColor: 'brand' },
       {
         default: () => [
-          h(Surface, { accent: 'red', 'data-testid': 'accented' }),
+          h(Surface, { color: 'red', 'data-testid': 'accented' }),
           h(Surface, { 'data-testid': 'sibling' }),
         ],
       },

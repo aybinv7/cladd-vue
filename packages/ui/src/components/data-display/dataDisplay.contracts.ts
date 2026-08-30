@@ -3,16 +3,15 @@ import type { Component } from 'vue';
 import type {
   SurfaceLevelInput,
   SurfaceVariant,
-  UiAccent,
   UiSize,
 } from '../../foundations/contracts.ts';
+import type { Color } from '../../types.ts';
 
 export interface ChipProps {
-  accent?: UiAccent;
   /** Polymorphic root element. Defaults to `'span'`. */
   as?: string | Component;
   clickable?: boolean;
-  color?: UiAccent;
+  color?: Color;
   contentClassName?: string;
   disabled?: boolean;
   hoverable?: boolean;
@@ -33,9 +32,8 @@ export type ChipDefaultProps = Partial<
 >;
 
 export interface ShortcutProps {
-  accent?: UiAccent;
   as?: string | Component;
-  color?: UiAccent;
+  color?: Color;
   iconClassName?: string;
   keyClassName?: string;
   keyContentClassName?: string;
@@ -48,10 +46,9 @@ export interface ShortcutProps {
 export type ShortcutDefaultProps = Partial<Omit<ShortcutProps, 'as'>>;
 
 export interface ListButtonProps {
-  accent?: UiAccent;
   /** Polymorphic root element. Defaults to `'button'`. Pass `'a'` for navigation rows. */
   as?: string | Component;
-  color?: UiAccent;
+  color?: Color;
   contentClassName?: string;
   disabled?: boolean;
   /** Small text rendered below the title. */

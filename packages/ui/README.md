@@ -6,7 +6,7 @@ This package ports Cladd's surface, sizing, accent, motion, DOM, and interaction
 
 ## Status
 
-Surface, action, data-display, feedback, form, and overlay foundations are available. The package includes `UiProvider`, surface primitives, dense controls, native form families, `Dialog`, `Popover`, and `Tooltip`. Native elements and focused Vue composables own keyboard, pointer, focus, form, positioning, and dismissal behavior.
+Surface, action, data-display, feedback, form, and overlay foundations are available. The package includes `CladdProvider`, surface primitives, dense controls, native form families, `Dialog`, `Popover`, and `Tooltip`. Native elements and focused Vue composables own keyboard, pointer, focus, form, positioning, and dismissal behavior.
 
 ## Boundaries
 
@@ -35,23 +35,23 @@ no build is required before running the playground.
 ## Usage
 
 ```ts
-import '@cladd-vue/ui/styles.css';
+import '@cladd-vue/ui/css';
 ```
 
 ```vue
 <script setup lang="ts">
-import { Button, Checkbox, Input, Surface, UiProvider } from '@cladd-vue/ui';
-import '@cladd-vue/ui/styles.css';
+import { Button, Checkbox, Input, Surface, CladdProvider } from '@cladd-vue/ui';
+import '@cladd-vue/ui/css';
 </script>
 
 <template>
-  <UiProvider theme="dark" accent="brand">
+  <CladdProvider theme="dark" accent="brand">
     <Surface :level="1" variant="gradient" outline>
       <Input name="query" placeholder="Filter targets" />
       <Checkbox name="offline" value="yes" />
       <Button accent="green" variant="gradient-fill">Save</Button>
     </Surface>
-  </UiProvider>
+  </CladdProvider>
 </template>
 ```
 
