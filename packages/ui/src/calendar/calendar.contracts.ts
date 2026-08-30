@@ -97,7 +97,7 @@ export interface CalendarProps {
   showToday?: boolean;
   /** Sizing token. Drives day-cell size and font sizes. Default `'md'`. */
   size?: CalendarSize;
-  /** First day of the week, `0` for Sunday. Default `1`. */
+  /** First day of the week, `0` for Sunday. Default `0`. */
   weekStart?: number;
 }
 

@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Inter+Mono:wght@400;500&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap");
 @import "tailwindcss";
 @import "@cladd-vue/ui/css";
 
@@ -50,7 +50,7 @@ select {
 code,
 kbd {
   font-family:
-    "Inter Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+    "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
     monospace;
 }
 
@@ -246,7 +246,7 @@ kbd {
 
 .section-nav__heading > span:last-child {
   color: var(--playground-muted);
-  font-family: "IBM Plex Mono", monospace;
+  font-family: "JetBrains Mono", ui-monospace, monospace;
   font-size: 10px;
 }
 
@@ -289,7 +289,7 @@ kbd {
 .section-nav__index,
 .section-nav__count {
   color: var(--playground-muted);
-  font-family: "IBM Plex Mono", monospace;
+  font-family: "JetBrains Mono", ui-monospace, monospace;
   font-size: 9px;
 }
 
@@ -353,7 +353,7 @@ kbd {
 .catalog-section__eyebrow {
   padding-top: 0;
   color: var(--playground-muted);
-  font-family: "IBM Plex Mono", monospace;
+  font-family: "JetBrains Mono", ui-monospace, monospace;
   font-size: 11px;
   font-weight: 600;
   letter-spacing: 0.08em;
@@ -587,7 +587,7 @@ kbd {
   place-content: center;
   place-items: center;
   color: var(--playground-muted);
-  font-family: "IBM Plex Mono", monospace;
+  font-family: "JetBrains Mono", ui-monospace, monospace;
   font-size: 8px;
 }
 
@@ -841,7 +841,7 @@ kbd {
   overflow-x: auto;
   padding-block: 16px;
   color: var(--cladd-fg-soft);
-  font-family: "IBM Plex Mono", monospace;
+  font-family: "JetBrains Mono", ui-monospace, monospace;
   font-size: 13px;
   line-height: 1.625;
 }
@@ -977,7 +977,7 @@ kbd {
   flex: 1;
   overflow: hidden;
   color: var(--playground-muted);
-  font-family: "IBM Plex Mono", monospace;
+  font-family: "JetBrains Mono", ui-monospace, monospace;
   font-size: 9px;
   text-align: right;
   text-overflow: ellipsis;

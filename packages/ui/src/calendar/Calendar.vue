@@ -3,9 +3,12 @@ import { VueDatePicker } from '@vuepic/vue-datepicker';
 import { computed, useAttrs } from 'vue';
 
 import '@vuepic/vue-datepicker/dist/main.css';
+import './calendar.css';
 
 import type { ButtonSize } from '../components/button.contracts.ts';
 import ChevronLeftIcon from '../components/icons/ChevronLeftIcon.vue';
+import Toolbar from '../components/Toolbar.vue';
+import ToolbarButton from '../components/ToolbarButton.vue';
 import { useComponentDefaults } from '../composables/useComponentDefaults.ts';
 import { useTheme, useAccentColor } from '../contexts/uiContext.ts';
 import { cn } from '../shared/cn.ts';
@@ -52,7 +55,7 @@ const d = useComponentDefaults('Calendar', props, {
   readOnly: false,
   showToday: true,
   size: 'md' as CalendarSize,
-  weekStart: 1,
+  weekStart: 0,
 });
 
 const slots = defineSlots<{
@@ -114,6 +117,31 @@ const rootClass = computed(() =>
   ),
 );
 
+/**
+ * The dependency types its header slot as a union across date, month and year
+ * pickers. This wrapper only ever renders the date picker, so narrow to that arm.
+ */
+interface MonthYearHeader {
+  handleMonthYearChange: (isNext: boolean, fromNav?: boolean) => void;
+  isDisabled: (next: boolean) => boolean;
+  month: number;
+  year: number;
+}
+
+function asHeader(slotProps: unknown): MonthYearHeader {
+  return slotProps as MonthYearHeader;
+}
+
+const monthFormatter = new Intl.DateTimeFormat(undefined, { month: 'long' });
+
+function monthLabel(month: number): string {
+  return monthFormatter.format(new Date(2000, month, 1));
+}
+
+const captionClass = computed(() =>
+  cn('pl-2 font-semibold text-cladd-fg', tokens.value.captionText),
+);
+
 const ui = computed(() => ({
   menu: cn('cladd-calendar__menu', tokens.value.captionText),
   calendar: 'cladd-calendar__grid',
@@ -139,10 +167,17 @@ const ui = computed(() => ({
 
     <VueDatePicker
       v-model="pickerValue"
+      :action-row="{
+        showCancel: false,
+        showNow: false,
+        showPreview: false,
+        showSelect: false,
+      }"
       auto-apply
       :dark="theme === 'dark'"
       :disabled="d.disabled"
       :enable-time-picker="false"
+      hide-input-icon
       :hide-navigation="d.hideNavigation ? ['month', 'year'] : []"
       inline
       :max-date="d.maxDate"
@@ -153,11 +188,39 @@ const ui = computed(() => ({
       :ui="ui"
       :week-start="d.weekStart"
     >
-      <template #arrow-left>
-        <ChevronLeftIcon />
-      </template>
-      <template #arrow-right>
-        <ChevronLeftIcon class="rotate-180" />
+      <!-- Upstream's caption sits left with the nav grouped on the right
+           (Calendar.tsx:355-364); the dependency's default splits the arrows
+           either side of the label, so the header is rendered here instead. -->
+      <template #month-year="slotProps">
+        <div class="flex min-h-8 w-full items-center" data-part="caption">
+          <span :class="captionClass">
+            {{ monthLabel(asHeader(slotProps).month) }}
+            {{ asHeader(slotProps).year }}
+          </span>
+          <Toolbar
+            class="ml-auto"
+            :outline="false"
+            :size="d.controlSize"
+            variant="transparent"
+          >
+            <ToolbarButton
+              aria-label="Previous month"
+              :disabled="asHeader(slotProps).isDisabled(false)"
+              square
+              @click="asHeader(slotProps).handleMonthYearChange(false, true)"
+            >
+              <ChevronLeftIcon />
+            </ToolbarButton>
+            <ToolbarButton
+              aria-label="Next month"
+              :disabled="asHeader(slotProps).isDisabled(true)"
+              square
+              @click="asHeader(slotProps).handleMonthYearChange(true, true)"
+            >
+              <ChevronLeftIcon class="rotate-180" />
+            </ToolbarButton>
+          </Toolbar>
+        </div>
       </template>
     </VueDatePicker>
 
