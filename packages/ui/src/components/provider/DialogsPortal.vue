@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import Dialog from "../overlays/Dialog.vue";
-import { useDialogsPortalContext } from "./dialogsPortalContext.ts";
+import Dialog from '../overlays/Dialog.vue';
+import { useDialogsPortalContext } from './dialogsPortalContext.ts';
 
 const { data, state } = useDialogsPortalContext();
 
@@ -20,7 +20,9 @@ function onClosed(): void {
     :confirm-accent="data.confirmButtonColor"
     :confirm-text="data.confirmButtonText"
     :description="data.text"
-    :require-confirm-text="data.requireConfirmText ? String(data.requireConfirmText) : undefined"
+    :require-confirm-text="
+      data.requireConfirmText ? String(data.requireConfirmText) : undefined
+    "
     :title="data.title"
     @cancel="data.onCancel?.(false)"
     @closed="onClosed"

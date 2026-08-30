@@ -1,5 +1,5 @@
-import type { UiAccent, SurfaceVariant } from "../../foundations/contracts.ts";
-import type { SegmentedProps } from "./segmented.contracts.ts";
+import type { UiAccent, SurfaceVariant } from '../../foundations/contracts.ts';
+import type { SegmentedProps } from './segmented.contracts.ts';
 
 export interface ToggleGroupOwnProps {
   /** Initial selection (uncontrolled). Ignored when `value` is provided. */
@@ -16,7 +16,7 @@ export interface ToggleGroupOwnProps {
 export type ToggleGroupProps = ToggleGroupOwnProps & SegmentedProps;
 
 export type ToggleGroupDefaultProps = Partial<
-  Omit<ToggleGroupProps, "as" | "defaultValue" | "value">
+  Omit<ToggleGroupProps, 'as' | 'defaultValue' | 'value'>
 >;
 
 export interface ToggleButtonOwnProps {
@@ -35,5 +35,5 @@ export interface ToggleButtonOwnProps {
 }
 
 export type ToggleButtonDefaultProps = Partial<
-  Omit<ToggleButtonOwnProps, "defaultSelected" | "selected" | "value">
+  Omit<ToggleButtonOwnProps, 'defaultSelected' | 'selected' | 'value'>
 >;

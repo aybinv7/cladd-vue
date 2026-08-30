@@ -1,4 +1,4 @@
-import { useDevice } from "../../composables/useDevice.ts";
+import { useDevice } from '../../composables/useDevice.ts';
 
 /**
  * Cladd's shared tooltip timer: the first hover waits the full delay, and once a tooltip has been

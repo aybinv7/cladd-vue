@@ -1,18 +1,18 @@
 <script setup lang="ts">
-import { computed, type Component } from "vue";
+import { computed, type Component } from 'vue';
 
-import { useComponentDefaults } from "../../composables/useComponentDefaults.ts";
-import type { SurfaceVariant, UiSize } from "../../foundations/contracts.ts";
-import { cn } from "../../shared/cn.ts";
-import { nestedSizeClasses } from "../../shared/sizeClasses.ts";
-import Surface from "../surface/Surface.vue";
+import { useComponentDefaults } from '../../composables/useComponentDefaults.ts';
+import type { SurfaceVariant, UiSize } from '../../foundations/contracts.ts';
+import { cn } from '../../shared/cn.ts';
+import { nestedSizeClasses } from '../../shared/sizeClasses.ts';
+import Surface from '../surface/Surface.vue';
 import {
   chipFontSizes,
   chipIconSizes,
   chipPaddings,
   chipRoundedClasses,
-} from "./chip.contracts.ts";
-import type { ChipProps } from "./dataDisplay.contracts.ts";
+} from './chip.contracts.ts';
+import type { ChipProps } from './dataDisplay.contracts.ts';
 
 defineOptions({ inheritAttrs: false });
 
@@ -33,16 +33,16 @@ const props = withDefaults(defineProps<ChipProps>(), {
   variant: undefined,
 });
 
-const d = useComponentDefaults("Chip", props, {
-  as: "span" as string | Component,
+const d = useComponentDefaults('Chip', props, {
+  as: 'span' as string | Component,
   clickable: undefined as boolean | undefined,
   disabled: false,
   hoverable: false,
   iconProps: {} as Record<string, unknown>,
   outline: true,
   rounded: false,
-  size: "md" as UiSize,
-  variant: "gradient" as SurfaceVariant,
+  size: 'md' as UiSize,
+  variant: 'gradient' as SurfaceVariant,
 });
 
 defineSlots<{
@@ -53,27 +53,28 @@ defineSlots<{
 const clickable = computed(
   () =>
     d.value.clickable === true ||
-    (d.value.clickable === undefined && (d.value.as === "a" || d.value.as === "button")),
+    (d.value.clickable === undefined &&
+      (d.value.as === 'a' || d.value.as === 'button')),
 );
 const isFill = computed(
-  () => d.value.variant === "solid-fill" || d.value.variant === "gradient-fill",
+  () => d.value.variant === 'solid-fill' || d.value.variant === 'gradient-fill',
 );
 
 const rootClass = computed(() =>
   cn(
-    "cui-chip group/cui-chip relative inline-flex font-semibold select-none focus:ring-0 focus:outline-0 focus:outline-none",
-    !isFill.value && "text-cui-primary",
-    d.value.rounded ? "rounded-full" : chipRoundedClasses[d.value.size],
-    clickable.value && "duration-200",
-    clickable.value && d.value.as === "a" ? "cursor-pointer" : "cursor-auto",
-    nestedSizeClasses(d.value.size, "height"),
+    'cladd-chip group/cladd-chip relative inline-flex font-semibold select-none focus:ring-0 focus:outline-0 focus:outline-none',
+    !isFill.value && 'text-cladd-primary',
+    d.value.rounded ? 'rounded-full' : chipRoundedClasses[d.value.size],
+    clickable.value && 'duration-200',
+    clickable.value && d.value.as === 'a' ? 'cursor-pointer' : 'cursor-auto',
+    nestedSizeClasses(d.value.size, 'height'),
     chipFontSizes[d.value.size],
   ),
 );
 
 const chipContentClass = computed(() =>
   cn(
-    "relative flex items-center justify-center gap-1 overflow-hidden text-ellipsis whitespace-nowrap [&>svg]:shrink-0",
+    'relative flex items-center justify-center gap-1 overflow-hidden text-ellipsis whitespace-nowrap [&>svg]:shrink-0',
     chipIconSizes[d.value.size],
     chipPaddings[d.value.size],
     d.value.contentClassName,

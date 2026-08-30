@@ -1,5 +1,5 @@
 @layer base {
-  .cui-slider {
+  .cladd-slider {
     input[type="range"] {
       appearance: none;
       background: transparent;

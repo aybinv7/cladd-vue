@@ -1,6 +1,9 @@
 <script setup lang="ts">
-import Toast from "../feedback/Toast.vue";
-import { useToastsPortalContext, type ToastsPortalData } from "./toastsPortalContext.ts";
+import Toast from '../feedback/Toast.vue';
+import {
+  useToastsPortalContext,
+  type ToastsPortalData,
+} from './toastsPortalContext.ts';
 
 const { data, state } = useToastsPortalContext();
 

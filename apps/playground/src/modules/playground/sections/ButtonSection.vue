@@ -1,34 +1,34 @@
 <script setup lang="ts">
-import { Button } from "@cladd-vue/ui";
-import { computed, ref } from "vue";
-import type { UiAccent } from "@cladd-vue/ui";
+import { Button } from '@cladd-vue/ui';
+import type { UiAccent } from '@cladd-vue/ui';
+import { computed, ref } from 'vue';
 
-import CatalogSection from "../components/CatalogSection.vue";
-import ComponentPlayground from "../components/ComponentPlayground.vue";
-import PlaygroundColorControl from "../components/PlaygroundColorControl.vue";
-import PlaygroundSegmented from "../components/PlaygroundSegmented.vue";
-import PlaygroundSwitchControl from "../components/PlaygroundSwitchControl.vue";
-import PlaygroundToolbar from "../components/PlaygroundToolbar.vue";
+import CatalogSection from '../components/CatalogSection.vue';
+import ComponentPlayground from '../components/ComponentPlayground.vue';
+import PlaygroundColorControl from '../components/PlaygroundColorControl.vue';
+import PlaygroundSegmented from '../components/PlaygroundSegmented.vue';
+import PlaygroundSwitchControl from '../components/PlaygroundSwitchControl.vue';
+import PlaygroundToolbar from '../components/PlaygroundToolbar.vue';
 
 const props = defineProps<{
   accent: UiAccent;
   interactionsEnabled: boolean;
 }>();
 
-const color = ref<UiAccent>("neutral");
+const color = ref<UiAccent>('neutral');
 const disabled = ref(false);
 const readOnly = ref(false);
-const size = ref("md");
-const variant = ref("gradient");
-const sizes = ["2xs", "xs", "sm", "md", "lg", "xl", "2xl"] as const;
-const variants = ["gradient", "solid", "transparent", "gradient-fill"] as const;
+const size = ref('md');
+const variant = ref('gradient');
+const sizes = ['2xs', 'xs', 'sm', 'md', 'lg', 'xl', '2xl'] as const;
+const variants = ['gradient', 'solid', 'transparent', 'gradient-fill'] as const;
 const code = computed(
   () => `<Button
   color="${color.value}"
   size="${size.value}"
   variant="${variant.value}"
-  ${disabled.value ? "disabled" : ':disabled="false"'}
-  ${readOnly.value ? "read-only" : ':read-only="false"'}
+  ${disabled.value ? 'disabled' : ':disabled="false"'}
+  ${readOnly.value ? 'read-only' : ':read-only="false"'}
 >
   Connect target
 </Button>`,
@@ -66,10 +66,18 @@ function setReadOnly(value: boolean): void {
       </template>
       <template #controls>
         <PlaygroundToolbar>
-          <PlaygroundSegmented v-model="size" :items="sizes" label="Button size" />
+          <PlaygroundSegmented
+            v-model="size"
+            :items="sizes"
+            label="Button size"
+          />
         </PlaygroundToolbar>
         <PlaygroundToolbar>
-          <PlaygroundSegmented v-model="variant" :items="variants" label="Button variant" />
+          <PlaygroundSegmented
+            v-model="variant"
+            :items="variants"
+            label="Button variant"
+          />
         </PlaygroundToolbar>
         <PlaygroundToolbar>
           <PlaygroundSwitchControl

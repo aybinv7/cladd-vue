@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import { computed, useAttrs } from "vue";
+import { computed, useAttrs } from 'vue';
 
-import { useComponentDefaults } from "../../composables/useComponentDefaults.ts";
-import Button from "./Button.vue";
-import type { ButtonProps } from "./button.contracts.ts";
-import { useToolbarContext } from "./toolbarContext.ts";
+import { useComponentDefaults } from '../../composables/useComponentDefaults.ts';
+import type { ButtonProps } from './button.contracts.ts';
+import Button from './Button.vue';
+import { useToolbarContext } from './toolbarContext.ts';
 
 defineOptions({ inheritAttrs: false });
 
@@ -38,7 +38,7 @@ defineSlots<{
 
 const attrs = useAttrs();
 const toolbar = useToolbarContext();
-const d = useComponentDefaults("ToolbarButton", props, {});
+const d = useComponentDefaults('ToolbarButton', props, {});
 
 const buttonProps = computed(() => ({
   accent: d.value.accent,
@@ -56,12 +56,12 @@ const buttonProps = computed(() => ({
   pressed: d.value.pressed,
   readOnly: d.value.readOnly,
   rounded: d.value.rounded ?? toolbar.value.rounded ?? true,
-  size: d.value.size ?? toolbar.value.size ?? "md",
+  size: d.value.size ?? toolbar.value.size ?? 'md',
   square: d.value.square,
   surface: d.value.surface,
   surfaceLevel: d.value.surfaceLevel,
   tightFocusRing: d.value.tightFocusRing,
-  variant: d.value.variant ?? toolbar.value.variant ?? "transparent",
+  variant: d.value.variant ?? toolbar.value.variant ?? 'transparent',
 }));
 </script>
 

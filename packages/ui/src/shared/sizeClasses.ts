@@ -1,107 +1,118 @@
-import type { UiSize } from "../foundations/contracts.ts";
+import type { UiSize } from '../foundations/contracts.ts';
 
-export type SizeClassProperty = "size" | "width" | "height" | "min-width" | "min-height";
+export type SizeClassProperty =
+  | 'size'
+  | 'width'
+  | 'height'
+  | 'min-width'
+  | 'min-height';
 
 const rootClasses: Record<SizeClassProperty, Record<UiSize, string>> = {
   size: {
-    "2xs": "size-cui-2xs",
-    xs: "size-cui-xs",
-    sm: "size-cui-sm",
-    md: "size-cui-md",
-    lg: "size-cui-lg",
-    xl: "size-cui-xl",
-    "2xl": "size-cui-2xl",
+    '2xs': 'size-cladd-2xs',
+    xs: 'size-cladd-xs',
+    sm: 'size-cladd-sm',
+    md: 'size-cladd-md',
+    lg: 'size-cladd-lg',
+    xl: 'size-cladd-xl',
+    '2xl': 'size-cladd-2xl',
   },
   width: {
-    "2xs": "w-cui-2xs",
-    xs: "w-cui-xs",
-    sm: "w-cui-sm",
-    md: "w-cui-md",
-    lg: "w-cui-lg",
-    xl: "w-cui-xl",
-    "2xl": "w-cui-2xl",
+    '2xs': 'w-cladd-2xs',
+    xs: 'w-cladd-xs',
+    sm: 'w-cladd-sm',
+    md: 'w-cladd-md',
+    lg: 'w-cladd-lg',
+    xl: 'w-cladd-xl',
+    '2xl': 'w-cladd-2xl',
   },
   height: {
-    "2xs": "h-cui-2xs",
-    xs: "h-cui-xs",
-    sm: "h-cui-sm",
-    md: "h-cui-md",
-    lg: "h-cui-lg",
-    xl: "h-cui-xl",
-    "2xl": "h-cui-2xl",
+    '2xs': 'h-cladd-2xs',
+    xs: 'h-cladd-xs',
+    sm: 'h-cladd-sm',
+    md: 'h-cladd-md',
+    lg: 'h-cladd-lg',
+    xl: 'h-cladd-xl',
+    '2xl': 'h-cladd-2xl',
   },
-  "min-width": {
-    "2xs": "min-w-cui-2xs",
-    xs: "min-w-cui-xs",
-    sm: "min-w-cui-sm",
-    md: "min-w-cui-md",
-    lg: "min-w-cui-lg",
-    xl: "min-w-cui-xl",
-    "2xl": "min-w-cui-2xl",
+  'min-width': {
+    '2xs': 'min-w-cladd-2xs',
+    xs: 'min-w-cladd-xs',
+    sm: 'min-w-cladd-sm',
+    md: 'min-w-cladd-md',
+    lg: 'min-w-cladd-lg',
+    xl: 'min-w-cladd-xl',
+    '2xl': 'min-w-cladd-2xl',
   },
-  "min-height": {
-    "2xs": "min-h-cui-2xs",
-    xs: "min-h-cui-xs",
-    sm: "min-h-cui-sm",
-    md: "min-h-cui-md",
-    lg: "min-h-cui-lg",
-    xl: "min-h-cui-xl",
-    "2xl": "min-h-cui-2xl",
+  'min-height': {
+    '2xs': 'min-h-cladd-2xs',
+    xs: 'min-h-cladd-xs',
+    sm: 'min-h-cladd-sm',
+    md: 'min-h-cladd-md',
+    lg: 'min-h-cladd-lg',
+    xl: 'min-h-cladd-xl',
+    '2xl': 'min-h-cladd-2xl',
   },
 };
 
 const nestedClasses: Record<SizeClassProperty, Record<UiSize, string>> = {
   size: {
-    "2xs": "size-cui-nested-2xs",
-    xs: "size-cui-nested-xs",
-    sm: "size-cui-nested-sm",
-    md: "size-cui-nested-md",
-    lg: "size-cui-nested-lg",
-    xl: "size-cui-nested-xl",
-    "2xl": "size-cui-nested-2xl",
+    '2xs': 'size-cladd-nested-2xs',
+    xs: 'size-cladd-nested-xs',
+    sm: 'size-cladd-nested-sm',
+    md: 'size-cladd-nested-md',
+    lg: 'size-cladd-nested-lg',
+    xl: 'size-cladd-nested-xl',
+    '2xl': 'size-cladd-nested-2xl',
   },
   width: {
-    "2xs": "w-cui-nested-2xs",
-    xs: "w-cui-nested-xs",
-    sm: "w-cui-nested-sm",
-    md: "w-cui-nested-md",
-    lg: "w-cui-nested-lg",
-    xl: "w-cui-nested-xl",
-    "2xl": "w-cui-nested-2xl",
+    '2xs': 'w-cladd-nested-2xs',
+    xs: 'w-cladd-nested-xs',
+    sm: 'w-cladd-nested-sm',
+    md: 'w-cladd-nested-md',
+    lg: 'w-cladd-nested-lg',
+    xl: 'w-cladd-nested-xl',
+    '2xl': 'w-cladd-nested-2xl',
   },
   height: {
-    "2xs": "h-cui-nested-2xs",
-    xs: "h-cui-nested-xs",
-    sm: "h-cui-nested-sm",
-    md: "h-cui-nested-md",
-    lg: "h-cui-nested-lg",
-    xl: "h-cui-nested-xl",
-    "2xl": "h-cui-nested-2xl",
+    '2xs': 'h-cladd-nested-2xs',
+    xs: 'h-cladd-nested-xs',
+    sm: 'h-cladd-nested-sm',
+    md: 'h-cladd-nested-md',
+    lg: 'h-cladd-nested-lg',
+    xl: 'h-cladd-nested-xl',
+    '2xl': 'h-cladd-nested-2xl',
   },
-  "min-width": {
-    "2xs": "min-w-cui-nested-2xs",
-    xs: "min-w-cui-nested-xs",
-    sm: "min-w-cui-nested-sm",
-    md: "min-w-cui-nested-md",
-    lg: "min-w-cui-nested-lg",
-    xl: "min-w-cui-nested-xl",
-    "2xl": "min-w-cui-nested-2xl",
+  'min-width': {
+    '2xs': 'min-w-cladd-nested-2xs',
+    xs: 'min-w-cladd-nested-xs',
+    sm: 'min-w-cladd-nested-sm',
+    md: 'min-w-cladd-nested-md',
+    lg: 'min-w-cladd-nested-lg',
+    xl: 'min-w-cladd-nested-xl',
+    '2xl': 'min-w-cladd-nested-2xl',
   },
-  "min-height": {
-    "2xs": "min-h-cui-nested-2xs",
-    xs: "min-h-cui-nested-xs",
-    sm: "min-h-cui-nested-sm",
-    md: "min-h-cui-nested-md",
-    lg: "min-h-cui-nested-lg",
-    xl: "min-h-cui-nested-xl",
-    "2xl": "min-h-cui-nested-2xl",
+  'min-height': {
+    '2xs': 'min-h-cladd-nested-2xs',
+    xs: 'min-h-cladd-nested-xs',
+    sm: 'min-h-cladd-nested-sm',
+    md: 'min-h-cladd-nested-md',
+    lg: 'min-h-cladd-nested-lg',
+    xl: 'min-h-cladd-nested-xl',
+    '2xl': 'min-h-cladd-nested-2xl',
   },
 };
 
-export function rootSizeClasses(size: UiSize = "sm", property: SizeClassProperty): string {
+export function rootSizeClasses(
+  size: UiSize = 'sm',
+  property: SizeClassProperty,
+): string {
   return rootClasses[property][size];
 }
 
-export function nestedSizeClasses(size: UiSize = "sm", property: SizeClassProperty): string {
+export function nestedSizeClasses(
+  size: UiSize = 'sm',
+  property: SizeClassProperty,
+): string {
   return nestedClasses[property][size];
 }

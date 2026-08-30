@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import Segmented from "../actions/Segmented.vue";
-import type { SegmentedProps } from "../actions/segmented.contracts.ts";
-import { useTabsContext } from "./tabsContext.ts";
+import type { SegmentedProps } from '../actions/segmented.contracts.ts';
+import Segmented from '../actions/Segmented.vue';
+import { useTabsContext } from './tabsContext.ts';
 
 defineOptions({ inheritAttrs: false });
 
@@ -14,12 +14,12 @@ defineSlots<{
 const { setValue } = useTabsContext();
 
 function onTabsKeydown(event: KeyboardEvent): void {
-  if (!["ArrowLeft", "ArrowRight", "Home", "End"].includes(event.key)) return;
+  if (!['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) return;
 
   const container = event.currentTarget as HTMLElement;
-  const tabs = Array.from(container.querySelectorAll<HTMLElement>('[role="tab"]')).filter(
-    (tab) => tab.getAttribute("data-disabled") == null,
-  );
+  const tabs = Array.from(
+    container.querySelectorAll<HTMLElement>('[role="tab"]'),
+  ).filter((tab) => tab.getAttribute('data-disabled') == null);
   if (tabs.length === 0) return;
 
   const active = document.activeElement as HTMLElement | null;
@@ -27,13 +27,13 @@ function onTabsKeydown(event: KeyboardEvent): void {
 
   let nextIndex: number;
   switch (event.key) {
-    case "ArrowRight":
+    case 'ArrowRight':
       nextIndex = (currentIndex + 1 + tabs.length) % tabs.length;
       break;
-    case "ArrowLeft":
+    case 'ArrowLeft':
       nextIndex = (currentIndex - 1 + tabs.length) % tabs.length;
       break;
-    case "Home":
+    case 'Home':
       nextIndex = 0;
       break;
     default:

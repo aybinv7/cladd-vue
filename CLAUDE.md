@@ -47,7 +47,10 @@ Focused runs use the package name: `vp run @cladd-vue/ui#test`, `vp run playgrou
 
 ## Ground rules
 
-- No inline code comments. Names and file boundaries carry the meaning; prose belongs in Markdown.
+- **Port, do not invent.** This repository reproduces Cladd in Vue. Upstream's names, selectors,
+  tokens, values, and code shape are the specification, and the diff against `reference/cladd/` is the
+  first acceptance test. Read `packages/ui/CLAUDE.md` before changing anything in the library.
+- No inline code comments of your own. Upstream's comments and JSDoc are ported verbatim.
 - One component family, composable, contract, or style concern per file.
 - Do not run dev servers or application builds unless the user explicitly asks.
 - Do not claim build, browser, accessibility, or device evidence unless that validation actually ran.

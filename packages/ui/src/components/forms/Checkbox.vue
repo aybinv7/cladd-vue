@@ -1,17 +1,17 @@
 <script setup lang="ts">
-import { computed } from "vue";
+import { computed } from 'vue';
 
-import { useComponentDefaults } from "../../composables/useComponentDefaults.ts";
-import { useUiContext } from "../../contexts/uiContext.ts";
-import FocusRing from "../feedback/FocusRing.vue";
-import { cn } from "../../shared/cn.ts";
-import Surface from "../surface/Surface.vue";
-import CheckboxGlyph from "./CheckboxGlyph.vue";
+import { useComponentDefaults } from '../../composables/useComponentDefaults.ts';
+import { useUiContext } from '../../contexts/uiContext.ts';
+import { cn } from '../../shared/cn.ts';
+import FocusRing from '../feedback/FocusRing.vue';
+import Surface from '../surface/Surface.vue';
 import {
   checkboxIndicatorSizes,
   checkboxRootSizes,
   type CheckboxProps,
-} from "./checkbox.contracts.ts";
+} from './checkbox.contracts.ts';
+import CheckboxGlyph from './CheckboxGlyph.vue';
 
 defineOptions({ inheritAttrs: false });
 
@@ -39,30 +39,36 @@ const props = withDefaults(defineProps<CheckboxProps>(), {
 const model = defineModel<boolean>({ default: false });
 const emit = defineEmits<{
   change: [checked: boolean, event?: Event];
-  "update:checked": [checked: boolean];
+  'update:checked': [checked: boolean];
 }>();
 const ui = useUiContext();
-const d = useComponentDefaults("Checkbox", props, {
-  as: "label" as CheckboxProps["as"],
+const d = useComponentDefaults('Checkbox', props, {
+  as: 'label' as CheckboxProps['as'],
   disabled: false,
   input: true,
   required: false,
-  size: "sm" as CheckboxProps["size"],
+  size: 'sm' as CheckboxProps['size'],
   thumbOutline: true,
 });
-const isReadOnly = computed(() => d.value.readOnly ?? d.value.readonly ?? false);
+const isReadOnly = computed(
+  () => d.value.readOnly ?? d.value.readonly ?? false,
+);
 const checked = computed(() => d.value.checked ?? model.value);
-const currentAccent = computed(() => d.value.color ?? d.value.accent ?? ui.accentColor.value);
-const hoverable = computed(() => d.value.hoverable ?? d.value.as === "label");
-const focusable = computed(() => d.value.focusable ?? (d.value.as === "label" || d.value.input));
+const currentAccent = computed(
+  () => d.value.color ?? d.value.accent ?? ui.accentColor.value,
+);
+const hoverable = computed(() => d.value.hoverable ?? d.value.as === 'label');
+const focusable = computed(
+  () => d.value.focusable ?? (d.value.as === 'label' || d.value.input),
+);
 const inputId = computed(() => d.value.inputId ?? d.value.id);
 
 function setChecked(next: boolean, event?: Event): void {
   if (d.value.disabled || isReadOnly.value) return;
 
   model.value = next;
-  emit("update:checked", next);
-  emit("change", next, event);
+  emit('update:checked', next);
+  emit('change', next, event);
 }
 
 function handleInputChange(event: Event): void {
@@ -83,7 +89,7 @@ function handleRootClick(event: MouseEvent): void {
 
 function handleFallbackKeydown(event: KeyboardEvent): void {
   if (d.value.input || d.value.disabled || isReadOnly.value) return;
-  if (event.key !== " " && event.key !== "Enter") return;
+  if (event.key !== ' ' && event.key !== 'Enter') return;
 
   event.preventDefault();
   setChecked(!checked.value);
@@ -91,30 +97,38 @@ function handleFallbackKeydown(event: KeyboardEvent): void {
 
 const rootClass = computed(() =>
   cn(
-    "cui-checkbox group/cui-checkbox relative flex shrink-0 items-center justify-center rounded-full select-none",
+    'cladd-checkbox group/cladd-checkbox relative flex shrink-0 items-center justify-center rounded-full select-none',
     checkboxRootSizes[d.value.size],
-    d.value.disabled && "opacity-50",
+    d.value.disabled && 'opacity-50',
   ),
 );
 
-const thumbClass = "absolute inset-0 size-full shrink-0 rounded-full duration-200";
+const thumbClass =
+  'absolute inset-0 size-full shrink-0 rounded-full duration-200';
 
 const checkedThumbClass = computed(() =>
-  cn(thumbClass, !checked.value && "scale-0", checked.value ? "opacity-100" : "opacity-0"),
+  cn(
+    thumbClass,
+    !checked.value && 'scale-0',
+    checked.value ? 'opacity-100' : 'opacity-0',
+  ),
 );
 
 const indicatorClass = computed(() =>
   cn(
-    "cui-checkbox__indicator pointer-events-none relative duration-200",
+    'cladd-checkbox__indicator pointer-events-none relative duration-200',
     checkboxIndicatorSizes[d.value.size],
-    !checked.value && "scale-75 text-cui-fg-soft",
-    checked.value && !d.value.disabled && !isReadOnly.value && "group-active/cui-checkbox:scale-90",
+    !checked.value && 'scale-75 text-cladd-fg-soft',
+    checked.value &&
+      !d.value.disabled &&
+      !isReadOnly.value &&
+      'group-active/cladd-checkbox:scale-90',
     !checked.value &&
       !d.value.disabled &&
       !isReadOnly.value &&
-      "group-active/cui-checkbox:scale-65",
-    checked.value && "text-cui-on-primary",
-    checked.value && `cui-color-${currentAccent.value}`,
+      'group-active/cladd-checkbox:scale-65',
+    checked.value && 'text-cladd-on-primary',
+    checked.value && `cladd-color-${currentAccent.value}`,
     d.value.checkClassName,
   ),
 );

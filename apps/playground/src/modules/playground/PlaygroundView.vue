@@ -1,31 +1,35 @@
 <script setup lang="ts">
-import { UiProvider } from "@cladd-vue/ui";
-import { ref, watchEffect } from "vue";
-import type { UiAccent, UiTheme } from "@cladd-vue/ui";
-import { RouterView } from "vue-router";
+import { UiProvider } from '@cladd-vue/ui';
+import type { UiAccent, UiTheme } from '@cladd-vue/ui';
+import { ref, watchEffect } from 'vue';
+import { RouterView } from 'vue-router';
 
-import PlaygroundControls from "./components/PlaygroundControls.vue";
-import PlaygroundHeader from "./components/PlaygroundHeader.vue";
-import SectionNav from "./components/SectionNav.vue";
-import { catalogComponentCount, catalogEntries, catalogStateCount } from "./playground.data";
+import PlaygroundControls from './components/PlaygroundControls.vue';
+import PlaygroundHeader from './components/PlaygroundHeader.vue';
+import SectionNav from './components/SectionNav.vue';
+import {
+  catalogComponentCount,
+  catalogEntries,
+  catalogStateCount,
+} from './playground.data';
 
-const theme = ref<UiTheme>("dark");
-const accent = ref<UiAccent>("neutral");
+const theme = ref<UiTheme>('dark');
+const accent = ref<UiAccent>('neutral');
 const interactionsEnabled = ref(true);
 
 function toggleTheme(): void {
-  theme.value = theme.value === "dark" ? "light" : "dark";
+  theme.value = theme.value === 'dark' ? 'light' : 'dark';
 }
 
 // Cladd's provider publishes context only, so the app owns the theme class on its own root. Only
 // `dark`/`light` goes here: upstream never puts `cladd-color-*` on a root — that class is applied
 // per component (`Surface.tsx`: `color && cladd-color-${color}`), and the app-wide accent travels
 // as context, which interactive components read through `useAccentColor()` as their default color.
-// Putting it on the root would recompute `--cui-bg` and tint the whole page.
+// Putting it on the root would recompute `--cladd-bg` and tint the whole page.
 watchEffect(() => {
   const root = document.documentElement;
-  root.classList.toggle("dark", theme.value === "dark");
-  root.classList.toggle("light", theme.value === "light");
+  root.classList.toggle('dark', theme.value === 'dark');
+  root.classList.toggle('light', theme.value === 'light');
 });
 </script>
 

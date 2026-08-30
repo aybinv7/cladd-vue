@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import { Button, Surface } from "@cladd-vue/ui";
-import { onBeforeUnmount, ref, watch } from "vue";
+import { Button, Surface } from '@cladd-vue/ui';
+import { onBeforeUnmount, ref, watch } from 'vue';
 
-import CheckIcon from "./icons/CheckIcon.vue";
-import CopyIcon from "./icons/CopyIcon.vue";
-import PlaygroundToolbar from "./PlaygroundToolbar.vue";
+import CheckIcon from './icons/CheckIcon.vue';
+import CopyIcon from './icons/CopyIcon.vue';
+import PlaygroundToolbar from './PlaygroundToolbar.vue';
 
 const props = defineProps<{
   code: string;
@@ -12,7 +12,7 @@ const props = defineProps<{
 
 const collapsed = ref(true);
 const highlighted = ref<string>();
-const copyState = ref<"idle" | "copied" | "failed">("idle");
+const copyState = ref<'idle' | 'copied' | 'failed'>('idle');
 let highlightRequest = 0;
 let copyTimer: ReturnType<typeof setTimeout> | undefined;
 
@@ -22,20 +22,20 @@ watch(
     const request = ++highlightRequest;
     highlighted.value = undefined;
     try {
-      const { codeToHtml } = await import("shiki");
+      const { codeToHtml } = await import('shiki');
       const html = await codeToHtml(code, {
         defaultColor: false,
-        lang: "vue",
-        themes: { dark: "github-dark", light: "github-light" },
+        lang: 'vue',
+        themes: { dark: 'github-dark', light: 'github-light' },
         transformers: [
           {
             code(node) {
               node.children = node.children.filter(
-                (child) => child.type !== "text" || child.value.trim() !== "",
+                (child) => child.type !== 'text' || child.value.trim() !== '',
               );
             },
             line(node) {
-              node.properties["data-line"] = "";
+              node.properties['data-line'] = '';
             },
             pre(node) {
               delete node.properties.style;
@@ -55,13 +55,13 @@ watch(
 async function copyCode(): Promise<void> {
   try {
     await navigator.clipboard.writeText(props.code);
-    copyState.value = "copied";
+    copyState.value = 'copied';
   } catch {
-    copyState.value = "failed";
+    copyState.value = 'failed';
   }
   if (copyTimer) clearTimeout(copyTimer);
   copyTimer = setTimeout(() => {
-    copyState.value = "idle";
+    copyState.value = 'idle';
   }, 1000);
 }
 
@@ -78,12 +78,24 @@ onBeforeUnmount(() => {
     :outline="!collapsed"
     :wrap-content="false"
   >
-    <div class="example-code__viewport" :class="{ 'example-code__viewport--collapsed': collapsed }">
-      <div v-if="highlighted" class="example-code__highlight" tabindex="-1" v-html="highlighted" />
+    <div
+      class="example-code__viewport"
+      :class="{ 'example-code__viewport--collapsed': collapsed }"
+    >
+      <div
+        v-if="highlighted"
+        class="example-code__highlight"
+        tabindex="-1"
+        v-html="highlighted"
+      />
       <pre v-else tabindex="-1"><code>{{ props.code }}</code></pre>
     </div>
 
-    <PlaygroundToolbar v-if="collapsed" class="example-code__reveal" :surface-level="3">
+    <PlaygroundToolbar
+      v-if="collapsed"
+      class="example-code__reveal"
+      :surface-level="3"
+    >
       <Button rounded @click="collapsed = false">View Code</Button>
     </PlaygroundToolbar>
 

@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import { computed, useAttrs } from "vue";
+import { computed, useAttrs } from 'vue';
 
-import { useComponentDefaults } from "../../composables/useComponentDefaults.ts";
-import { cn } from "../../shared/cn.ts";
-import type { TabPanelProps } from "./tabs.contracts.ts";
-import { tabId, tabPanelId, useTabsContext } from "./tabsContext.ts";
+import { useComponentDefaults } from '../../composables/useComponentDefaults.ts';
+import { cn } from '../../shared/cn.ts';
+import type { TabPanelProps } from './tabs.contracts.ts';
+import { tabId, tabPanelId, useTabsContext } from './tabsContext.ts';
 
 defineOptions({ inheritAttrs: false });
 
@@ -23,12 +23,12 @@ const rootAttrs = computed(() => {
   return rest;
 });
 const { value: selectedValue, baseId } = useTabsContext();
-const d = useComponentDefaults("TabPanel", props, {
-  as: "div" as TabPanelProps["as"],
+const d = useComponentDefaults('TabPanel', props, {
+  as: 'div' as TabPanelProps['as'],
   keepMounted: false,
 });
 const selected = computed(() => selectedValue.value === d.value.value);
-const rootClass = computed(() => cn("cui-tab-panel", attrs.class));
+const rootClass = computed(() => cn('cladd-tab-panel', attrs.class));
 </script>
 
 <template>

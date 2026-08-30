@@ -1,21 +1,29 @@
 <script setup lang="ts">
-import { computed, nextTick, onBeforeUnmount, onMounted, ref, useAttrs, useId, watch } from "vue";
+import {
+  computed,
+  nextTick,
+  onBeforeUnmount,
+  onMounted,
+  ref,
+  useAttrs,
+  useId,
+  watch,
+} from 'vue';
 
-import { useComponentDefaults } from "../../composables/useComponentDefaults.ts";
-import { useDevice } from "../../composables/useDevice.ts";
-import { cn } from "../../shared/cn.ts";
-import Button from "../actions/Button.vue";
-import { buttonIconSizes } from "../actions/button.contracts.ts";
-import List from "../data-display/List.vue";
-import ListButton from "../data-display/ListButton.vue";
-import SectionTitle from "../data-display/SectionTitle.vue";
-import Shortcut from "../data-display/Shortcut.vue";
-import Popover from "../overlays/Popover.vue";
-import Surface from "../surface/Surface.vue";
-import Checkbox from "./Checkbox.vue";
-import Radio from "./Radio.vue";
-import SearchField from "./SearchField.vue";
-import SelectDropdownIcon from "./SelectDropdownIcon.vue";
+import { useComponentDefaults } from '../../composables/useComponentDefaults.ts';
+import { useDevice } from '../../composables/useDevice.ts';
+import { cn } from '../../shared/cn.ts';
+import { buttonIconSizes } from '../actions/button.contracts.ts';
+import Button from '../actions/Button.vue';
+import List from '../data-display/List.vue';
+import ListButton from '../data-display/ListButton.vue';
+import SectionTitle from '../data-display/SectionTitle.vue';
+import Shortcut from '../data-display/Shortcut.vue';
+import Popover from '../overlays/Popover.vue';
+import Surface from '../surface/Surface.vue';
+import Checkbox from './Checkbox.vue';
+import Radio from './Radio.vue';
+import SearchField from './SearchField.vue';
 import {
   getDefaultOptionInfo,
   getDefaultOptionLabel,
@@ -48,7 +56,8 @@ import {
   type SelectOptionParams,
   type SelectProps,
   type SelectValue,
-} from "./select.contracts.ts";
+} from './select.contracts.ts';
+import SelectDropdownIcon from './SelectDropdownIcon.vue';
 
 defineOptions({ inheritAttrs: false });
 
@@ -106,9 +115,15 @@ const props = withDefaults(defineProps<SelectProps>(), {
 });
 
 const slots = defineSlots<{
-  afterOption?: (params: { index: number; value: SelectOptionInput }) => unknown;
+  afterOption?: (params: {
+    index: number;
+    value: SelectOptionInput;
+  }) => unknown;
   afterOptions?: () => unknown;
-  beforeOption?: (params: { index: number; value: SelectOptionInput }) => unknown;
+  beforeOption?: (params: {
+    index: number;
+    value: SelectOptionInput;
+  }) => unknown;
   beforeOptions?: () => unknown;
   default?: (params: {
     selected: readonly SelectOptionInput[];
@@ -131,11 +146,11 @@ const emit = defineEmits<{
   search: [query: string];
 }>();
 
-const model = defineModel<SelectValue | SelectValue[]>({ default: "" });
-const open = defineModel<boolean>("open", { default: false });
+const model = defineModel<SelectValue | SelectValue[]>({ default: '' });
+const open = defineModel<boolean>('open', { default: false });
 const attrs = useAttrs();
 const device = useDevice();
-const d = useComponentDefaults("Select", props, {
+const d = useComponentDefaults('Select', props, {
   closeOnSelect: true,
   disabled: false,
   dropdownIcon: true,
@@ -143,15 +158,15 @@ const d = useComponentDefaults("Select", props, {
   hoverable: true,
   keyboardHints: true,
   keyboardHintsOutline: false,
-  keyboardHintsSize: "md" as SelectProps["keyboardHintsSize"],
-  keyboardHintsVariant: "transparent" as SelectProps["keyboardHintsVariant"],
+  keyboardHintsSize: 'md' as SelectProps['keyboardHintsSize'],
+  keyboardHintsVariant: 'transparent' as SelectProps['keyboardHintsVariant'],
   multiline: false,
   multiple: false,
-  options: [] as SelectProps["options"],
+  options: [] as SelectProps['options'],
   outline: true,
-  placeholder: "",
+  placeholder: '',
   popoverOffset: selectPopoverOffset,
-  popoverPosition: "bottom-end" as SelectProps["popoverPosition"],
+  popoverPosition: 'bottom-end' as SelectProps['popoverPosition'],
   readOnly: false,
   pressed: false,
   reverse: false,
@@ -159,21 +174,21 @@ const d = useComponentDefaults("Select", props, {
   scrollToSelected: false,
   search: false,
   searchFocus: false,
-  searchNotFound: "Nothing found",
-  searchPlaceholder: "Search",
-  size: "md" as SelectProps["size"],
-  surface: "surface" as SelectProps["surface"],
+  searchNotFound: 'Nothing found',
+  searchPlaceholder: 'Search',
+  size: 'md' as SelectProps['size'],
+  surface: 'surface' as SelectProps['surface'],
   tightFocusRing: false,
-  variant: "gradient" as SelectProps["variant"],
+  variant: 'gradient' as SelectProps['variant'],
 });
-const query = ref("");
+const query = ref('');
 const selectedItemIndex = ref(-1);
 const triggerElement = ref<HTMLElement>();
 const list = ref<HTMLElement>();
 const searchField = ref<HTMLElement>();
 const id = useId();
-const listboxId = `cui-select-listbox-${id}`;
-const optionIdPrefix = `cui-select-option-${id}`;
+const listboxId = `cladd-select-listbox-${id}`;
+const optionIdPrefix = `cladd-select-option-${id}`;
 
 const selectedValues = computed<SelectValue[]>(() =>
   Array.isArray(model.value) ? model.value : [model.value],
@@ -182,25 +197,30 @@ const selectedValues = computed<SelectValue[]>(() =>
 // Upstream keeps no internal filter state: with `search` + a filter callback the caller controls
 // matching, otherwise every option is shown.
 const displayOptions = computed<readonly SelectOptionInput[]>(() =>
-  d.value.search && d.value.searchFilter ? d.value.searchFilter(query.value) : d.value.options,
+  d.value.search && d.value.searchFilter
+    ? d.value.searchFilter(query.value)
+    : d.value.options,
 );
 
-const selectedOptions = computed(() => d.value.options.filter((option) => optionSelected(option)));
+const selectedOptions = computed(() =>
+  d.value.options.filter((option) => optionSelected(option)),
+);
 
 // Upstream renders `String(value)`, not the option label — richer displays go through the
 // default slot (upstream's `children`).
 const triggerValue = computed(() =>
   model.value !== null &&
   model.value !== undefined &&
-  model.value !== "" &&
+  model.value !== '' &&
   !Array.isArray(model.value)
     ? String(model.value)
-    : "",
+    : '',
 );
 
 const searchInset = computed(() => Boolean(d.value.title));
 const showHints = computed(
-  () => d.value.keyboardHints && displayOptions.value.length > 1 && !device.mobile,
+  () =>
+    d.value.keyboardHints && displayOptions.value.length > 1 && !device.mobile,
 );
 
 const triggerClass = computed(() => cn(selectTriggerClasses, attrs.class));
@@ -223,17 +243,28 @@ const valueClass = computed(() =>
     d.value.valueClassName,
   ),
 );
-const popoverClass = computed(() => cn(selectPopoverClasses, d.value.popoverClassName));
+const popoverClass = computed(() =>
+  cn(selectPopoverClasses, d.value.popoverClassName),
+);
 const searchWrapperClass = computed(() =>
-  searchInset.value ? selectSearchInsetWrapperClasses : selectSearchStickyWrapperClasses,
+  searchInset.value
+    ? selectSearchInsetWrapperClasses
+    : selectSearchStickyWrapperClasses,
 );
 const searchWrapperContentClass = computed(() =>
-  searchInset.value ? selectSearchInsetWrapperClasses : selectSearchStickyContentClasses,
+  searchInset.value
+    ? selectSearchInsetWrapperClasses
+    : selectSearchStickyContentClasses,
 );
 const searchFieldClass = computed(() =>
-  cn(selectSearchFieldClasses, searchInset.value && selectSearchFieldInsetClasses),
+  cn(
+    selectSearchFieldClasses,
+    searchInset.value && selectSearchFieldInsetClasses,
+  ),
 );
-const hintKeyClass = computed(() => cn(selectHintKeyClasses, d.value.keyboardHintsClassName));
+const hintKeyClass = computed(() =>
+  cn(selectHintKeyClasses, d.value.keyboardHintsClassName),
+);
 const triggerAttrs = computed(() => {
   const { class: _consumerClass, ...rest } = attrs;
   return rest;
@@ -250,12 +281,24 @@ function optionParams(
   return { index, selected: optionSelected(option), value: option };
 }
 
-function optionLabel(option: SelectOptionInput, index = d.value.options.indexOf(option)): string {
-  return d.value.optionLabel?.(optionParams(option, index)) ?? getDefaultOptionLabel(option);
+function optionLabel(
+  option: SelectOptionInput,
+  index = d.value.options.indexOf(option),
+): string {
+  return (
+    d.value.optionLabel?.(optionParams(option, index)) ??
+    getDefaultOptionLabel(option)
+  );
 }
 
-function optionInfo(option: SelectOptionInput, index: number): string | undefined {
-  return d.value.optionInfo?.(optionParams(option, index)) ?? getDefaultOptionInfo(option);
+function optionInfo(
+  option: SelectOptionInput,
+  index: number,
+): string | undefined {
+  return (
+    d.value.optionInfo?.(optionParams(option, index)) ??
+    getDefaultOptionInfo(option)
+  );
 }
 
 function optionSelected(option: SelectOptionInput): boolean {
@@ -266,28 +309,31 @@ function optionSelected(option: SelectOptionInput): boolean {
 function optionDisabled(option: SelectOptionInput): boolean {
   if (d.value.isOptionDisabled) return d.value.isOptionDisabled(option);
   return (
-    typeof option === "object" &&
+    typeof option === 'object' &&
     option !== null &&
-    "disabled" in option &&
+    'disabled' in option &&
     option.disabled === true
   );
 }
 
 function indicatorAccent(option: SelectOptionInput, index: number) {
-  return d.value.optionIndicatorColor?.(optionParams(option, index)) ?? d.value.indicatorColor;
+  return (
+    d.value.optionIndicatorColor?.(optionParams(option, index)) ??
+    d.value.indicatorColor
+  );
 }
 
 function onChangeInternal(option: SelectOptionInput, checked: boolean): void {
   const key = optionValue(option);
   if (!d.value.multiple) {
     model.value = key;
-    emit("change", key);
+    emit('change', key);
   } else {
-    const next = selectedValues.value.filter((value) => value !== "");
+    const next = selectedValues.value.filter((value) => value !== '');
     if (checked) next.push(key);
     else if (next.includes(key)) next.splice(next.indexOf(key), 1);
     model.value = next;
-    emit("change", next);
+    emit('change', next);
   }
   if (!d.value.multiple && d.value.closeOnSelect) open.value = false;
 }
@@ -297,7 +343,8 @@ function hintFor(option: SelectOptionInput, index: number): number | undefined {
     if (optionValue(option) === d.value.noneOptionValue) return 0;
     let rank = 0;
     for (let i = 0; i <= index; i += 1) {
-      if (optionValue(displayOptions.value[i]) !== d.value.noneOptionValue) rank += 1;
+      if (optionValue(displayOptions.value[i]) !== d.value.noneOptionValue)
+        rank += 1;
     }
     return rank <= 9 ? rank : undefined;
   }
@@ -306,27 +353,30 @@ function hintFor(option: SelectOptionInput, index: number): number | undefined {
 }
 
 function searchInputElement(): HTMLInputElement | null | undefined {
-  return searchField.value?.querySelector("input");
+  return searchField.value?.querySelector('input');
 }
 
-function scrollPopoverToElement(scrollToEl?: HTMLElement, dir?: "down" | "up"): void {
+function scrollPopoverToElement(
+  scrollToEl?: HTMLElement,
+  dir?: 'down' | 'up',
+): void {
   if (!scrollToEl && d.value.scrollToSelected && list.value) {
-    const checkedEl = list.value.querySelector("input[checked]");
-    const labelEl = checkedEl?.closest("label");
-    labelEl?.scrollIntoView({ block: "center" });
+    const checkedEl = list.value.querySelector('input[checked]');
+    const labelEl = checkedEl?.closest('label');
+    labelEl?.scrollIntoView({ block: 'center' });
     return;
   }
   if (!scrollToEl || !list.value) return;
-  const scrollEl = scrollToEl.closest(".overflow-auto");
+  const scrollEl = scrollToEl.closest('.overflow-auto');
   if (!(scrollEl instanceof HTMLElement)) return;
-  if (dir === "up") {
+  if (dir === 'up') {
     if (scrollEl.scrollTop > scrollToEl.offsetTop) {
-      scrollToEl.scrollIntoView({ behavior: "smooth", block: "start" });
+      scrollToEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
     return;
   }
   if (scrollEl.scrollTop + scrollEl.offsetHeight < scrollToEl.offsetTop) {
-    scrollToEl.scrollIntoView({ behavior: "smooth", block: "end" });
+    scrollToEl.scrollIntoView({ behavior: 'smooth', block: 'end' });
   }
 }
 
@@ -358,7 +408,9 @@ function onKeydown(event: KeyboardEvent): void {
       } else {
         let rank = 0;
         for (let i = 0; i < displayOptions.value.length; i += 1) {
-          if (optionValue(displayOptions.value[i]) !== d.value.noneOptionValue) {
+          if (
+            optionValue(displayOptions.value[i]) !== d.value.noneOptionValue
+          ) {
             rank += 1;
             if (rank === digit) {
               targetIndex = i;
@@ -370,45 +422,58 @@ function onKeydown(event: KeyboardEvent): void {
     } else {
       targetIndex = digit === 0 ? 9 : digit - 1;
     }
-    if (targetIndex >= 0 && targetIndex < displayOptions.value.length) selectAt(targetIndex);
+    if (targetIndex >= 0 && targetIndex < displayOptions.value.length)
+      selectAt(targetIndex);
     return;
   }
 
-  if (!["ArrowDown", "ArrowUp", "Enter", "Tab", " "].includes(event.key)) return;
+  if (!['ArrowDown', 'ArrowUp', 'Enter', 'Tab', ' '].includes(event.key))
+    return;
 
   const maxIndex = displayOptions.value.length - 1;
   let newIndex = selectedItemIndex.value;
-  if (selectedItemIndex.value < 0) newIndex = displayOptions.value.findIndex(optionSelected);
-  let dir: "down" | "up" | undefined;
+  if (selectedItemIndex.value < 0)
+    newIndex = displayOptions.value.findIndex(optionSelected);
+  let dir: 'down' | 'up' | undefined;
 
-  if (event.key === "ArrowUp" || (event.key === "Tab" && event.shiftKey)) {
-    dir = "up";
+  if (event.key === 'ArrowUp' || (event.key === 'Tab' && event.shiftKey)) {
+    dir = 'up';
     newIndex -= 1;
     event.preventDefault();
     if (newIndex < 0) {
-      dir = "down";
+      dir = 'down';
       newIndex = maxIndex;
     }
   }
-  if (event.key === "ArrowDown" || (event.key === "Tab" && !event.shiftKey)) {
-    dir = "down";
+  if (event.key === 'ArrowDown' || (event.key === 'Tab' && !event.shiftKey)) {
+    dir = 'down';
     newIndex += 1;
     event.preventDefault();
     if (newIndex > maxIndex) {
-      dir = "up";
+      dir = 'up';
       newIndex = 0;
     }
   }
-  if (event.key === "ArrowUp" || event.key === "ArrowDown" || event.key === "Tab") {
+  if (
+    event.key === 'ArrowUp' ||
+    event.key === 'ArrowDown' ||
+    event.key === 'Tab'
+  ) {
     selectedItemIndex.value = newIndex;
     nextTick(() => {
-      const element = list.value?.querySelectorAll<HTMLElement>(".cui-list label")[newIndex];
+      const element =
+        list.value?.querySelectorAll<HTMLElement>('.cladd-list label')[
+          newIndex
+        ];
       if (!element) return;
       element.focus();
       scrollPopoverToElement(element, dir);
     });
   }
-  if ((event.key === "Enter" || event.key === " ") && selectedItemIndex.value >= 0) {
+  if (
+    (event.key === 'Enter' || event.key === ' ') &&
+    selectedItemIndex.value >= 0
+  ) {
     if (document.activeElement === searchInputElement()) return;
     event.preventDefault();
     selectAt(selectedItemIndex.value);
@@ -416,17 +481,17 @@ function onKeydown(event: KeyboardEvent): void {
 }
 
 function onTriggerClick(event: MouseEvent): void {
-  emit("click", event);
+  emit('click', event);
   open.value = !open.value;
 }
 
 function onPopoverOpen(): void {
-  emit("opening");
+  emit('opening');
   scrollPopoverToElement();
 }
 
 function onPopoverOpened(): void {
-  emit("opened");
+  emit('opened');
   if (!d.value.searchFocus) return;
   if (device.ios || device.android) return;
   nextTick(() => searchInputElement()?.focus());
@@ -435,26 +500,26 @@ function onPopoverOpened(): void {
 function onPopoverClosed(): void {
   selectedItemIndex.value = -1;
   if (!device.mobile) triggerElement.value?.focus();
-  emit("closed");
+  emit('closed');
 }
 
 function setTriggerElement(value: unknown): void {
   const element =
     value instanceof HTMLElement
       ? value
-      : value && typeof value === "object" && "$el" in value
+      : value && typeof value === 'object' && '$el' in value
         ? ((value as { $el: unknown }).$el as HTMLElement)
         : undefined;
   triggerElement.value = element instanceof HTMLElement ? element : undefined;
 }
 
-watch(query, (value) => emit("search", value));
+watch(query, (value) => emit('search', value));
 watch(open, (value) => {
-  if (value) query.value = "";
+  if (value) query.value = '';
 });
 
-onMounted(() => document.addEventListener("keydown", onKeydown));
-onBeforeUnmount(() => document.removeEventListener("keydown", onKeydown));
+onMounted(() => document.addEventListener('keydown', onKeydown));
+onBeforeUnmount(() => document.removeEventListener('keydown', onKeydown));
 </script>
 
 <template>
@@ -464,7 +529,9 @@ onBeforeUnmount(() => document.removeEventListener("keydown", onKeydown));
     :ref="setTriggerElement"
     :accent="d.accent"
     :aria-activedescendant="
-      open && selectedItemIndex >= 0 ? `${optionIdPrefix}-${selectedItemIndex}` : undefined
+      open && selectedItemIndex >= 0
+        ? `${optionIdPrefix}-${selectedItemIndex}`
+        : undefined
     "
     :aria-controls="open ? listboxId : undefined"
     :aria-disabled="d.disabled || undefined"
@@ -494,10 +561,15 @@ onBeforeUnmount(() => document.removeEventListener("keydown", onKeydown));
       <slot name="icon" />
     </div>
     <div :class="valueClass" data-part="value">
-      <slot :selected="selectedOptions" :value="model">{{ triggerValue || d.placeholder }}</slot>
+      <slot :selected="selectedOptions" :value="model">{{
+        triggerValue || d.placeholder
+      }}</slot>
     </div>
     <slot v-if="d.dropdownIcon" name="dropdownIcon">
-      <SelectDropdownIcon :class="selectDropdownIconClasses" data-part="dropdown-icon" />
+      <SelectDropdownIcon
+        :class="selectDropdownIconClasses"
+        data-part="dropdown-icon"
+      />
     </slot>
   </Button>
 
@@ -516,7 +588,9 @@ onBeforeUnmount(() => document.removeEventListener("keydown", onKeydown));
     @opened="onPopoverOpened"
     @opening="onPopoverOpen"
   >
-    <SectionTitle v-if="d.title" :class="selectTitleClasses">{{ d.title }}</SectionTitle>
+    <SectionTitle v-if="d.title" :class="selectTitleClasses">{{
+      d.title
+    }}</SectionTitle>
     <Surface
       v-if="d.search"
       :bg-class-name="searchInset ? 'hidden' : undefined"
@@ -533,7 +607,12 @@ onBeforeUnmount(() => document.removeEventListener("keydown", onKeydown));
       />
     </Surface>
     <slot name="beforeOptions" />
-    <List :id="listboxId" ref="list" :aria-multiselectable="d.multiple || undefined" role="listbox">
+    <List
+      :id="listboxId"
+      ref="list"
+      :aria-multiselectable="d.multiple || undefined"
+      role="listbox"
+    >
       <div
         v-if="d.search && d.searchFilter && query && !displayOptions.length"
         :class="selectEmptyClasses"
@@ -541,7 +620,10 @@ onBeforeUnmount(() => document.removeEventListener("keydown", onKeydown));
       >
         <slot name="empty" :query="query">{{ d.searchNotFound }}</slot>
       </div>
-      <template v-for="(option, optionIndex) in displayOptions" :key="d.options.indexOf(option)">
+      <template
+        v-for="(option, optionIndex) in displayOptions"
+        :key="d.options.indexOf(option)"
+      >
         <slot name="beforeOption" :index="optionIndex" :value="option" />
         <ListButton
           :id="`${optionIdPrefix}-${optionIndex}`"
@@ -576,9 +658,11 @@ onBeforeUnmount(() => document.removeEventListener("keydown", onKeydown));
                 v-if="$slots.optionInfo || optionInfo(option, optionIndex)"
                 :class="selectOptionInfoClasses"
               >
-                <slot name="optionInfo" v-bind="optionParams(option, optionIndex)">{{
-                  optionInfo(option, optionIndex)
-                }}</slot>
+                <slot
+                  name="optionInfo"
+                  v-bind="optionParams(option, optionIndex)"
+                  >{{ optionInfo(option, optionIndex) }}</slot
+                >
               </div>
             </div>
             <Shortcut

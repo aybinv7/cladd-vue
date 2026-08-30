@@ -1,15 +1,15 @@
 <script setup lang="ts">
-import { Slider } from "@cladd-vue/ui";
-import { computed, ref } from "vue";
-import type { UiAccent } from "@cladd-vue/ui";
+import { Slider } from '@cladd-vue/ui';
+import type { UiAccent } from '@cladd-vue/ui';
+import { computed, ref } from 'vue';
 
-import CatalogSection from "../components/CatalogSection.vue";
-import ComponentPlayground from "../components/ComponentPlayground.vue";
-import PlaygroundColorControl from "../components/PlaygroundColorControl.vue";
-import PlaygroundSegmented from "../components/PlaygroundSegmented.vue";
-import PlaygroundSwitchControl from "../components/PlaygroundSwitchControl.vue";
-import PlaygroundToolbar from "../components/PlaygroundToolbar.vue";
-import { createSliderCode } from "../component-docs";
+import { createSliderCode } from '../component-docs';
+import CatalogSection from '../components/CatalogSection.vue';
+import ComponentPlayground from '../components/ComponentPlayground.vue';
+import PlaygroundColorControl from '../components/PlaygroundColorControl.vue';
+import PlaygroundSegmented from '../components/PlaygroundSegmented.vue';
+import PlaygroundSwitchControl from '../components/PlaygroundSwitchControl.vue';
+import PlaygroundToolbar from '../components/PlaygroundToolbar.vue';
 
 const props = defineProps<{
   accent: UiAccent;
@@ -17,11 +17,11 @@ const props = defineProps<{
 }>();
 
 const value = ref(50);
-const color = ref<UiAccent>("neutral");
+const color = ref<UiAccent>('neutral');
 const disabled = ref(false);
 const readOnly = ref(false);
-const size = ref<"xs" | "sm" | "md">("md");
-const sizes = ["xs", "sm", "md"] as const;
+const size = ref<'xs' | 'sm' | 'md'>('md');
+const sizes = ['xs', 'sm', 'md'] as const;
 const code = computed(() =>
   createSliderCode({
     color: color.value,
@@ -65,7 +65,11 @@ function setReadOnly(next: boolean): void {
       </template>
       <template #controls>
         <PlaygroundToolbar>
-          <PlaygroundSegmented v-model="size" :items="sizes" label="Slider size" />
+          <PlaygroundSegmented
+            v-model="size"
+            :items="sizes"
+            label="Slider size"
+          />
         </PlaygroundToolbar>
         <PlaygroundToolbar>
           <PlaygroundSwitchControl

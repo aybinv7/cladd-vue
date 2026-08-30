@@ -62,10 +62,10 @@ associate with a `contenteditable` element.
 
 ```vue
 <script setup lang="ts">
-import { ref } from "vue";
-import { Textarea } from "@cladd-vue/ui";
+import { ref } from 'vue';
+import { Textarea } from '@cladd-vue/ui';
 
-const notes = ref("");
+const notes = ref('');
 </script>
 
 <template>

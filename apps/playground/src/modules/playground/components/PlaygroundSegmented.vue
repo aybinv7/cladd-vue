@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Button } from "@cladd-vue/ui";
+import { Button } from '@cladd-vue/ui';
 
 const props = withDefaults(
   defineProps<{

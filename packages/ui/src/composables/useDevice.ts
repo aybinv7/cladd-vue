@@ -20,12 +20,13 @@ interface NwWindow {
 let deviceCalculated: DeviceInfo | null = null;
 
 function calcDevice({ userAgent }: DeviceOverrides = {}): DeviceInfo | null {
-  if (typeof window === "undefined") return null;
+  if (typeof window === 'undefined') return null;
   const nwWindow = window as unknown as NwWindow;
   const supportTouch =
-    "ontouchstart" in window ||
+    'ontouchstart' in window ||
     Boolean(
-      nwWindow.DocumentTouch && document instanceof (nwWindow.DocumentTouch as typeof Object),
+      nwWindow.DocumentTouch &&
+      document instanceof (nwWindow.DocumentTouch as typeof Object),
     );
   const platform = window.navigator.platform;
   const ua = userAgent || window.navigator.userAgent;
@@ -43,15 +44,16 @@ function calcDevice({ userAgent }: DeviceOverrides = {}): DeviceInfo | null {
   const android = ua.match(/(Android);?[\s/]+([\d.]+)?/);
   let ipad = ua.match(/(iPad).*OS\s([\d_]+)/);
   const ipod = ua.match(/(iPod)(.*OS\s([\d_]+))?/);
-  const iphone = !ipad && ua.match(/(iPhone\sOS|iOS|iPhone;\sCPU\sOS)\s([\d_]+)/);
+  const iphone =
+    !ipad && ua.match(/(iPhone\sOS|iOS|iPhone;\sCPU\sOS)\s([\d_]+)/);
 
-  const electron = ua.toLowerCase().indexOf("electron") >= 0;
-  const nwjs = typeof nwWindow.nw !== "undefined";
-  let macos = platform === "MacIntel";
+  const electron = ua.toLowerCase().indexOf('electron') >= 0;
+  const nwjs = typeof nwWindow.nw !== 'undefined';
+  let macos = platform === 'MacIntel';
 
   if (!ipad && macos && supportTouch) {
     ipad = ua.match(/(Version)\/([\d.]+)/);
-    if (!ipad) ipad = ["", "Version", "13_0_0"] as unknown as RegExpMatchArray;
+    if (!ipad) ipad = ['', 'Version', '13_0_0'] as unknown as RegExpMatchArray;
     macos = false;
   }
 
@@ -67,7 +69,10 @@ function calcDevice({ userAgent }: DeviceOverrides = {}): DeviceInfo | null {
   return device;
 }
 
-export function useDevice(overrides: DeviceOverrides = {}, reset?: boolean): DeviceInfo {
+export function useDevice(
+  overrides: DeviceOverrides = {},
+  reset?: boolean,
+): DeviceInfo {
   if (!deviceCalculated || reset) {
     const result = calcDevice(overrides);
     if (result) deviceCalculated = result;

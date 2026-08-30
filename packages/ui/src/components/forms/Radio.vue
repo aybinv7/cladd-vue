@@ -1,13 +1,17 @@
 <script setup lang="ts">
-import { computed, inject } from "vue";
+import { computed, inject } from 'vue';
 
-import { useComponentDefaults } from "../../composables/useComponentDefaults.ts";
-import { useUiContext } from "../../contexts/uiContext.ts";
-import FocusRing from "../feedback/FocusRing.vue";
-import { cn } from "../../shared/cn.ts";
-import Surface from "../surface/Surface.vue";
-import { radioIndicatorSizes, radioRootSizes, type RadioProps } from "./radio.contracts.ts";
-import { radioGroupKey } from "./radioGroupContext.ts";
+import { useComponentDefaults } from '../../composables/useComponentDefaults.ts';
+import { useUiContext } from '../../contexts/uiContext.ts';
+import { cn } from '../../shared/cn.ts';
+import FocusRing from '../feedback/FocusRing.vue';
+import Surface from '../surface/Surface.vue';
+import {
+  radioIndicatorSizes,
+  radioRootSizes,
+  type RadioProps,
+} from './radio.contracts.ts';
+import { radioGroupKey } from './radioGroupContext.ts';
 
 defineOptions({ inheritAttrs: false });
 
@@ -34,29 +38,39 @@ const props = withDefaults(defineProps<RadioProps>(), {
 const model = defineModel<boolean>({ default: false });
 const emit = defineEmits<{
   change: [checked: boolean, event?: Event];
-  "update:checked": [checked: boolean];
+  'update:checked': [checked: boolean];
 }>();
 const group = inject(radioGroupKey, undefined);
 const ui = useUiContext();
-const d = useComponentDefaults("Radio", props, {
-  as: "label" as RadioProps["as"],
+const d = useComponentDefaults('Radio', props, {
+  as: 'label' as RadioProps['as'],
   disabled: false,
   input: true,
   required: false,
-  size: "sm" as RadioProps["size"],
+  size: 'sm' as RadioProps['size'],
   thumbOutline: true,
 });
-const isReadOnly = computed(() => d.value.readOnly ?? d.value.readonly ?? false);
+const isReadOnly = computed(
+  () => d.value.readOnly ?? d.value.readonly ?? false,
+);
 const checked = computed(() => {
   if (group) return group.value.value === d.value.value;
   return d.value.checked ?? model.value;
 });
-const disabled = computed(() => d.value.disabled || group?.disabled.value === true);
+const disabled = computed(
+  () => d.value.disabled || group?.disabled.value === true,
+);
 const name = computed(() => d.value.name ?? group?.name.value);
-const required = computed(() => d.value.required || group?.required.value === true);
-const currentAccent = computed(() => d.value.color ?? d.value.accent ?? ui.accentColor.value);
-const hoverable = computed(() => d.value.hoverable ?? d.value.as === "label");
-const focusable = computed(() => d.value.focusable ?? (d.value.as === "label" || d.value.input));
+const required = computed(
+  () => d.value.required || group?.required.value === true,
+);
+const currentAccent = computed(
+  () => d.value.color ?? d.value.accent ?? ui.accentColor.value,
+);
+const hoverable = computed(() => d.value.hoverable ?? d.value.as === 'label');
+const focusable = computed(
+  () => d.value.focusable ?? (d.value.as === 'label' || d.value.input),
+);
 const inputId = computed(() => d.value.inputId ?? d.value.id);
 
 function setChecked(next: boolean, event?: Event): void {
@@ -66,10 +80,10 @@ function setChecked(next: boolean, event?: Event): void {
     if (d.value.value !== undefined) group.value.value = d.value.value;
   } else {
     model.value = next;
-    emit("update:checked", next);
+    emit('update:checked', next);
   }
 
-  emit("change", next, event);
+  emit('change', next, event);
 }
 
 function handleInputChange(event: Event): void {
@@ -90,7 +104,7 @@ function handleRootClick(event: MouseEvent): void {
 
 function handleFallbackKeydown(event: KeyboardEvent): void {
   if (d.value.input || disabled.value || isReadOnly.value) return;
-  if (event.key !== " " && event.key !== "Enter") return;
+  if (event.key !== ' ' && event.key !== 'Enter') return;
 
   event.preventDefault();
   setChecked(!checked.value, event);
@@ -98,27 +112,38 @@ function handleFallbackKeydown(event: KeyboardEvent): void {
 
 const rootClass = computed(() =>
   cn(
-    "cui-radio group/cui-radio relative flex shrink-0 items-center justify-center rounded-full select-none",
+    'cladd-radio group/cladd-radio relative flex shrink-0 items-center justify-center rounded-full select-none',
     radioRootSizes[d.value.size],
-    disabled.value && "opacity-50",
+    disabled.value && 'opacity-50',
   ),
 );
 
-const thumbClass = "absolute inset-0 size-full shrink-0 rounded-full duration-200";
+const thumbClass =
+  'absolute inset-0 size-full shrink-0 rounded-full duration-200';
 
 const checkedThumbClass = computed(() =>
-  cn(thumbClass, !checked.value && "scale-0", checked.value ? "opacity-100" : "opacity-0"),
+  cn(
+    thumbClass,
+    !checked.value && 'scale-0',
+    checked.value ? 'opacity-100' : 'opacity-0',
+  ),
 );
 
 const indicatorClass = computed(() =>
   cn(
-    "cui-radio__indicator pointer-events-none relative rounded-full duration-200",
+    'cladd-radio__indicator pointer-events-none relative rounded-full duration-200',
     radioIndicatorSizes[d.value.size],
-    !checked.value && "scale-75 bg-cui-fg-soft",
-    !checked.value && !isReadOnly.value && !disabled.value && "group-active/cui-radio:scale-65",
-    checked.value && `cui-color-${currentAccent.value}`,
-    checked.value && "bg-cui-on-primary",
-    checked.value && !disabled.value && !isReadOnly.value && "group-active/cui-radio:scale-90",
+    !checked.value && 'scale-75 bg-cladd-fg-soft',
+    !checked.value &&
+      !isReadOnly.value &&
+      !disabled.value &&
+      'group-active/cladd-radio:scale-65',
+    checked.value && `cladd-color-${currentAccent.value}`,
+    checked.value && 'bg-cladd-on-primary',
+    checked.value &&
+      !disabled.value &&
+      !isReadOnly.value &&
+      'group-active/cladd-radio:scale-90',
   ),
 );
 </script>
@@ -180,6 +205,10 @@ const indicatorClass = computed(() =>
       :wrap-content="false"
     />
     <span :class="indicatorClass" data-part="indicator" />
-    <FocusRing v-if="focusable && !disabled && !isReadOnly" class="rounded-full" group="radio" />
+    <FocusRing
+      v-if="focusable && !disabled && !isReadOnly"
+      class="rounded-full"
+      group="radio"
+    />
   </component>
 </template>

@@ -1,8 +1,13 @@
 <script setup lang="ts">
-import { Surface, SurfaceCut, surfaceLevels, surfaceVariants } from "@cladd-vue/ui";
-import type { UiAccent } from "@cladd-vue/ui";
+import {
+  Surface,
+  SurfaceCut,
+  surfaceLevels,
+  surfaceVariants,
+} from '@cladd-vue/ui';
+import type { UiAccent } from '@cladd-vue/ui';
 
-import CatalogSection from "../components/CatalogSection.vue";
+import CatalogSection from '../components/CatalogSection.vue';
 
 defineProps<{
   accent: UiAccent;

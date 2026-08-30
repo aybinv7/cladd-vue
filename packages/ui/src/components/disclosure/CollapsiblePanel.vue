@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import { computed, onMounted, shallowRef, useAttrs, watch } from "vue";
+import { computed, onMounted, shallowRef, useAttrs, watch } from 'vue';
 
-import { useComponentDefaults } from "../../composables/useComponentDefaults.ts";
-import { cn } from "../../shared/cn.ts";
-import type { CollapsiblePanelProps } from "./collapsible.contracts.ts";
-import { useCollapsibleContext } from "./collapsibleContext.ts";
+import { useComponentDefaults } from '../../composables/useComponentDefaults.ts';
+import { cn } from '../../shared/cn.ts';
+import type { CollapsiblePanelProps } from './collapsible.contracts.ts';
+import { useCollapsibleContext } from './collapsibleContext.ts';
 
 defineOptions({ inheritAttrs: false });
 
@@ -23,8 +23,8 @@ const rootAttrs = computed(() => {
   return rest;
 });
 const collapsible = useCollapsibleContext();
-const d = useComponentDefaults("CollapsiblePanel", props, {
-  as: "div" as CollapsiblePanelProps["as"],
+const d = useComponentDefaults('CollapsiblePanel', props, {
+  as: 'div' as CollapsiblePanelProps['as'],
   keepMounted: false,
 });
 
@@ -35,7 +35,7 @@ let previousOpen = collapsible.value.open;
 
 const rootClass = computed(() =>
   cn(
-    "cui-collapsible-panel box-border block overflow-hidden transition-[height] duration-200 ease-out motion-reduce:transition-none",
+    'cladd-collapsible-panel box-border block overflow-hidden transition-[height] duration-200 ease-out motion-reduce:transition-none',
     attrs.class,
   ),
 );
@@ -44,7 +44,7 @@ function setElement(value: unknown): void {
   element.value =
     value instanceof HTMLElement
       ? value
-      : value && typeof value === "object" && "$el" in value
+      : value && typeof value === 'object' && '$el' in value
         ? ((value as { $el: unknown }).$el as HTMLElement)
         : undefined;
 }
@@ -68,7 +68,7 @@ watch(
 
     if (!mounted) {
       previousOpen = open;
-      el.style.height = open ? "auto" : "0px";
+      el.style.height = open ? 'auto' : '0px';
       return;
     }
 
@@ -76,43 +76,44 @@ watch(
     previousOpen = open;
 
     const reduce =
-      typeof matchMedia !== "undefined" && matchMedia("(prefers-reduced-motion: reduce)").matches;
+      typeof matchMedia !== 'undefined' &&
+      matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     const onEnd = (event: TransitionEvent): void => {
-      if (event.target !== el || event.propertyName !== "height") return;
-      el.removeEventListener("transitionend", onEnd);
-      if (open) el.style.height = "auto";
+      if (event.target !== el || event.propertyName !== 'height') return;
+      el.removeEventListener('transitionend', onEnd);
+      if (open) el.style.height = 'auto';
       else if (!d.value.keepMounted) rendered.value = false;
     };
 
     if (open) {
       const target = el.scrollHeight;
       if (reduce || target === 0) {
-        el.style.height = "auto";
+        el.style.height = 'auto';
         return;
       }
-      el.style.height = "0px";
+      el.style.height = '0px';
       void el.offsetHeight;
-      el.addEventListener("transitionend", onEnd);
+      el.addEventListener('transitionend', onEnd);
       requestAnimationFrame(() => {
         el.style.height = `${target}px`;
       });
     } else {
       const current = el.scrollHeight;
       if (reduce || current === 0) {
-        el.style.height = "0px";
+        el.style.height = '0px';
         if (!d.value.keepMounted) rendered.value = false;
         return;
       }
       el.style.height = `${current}px`;
       void el.offsetHeight;
-      el.addEventListener("transitionend", onEnd);
+      el.addEventListener('transitionend', onEnd);
       requestAnimationFrame(() => {
-        el.style.height = "0px";
+        el.style.height = '0px';
       });
     }
   },
-  { flush: "post" },
+  { flush: 'post' },
 );
 </script>
 

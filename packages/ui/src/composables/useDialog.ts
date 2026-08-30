@@ -1,6 +1,6 @@
-import { useDialogsPortalContext } from "../components/provider/dialogsPortalContext.ts";
-import { useAccentColor } from "../contexts/uiContext.ts";
-import type { UiAccent } from "../foundations/contracts.ts";
+import { useDialogsPortalContext } from '../components/provider/dialogsPortalContext.ts';
+import { useAccentColor } from '../contexts/uiContext.ts';
+import type { UiAccent } from '../foundations/contracts.ts';
 
 export interface UseDialogOptions {
   /** Defer rendering until first opened, and unmount after close. Default `false`. */
@@ -60,7 +60,7 @@ export function useDialog({ lazy }: UseDialogOptions = {}): DialogApi {
 
   return {
     alert({
-      confirmButtonText = "Ok",
+      confirmButtonText = 'Ok',
       onClosed = () => {},
       onConfirm = () => {},
       stopPropagationOnClick = false,
@@ -79,10 +79,10 @@ export function useDialog({ lazy }: UseDialogOptions = {}): DialogApi {
       state.value = true;
     },
     confirm({
-      cancelButtonColor = "neutral",
-      cancelButtonText = "Cancel",
+      cancelButtonColor = 'neutral',
+      cancelButtonText = 'Cancel',
       confirmButtonColor = accentColor.value,
-      confirmButtonText = "Confirm",
+      confirmButtonText = 'Confirm',
       onCancel = () => {},
       onClosed = () => {},
       onConfirm = () => {},

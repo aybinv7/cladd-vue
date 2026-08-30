@@ -1,4 +1,4 @@
-import type { ComputedRef, InjectionKey, Ref } from "vue";
+import type { ComputedRef, InjectionKey, Ref } from 'vue';
 
 export interface RadioGroupContext {
   disabled: ComputedRef<boolean>;
@@ -7,4 +7,5 @@ export interface RadioGroupContext {
   value: Ref<string>;
 }
 
-export const radioGroupKey: InjectionKey<RadioGroupContext> = Symbol("cui-radio-group");
+export const radioGroupKey: InjectionKey<RadioGroupContext> =
+  Symbol('cladd-radio-group');

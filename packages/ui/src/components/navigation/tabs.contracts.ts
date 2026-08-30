@@ -1,8 +1,8 @@
-import type { Component } from "vue";
+import type { Component } from 'vue';
 
-import type { SegmentedProps } from "../actions/segmented.contracts.ts";
+import type { SegmentedProps } from '../actions/segmented.contracts.ts';
 
-export type TabsListDefaultProps = Partial<Omit<SegmentedProps, "as">>;
+export type TabsListDefaultProps = Partial<Omit<SegmentedProps, 'as'>>;
 
 export interface TabsProps {
   /** Initially selected tab value (uncontrolled). Ignored when `value` is provided. */
@@ -11,7 +11,9 @@ export interface TabsProps {
   value?: string;
 }
 
-export type TabsDefaultProps = Partial<Omit<TabsProps, "defaultValue" | "value">>;
+export type TabsDefaultProps = Partial<
+  Omit<TabsProps, 'defaultValue' | 'value'>
+>;
 
 export interface TabProps {
   /** Polymorphic root element. Defaults to `'button'`. */
@@ -20,7 +22,7 @@ export interface TabProps {
   value: string;
 }
 
-export type TabDefaultProps = Partial<Omit<TabProps, "as" | "value">>;
+export type TabDefaultProps = Partial<Omit<TabProps, 'as' | 'value'>>;
 
 export interface TabPanelProps {
   /** Polymorphic root element. Defaults to `'div'`. */
@@ -31,4 +33,4 @@ export interface TabPanelProps {
   value: string;
 }
 
-export type TabPanelDefaultProps = Partial<Omit<TabPanelProps, "as" | "value">>;
+export type TabPanelDefaultProps = Partial<Omit<TabPanelProps, 'as' | 'value'>>;

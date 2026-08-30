@@ -4,12 +4,14 @@
 
 ```vue
 <script setup lang="ts">
-import { Button } from "@cladd-vue/ui";
+import { Button } from '@cladd-vue/ui';
 </script>
 
 <template>
   <Button color="brand" size="lg">Save changes</Button>
-  <Button as="a" href="/docs" variant="transparent" :outline="false">Docs</Button>
+  <Button as="a" href="/docs" variant="transparent" :outline="false"
+    >Docs</Button
+  >
 </template>
 ```
 

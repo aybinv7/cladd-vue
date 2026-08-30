@@ -188,7 +188,8 @@ tab**. An overlay driven from such a pane stays permanently in its closed visual
 exactly like a broken port. Shim it before the first open:
 
 ```js
-window.requestAnimationFrame = (cb) => window.setTimeout(() => cb(performance.now()), 16);
+window.requestAnimationFrame = (cb) =>
+  window.setTimeout(() => cb(performance.now()), 16);
 ```
 
 Shim on a freshly loaded page — once an overlay is stuck mid-phase, re-clicking the trigger will not

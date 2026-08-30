@@ -1,6 +1,9 @@
-import { watchEffect, type Ref } from "vue";
+import { watchEffect, type Ref } from 'vue';
 
-import { getFocusTrapFocusable, isTopmostModalLayer } from "./focusTrap.contracts.ts";
+import {
+  getFocusTrapFocusable,
+  isTopmostModalLayer,
+} from './focusTrap.contracts.ts';
 
 export type FocusTrapInitialFocus =
   | (() => HTMLElement | null | undefined)
@@ -20,7 +23,9 @@ export function useFocusTrap(options: FocusTrapOptions): void {
   function resolveInitialFocus(): HTMLElement | null | undefined {
     const initialFocus = options.initialFocus;
     if (!initialFocus) return undefined;
-    return typeof initialFocus === "function" ? initialFocus() : initialFocus.value;
+    return typeof initialFocus === 'function'
+      ? initialFocus()
+      : initialFocus.value;
   }
 
   function focusInitial(container: HTMLElement): void {
@@ -36,8 +41,8 @@ export function useFocusTrap(options: FocusTrapOptions): void {
       return;
     }
 
-    if (!container.hasAttribute("tabindex")) {
-      container.setAttribute("tabindex", "-1");
+    if (!container.hasAttribute('tabindex')) {
+      container.setAttribute('tabindex', '-1');
     }
     container.focus();
   }
@@ -56,7 +61,7 @@ export function useFocusTrap(options: FocusTrapOptions): void {
       }
 
       function onKeydown(event: KeyboardEvent): void {
-        if (event.key !== "Tab") return;
+        if (event.key !== 'Tab') return;
         if (!container.isConnected) return;
         if (!isTopmostModalLayer(container)) return;
 
@@ -85,16 +90,16 @@ export function useFocusTrap(options: FocusTrapOptions): void {
         }
       }
 
-      document.addEventListener("keydown", onKeydown);
+      document.addEventListener('keydown', onKeydown);
 
       onCleanup(() => {
-        document.removeEventListener("keydown", onKeydown);
+        document.removeEventListener('keydown', onKeydown);
         if (!restoreFocus || !previouslyFocused) return;
-        if (typeof previouslyFocused.focus !== "function") return;
+        if (typeof previouslyFocused.focus !== 'function') return;
         if (!document.contains(previouslyFocused)) return;
         previouslyFocused.focus();
       });
     },
-    { flush: "post" },
+    { flush: 'post' },
   );
 }

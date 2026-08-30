@@ -1,21 +1,27 @@
 <script setup lang="ts">
-import { computed, shallowRef, useAttrs, useSlots, watch } from "vue";
+import { computed, shallowRef, useAttrs, useSlots, watch } from 'vue';
 
-import { useComponentDefaults } from "../../composables/useComponentDefaults.ts";
-import { useFocusTrap } from "../../composables/useFocusTrap.ts";
-import { useOverlayLifecycle } from "../../composables/useOverlayLifecycle.ts";
-import { useOverlayPhase } from "../../composables/useOverlayPhase.ts";
-import { provideSurfaceColorReset } from "../../contexts/surfaceContext.ts";
-import { useUiContext } from "../../contexts/uiContext.ts";
-import { cn } from "../../shared/cn.ts";
-import Button from "../actions/Button.vue";
-import VNodeRenderer from "../data-display/VNodeRenderer.ts";
-import CloseIcon from "../feedback/CloseIcon.vue";
-import Surface from "../surface/Surface.vue";
-import Backdrop from "./Backdrop.vue";
-import { overlayTriggerClasses, resolveOverlayElement } from "./overlay.contracts.ts";
-import { popupRootContextKey, useOverlayRootContext } from "./overlayRootContext.ts";
-import { cloneTriggerNode } from "./overlayTrigger.ts";
+import { useComponentDefaults } from '../../composables/useComponentDefaults.ts';
+import { useFocusTrap } from '../../composables/useFocusTrap.ts';
+import { useOverlayLifecycle } from '../../composables/useOverlayLifecycle.ts';
+import { useOverlayPhase } from '../../composables/useOverlayPhase.ts';
+import { provideSurfaceColorReset } from '../../contexts/surfaceContext.ts';
+import { useUiContext } from '../../contexts/uiContext.ts';
+import { cn } from '../../shared/cn.ts';
+import Button from '../actions/Button.vue';
+import VNodeRenderer from '../data-display/VNodeRenderer.ts';
+import CloseIcon from '../feedback/CloseIcon.vue';
+import Surface from '../surface/Surface.vue';
+import Backdrop from './Backdrop.vue';
+import {
+  overlayTriggerClasses,
+  resolveOverlayElement,
+} from './overlay.contracts.ts';
+import {
+  popupRootContextKey,
+  useOverlayRootContext,
+} from './overlayRootContext.ts';
+import { cloneTriggerNode } from './overlayTrigger.ts';
 import {
   popupBackdropClasses,
   popupBackdropClosedClasses,
@@ -40,7 +46,7 @@ import {
   popupWrapperClosedClasses,
   popupWrapperOpenedClasses,
   type PopupProps,
-} from "./popup.contracts.ts";
+} from './popup.contracts.ts';
 
 defineOptions({ inheritAttrs: false });
 
@@ -80,20 +86,20 @@ const emit = defineEmits<{
   opening: [];
 }>();
 
-const modelOpen = defineModel<boolean>("open", { default: undefined });
+const modelOpen = defineModel<boolean>('open', { default: undefined });
 const slots = useSlots();
 const attrs = useAttrs();
 const ui = useUiContext();
 const root = useOverlayRootContext(popupRootContextKey);
 const container = shallowRef<HTMLElement>();
 const wrapper = shallowRef<HTMLElement>();
-const d = useComponentDefaults("Popup", props, {
+const d = useComponentDefaults('Popup', props, {
   backdrop: true,
   closeButton: true,
   closeOnBackdropClick: true,
   closeOnEscape: true,
   header: true,
-  inertContainer: ".app-container",
+  inertContainer: '.app-container',
   lazy: false,
 });
 const pointer = {
@@ -114,7 +120,7 @@ const model = computed<boolean>({
 });
 
 const { phase, setPhase } = useOverlayPhase(model);
-const mounted = computed(() => phase.value !== "closed");
+const mounted = computed(() => phase.value !== 'closed');
 
 function close(): void {
   model.value = false;
@@ -133,10 +139,10 @@ const { opened } = useOverlayLifecycle({
   closeOnEscape: () => d.value.closeOnEscape && !hasChildOverlay(),
   element: wrapper,
   lazy: () => d.value.lazy,
-  onClose: () => emit("closing"),
-  onClosed: () => emit("closed"),
-  onOpen: () => emit("opening"),
-  onOpened: () => emit("opened"),
+  onClose: () => emit('closing'),
+  onClosed: () => emit('closed'),
+  onOpen: () => emit('opening'),
+  onOpened: () => emit('opened'),
   phase,
   setPhase,
 });
@@ -145,7 +151,11 @@ useFocusTrap({ active: opened, container, setInitialFocus: false });
 
 const teleportTarget = computed(() => d.value.root ?? ui.overlaysRoot.value);
 const containerClass = computed(() =>
-  cn(popupContainerClasses, opened.value && popupOpenedMarkerClasses, attrs.class),
+  cn(
+    popupContainerClasses,
+    opened.value && popupOpenedMarkerClasses,
+    attrs.class,
+  ),
 );
 const backdropClass = computed(() =>
   cn(
@@ -162,7 +172,9 @@ const wrapperClass = computed(() =>
     d.value.wrapClassName,
   ),
 );
-const contentClass = computed(() => cn(popupContentClasses, d.value.contentClassName));
+const contentClass = computed(() =>
+  cn(popupContentClasses, d.value.contentClassName),
+);
 const containerAttrs = computed(() => {
   const { class: _consumerClass, ...rest } = attrs;
   return rest;
@@ -177,7 +189,9 @@ function previousPopups(): Element[] {
   const element = container.value;
   const parent = element?.parentElement;
   if (!element || !parent) return [];
-  const all = [...parent.children].filter((child) => child.matches(popupContainerSelector));
+  const all = [...parent.children].filter((child) =>
+    child.matches(popupContainerSelector),
+  );
   return all.slice(0, all.indexOf(element));
 }
 
@@ -203,23 +217,24 @@ watch(opened, (value) => {
 watch(mounted, (value) => {
   if (value) return;
   const inert = inertTarget();
-  if (inert && document.querySelectorAll(popupContainerSelector).length === 0) inert.inert = false;
+  if (inert && document.querySelectorAll(popupContainerSelector).length === 0)
+    inert.inert = false;
 });
 
 function onPointer(event: PointerEvent): void {
-  if (event.pointerType !== "mouse") return;
-  if (event.type === "pointerdown") {
+  if (event.pointerType !== 'mouse') return;
+  if (event.type === 'pointerdown') {
     pointer.touched = true;
     pointer.moved = false;
     pointer.target = event.target;
     pointer.startPositions = [event.pageX, event.pageY];
   }
-  if (event.type === "pointermove") {
+  if (event.type === 'pointermove') {
     pointer.moved = true;
     const [x, y] = pointer.startPositions;
     pointer.distance = ((event.pageX - x) ** 2 + (event.pageY - y) ** 2) ** 0.5;
   }
-  if (event.type === "pointerup" && pointer.distance < 10) {
+  if (event.type === 'pointerup' && pointer.distance < 10) {
     pointer.moved = false;
   }
 }
@@ -227,19 +242,26 @@ function onPointer(event: PointerEvent): void {
 function onClick(event: MouseEvent): void {
   const target = event.target;
   if (!(target instanceof HTMLElement)) return;
-  if (target.closest(popupInsideClickSelector) || !document.documentElement.contains(target))
+  if (
+    target.closest(popupInsideClickSelector) ||
+    !document.documentElement.contains(target)
+  )
     return;
   const inAnotherPopup =
     target.closest(popupContainerSelector) &&
     container.value !== target.closest(popupContainerSelector);
   if (inAnotherPopup) return;
-  if ((pointer.target && pointer.target !== target) || (pointer.target && pointer.moved)) return;
+  if (
+    (pointer.target && pointer.target !== target) ||
+    (pointer.target && pointer.moved)
+  )
+    return;
   if (!d.value.closeOnBackdropClick) return;
   close();
 }
 
 function onCloseButtonClick(): void {
-  emit("closeButtonClick");
+  emit('closeButtonClick');
   close();
 }
 
@@ -247,7 +269,9 @@ function setWrapper(value: unknown): void {
   wrapper.value = resolveOverlayElement(value);
 }
 
-const triggerNode = computed(() => cloneTriggerNode(slots.trigger?.(), { onClick: open }));
+const triggerNode = computed(() =>
+  cloneTriggerNode(slots.trigger?.(), { onClick: open }),
+);
 
 provideSurfaceColorReset();
 
@@ -278,7 +302,11 @@ defineExpose({ close });
     >
       <Backdrop v-if="d.backdrop" :class="backdropClass" />
       <div :ref="setWrapper" :class="wrapperClass" data-part="wrapper">
-        <div :class="contentClass" :data-open="opened || undefined" data-part="content">
+        <div
+          :class="contentClass"
+          :data-open="opened || undefined"
+          data-part="content"
+        >
           <slot name="beforeContent" />
           <div
             v-if="d.header"

@@ -1,6 +1,10 @@
-import type { Component } from "vue";
+import type { Component } from 'vue';
 
-import type { SurfaceVariant, UiAccent, UiSize } from "../../foundations/contracts.ts";
+import type {
+  SurfaceVariant,
+  UiAccent,
+  UiSize,
+} from '../../foundations/contracts.ts';
 
 export interface SegmentedProps {
   /** Polymorphic root element. Defaults to `'div'`. */
@@ -25,7 +29,7 @@ export interface SegmentedProps {
   variant?: SurfaceVariant;
 }
 
-export type SegmentedDefaultProps = Partial<Omit<SegmentedProps, "as">>;
+export type SegmentedDefaultProps = Partial<Omit<SegmentedProps, 'as'>>;
 
 export interface SegmentedButtonProps {
   /**
@@ -36,4 +40,6 @@ export interface SegmentedButtonProps {
   active?: boolean;
 }
 
-export type SegmentedButtonDefaultProps = Partial<Omit<SegmentedButtonProps, "active">>;
+export type SegmentedButtonDefaultProps = Partial<
+  Omit<SegmentedButtonProps, 'active'>
+>;

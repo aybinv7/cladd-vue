@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import { computed, useAttrs } from "vue";
+import { computed, useAttrs } from 'vue';
 
-import { useComponentDefaults } from "../../composables/useComponentDefaults.ts";
-import { useUiContext } from "../../contexts/uiContext.ts";
-import { cn } from "../../shared/cn.ts";
-import { nestedSizeClasses } from "../../shared/sizeClasses.ts";
-import type { SpinnerProps } from "./feedback.contracts.ts";
+import { useComponentDefaults } from '../../composables/useComponentDefaults.ts';
+import { useUiContext } from '../../contexts/uiContext.ts';
+import { cn } from '../../shared/cn.ts';
+import { nestedSizeClasses } from '../../shared/sizeClasses.ts';
+import type { SpinnerProps } from './feedback.contracts.ts';
 
 defineOptions({ inheritAttrs: false });
 
@@ -19,8 +19,10 @@ const props = withDefaults(defineProps<SpinnerProps>(), {
 
 const ui = useUiContext();
 const attrs = useAttrs();
-const d = useComponentDefaults("Spinner", props, { size: "sm" as const });
-const currentAccent = computed(() => d.value.color ?? d.value.accent ?? ui.accentColor.value);
+const d = useComponentDefaults('Spinner', props, { size: 'sm' as const });
+const currentAccent = computed(
+  () => d.value.color ?? d.value.accent ?? ui.accentColor.value,
+);
 const rootAttrs = computed(() => {
   const { class: _consumerClass, ...rest } = attrs;
   return rest;
@@ -28,9 +30,9 @@ const rootAttrs = computed(() => {
 
 const rootClass = computed(() =>
   cn(
-    "cui-spinner relative inline-block",
-    `cui-color-${currentAccent.value} text-cui-primary`,
-    nestedSizeClasses(d.value.size, "size"),
+    'cladd-spinner relative inline-block',
+    `cladd-color-${currentAccent.value} text-cladd-primary`,
+    nestedSizeClasses(d.value.size, 'size'),
     attrs.class,
   ),
 );
@@ -39,7 +41,7 @@ const rootClass = computed(() =>
 <template>
   <span v-bind="rootAttrs" :class="rootClass">
     <svg
-      class="h-full w-full animate-cui-spinner"
+      class="h-full w-full animate-cladd-spinner"
       fill="currentColor"
       viewBox="0 0 20 20"
       xmlns="http://www.w3.org/2000/svg"

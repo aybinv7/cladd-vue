@@ -4,7 +4,29 @@ This file governs all work inside `packages/ui`.
 
 ## Mission
 
-Build a reusable Vue 3 UI package for dense, long-lived application interfaces. Port the pinned Cladd visual hierarchy, sizing, DOM structure, motion, public behavior, and interaction quality into native Vue.
+Reproduce the pinned Cladd package in Vue. Not "inspired by", not "adapted": the same names, the same
+selectors, the same tokens, the same code shape, the same values. The only permitted change is the
+framework, React to Vue.
+
+## The first test is the upstream diff
+
+Before any other consideration, ask what upstream does and match it. This outranks every convention
+below, every convention in the repository root, and every instinct to improve something.
+
+- A file that exists upstream must diff clean against `reference/cladd/` apart from framework
+  transposition. `tests/upstreamParity.test.ts` enforces this for stylesheets; extend it as more
+  surfaces reach parity.
+- Upstream's literal tables stay literal. Do not replace a hand-written list with a generator, a
+  `.map()`, or a shared helper, even when the output is identical. `shared/cn.ts` is the cautionary
+  example: the port turned flat upstream arrays into `sizeScale.map()` and `radiusVariant()` and made
+  the file undiffable for no benefit.
+- Upstream's duplicated, redundant, or plainly odd lines are ported as they are. A harmless duplicate
+  selector is cheaper than a diff you have to explain on every future review.
+- Upstream's JSDoc on public props is part of the port. Copy it verbatim. This is the one exception to
+  the repository's no-comments rule, and it is not optional.
+- Deviating requires a recorded reason in `docs/port/<Component>.md`, and an allowance entry in the
+  parity test where one applies. An unrecorded deviation is a defect regardless of whether it looks
+  better.
 
 Read these files before implementation:
 
@@ -27,7 +49,7 @@ Read these files before implementation:
 - Never copy consumer application feature behavior into this package.
 - Pinned Cladd source decides the DOM. Where upstream uses a native element, use it; where upstream uses custom interaction, port that instead of substituting a native element. Every choice must be traced to upstream and locked by contract tests.
 - Never introduce a general headless component runtime.
-- Never add inline code comments. Use clear names and focused files. Public API documentation belongs in Markdown.
+- Never add inline code comments of your own. Upstream's own comments, including CSS block comments and JSDoc on public props, are ported verbatim.
 - Never place unrelated primitives in one file. One component family, composable, contract, or style concern per file.
 - Never use `npm`, `pnpm`, `npx`, Vitest, ESLint, Oxfmt, or Vue TSC directly. Use `vp` commands.
 - Never run a dev server or application build from this package task unless the user explicitly requests it.
@@ -35,8 +57,14 @@ Read these files before implementation:
 ## Public API
 
 - Export consumers' API only through `src/index.ts` and documented subpath exports.
-- Use stable generic component names such as `Surface`, `Button`, and `Dialog`.
-- Prefix CSS classes, data attributes, keyframes, and variables with `cui-`.
+- Component names, prop names, type names, and slot names are upstream's. `color`, not `accent`.
+  `CladdProvider`, not `UiProvider`. Do not add an alias "for clarity"; an alias is a second public
+  contract to keep in sync forever.
+- Do not add compound sub-components upstream does not ship. If upstream exposes `Dialog` as one
+  component, the port exposes one component.
+- CSS classes, data attributes, keyframes, and custom properties keep upstream's exact spelling,
+  including the `cladd-` prefix and including the handful upstream leaves unprefixed, such as
+  `.safe-areas` and `.no-safe-areas`.
 - Keep Vue as the only UI peer dependency to prevent duplicate runtimes.
 - Keep imports tree-shakeable. Avoid registration of every component through a global plugin.
 - Treat changes to exported props, events, slots, types, tokens, and CSS selectors as API changes.
@@ -68,9 +96,11 @@ Read these files before implementation:
 
 - Styling is ported from the pinned Cladd source: utility strings from the upstream component, `@theme` token blocks, and custom variants, copied by value.
 - Record the upstream file and lines for every copied style in the implementing change.
-- Rename `cladd-*` class hooks and `--cladd-*` tokens to `cui-*` and `--cui-*`, keeping upstream values and formulas unchanged.
-- Keep all selectors and custom properties namespaced.
-- Build variants from shared tokens instead of one-off colors, radii, shadows, or timings.
+- Class hooks and custom properties keep upstream's spelling exactly. Nothing is renamed, and nothing
+  gains a prefix upstream does not have.
+- Formatting follows upstream's `.oxfmtrc.json`, mirrored into the root `vite.config.ts` `fmt` block:
+  80 column width, single quotes outside CSS, two-space indent, trailing commas. This exists so files
+  diff cleanly against `reference/cladd/`; do not retune it for taste.
 - Surfaces use contextual levels one through five and scoped accent inheritance.
 - Default control height is 28 pixels. Nested controls are eight pixels smaller at the same size token.
 - Prefer inset outlines and surface contrast over decorative drop shadows.
@@ -112,7 +142,7 @@ Read these files before implementation:
 - Cladd is MIT licensed and is a design and implementation reference.
 - Keep `THIRD_PARTY_NOTICES.md` current when copying or substantially adapting Cladd code.
 - Record upstream file paths and pinned commit in the implementing change.
-- The package name acknowledges the port. Keep Cladd branding out of component names, CSS selectors, custom properties, and data attributes, which stay under `cui-`.
+- The package name acknowledges the port. Keep Cladd branding out of component names, CSS selectors, custom properties, and data attributes, which stay under `cladd-`.
 - Keep the "not an official Cladd package" disclaimer in `README.md` and `THIRD_PARTY_NOTICES.md`.
 
 ## Delivery discipline

@@ -12,7 +12,9 @@ export interface AccordionRootProps {
   value?: string | string[];
 }
 
-export type AccordionRootDefaultProps = Partial<Omit<AccordionRootProps, "defaultValue" | "value">>;
+export type AccordionRootDefaultProps = Partial<
+  Omit<AccordionRootProps, 'defaultValue' | 'value'>
+>;
 
 export interface AccordionItemProps {
   /** Disable just this item. Combined with the accordion's own `disabled`. */
@@ -21,4 +23,6 @@ export interface AccordionItemProps {
   value: string;
 }
 
-export type AccordionItemDefaultProps = Partial<Omit<AccordionItemProps, "value">>;
+export type AccordionItemDefaultProps = Partial<
+  Omit<AccordionItemProps, 'value'>
+>;

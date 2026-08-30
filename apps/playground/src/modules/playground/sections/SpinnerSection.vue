@@ -1,22 +1,22 @@
 <script setup lang="ts">
-import { Spinner } from "@cladd-vue/ui";
-import { computed, ref } from "vue";
-import type { UiAccent } from "@cladd-vue/ui";
+import { Spinner } from '@cladd-vue/ui';
+import type { UiAccent } from '@cladd-vue/ui';
+import { computed, ref } from 'vue';
 
-import CatalogSection from "../components/CatalogSection.vue";
-import ComponentPlayground from "../components/ComponentPlayground.vue";
-import PlaygroundColorControl from "../components/PlaygroundColorControl.vue";
-import PlaygroundSegmented from "../components/PlaygroundSegmented.vue";
-import PlaygroundToolbar from "../components/PlaygroundToolbar.vue";
+import CatalogSection from '../components/CatalogSection.vue';
+import ComponentPlayground from '../components/ComponentPlayground.vue';
+import PlaygroundColorControl from '../components/PlaygroundColorControl.vue';
+import PlaygroundSegmented from '../components/PlaygroundSegmented.vue';
+import PlaygroundToolbar from '../components/PlaygroundToolbar.vue';
 
 defineProps<{
   accent: UiAccent;
   interactionsEnabled: boolean;
 }>();
 
-const color = ref<UiAccent>("neutral");
-const size = ref("md");
-const sizes = ["2xs", "xs", "sm", "md", "lg", "xl", "2xl"] as const;
+const color = ref<UiAccent>('neutral');
+const size = ref('md');
+const sizes = ['2xs', 'xs', 'sm', 'md', 'lg', 'xl', '2xl'] as const;
 const code = computed(
   () => `<Spinner
   color="${color.value}"
@@ -38,7 +38,11 @@ const code = computed(
       </template>
       <template #controls>
         <PlaygroundToolbar>
-          <PlaygroundSegmented v-model="size" :items="sizes" label="Spinner size" />
+          <PlaygroundSegmented
+            v-model="size"
+            :items="sizes"
+            label="Spinner size"
+          />
         </PlaygroundToolbar>
         <PlaygroundToolbar>
           <PlaygroundColorControl v-model="color" />

@@ -1,11 +1,11 @@
-import type { Component } from "vue";
+import type { Component } from 'vue';
 
 import type {
   SurfaceLevelInput,
   SurfaceVariant,
   UiAccent,
   UiSize,
-} from "../../foundations/contracts.ts";
+} from '../../foundations/contracts.ts';
 
 export interface SpinnerProps {
   accent?: UiAccent;
@@ -28,7 +28,9 @@ export interface FocusRingProps {
   offset?: boolean;
 }
 
-export type FocusRingDefaultProps = Partial<Omit<FocusRingProps, "force" | "group">>;
+export type FocusRingDefaultProps = Partial<
+  Omit<FocusRingProps, 'force' | 'group'>
+>;
 
 export interface ToastProps {
   /** Render the auto close button on the right. Default `true`. */
@@ -53,4 +55,6 @@ export interface ToastProps {
   variant?: SurfaceVariant;
 }
 
-export type ToastDefaultProps = Partial<Omit<ToastProps, "icon" | "iconProps" | "text" | "title">>;
+export type ToastDefaultProps = Partial<
+  Omit<ToastProps, 'icon' | 'iconProps' | 'text' | 'title'>
+>;

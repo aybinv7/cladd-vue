@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { computed, useAttrs } from "vue";
+import { computed, useAttrs } from 'vue';
 
-import { cn } from "../../shared/cn.ts";
-import { listTitleClasses } from "./list.contracts.ts";
+import { cn } from '../../shared/cn.ts';
+import { listTitleClasses } from './list.contracts.ts';
 
 defineOptions({ inheritAttrs: false });
 

@@ -1,21 +1,21 @@
 <script setup lang="ts">
-import { Toolbar, ToolbarButton, ToolbarSeparator } from "@cladd-vue/ui";
-import { computed, ref } from "vue";
-import type { UiAccent } from "@cladd-vue/ui";
+import { Toolbar, ToolbarButton, ToolbarSeparator } from '@cladd-vue/ui';
+import type { UiAccent } from '@cladd-vue/ui';
+import { computed, ref } from 'vue';
 
-import CatalogSection from "../components/CatalogSection.vue";
-import ComponentPlayground from "../components/ComponentPlayground.vue";
-import PlaygroundSegmented from "../components/PlaygroundSegmented.vue";
-import PlaygroundToolbar from "../components/PlaygroundToolbar.vue";
+import CatalogSection from '../components/CatalogSection.vue';
+import ComponentPlayground from '../components/ComponentPlayground.vue';
+import PlaygroundSegmented from '../components/PlaygroundSegmented.vue';
+import PlaygroundToolbar from '../components/PlaygroundToolbar.vue';
 
 const props = defineProps<{
   accent: UiAccent;
   interactionsEnabled: boolean;
 }>();
 
-const sizes = ["2xs", "xs", "sm", "md", "lg", "xl", "2xl"] as const;
+const sizes = ['2xs', 'xs', 'sm', 'md', 'lg', 'xl', '2xl'] as const;
 
-const toolbarSize = ref("md");
+const toolbarSize = ref('md');
 const toolbarCode = computed(
   () => `<Toolbar size="${toolbarSize.value}">
   <ToolbarButton>Copy</ToolbarButton>
@@ -36,15 +36,25 @@ const toolbarCode = computed(
     <ComponentPlayground :code="toolbarCode" preview-surface>
       <template #preview>
         <Toolbar :size="toolbarSize">
-          <ToolbarButton :disabled="!props.interactionsEnabled">Copy</ToolbarButton>
-          <ToolbarButton :disabled="!props.interactionsEnabled">Paste</ToolbarButton>
+          <ToolbarButton :disabled="!props.interactionsEnabled"
+            >Copy</ToolbarButton
+          >
+          <ToolbarButton :disabled="!props.interactionsEnabled"
+            >Paste</ToolbarButton
+          >
           <ToolbarSeparator />
-          <ToolbarButton :disabled="!props.interactionsEnabled">Delete</ToolbarButton>
+          <ToolbarButton :disabled="!props.interactionsEnabled"
+            >Delete</ToolbarButton
+          >
         </Toolbar>
       </template>
       <template #controls>
         <PlaygroundToolbar>
-          <PlaygroundSegmented v-model="toolbarSize" :items="sizes" label="Toolbar button size" />
+          <PlaygroundSegmented
+            v-model="toolbarSize"
+            :items="sizes"
+            label="Toolbar button size"
+          />
         </PlaygroundToolbar>
       </template>
     </ComponentPlayground>

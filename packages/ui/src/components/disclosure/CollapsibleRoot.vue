@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { computed, shallowRef, useId } from "vue";
+import { computed, shallowRef, useId } from 'vue';
 
-import { useComponentDefaults } from "../../composables/useComponentDefaults.ts";
-import type { CollapsibleRootProps } from "./collapsible.contracts.ts";
-import { provideCollapsibleContext } from "./collapsibleContext.ts";
+import { useComponentDefaults } from '../../composables/useComponentDefaults.ts';
+import type { CollapsibleRootProps } from './collapsible.contracts.ts';
+import { provideCollapsibleContext } from './collapsibleContext.ts';
 
 const props = withDefaults(defineProps<CollapsibleRootProps>(), {
   disabled: undefined,
@@ -12,26 +12,28 @@ const props = withDefaults(defineProps<CollapsibleRootProps>(), {
 });
 
 const emit = defineEmits<{
-  "update:open": [open: boolean];
+  'update:open': [open: boolean];
 }>();
 
 defineSlots<{
   default?: () => unknown;
 }>();
 
-const d = useComponentDefaults("CollapsibleRoot", props, {
+const d = useComponentDefaults('CollapsibleRoot', props, {
   disabled: false,
   defaultOpen: false,
 });
 const baseId = useId();
 const internalOpen = shallowRef(d.value.defaultOpen);
 const isControlled = computed(() => d.value.open !== undefined);
-const open = computed(() => (isControlled.value ? d.value.open : internalOpen.value));
+const open = computed(() =>
+  isControlled.value ? d.value.open : internalOpen.value,
+);
 
 function setOpen(next: boolean): void {
   if (d.value.disabled || next === open.value) return;
   if (!isControlled.value) internalOpen.value = next;
-  emit("update:open", next);
+  emit('update:open', next);
 }
 
 provideCollapsibleContext(

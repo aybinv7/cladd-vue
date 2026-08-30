@@ -4,8 +4,8 @@
 
 ```vue
 <script setup lang="ts">
-import { UiProvider, Surface } from "@cladd-vue/ui";
-import "@cladd-vue/ui/styles.css";
+import { UiProvider, Surface } from '@cladd-vue/ui';
+import '@cladd-vue/ui/styles.css';
 </script>
 
 <template>
@@ -31,11 +31,11 @@ Both props are reactive: changing `theme` or `accent` updates the published cont
 
 ## Rendered root
 
-The root element carries the class `cui-theme`, the accent class `cui-accent-{accent}`, and the attributes `data-cui-theme` and `data-cui-accent`. That element is the styling anchor for the package:
+The root element carries the class `cladd-theme`, the accent class `cladd-accent-{accent}`, and the attributes `data-cladd-theme` and `data-cladd-accent`. That element is the styling anchor for the package:
 
-- `styles/tokens.css` and `styles/motion.css` define their custom properties on `:where(:root, .cui-theme)`, so dark tokens resolve even without a provider.
-- Light mode is only selected by `.cui-theme[data-cui-theme="light"]`, so a light region requires a provider (or an equivalent hand-written root) — setting `theme` alone on a component does nothing.
-- `color-scheme` is set from `data-cui-theme`, which is what makes native scrollbars and form chrome match.
+- `styles/tokens.css` and `styles/motion.css` define their custom properties on `:where(:root, .cladd-theme)`, so dark tokens resolve even without a provider.
+- Light mode is only selected by `.cladd-theme[data-cladd-theme="light"]`, so a light region requires a provider (or an equivalent hand-written root) — setting `theme` alone on a component does nothing.
+- `color-scheme` is set from `data-cladd-theme`, which is what makes native scrollbars and form chrome match.
 
 Import `@cladd-vue/ui/styles.css` once in the application entry; the provider does not inject styles.
 
@@ -45,7 +45,7 @@ Import `@cladd-vue/ui/styles.css` once in the application entry; the provider do
 
 ```vue
 <script setup lang="ts">
-import { useUiContext } from "@cladd-vue/ui";
+import { useUiContext } from '@cladd-vue/ui';
 
 const ui = useUiContext();
 </script>
@@ -63,7 +63,7 @@ Providers nest, and each one re-roots the theme for its subtree. That is the sup
 
 ```vue
 <script setup lang="ts">
-import { UiProvider, Surface } from "@cladd-vue/ui";
+import { UiProvider, Surface } from '@cladd-vue/ui';
 </script>
 
 <template>
@@ -85,5 +85,5 @@ Divergences from upstream that are intentional or not yet implemented in this pa
 
 - **No per-component default props.** Upstream accepts `defaults={{ Button: { outline: false, size: 'lg' } }}` and every component reads it through `useComponentDefaults`. `UiProvider` has no `defaults` prop, and no component in this package consults one, so an app-wide default has to be applied by the consumer (a local wrapper component, for example). This is the one upstream provider capability that is missing rather than reshaped.
 - Upstream `accentColor` is named `accent` here, matching the `accent` prop used across this package.
-- There is no provider-level overlay root. Upstream `CladdProvider` takes `overlaysRoot` and mounts shared dialog and toast portals; in this package the overlay components own their portal target and re-apply the `cui-theme` root on their portaled content, and the provider renders no portals of its own.
-- The provider renders a real element (`as`, default `div`) because the `cui-theme` class and `data-cui-theme` attribute are the CSS anchor for tokens and `color-scheme`. Upstream's provider renders no element: its stylesheet keys light and dark tokens off `.light` / `.dark` classes that the application puts on its own element, separately from the React context.
+- There is no provider-level overlay root. Upstream `CladdProvider` takes `overlaysRoot` and mounts shared dialog and toast portals; in this package the overlay components own their portal target and re-apply the `cladd-theme` root on their portaled content, and the provider renders no portals of its own.
+- The provider renders a real element (`as`, default `div`) because the `cladd-theme` class and `data-cladd-theme` attribute are the CSS anchor for tokens and `color-scheme`. Upstream's provider renders no element: its stylesheet keys light and dark tokens off `.light` / `.dark` classes that the application puts on its own element, separately from the React context.

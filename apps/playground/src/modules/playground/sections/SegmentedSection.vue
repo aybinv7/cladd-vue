@@ -1,34 +1,34 @@
 <script setup lang="ts">
-import { Segmented, SegmentedButton } from "@cladd-vue/ui";
-import { computed, ref } from "vue";
-import type { UiAccent } from "@cladd-vue/ui";
+import { Segmented, SegmentedButton } from '@cladd-vue/ui';
+import type { UiAccent } from '@cladd-vue/ui';
+import { computed, ref } from 'vue';
 
-import CatalogSection from "../components/CatalogSection.vue";
-import ComponentPlayground from "../components/ComponentPlayground.vue";
-import PlaygroundSegmented from "../components/PlaygroundSegmented.vue";
-import PlaygroundSwitchControl from "../components/PlaygroundSwitchControl.vue";
-import PlaygroundToolbar from "../components/PlaygroundToolbar.vue";
+import CatalogSection from '../components/CatalogSection.vue';
+import ComponentPlayground from '../components/ComponentPlayground.vue';
+import PlaygroundSegmented from '../components/PlaygroundSegmented.vue';
+import PlaygroundSwitchControl from '../components/PlaygroundSwitchControl.vue';
+import PlaygroundToolbar from '../components/PlaygroundToolbar.vue';
 
 const props = defineProps<{
   accent: UiAccent;
   interactionsEnabled: boolean;
 }>();
 
-const sizes = ["2xs", "xs", "sm", "md", "lg", "xl", "2xl"] as const;
+const sizes = ['2xs', 'xs', 'sm', 'md', 'lg', 'xl', '2xl'] as const;
 
-const segmentedOptions = ["Grid", "List", "Table"] as const;
-const segmentedActive = ref<(typeof segmentedOptions)[number]>("Grid");
+const segmentedOptions = ['Grid', 'List', 'Table'] as const;
+const segmentedActive = ref<(typeof segmentedOptions)[number]>('Grid');
 const segmentedRounded = ref(true);
 const segmentedDisabled = ref(false);
-const segmentedSize = ref("md");
+const segmentedSize = ref('md');
 const segmentedCode = computed(
-  () => `<Segmented ${segmentedRounded.value ? "" : ':rounded="false"'} size="${segmentedSize.value}">
+  () => `<Segmented ${segmentedRounded.value ? '' : ':rounded="false"'} size="${segmentedSize.value}">
 ${segmentedOptions
   .map(
     (option) =>
       `  <SegmentedButton :active="active === '${option}'" @click="active = '${option}'">${option}</SegmentedButton>`,
   )
-  .join("\n")}
+  .join('\n')}
 </Segmented>`,
 );
 </script>
@@ -59,11 +59,18 @@ ${segmentedOptions
       </template>
       <template #controls>
         <PlaygroundToolbar>
-          <PlaygroundSegmented v-model="segmentedSize" :items="sizes" label="Segment size" />
+          <PlaygroundSegmented
+            v-model="segmentedSize"
+            :items="sizes"
+            label="Segment size"
+          />
         </PlaygroundToolbar>
         <PlaygroundToolbar>
           <PlaygroundSwitchControl label="rounded" v-model="segmentedRounded" />
-          <PlaygroundSwitchControl label="disabled" v-model="segmentedDisabled" />
+          <PlaygroundSwitchControl
+            label="disabled"
+            v-model="segmentedDisabled"
+          />
         </PlaygroundToolbar>
       </template>
     </ComponentPlayground>

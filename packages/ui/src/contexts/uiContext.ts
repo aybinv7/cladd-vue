@@ -6,13 +6,13 @@ import {
   type InjectionKey,
   type MaybeRefOrGetter,
   type Ref,
-} from "vue";
+} from 'vue';
 
-import type { ComponentDefaults } from "../foundations/componentDefaults.ts";
-import type { UiAccent, UiTheme } from "../foundations/contracts.ts";
+import type { ComponentDefaults } from '../foundations/componentDefaults.ts';
+import type { UiAccent, UiTheme } from '../foundations/contracts.ts';
 
 /** Upstream default: `'#app, #__next, #root'` — the first match wins. */
-export const defaultOverlaysRoot = "#app, #__next, #root";
+export const defaultOverlaysRoot = '#app, #__next, #root';
 
 export interface UiContextValue {
   accentColor: Readonly<Ref<UiAccent>>;
@@ -21,13 +21,13 @@ export interface UiContextValue {
   theme: Readonly<Ref<UiTheme>>;
 }
 
-const uiContextKey: InjectionKey<UiContextValue> = Symbol("cui-context");
+const uiContextKey: InjectionKey<UiContextValue> = Symbol('cladd-context');
 
 const defaultUiContext: UiContextValue = {
-  accentColor: computed(() => "brand"),
+  accentColor: computed(() => 'brand'),
   defaults: computed(() => ({})),
   overlaysRoot: computed(() => defaultOverlaysRoot),
-  theme: computed(() => "dark"),
+  theme: computed(() => 'dark'),
 };
 
 export interface ProvideUiContextOptions {
@@ -37,11 +37,15 @@ export interface ProvideUiContextOptions {
   theme: MaybeRefOrGetter<UiTheme>;
 }
 
-export function provideUiContext(options: ProvideUiContextOptions): UiContextValue {
+export function provideUiContext(
+  options: ProvideUiContextOptions,
+): UiContextValue {
   const value: UiContextValue = {
     accentColor: computed(() => toValue(options.accentColor)),
     defaults: computed(() => toValue(options.defaults) ?? {}),
-    overlaysRoot: computed(() => toValue(options.overlaysRoot) ?? defaultOverlaysRoot),
+    overlaysRoot: computed(
+      () => toValue(options.overlaysRoot) ?? defaultOverlaysRoot,
+    ),
     theme: computed(() => toValue(options.theme)),
   };
 

@@ -1,6 +1,6 @@
-import { onUnmounted, shallowRef, watch, watchEffect, type Ref } from "vue";
+import { onUnmounted, shallowRef, watch, watchEffect, type Ref } from 'vue';
 
-import type { OverlayPhase } from "../foundations/contracts.ts";
+import type { OverlayPhase } from '../foundations/contracts.ts';
 
 export interface OverlayLifecycleOptions {
   closeOnEscape?: () => boolean;
@@ -35,11 +35,14 @@ function runAfterTwoFrames(callback: () => void): () => void {
 }
 
 function isElementVisible(element: HTMLElement): boolean {
-  const check = (element as { checkVisibility?: () => boolean }).checkVisibility;
-  return typeof check === "function" ? check.call(element) : false;
+  const check = (element as { checkVisibility?: () => boolean })
+    .checkVisibility;
+  return typeof check === 'function' ? check.call(element) : false;
 }
 
-export function useOverlayLifecycle(options: OverlayLifecycleOptions): OverlayLifecycle {
+export function useOverlayLifecycle(
+  options: OverlayLifecycleOptions,
+): OverlayLifecycle {
   const opened = shallowRef(false);
   let initiallyOpened = false;
   let closedFired = false;
@@ -50,14 +53,14 @@ export function useOverlayLifecycle(options: OverlayLifecycleOptions): OverlayLi
   function fireClosed(): void {
     if (closedFired) return;
     closedFired = true;
-    options.setPhase("closed");
+    options.setPhase('closed');
     options.onClosed?.();
   }
 
   function close(): void {
     opened.value = false;
     options.onClose?.();
-    options.setPhase("closing");
+    options.setPhase('closing');
   }
 
   function open(): void {
@@ -78,14 +81,14 @@ export function useOverlayLifecycle(options: OverlayLifecycleOptions): OverlayLi
   function completeTransition(element: HTMLElement): void {
     const phase = options.phase.value;
 
-    if (phase === "closing") {
+    if (phase === 'closing') {
       fireClosed();
       return;
     }
 
-    if (phase === "opening" || phase === "opened") {
+    if (phase === 'opening' || phase === 'opened') {
       options.onOpened?.(element);
-      if (phase === "opening") options.setPhase("opened");
+      if (phase === 'opening') options.setPhase('opened');
     }
   }
 
@@ -96,7 +99,7 @@ export function useOverlayLifecycle(options: OverlayLifecycleOptions): OverlayLi
   }
 
   function onKeydown(event: KeyboardEvent): void {
-    if (event.key !== "Escape") return;
+    if (event.key !== 'Escape') return;
     if (options.closeOnEscape && !options.closeOnEscape()) return;
     event.preventDefault();
     event.stopPropagation();
@@ -104,7 +107,7 @@ export function useOverlayLifecycle(options: OverlayLifecycleOptions): OverlayLi
   }
 
   watch(
-    () => options.phase.value !== "closed",
+    () => options.phase.value !== 'closed',
     (active, _previous, onCleanup) => {
       cancelActivation();
 
@@ -120,14 +123,14 @@ export function useOverlayLifecycle(options: OverlayLifecycleOptions): OverlayLi
       });
 
       cancelActivation = () => cancelAnimationFrame(frame);
-      document.addEventListener("keydown", onKeydown);
-      onCleanup(() => document.removeEventListener("keydown", onKeydown));
+      document.addEventListener('keydown', onKeydown);
+      onCleanup(() => document.removeEventListener('keydown', onKeydown));
     },
     { immediate: true },
   );
 
   watch(options.phase, (phase) => {
-    if (phase === "closing") {
+    if (phase === 'closing') {
       if (opened.value) {
         opened.value = false;
         options.onClose?.();
@@ -135,7 +138,7 @@ export function useOverlayLifecycle(options: OverlayLifecycleOptions): OverlayLi
       return;
     }
 
-    if (phase === "opening" || phase === "opened") {
+    if (phase === 'opening' || phase === 'opened') {
       if (!opened.value && initiallyOpened) open();
     }
   });
@@ -143,12 +146,14 @@ export function useOverlayLifecycle(options: OverlayLifecycleOptions): OverlayLi
   watch(opened, (value) => {
     cancelOpenCallback();
     if (!value) return;
-    cancelOpenCallback = runAfterTwoFrames(() => options.onOpen?.(options.element.value));
+    cancelOpenCallback = runAfterTwoFrames(() =>
+      options.onOpen?.(options.element.value),
+    );
   });
 
   watchEffect((onCleanup) => {
     const element = options.element.value;
-    const active = options.phase.value !== "closed";
+    const active = options.phase.value !== 'closed';
     if (!element || !active) return;
 
     if (!isElementVisible(element)) {
@@ -156,16 +161,18 @@ export function useOverlayLifecycle(options: OverlayLifecycleOptions): OverlayLi
       return;
     }
 
-    element.addEventListener("transitionend", onTransitionEnd);
-    onCleanup(() => element.removeEventListener("transitionend", onTransitionEnd));
+    element.addEventListener('transitionend', onTransitionEnd);
+    onCleanup(() =>
+      element.removeEventListener('transitionend', onTransitionEnd),
+    );
   });
 
   onUnmounted(() => {
     cancelActivation();
     cancelOpenCallback();
     cancelLazyOpen();
-    document.removeEventListener("keydown", onKeydown);
-    if (options.phase.value === "closing") fireClosed();
+    document.removeEventListener('keydown', onKeydown);
+    if (options.phase.value === 'closing') fireClosed();
   });
 
   return { close, open, opened };

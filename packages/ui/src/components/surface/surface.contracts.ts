@@ -1,6 +1,10 @@
-import type { Component } from "vue";
+import type { Component } from 'vue';
 
-import type { SurfaceLevelInput, SurfaceVariant, UiAccent } from "../../foundations/contracts.ts";
+import type {
+  SurfaceLevelInput,
+  SurfaceVariant,
+  UiAccent,
+} from '../../foundations/contracts.ts';
 
 export interface SurfaceProps {
   accent?: UiAccent;
@@ -8,7 +12,7 @@ export interface SurfaceProps {
   as?: string | Component;
   bgClassName?: string;
   clickable?: boolean;
-  /** Accent color token. Sets the surface's `cui-color-{name}` class. */
+  /** Accent color token. Sets the surface's `cladd-color-{name}` class. */
   color?: UiAccent;
   contentClassName?: string;
   hoverable?: boolean;
@@ -18,7 +22,7 @@ export interface SurfaceProps {
   outline?: boolean;
   overlayClassName?: string;
   /** Default `'above'`. */
-  overlayPosition?: "above" | "below";
+  overlayPosition?: 'above' | 'below';
   pressed?: boolean;
   /** Default `'solid'`. */
   variant?: SurfaceVariant;
@@ -26,7 +30,7 @@ export interface SurfaceProps {
   wrapContent?: boolean;
 }
 
-export type SurfaceDefaultProps = Partial<Omit<SurfaceProps, "as" | "level">>;
+export type SurfaceDefaultProps = Partial<Omit<SurfaceProps, 'as' | 'level'>>;
 
 export interface SurfaceCutProps {
   accent?: UiAccent;
@@ -38,9 +42,9 @@ export interface SurfaceCutProps {
   hoverable?: boolean;
   outline?: boolean;
   overlayClassName?: string;
-  overlayPosition?: "above" | "below";
+  overlayPosition?: 'above' | 'below';
   pressed?: boolean;
   wrapContent?: boolean;
 }
 
-export type SurfaceCutDefaultProps = Partial<Omit<SurfaceCutProps, "as">>;
+export type SurfaceCutDefaultProps = Partial<Omit<SurfaceCutProps, 'as'>>;

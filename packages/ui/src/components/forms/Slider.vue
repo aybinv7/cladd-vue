@@ -7,16 +7,16 @@ import {
   shallowRef,
   useAttrs,
   type CSSProperties,
-} from "vue";
+} from 'vue';
 
-import { useComponentDefaults } from "../../composables/useComponentDefaults.ts";
-import { useUiContext } from "../../contexts/uiContext.ts";
-import { cn } from "../../shared/cn.ts";
-import { roundedClasses } from "../../shared/roundedClasses.ts";
-import { rootSizeClasses } from "../../shared/sizeClasses.ts";
-import FocusRing from "../feedback/FocusRing.vue";
-import Surface from "../surface/Surface.vue";
-import SurfaceCut from "../surface/SurfaceCut.vue";
+import { useComponentDefaults } from '../../composables/useComponentDefaults.ts';
+import { useUiContext } from '../../contexts/uiContext.ts';
+import { cn } from '../../shared/cn.ts';
+import { roundedClasses } from '../../shared/roundedClasses.ts';
+import { rootSizeClasses } from '../../shared/sizeClasses.ts';
+import FocusRing from '../feedback/FocusRing.vue';
+import Surface from '../surface/Surface.vue';
+import SurfaceCut from '../surface/SurfaceCut.vue';
 import {
   sliderRangeInsets,
   sliderRootHeights,
@@ -25,7 +25,7 @@ import {
   sliderTrackBarClasses,
   sliderValueOffsets,
   type SliderProps,
-} from "./slider.contracts.ts";
+} from './slider.contracts.ts';
 
 defineOptions({ inheritAttrs: false });
 
@@ -58,11 +58,11 @@ const props = withDefaults(defineProps<SliderProps>(), {
 const model = defineModel<number>();
 const emit = defineEmits<{
   change: [value: number, event?: Event];
-  "update:value": [value: number];
+  'update:value': [value: number];
 }>();
 const ui = useUiContext();
 const attrs = useAttrs();
-const d = useComponentDefaults("Slider", props, {
+const d = useComponentDefaults('Slider', props, {
   debounce: 0,
   defaultValue: 0,
   disabled: false,
@@ -73,23 +73,31 @@ const d = useComponentDefaults("Slider", props, {
   rangeOutline: true,
   readOnly: false,
   rounded: false,
-  scale: "linear" as SliderProps["scale"],
-  size: "sm" as SliderProps["size"],
+  scale: 'linear' as SliderProps['scale'],
+  size: 'sm' as SliderProps['size'],
   step: 1,
   throttle: 0,
   thumbOutline: true,
   tightFocusRing: false,
-  variant: "thumb" as SliderProps["variant"],
+  variant: 'thumb' as SliderProps['variant'],
 });
-const labellingAttributeNames = ["aria-label", "aria-labelledby", "aria-describedby"];
+const labellingAttributeNames = [
+  'aria-label',
+  'aria-labelledby',
+  'aria-describedby',
+];
 const controlAttrs = computed(() =>
   Object.fromEntries(
-    Object.entries(attrs).filter(([name]) => labellingAttributeNames.includes(name)),
+    Object.entries(attrs).filter(([name]) =>
+      labellingAttributeNames.includes(name),
+    ),
   ),
 );
 const rootAttrs = computed(() =>
   Object.fromEntries(
-    Object.entries(attrs).filter(([name]) => !labellingAttributeNames.includes(name)),
+    Object.entries(attrs).filter(
+      ([name]) => !labellingAttributeNames.includes(name),
+    ),
   ),
 );
 const uncontrolledValue = shallowRef(d.value.defaultValue);
@@ -100,15 +108,18 @@ let throttleTimer: ReturnType<typeof setTimeout> | undefined;
 let throttleLastFire = 0;
 let throttlePending: number | undefined;
 
-const isTrack = computed(() => d.value.variant === "track");
+const isTrack = computed(() => d.value.variant === 'track');
 const isControlled = computed(() => d.value.value !== undefined);
-const value = computed(() => d.value.value ?? model.value ?? uncontrolledValue.value);
+const value = computed(
+  () => d.value.value ?? model.value ?? uncontrolledValue.value,
+);
 const scaleFns = computed(() => {
-  if (d.value.scale === "linear") return undefined;
-  if (d.value.scale === "log") {
+  if (d.value.scale === 'linear') return undefined;
+  if (d.value.scale === 'log') {
     if (d.value.min <= 0 || d.value.max <= d.value.min) return undefined;
     return {
-      fromSlider: (position: number) => d.value.min * (d.value.max / d.value.min) ** position,
+      fromSlider: (position: number) =>
+        d.value.min * (d.value.max / d.value.min) ** position,
       toSlider: (next: number) =>
         Math.log(next / d.value.min) / Math.log(d.value.max / d.value.min),
     };
@@ -119,41 +130,52 @@ const progress = computed(() => {
   const span = d.value.max - d.value.min;
   if (span <= 0) return 0;
   const next = Math.min(d.value.max, Math.max(d.value.min, value.value));
-  const position = scaleFns.value ? scaleFns.value.toSlider(next) : (next - d.value.min) / span;
+  const position = scaleFns.value
+    ? scaleFns.value.toSlider(next)
+    : (next - d.value.min) / span;
   return Math.min(1, Math.max(0, position));
 });
 const effectiveColor = computed(
-  () => d.value.color ?? d.value.accent ?? (isTrack.value ? undefined : ui.accentColor.value),
+  () =>
+    d.value.color ??
+    d.value.accent ??
+    (isTrack.value ? undefined : ui.accentColor.value),
 );
 const inputValue = computed(() =>
   scaleFns.value ? Math.round(progress.value * sliderResolution) : value.value,
 );
 const inputMin = computed(() => (scaleFns.value ? 0 : d.value.min));
-const inputMax = computed(() => (scaleFns.value ? sliderResolution : d.value.max));
+const inputMax = computed(() =>
+  scaleFns.value ? sliderResolution : d.value.max,
+);
 const inputStep = computed(() => (scaleFns.value ? 1 : d.value.step));
-const radii = computed(() => roundedClasses(d.value.size, d.value.rounded, false));
-const durationClass = computed(() => (dragging.value ? "duration-0" : "duration-300"));
+const radii = computed(() =>
+  roundedClasses(d.value.size, d.value.rounded, false),
+);
+const durationClass = computed(() =>
+  dragging.value ? 'duration-0' : 'duration-300',
+);
 const thumbSpacing = computed(() => sliderThumbSpacingVars[d.value.size]);
 
 const rootClass = computed(() =>
   cn(
-    "cui-slider group/cui-slider relative flex touch-pan-y select-none",
+    'cladd-slider group/cladd-slider relative flex touch-pan-y select-none',
     !isTrack.value && sliderRootHeights[d.value.size],
-    isTrack.value && rootSizeClasses(d.value.size, "height"),
+    isTrack.value && rootSizeClasses(d.value.size, 'height'),
   ),
 );
 
 const trackVariantTrackClass = computed(() =>
-  cn("pointer-events-none absolute inset-0", radii.value.itemRoundedClasses),
+  cn('pointer-events-none absolute inset-0', radii.value.itemRoundedClasses),
 );
 
 const trackVariantRangeClass = computed(() =>
   cn(
-    effectiveColor.value && `cui-color-${effectiveColor.value}`,
-    "pointer-events-none absolute top-0 bottom-0 left-0 ease-out",
-    d.value.rounded && "rounded-l-full",
+    effectiveColor.value && `cladd-color-${effectiveColor.value}`,
+    'pointer-events-none absolute top-0 bottom-0 left-0 ease-out',
+    d.value.rounded && 'rounded-l-full',
     radii.value.itemRoundedClasses,
-    d.value.disabled && "opacity-50",
+    d.value.disabled && 'opacity-50',
     durationClass.value,
   ),
 );
@@ -163,55 +185,66 @@ const trackVariantRangeStyle = computed(
 );
 
 const trackVariantFocusRingClass = computed(() =>
-  d.value.tightFocusRing ? radii.value.itemRoundedClasses : radii.value.focusRoundedClasses,
+  d.value.tightFocusRing
+    ? radii.value.itemRoundedClasses
+    : radii.value.focusRoundedClasses,
 );
 
 const trackVariantHandleClass = computed(() =>
   cn(
-    effectiveColor.value && `cui-color-${effectiveColor.value}`,
-    "pointer-events-none absolute top-1/2 h-4 w-0.5 shrink-0 -translate-y-1/2 scale-y-75 rounded-full bg-cui-fg-softer ease-out group-focus-within/cui-slider:scale-100 group-focus-within/cui-slider:bg-cui-primary",
+    effectiveColor.value && `cladd-color-${effectiveColor.value}`,
+    'pointer-events-none absolute top-1/2 h-4 w-0.5 shrink-0 -translate-y-1/2 scale-y-75 rounded-full bg-cladd-fg-softer ease-out group-focus-within/cladd-slider:scale-100 group-focus-within/cladd-slider:bg-cladd-primary',
     d.value.rangeFill &&
       progress.value > 0.5 &&
-      "bg-cui-on-primary outline-transparent group-focus-within/cui-slider:bg-cui-on-primary",
-    d.value.disabled && "opacity-50",
+      'bg-cladd-on-primary outline-transparent group-focus-within/cladd-slider:bg-cladd-on-primary',
+    d.value.disabled && 'opacity-50',
     durationClass.value,
   ),
 );
 
 const trackVariantHandleStyle = computed(
-  () => ({ left: `calc(8px + (100% - 18px) * ${progress.value})` }) as CSSProperties,
+  () =>
+    ({
+      left: `calc(8px + (100% - 18px) * ${progress.value})`,
+    }) as CSSProperties,
 );
 
 const thumbVariantTrackClass = computed(() =>
   cn(
-    "pointer-events-none absolute inset-0 top-1/2 right-0 left-0 rounded-full",
+    'pointer-events-none absolute inset-0 top-1/2 right-0 left-0 rounded-full',
     sliderTrackBarClasses[d.value.size],
   ),
 );
 
 const thumbVariantRangeClass = computed(() =>
-  cn("absolute top-1/2 -mt-px h-0.5 overflow-hidden rounded-full", sliderRangeInsets[d.value.size]),
+  cn(
+    'absolute top-1/2 -mt-px h-0.5 overflow-hidden rounded-full',
+    sliderRangeInsets[d.value.size],
+  ),
 );
 
 const thumbVariantRangeFillClass = computed(() =>
   cn(
-    `cui-color-${effectiveColor.value}`,
-    "absolute inset-0 rounded-full bg-cui-primary ease-out",
+    `cladd-color-${effectiveColor.value}`,
+    'absolute inset-0 rounded-full bg-cladd-primary ease-out',
     !d.value.disabled &&
       !d.value.readOnly &&
-      "group-focus-within/slider:-translate-x-3 group-active/slider:-translate-x-3",
-    d.value.disabled && "opacity-50",
+      'group-focus-within/slider:-translate-x-3 group-active/slider:-translate-x-3',
+    d.value.disabled && 'opacity-50',
     durationClass.value,
   ),
 );
 
 const thumbVariantRangeFillStyle = computed(
-  () => ({ width: `calc((100% - ${thumbSpacing.value}) * ${progress.value})` }) as CSSProperties,
+  () =>
+    ({
+      width: `calc((100% - ${thumbSpacing.value}) * ${progress.value})`,
+    }) as CSSProperties,
 );
 
 const thumbWrapperClass = computed(() =>
   cn(
-    "pointer-events-none absolute inset-0 flex items-center ease-out group-focus-within/cui-slider:z-10",
+    'pointer-events-none absolute inset-0 flex items-center ease-out group-focus-within/cladd-slider:z-10',
     durationClass.value,
   ),
 );
@@ -226,19 +259,20 @@ const thumbWrapperStyle = computed(
 const valueBubbleClass = computed(() =>
   cn(
     sliderValueOffsets[d.value.size],
-    "absolute -bottom-4 min-w-8 -translate-x-1/2 scale-0 rounded-cui-2xl px-1 pt-2.5 pb-8 text-center text-cui-xs leading-none font-medium text-cui-primary duration-300",
+    'absolute -bottom-4 min-w-8 -translate-x-1/2 scale-0 rounded-cladd-2xl px-1 pt-2.5 pb-8 text-center text-cladd-xs leading-none font-medium text-cladd-primary duration-300',
     !d.value.disabled &&
       !d.value.readOnly &&
-      "group-focus-within/cui-slider:scale-100 group-active/cui-slider:scale-100",
+      'group-focus-within/cladd-slider:scale-100 group-active/cladd-slider:scale-100',
   ),
 );
 
 const thumbSurfaceClass = computed(() =>
-  cn("z-10 shrink-0 rounded-full", sliderThumbSizes[d.value.size]),
+  cn('z-10 shrink-0 rounded-full', sliderThumbSizes[d.value.size]),
 );
 
 function normalize(next: number): number {
-  const rounded = d.value.step > 0 ? Math.round(next / d.value.step) * d.value.step : next;
+  const rounded =
+    d.value.step > 0 ? Math.round(next / d.value.step) * d.value.step : next;
   return Math.min(d.value.max, Math.max(d.value.min, rounded));
 }
 
@@ -248,7 +282,7 @@ function publish(next: number, event?: Event): void {
   const normalized = normalize(next);
   if (!isControlled.value) uncontrolledValue.value = normalized;
   model.value = normalized;
-  emit("update:value", normalized);
+  emit('update:value', normalized);
 
   if (d.value.throttle > 0) {
     const now = Date.now();
@@ -258,7 +292,7 @@ function publish(next: number, event?: Event): void {
       throttlePending = undefined;
       if (throttleTimer) clearTimeout(throttleTimer);
       throttleTimer = undefined;
-      emit("change", normalized, event);
+      emit('change', normalized, event);
       return;
     }
 
@@ -268,7 +302,7 @@ function publish(next: number, event?: Event): void {
         throttleTimer = undefined;
         if (throttlePending === undefined) return;
         throttleLastFire = Date.now();
-        emit("change", throttlePending);
+        emit('change', throttlePending);
         throttlePending = undefined;
       }, d.value.throttle - elapsed);
     }
@@ -277,16 +311,22 @@ function publish(next: number, event?: Event): void {
 
   if (d.value.debounce > 0) {
     if (debounceTimer) clearTimeout(debounceTimer);
-    debounceTimer = setTimeout(() => emit("change", normalized), d.value.debounce);
+    debounceTimer = setTimeout(
+      () => emit('change', normalized),
+      d.value.debounce,
+    );
     return;
   }
 
-  emit("change", normalized, event);
+  emit('change', normalized, event);
 }
 
 function handleInput(event: Event): void {
   const raw = Number((event.target as HTMLInputElement).value);
-  publish(scaleFns.value ? scaleFns.value.fromSlider(raw / sliderResolution) : raw, event);
+  publish(
+    scaleFns.value ? scaleFns.value.fromSlider(raw / sliderResolution) : raw,
+    event,
+  );
 }
 
 function handlePointerDown(): void {
@@ -303,15 +343,15 @@ function handlePointerUp(): void {
 }
 
 onMounted(() => {
-  document.addEventListener("pointermove", handlePointerMove);
-  document.addEventListener("pointerup", handlePointerUp);
+  document.addEventListener('pointermove', handlePointerMove);
+  document.addEventListener('pointerup', handlePointerUp);
 });
 
 onBeforeUnmount(() => {
   if (debounceTimer) clearTimeout(debounceTimer);
   if (throttleTimer) clearTimeout(throttleTimer);
-  document.removeEventListener("pointermove", handlePointerMove);
-  document.removeEventListener("pointerup", handlePointerUp);
+  document.removeEventListener('pointermove', handlePointerMove);
+  document.removeEventListener('pointerup', handlePointerUp);
 });
 </script>
 
@@ -349,14 +389,25 @@ onBeforeUnmount(() => {
         group="slider"
         :offset="!d.tightFocusRing"
       />
-      <span :class="trackVariantHandleClass" data-part="thumb" :style="trackVariantHandleStyle" />
+      <span
+        :class="trackVariantHandleClass"
+        data-part="thumb"
+        :style="trackVariantHandleStyle"
+      />
     </template>
     <template v-else>
       <SurfaceCut as="span" :class="thumbVariantTrackClass" data-part="track" />
       <span :class="thumbVariantRangeClass" data-part="range">
-        <span :class="thumbVariantRangeFillClass" :style="thumbVariantRangeFillStyle" />
+        <span
+          :class="thumbVariantRangeFillClass"
+          :style="thumbVariantRangeFillStyle"
+        />
       </span>
-      <span :class="thumbWrapperClass" data-part="thumb-wrapper" :style="thumbWrapperStyle">
+      <span
+        :class="thumbWrapperClass"
+        data-part="thumb-wrapper"
+        :style="thumbWrapperStyle"
+      >
         <span class="relative top-0 size-0 h-0" data-part="value">
           <Surface
             as="span"
@@ -366,7 +417,11 @@ onBeforeUnmount(() => {
             variant="gradient"
           >
             <template v-if="!d.disabled && !d.readOnly" #beforeContent>
-              <FocusRing class="rounded-full" group="slider" :offset="!d.tightFocusRing" />
+              <FocusRing
+                class="rounded-full"
+                group="slider"
+                :offset="!d.tightFocusRing"
+              />
             </template>
             {{ value }}
           </Surface>

@@ -51,7 +51,7 @@ Each manifest is `docs/port/<Component>.md` and contains, in this order:
 ### Verdict vocabulary
 
 - **`ported`** — copied by value. Name, type domain, default, and effect are the upstream ones. The
-  only permitted mechanical change is the `cladd-*` to `cui-*` namespace rename.
+  only permitted mechanical change is the `cladd-*` to `cladd-*` namespace rename.
 - **`transposed`** — a React construct rewritten in Vue with its semantics preserved: `ReactNode`
   prop to slot, `onX` callback to emitted event, `className` to `class`, `ElementType` to
   `<component :is>`, `useEffect` to a lifecycle hook, context to an `InjectionKey`, a Tailwind

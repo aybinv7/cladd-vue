@@ -1,15 +1,15 @@
 <script setup lang="ts">
-import { computed, ref, useAttrs } from "vue";
+import { computed, ref, useAttrs } from 'vue';
 
-import { useComponentDefaults } from "../../composables/useComponentDefaults.ts";
-import { useUiContext } from "../../contexts/uiContext.ts";
-import { cn } from "../../shared/cn.ts";
-import { roundedClasses } from "../../shared/roundedClasses.ts";
-import { rootSizeClasses } from "../../shared/sizeClasses.ts";
-import Button from "../actions/Button.vue";
-import FocusRing from "../feedback/FocusRing.vue";
-import SurfaceCut from "../surface/SurfaceCut.vue";
-import CloseIcon from "../feedback/CloseIcon.vue";
+import { useComponentDefaults } from '../../composables/useComponentDefaults.ts';
+import { useUiContext } from '../../contexts/uiContext.ts';
+import { cn } from '../../shared/cn.ts';
+import { roundedClasses } from '../../shared/roundedClasses.ts';
+import { rootSizeClasses } from '../../shared/sizeClasses.ts';
+import Button from '../actions/Button.vue';
+import CloseIcon from '../feedback/CloseIcon.vue';
+import FocusRing from '../feedback/FocusRing.vue';
+import SurfaceCut from '../surface/SurfaceCut.vue';
 import {
   inputClearButtonSizes,
   inputClearGlyphSizes,
@@ -18,7 +18,7 @@ import {
   inputPaddingNoIcon,
   inputPaddingWithIcon,
   type InputProps,
-} from "./input.contracts.ts";
+} from './input.contracts.ts';
 
 const interactiveSelector =
   'input, textarea, select, button, a, [role="button"], [tabindex]:not([tabindex="-1"])';
@@ -71,47 +71,59 @@ const emit = defineEmits<{
   keydown: [event: KeyboardEvent];
 }>();
 
-const model = defineModel<string>({ default: "" });
+const model = defineModel<string>({ default: '' });
 const ui = useUiContext();
 const attrs = useAttrs();
-const d = useComponentDefaults("Input", props, {
-  as: "div" as InputProps["as"],
+const d = useComponentDefaults('Input', props, {
+  as: 'div' as InputProps['as'],
   autofocus: false,
   clearButton: false,
-  clearLabel: "Clear",
+  clearLabel: 'Clear',
   disabled: false,
   readOnly: false,
   required: false,
   rounded: false,
-  size: "lg" as InputProps["size"],
+  size: 'lg' as InputProps['size'],
   tightFocusRing: false,
-  type: "text",
+  type: 'text',
   valid: true,
 });
-const currentAccent = computed(() => d.value.color ?? d.value.accent ?? ui.accentColor.value);
+const currentAccent = computed(
+  () => d.value.color ?? d.value.accent ?? ui.accentColor.value,
+);
 const inputElement = ref<HTMLInputElement>();
 const focused = ref(false);
 
-const radii = computed(() => roundedClasses(d.value.size, d.value.rounded, false));
-const heightClass = computed(() => rootSizeClasses(d.value.size, "height"));
+const radii = computed(() =>
+  roundedClasses(d.value.size, d.value.rounded, false),
+);
+const heightClass = computed(() => rootSizeClasses(d.value.size, 'height'));
 const inputPadding = computed(() =>
-  slots.icon ? inputPaddingWithIcon[d.value.size] : inputPaddingNoIcon[d.value.size],
+  slots.icon
+    ? inputPaddingWithIcon[d.value.size]
+    : inputPaddingNoIcon[d.value.size],
 );
 const showDisplayValue = computed(
   () => Boolean(slots.displayValue) && (d.value.readOnly || !focused.value),
 );
 
 const rootClass = computed(() =>
-  cn("cui-input group/cui-input", d.value.disabled && "opacity-50", radii.value.itemRoundedClasses),
+  cn(
+    'cladd-input group/cladd-input',
+    d.value.disabled && 'opacity-50',
+    radii.value.itemRoundedClasses,
+  ),
 );
 
 const focusRingClass = computed(() =>
-  d.value.tightFocusRing ? "rounded-[inherit]" : radii.value.focusRoundedClasses,
+  d.value.tightFocusRing
+    ? 'rounded-[inherit]'
+    : radii.value.focusRoundedClasses,
 );
 
 const iconClass = computed(() =>
   cn(
-    "pointer-events-none absolute top-1/2 -translate-y-1/2",
+    'pointer-events-none absolute top-1/2 -translate-y-1/2',
     inputIconWrapClasses[d.value.size],
     d.value.iconClassName,
   ),
@@ -123,10 +135,10 @@ const controlClass = computed(() =>
     heightClass.value,
     inputFontSizes[d.value.size],
     radii.value.itemRoundedClasses,
-    "w-full appearance-none border-none bg-transparent font-medium shadow-none outline-none",
-    d.value.disabled && "text-cui-fg-softer",
-    "placeholder-cui-fg-softer",
-    showDisplayValue.value && "text-transparent! placeholder-transparent!",
+    'w-full appearance-none border-none bg-transparent font-medium shadow-none outline-none',
+    d.value.disabled && 'text-cladd-fg-softer',
+    'placeholder-cladd-fg-softer',
+    showDisplayValue.value && 'text-transparent! placeholder-transparent!',
     d.value.inputClassName,
   ),
 );
@@ -136,55 +148,55 @@ const displayValueClass = computed(() =>
     inputPadding.value,
     heightClass.value,
     inputFontSizes[d.value.size],
-    "pointer-events-none absolute inset-0 flex items-center font-medium",
-    d.value.disabled && "text-cui-fg-softer",
+    'pointer-events-none absolute inset-0 flex items-center font-medium',
+    d.value.disabled && 'text-cladd-fg-softer',
     d.value.inputClassName,
   ),
 );
 
 const clearWrapClass = computed(() =>
   cn(
-    "relative mr-1 shrink-0",
-    rootSizeClasses(d.value.size, "height"),
-    rootSizeClasses(d.value.size, "width"),
+    'relative mr-1 shrink-0',
+    rootSizeClasses(d.value.size, 'height'),
+    rootSizeClasses(d.value.size, 'width'),
   ),
 );
 
 const clearButtonClass = computed(() =>
   cn(
-    "absolute top-1 right-0 bottom-1 left-0 h-auto w-auto transform-gpu duration-200",
-    !model.value && "pointer-events-none scale-0",
+    'absolute top-1 right-0 bottom-1 left-0 h-auto w-auto transform-gpu duration-200',
+    !model.value && 'pointer-events-none scale-0',
   ),
 );
 
 const infoClass = computed(() =>
   cn(
-    "pointer-events-none absolute -top-1.5 left-2 z-10 translate-y-0 rounded-cui-xs bg-cui-primary px-2 py-0.5 text-cui-2xs leading-none font-semibold text-cui-on-primary opacity-0 duration-200 group-has-[input:focus]/cui-input:-translate-y-1/2 group-has-[input:focus]/cui-input:opacity-100",
-    `cui-color-${currentAccent.value}`,
+    'pointer-events-none absolute -top-1.5 left-2 z-10 translate-y-0 rounded-cladd-xs bg-cladd-primary px-2 py-0.5 text-cladd-2xs leading-none font-semibold text-cladd-on-primary opacity-0 duration-200 group-has-[input:focus]/cladd-input:-translate-y-1/2 group-has-[input:focus]/cladd-input:opacity-100',
+    `cladd-color-${currentAccent.value}`,
   ),
 );
 
 const errorClass =
-  "cui-color-red pointer-events-none absolute -top-1.5 left-2 z-10 -translate-y-1/2 rounded-cui-xs bg-cui-primary px-2 py-0.5 text-cui-2xs leading-none font-semibold text-cui-on-primary opacity-100 duration-200";
+  'cladd-color-red pointer-events-none absolute -top-1.5 left-2 z-10 -translate-y-1/2 rounded-cladd-xs bg-cladd-primary px-2 py-0.5 text-cladd-2xs leading-none font-semibold text-cladd-on-primary opacity-100 duration-200';
 
 function onInput(event: Event): void {
   const value = (event.target as HTMLInputElement).value;
   model.value = value;
-  emit("change", value, event);
+  emit('change', value, event);
 }
 
 function onFocus(event: FocusEvent): void {
   focused.value = true;
-  emit("focus", event);
+  emit('focus', event);
 }
 
 function onBlur(event: FocusEvent): void {
   focused.value = false;
-  emit("blur", event);
+  emit('blur', event);
 }
 
 function onPointerDown(event: PointerEvent): void {
-  if (event.pointerType === "touch") return;
+  if (event.pointerType === 'touch') return;
   if ((event.target as HTMLElement).closest(interactiveSelector)) return;
   event.preventDefault();
   inputElement.value?.focus();
@@ -196,8 +208,8 @@ function onClick(event: MouseEvent): void {
 }
 
 function clearValue(): void {
-  model.value = "";
-  emit("clear");
+  model.value = '';
+  emit('clear');
 }
 
 defineExpose({
@@ -268,12 +280,19 @@ defineExpose({
           @keydown="emit('keydown', $event)"
         />
 
-        <span v-if="showDisplayValue" :class="displayValueClass" data-part="display-value">
+        <span
+          v-if="showDisplayValue"
+          :class="displayValueClass"
+          data-part="display-value"
+        >
           <slot name="displayValue" />
         </span>
       </div>
 
-      <div v-if="d.clearButton && !d.disabled && !d.readOnly" :class="clearWrapClass">
+      <div
+        v-if="d.clearButton && !d.disabled && !d.readOnly"
+        :class="clearWrapClass"
+      >
         <Button
           :aria-label="d.clearLabel"
           :class="clearButtonClass"
@@ -286,17 +305,27 @@ defineExpose({
           :tabindex="-1"
           @click="clearValue"
         >
-          <CloseIcon :class="cn('text-cui-fg-soft', inputClearGlyphSizes[d.size])" />
+          <CloseIcon
+            :class="cn('text-cladd-fg-soft', inputClearGlyphSizes[d.size])"
+          />
         </Button>
       </div>
 
       <slot name="suffix" />
     </div>
 
-    <div v-if="d.infoMessage && d.valid && !d.readOnly" :class="infoClass" data-part="info">
+    <div
+      v-if="d.infoMessage && d.valid && !d.readOnly"
+      :class="infoClass"
+      data-part="info"
+    >
       {{ d.infoMessage }}
     </div>
-    <div v-if="d.errorMessage && !d.valid" :class="errorClass" data-part="error">
+    <div
+      v-if="d.errorMessage && !d.valid"
+      :class="errorClass"
+      data-part="error"
+    >
       {{ d.errorMessage }}
     </div>
   </SurfaceCut>

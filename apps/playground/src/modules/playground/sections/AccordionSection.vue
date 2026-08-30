@@ -6,12 +6,12 @@ import {
   AccordionRoot,
   AccordionTrigger,
   Surface,
-} from "@cladd-vue/ui";
-import { ref } from "vue";
-import type { UiAccent } from "@cladd-vue/ui";
+} from '@cladd-vue/ui';
+import type { UiAccent } from '@cladd-vue/ui';
+import { ref } from 'vue';
 
-import CatalogSection from "../components/CatalogSection.vue";
-import ComponentPlayground from "../components/ComponentPlayground.vue";
+import CatalogSection from '../components/CatalogSection.vue';
+import ComponentPlayground from '../components/ComponentPlayground.vue';
 
 defineProps<{
   accent: UiAccent;
@@ -19,28 +19,36 @@ defineProps<{
 }>();
 
 const headerClass =
-  "flex w-full items-center justify-between gap-2 px-3 py-2.5 text-cui-sm text-cui-fg hover:bg-cui-surface-hover data-[disabled]:opacity-50";
+  'flex w-full items-center justify-between gap-2 px-3 py-2.5 text-cladd-sm text-cladd-fg hover:bg-cladd-surface-hover data-[disabled]:opacity-50';
 
 const items = [
-  { value: "appearance", label: "Appearance", body: "Theme, accent color, density." },
-  { value: "layout", label: "Layout", body: "Grid, spacing, breakpoints." },
-  { value: "advanced", label: "Advanced", body: "Feature flags and experiments." },
+  {
+    value: 'appearance',
+    label: 'Appearance',
+    body: 'Theme, accent color, density.',
+  },
+  { value: 'layout', label: 'Layout', body: 'Grid, spacing, breakpoints.' },
+  {
+    value: 'advanced',
+    label: 'Advanced',
+    body: 'Feature flags and experiments.',
+  },
 ] as const;
 
-const open = ref<string[]>(["appearance"]);
+const open = ref<string[]>(['appearance']);
 
 const accordionCode = `<AccordionRoot default-value="appearance" multiple>
   <AccordionItem v-for="item in items" :key="item.value" :value="item.value">
     <AccordionTrigger>
       <button class="${headerClass}">
         {{ item.label }}
-        <AccordionIndicator class="size-4 -rotate-90 text-cui-fg-soft transition-transform duration-200 data-[open]:rotate-0">
+        <AccordionIndicator class="size-4 -rotate-90 text-cladd-fg-soft transition-transform duration-200 data-[open]:rotate-0">
           <ChevronDownIcon />
         </AccordionIndicator>
       </button>
     </AccordionTrigger>
     <AccordionPanel>
-      <div class="px-3 pt-1 pb-3 text-cui-sm text-cui-fg-soft">{{ item.body }}</div>
+      <div class="px-3 pt-1 pb-3 text-cladd-sm text-cladd-fg-soft">{{ item.body }}</div>
     </AccordionPanel>
   </AccordionItem>
 </AccordionRoot>`;
@@ -63,7 +71,11 @@ const accordionCode = `<AccordionRoot default-value="appearance" multiple>
             wrap-content
           >
             <AccordionRoot default-value="appearance" multiple>
-              <AccordionItem v-for="item in items" :key="item.value" :value="item.value">
+              <AccordionItem
+                v-for="item in items"
+                :key="item.value"
+                :value="item.value"
+              >
                 <AccordionTrigger>
                   <button :class="headerClass" :disabled="!interactionsEnabled">
                     {{ item.label }}
@@ -97,7 +109,11 @@ const accordionCode = `<AccordionRoot default-value="appearance" multiple>
             outline
             wrap-content
           >
-            <AccordionRoot multiple :value="open" @update:value="open = $event as string[]">
+            <AccordionRoot
+              multiple
+              :value="open"
+              @update:value="open = $event as string[]"
+            >
               <AccordionItem
                 v-for="item in items"
                 :key="item.value"
@@ -156,12 +172,12 @@ const accordionCode = `<AccordionRoot default-value="appearance" multiple>
 }
 
 .accordion-section__list > :not(:last-child) {
-  border-bottom: 1px solid var(--cui-outline);
+  border-bottom: 1px solid var(--cladd-outline);
 }
 
 .accordion-section__chevron {
   flex-shrink: 0;
-  color: var(--cui-fg-soft);
+  color: var(--cladd-fg-soft);
   transform: rotate(-90deg);
   transition: transform 0.2s ease-out;
 }
@@ -172,7 +188,7 @@ const accordionCode = `<AccordionRoot default-value="appearance" multiple>
 
 .accordion-section__body {
   padding: 4px 12px 12px;
-  color: var(--cui-fg-soft);
+  color: var(--cladd-fg-soft);
   font-size: 12px;
 }
 </style>

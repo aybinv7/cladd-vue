@@ -1,9 +1,9 @@
-import type { UiAccent } from "../../foundations/contracts.ts";
-import type { FieldSize } from "./form.contracts.ts";
+import type { UiAccent } from '../../foundations/contracts.ts';
+import type { FieldSize } from './form.contracts.ts';
 
-export const searchFieldClasses = "cui-search-field w-full";
+export const searchFieldClasses = 'cladd-search-field w-full';
 
-export const searchFieldIconClasses = "text-cui-fg-softer";
+export const searchFieldIconClasses = 'text-cladd-fg-softer';
 
 export interface SearchFieldProps {
   accent?: UiAccent;

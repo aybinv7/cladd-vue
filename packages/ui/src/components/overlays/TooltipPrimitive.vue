@@ -1,14 +1,14 @@
 <script setup lang="ts">
-import { computed, shallowRef, useAttrs, watch } from "vue";
+import { computed, shallowRef, useAttrs, watch } from 'vue';
 
-import { useAnchorPosition } from "../../composables/useAnchorPosition.ts";
-import { useComponentDefaults } from "../../composables/useComponentDefaults.ts";
-import { useOverlayLifecycle } from "../../composables/useOverlayLifecycle.ts";
-import { useOverlayPhase } from "../../composables/useOverlayPhase.ts";
-import { provideSurfaceColorReset } from "../../contexts/surfaceContext.ts";
-import { useUiContext } from "../../contexts/uiContext.ts";
-import { cn } from "../../shared/cn.ts";
-import Surface from "../surface/Surface.vue";
+import { useAnchorPosition } from '../../composables/useAnchorPosition.ts';
+import { useComponentDefaults } from '../../composables/useComponentDefaults.ts';
+import { useOverlayLifecycle } from '../../composables/useOverlayLifecycle.ts';
+import { useOverlayPhase } from '../../composables/useOverlayPhase.ts';
+import { provideSurfaceColorReset } from '../../contexts/surfaceContext.ts';
+import { useUiContext } from '../../contexts/uiContext.ts';
+import { cn } from '../../shared/cn.ts';
+import Surface from '../surface/Surface.vue';
 import {
   buildTooltipPositionStyle,
   resolveOverlayElement,
@@ -21,7 +21,7 @@ import {
   tooltipSurfaceClasses,
   tooltipZIndexClasses,
   type TooltipPrimitiveProps,
-} from "./overlay.contracts.ts";
+} from './overlay.contracts.ts';
 
 // Upstream keeps `className` (the tooltip Surface) separate from `contentClassName`.
 defineOptions({ inheritAttrs: false });
@@ -49,22 +49,22 @@ const emit = defineEmits<{
   opening: [];
 }>();
 
-const model = defineModel<boolean>("open", { default: false });
+const model = defineModel<boolean>('open', { default: false });
 const attrs = useAttrs();
 const ui = useUiContext();
 const surface = shallowRef<HTMLElement>();
 const { anchorName, setAnchorElement } = useAnchorPosition();
-const d = useComponentDefaults("TooltipPrimitive", props, {
+const d = useComponentDefaults('TooltipPrimitive', props, {
   offset: 4,
-  position: "top" as TooltipPrimitiveProps["position"],
+  position: 'top' as TooltipPrimitiveProps['position'],
   zIndex: tooltipZIndexClasses,
 });
 const { phase, setPhase } = useOverlayPhase(model);
 
-const mounted = computed(() => phase.value !== "closed");
+const mounted = computed(() => phase.value !== 'closed');
 const currentAccent = computed(() => d.value.color ?? d.value.accent);
 const currentSurfaceLevel = computed(
-  () => d.value.surfaceLevel ?? (ui.theme.value === "light" ? 1 : 5),
+  () => d.value.surfaceLevel ?? (ui.theme.value === 'light' ? 1 : 5),
 );
 const surfaceStyle = computed(() =>
   buildTooltipPositionStyle({
@@ -86,10 +86,10 @@ function setSurface(value: unknown): void {
 
 const { opened } = useOverlayLifecycle({
   element: surface,
-  onClose: () => emit("closing"),
-  onClosed: () => emit("closed"),
-  onOpen: () => emit("opening"),
-  onOpened: () => emit("opened"),
+  onClose: () => emit('closing'),
+  onClosed: () => emit('closed'),
+  onOpen: () => emit('opening'),
+  onOpened: () => emit('opened'),
   phase,
   setPhase,
 });
@@ -98,15 +98,17 @@ const surfaceClass = computed(() =>
   cn(
     tooltipSurfaceClasses,
     opened.value && tooltipOpenedClasses,
-    phase.value === "opened" && tooltipDurationClasses,
-    phase.value === "closing" && tooltipDurationClasses,
-    (phase.value === "closing" || !opened.value) && tooltipHiddenClasses,
+    phase.value === 'opened' && tooltipDurationClasses,
+    phase.value === 'closing' && tooltipDurationClasses,
+    (phase.value === 'closing' || !opened.value) && tooltipHiddenClasses,
     d.value.zIndex,
     tooltipOrigins[d.value.position],
     attrs.class,
   ),
 );
-const contentClass = computed(() => cn(tooltipContentClasses, d.value.contentClassName));
+const contentClass = computed(() =>
+  cn(tooltipContentClasses, d.value.contentClassName),
+);
 
 watch(
   () => d.value.anchorElement,

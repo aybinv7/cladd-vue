@@ -1,4 +1,10 @@
-import { inject, provide, type InjectionKey, type Ref, type ShallowRef } from "vue";
+import {
+  inject,
+  provide,
+  type InjectionKey,
+  type Ref,
+  type ShallowRef,
+} from 'vue';
 
 /**
  * Shared state container behind the `*Root` / `*Trigger` / `*Close` compounds.
@@ -13,13 +19,17 @@ export interface OverlayRootContext {
   setOpen: (open: boolean) => void;
 }
 
-export const popoverRootContextKey: InjectionKey<OverlayRootContext> = Symbol("cui-popover-root");
+export const popoverRootContextKey: InjectionKey<OverlayRootContext> =
+  Symbol('cladd-popover-root');
 
-export const dialogRootContextKey: InjectionKey<OverlayRootContext> = Symbol("cui-dialog-root");
+export const dialogRootContextKey: InjectionKey<OverlayRootContext> =
+  Symbol('cladd-dialog-root');
 
-export const popupRootContextKey: InjectionKey<OverlayRootContext> = Symbol("cui-popup-root");
+export const popupRootContextKey: InjectionKey<OverlayRootContext> =
+  Symbol('cladd-popup-root');
 
-export const toastRootContextKey: InjectionKey<OverlayRootContext> = Symbol("cui-toast-root");
+export const toastRootContextKey: InjectionKey<OverlayRootContext> =
+  Symbol('cladd-toast-root');
 
 export function provideOverlayRootContext(
   key: InjectionKey<OverlayRootContext>,

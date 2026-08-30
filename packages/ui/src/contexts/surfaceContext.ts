@@ -6,9 +6,9 @@ import {
   type InjectionKey,
   type MaybeRefOrGetter,
   type Ref,
-} from "vue";
+} from 'vue';
 
-import type { UiAccent } from "../foundations/contracts.ts";
+import type { UiAccent } from '../foundations/contracts.ts';
 
 /**
  * Tracks the surface depth of the current subtree. Each `Surface` publishes its own level (or
@@ -17,7 +17,7 @@ import type { UiAccent } from "../foundations/contracts.ts";
  */
 export interface SurfaceContextValue {
   /**
-   * Accent color of the nearest enclosing colored surface, mirroring the `cui-color-{name}` CSS
+   * Accent color of the nearest enclosing colored surface, mirroring the `cladd-color-{name}` CSS
    * cascade so descendants can read the region color in JS. `undefined` when no surface up the
    * tree set a color.
    */
@@ -26,7 +26,9 @@ export interface SurfaceContextValue {
   level: Readonly<Ref<number>>;
 }
 
-const surfaceContextKey: InjectionKey<SurfaceContextValue> = Symbol("cui-surface-context");
+const surfaceContextKey: InjectionKey<SurfaceContextValue> = Symbol(
+  'cladd-surface-context',
+);
 const defaultSurfaceContext: SurfaceContextValue = {
   color: computed(() => undefined),
   level: computed(() => 0),
@@ -47,7 +49,7 @@ export function provideSurfaceContext(
 
 /**
  * Resets the region color to `undefined` while preserving the surface level, for use at portal
- * boundaries. Vue's provide/inject crosses teleports but the `cui-color-{name}` CSS cascade does
+ * boundaries. Vue's provide/inject crosses teleports but the `cladd-color-{name}` CSS cascade does
  * not — without this, a teleported overlay would inherit a colored ancestor's region color through
  * context while its DOM renders neutral.
  */

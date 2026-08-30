@@ -1,16 +1,25 @@
-import { defineComponent, h, nextTick } from "vue";
-import { expect, test } from "vite-plus/test";
+import { expect, test } from 'vite-plus/test';
+import { defineComponent, h, nextTick } from 'vue';
 
-import { Toast, ToastRoot, ToastTrigger, UiProvider, useDialog, useToast } from "../src/index.ts";
 import {
   toastOpenedClasses,
   toastSurfaceClasses,
-} from "../src/components/feedback/toast.contracts.ts";
-import { byTestId, click, mountTree } from "./support/mountTree.ts";
+} from '../src/components/feedback/toast.contracts.ts';
+import {
+  Toast,
+  ToastRoot,
+  ToastTrigger,
+  UiProvider,
+  useDialog,
+  useToast,
+} from '../src/index.ts';
+import { byTestId, click, mountTree } from './support/mountTree.ts';
 
 async function settle(): Promise<void> {
   await nextTick();
-  await new Promise((resolve) => requestAnimationFrame(() => resolve(undefined)));
+  await new Promise((resolve) =>
+    requestAnimationFrame(() => resolve(undefined)),
+  );
   await nextTick();
 }
 
@@ -20,44 +29,50 @@ function mountWithApi<T>(useApi: () => T) {
   const consumer = defineComponent({
     setup() {
       api = useApi();
-      return () => h("span");
+      return () => h('span');
     },
   });
-  const mounted = mountTree(h(UiProvider, null, { default: () => h(consumer) }));
+  const mounted = mountTree(
+    h(UiProvider, null, { default: () => h(consumer) }),
+  );
   return { api, mounted };
 }
 
-test("locks the Cladd toast stacking utility strings", () => {
+test('locks the Cladd toast stacking utility strings', () => {
   expect(toastSurfaceClasses).toBe(
-    "cui-toast fixed right-safe-4 bottom-safe-4 z-50 max-w-full origin-bottom rounded-cui-toast",
+    'cladd-toast fixed right-safe-4 bottom-safe-4 z-50 max-w-full origin-bottom rounded-cladd-toast',
   );
   // Each toast reacts to how many un-closing toasts follow it — three deep and it hides.
   expect(toastOpenedClasses).toContain(
-    "has-[+.cui-toast+.cui-toast+.cui-toast:not(.toast-closing)]:opacity-0",
+    'has-[+.cladd-toast+.cladd-toast+.cladd-toast:not(.toast-closing)]:opacity-0',
   );
-  expect(toastOpenedClasses).toContain("has-[+.cui-toast:not(.toast-closing)]:scale-90");
+  expect(toastOpenedClasses).toContain(
+    'has-[+.cladd-toast:not(.toast-closing)]:scale-90',
+  );
 });
 
-test("UiProvider renders the dialogs portal and useDialog drives it", async () => {
+test('UiProvider renders the dialogs portal and useDialog drives it', async () => {
   const { api, mounted } = mountWithApi(() => useDialog());
   const confirmed: boolean[] = [];
 
   expect(document.body.querySelector('[role="dialog"]')).toBeNull();
 
   api.confirm({
-    confirmButtonText: "Delete",
+    confirmButtonText: 'Delete',
     onConfirm: (value) => confirmed.push(value),
-    text: "This cannot be undone.",
-    title: "Delete target?",
+    text: 'This cannot be undone.',
+    title: 'Delete target?',
   });
   await settle();
 
   const dialog = document.body.querySelector<HTMLElement>('[role="dialog"]');
   expect(dialog).not.toBeNull();
-  expect(dialog?.textContent).toContain("Delete target?");
-  expect(dialog?.textContent).toContain("This cannot be undone.");
+  expect(dialog?.textContent).toContain('Delete target?');
+  expect(dialog?.textContent).toContain('This cannot be undone.');
 
-  const confirmButton = document.body.querySelector<HTMLButtonElement>('[data-part="confirm"]');
+  const confirmButton = document.body.querySelector<HTMLButtonElement>(
+    '[data-part="confirm"]',
+  );
   if (confirmButton) await click(confirmButton);
   await settle();
 
@@ -66,56 +81,65 @@ test("UiProvider renders the dialogs portal and useDialog drives it", async () =
   mounted.root.remove();
 });
 
-test("useDialog alert renders a single confirm affordance", async () => {
+test('useDialog alert renders a single confirm affordance', async () => {
   const { api, mounted } = mountWithApi(() => useDialog());
 
-  api.alert({ text: "Target detached.", title: "Done" });
+  api.alert({ text: 'Target detached.', title: 'Done' });
   await settle();
 
-  expect(document.body.querySelector('[data-part="confirm"]')?.textContent?.trim()).toBe("Ok");
+  expect(
+    document.body.querySelector('[data-part="confirm"]')?.textContent?.trim(),
+  ).toBe('Ok');
   expect(document.body.querySelector('[data-part="cancel"]')).toBeNull();
 
   mounted.app.unmount();
   mounted.root.remove();
 });
 
-test("drives a declarative toast through the ToastRoot compound", async () => {
+test('drives a declarative toast through the ToastRoot compound', async () => {
   const mounted = mountTree(
     h(UiProvider, null, {
       default: () =>
         h(ToastRoot, null, {
           default: () => [
             h(ToastTrigger, null, {
-              default: () => h("button", { "data-testid": "toast-trigger", type: "button" }, "Go"),
+              default: () =>
+                h(
+                  'button',
+                  { 'data-testid': 'toast-trigger', type: 'button' },
+                  'Go',
+                ),
             }),
-            h(Toast, { text: "Reconnected", timeout: 0, title: "Device" }),
+            h(Toast, { text: 'Reconnected', timeout: 0, title: 'Device' }),
           ],
         }),
     }),
   );
 
-  expect(document.body.querySelector(".cui-toast")).toBeNull();
+  expect(document.body.querySelector('.cladd-toast')).toBeNull();
 
-  await click(byTestId(mounted.root, "toast-trigger"));
+  await click(byTestId(mounted.root, 'toast-trigger'));
   await settle();
 
-  expect(document.body.querySelector(".cui-toast")?.textContent).toContain("Reconnected");
+  expect(document.body.querySelector('.cladd-toast')?.textContent).toContain(
+    'Reconnected',
+  );
 
   mounted.app.unmount();
   mounted.root.remove();
 });
 
-test("UiProvider renders the toasts portal and useToast queues onto it", async () => {
+test('UiProvider renders the toasts portal and useToast queues onto it', async () => {
   const { api, mounted } = mountWithApi(() => useToast());
 
-  api({ text: "IndexedDB cleared", timeout: 0, title: "Storage" });
-  api({ text: "Cache API cleared", timeout: 0, title: "Storage" });
+  api({ text: 'IndexedDB cleared', timeout: 0, title: 'Storage' });
+  api({ text: 'Cache API cleared', timeout: 0, title: 'Storage' });
   await settle();
 
-  const toasts = document.body.querySelectorAll(".cui-toast");
+  const toasts = document.body.querySelectorAll('.cladd-toast');
   expect(toasts).toHaveLength(2);
-  expect(document.body.textContent).toContain("IndexedDB cleared");
-  expect(document.body.textContent).toContain("Cache API cleared");
+  expect(document.body.textContent).toContain('IndexedDB cleared');
+  expect(document.body.textContent).toContain('Cache API cleared');
 
   mounted.app.unmount();
   mounted.root.remove();

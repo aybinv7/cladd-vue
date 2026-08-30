@@ -1,6 +1,16 @@
-import { computed, inject, provide, type ComputedRef, type InjectionKey } from "vue";
+import {
+  computed,
+  inject,
+  provide,
+  type ComputedRef,
+  type InjectionKey,
+} from 'vue';
 
-import type { SurfaceVariant, UiAccent, UiSize } from "../../foundations/contracts.ts";
+import type {
+  SurfaceVariant,
+  UiAccent,
+  UiSize,
+} from '../../foundations/contracts.ts';
 
 export interface SegmentedContextValue {
   activeColor?: UiAccent;
@@ -14,13 +24,15 @@ export interface SegmentedContextValue {
 }
 
 const segmentedContextKey: InjectionKey<ComputedRef<SegmentedContextValue>> =
-  Symbol("cui-segmented");
+  Symbol('cladd-segmented');
 const defaultSegmentedContext = computed<SegmentedContextValue>(() => ({}));
 
 export function useSegmentedContext(): ComputedRef<SegmentedContextValue> {
   return inject(segmentedContextKey, defaultSegmentedContext);
 }
 
-export function provideSegmentedContext(value: ComputedRef<SegmentedContextValue>): void {
+export function provideSegmentedContext(
+  value: ComputedRef<SegmentedContextValue>,
+): void {
   provide(segmentedContextKey, value);
 }

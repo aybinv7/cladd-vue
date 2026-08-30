@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import { computed, useAttrs } from "vue";
+import { computed, useAttrs } from 'vue';
 
-import { useComponentDefaults } from "../../composables/useComponentDefaults.ts";
-import { cn } from "../../shared/cn.ts";
-import { roundedClasses } from "../../shared/roundedClasses.ts";
-import Surface from "../surface/Surface.vue";
-import type { ToolbarProps } from "./toolbar.contracts.ts";
-import { provideToolbarContext } from "./toolbarContext.ts";
+import { useComponentDefaults } from '../../composables/useComponentDefaults.ts';
+import { cn } from '../../shared/cn.ts';
+import { roundedClasses } from '../../shared/roundedClasses.ts';
+import Surface from '../surface/Surface.vue';
+import type { ToolbarProps } from './toolbar.contracts.ts';
+import { provideToolbarContext } from './toolbarContext.ts';
 
 defineOptions({ inheritAttrs: false });
 
@@ -32,14 +32,14 @@ const rootAttrs = computed(() => {
   const { class: _consumerClass, ...rest } = attrs;
   return rest;
 });
-const d = useComponentDefaults("Toolbar", props, {
-  as: "div" as ToolbarProps["as"],
+const d = useComponentDefaults('Toolbar', props, {
+  as: 'div' as ToolbarProps['as'],
   buttonOutline: false,
-  buttonVariant: "transparent" as ToolbarProps["buttonVariant"],
+  buttonVariant: 'transparent' as ToolbarProps['buttonVariant'],
   outline: true,
   rounded: true,
-  size: "md" as ToolbarProps["size"],
-  variant: "gradient" as ToolbarProps["variant"],
+  size: 'md' as ToolbarProps['size'],
+  variant: 'gradient' as ToolbarProps['variant'],
 });
 
 provideToolbarContext(
@@ -53,10 +53,10 @@ provideToolbarContext(
 
 const radii = computed(() => roundedClasses(d.value.size, d.value.rounded));
 const rootClass = computed(() =>
-  cn("cui-toolbar flex", radii.value.wrapRoundedClasses, attrs.class),
+  cn('cladd-toolbar flex', radii.value.wrapRoundedClasses, attrs.class),
 );
 const contentClass = computed(() =>
-  cn("flex h-auto items-center justify-center p-1", d.value.contentClassName),
+  cn('flex h-auto items-center justify-center p-1', d.value.contentClassName),
 );
 </script>
 

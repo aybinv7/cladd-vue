@@ -1,6 +1,9 @@
-import { computed, shallowRef, type InjectionKey } from "vue";
+import { computed, shallowRef, type InjectionKey } from 'vue';
 
-import { provideOverlayRootContext, type OverlayRootContext } from "./overlayRootContext.ts";
+import {
+  provideOverlayRootContext,
+  type OverlayRootContext,
+} from './overlayRootContext.ts';
 
 export interface OverlayRootProps {
   /** Initial open state (uncontrolled). Default `false`. Ignored when `open` is provided. */
@@ -22,7 +25,9 @@ export function useOverlayRoot(
 ): OverlayRootContext {
   const internalOpen = shallowRef(props.defaultOpen ?? false);
   const controlled = computed(() => props.open !== undefined);
-  const open = computed(() => (props.open === undefined ? internalOpen.value : props.open));
+  const open = computed(() =>
+    props.open === undefined ? internalOpen.value : props.open,
+  );
 
   function setOpen(next: boolean): void {
     if (!controlled.value) internalOpen.value = next;

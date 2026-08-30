@@ -1,7 +1,13 @@
 <script setup lang="ts">
-import { ref } from "vue";
+import { ref } from 'vue';
 
-import { Button, Dialog, Popover, Tooltip, UiProvider } from "../../src/index.ts";
+import {
+  Button,
+  Dialog,
+  Popover,
+  Tooltip,
+  UiProvider,
+} from '../../src/index.ts';
 
 const dialogOpen = ref(false);
 const guardedDialogOpen = ref(false);
@@ -29,10 +35,14 @@ const closedCount = ref(0);
           </template>
           <template #default="{ close: closeNested }">
             <Button data-testid="nested-action">Nested action</Button>
-            <Button data-testid="close-nested" @click="closeNested">Close nested</Button>
+            <Button data-testid="close-nested" @click="closeNested"
+              >Close nested</Button
+            >
           </template>
         </Popover>
-        <Button data-testid="close-dialog" @click="closeDialog">Close dialog</Button>
+        <Button data-testid="close-dialog" @click="closeDialog"
+          >Close dialog</Button
+        >
       </template>
     </Dialog>
 
@@ -44,7 +54,9 @@ const closedCount = ref(0);
       title="Delete target?"
     >
       <template #trigger>
-        <Button data-testid="guarded-dialog-trigger">Open guarded dialog</Button>
+        <Button data-testid="guarded-dialog-trigger"
+          >Open guarded dialog</Button
+        >
       </template>
     </Dialog>
 
@@ -54,7 +66,9 @@ const closedCount = ref(0);
       </template>
       <template #default="{ close: closePopover }">
         <span data-testid="popover-content">Popover content</span>
-        <Button data-testid="close-popover" @click="closePopover">Close popover</Button>
+        <Button data-testid="close-popover" @click="closePopover"
+          >Close popover</Button
+        >
       </template>
     </Popover>
 

@@ -1,19 +1,19 @@
 <script setup lang="ts">
-import { provideUiContext } from "../../contexts/uiContext.ts";
-import type { ComponentDefaults } from "../../foundations/componentDefaults.ts";
-import type { UiAccent, UiTheme } from "../../foundations/contracts.ts";
-import DialogsPortal from "./DialogsPortal.vue";
-import { provideDialogsPortalContext } from "./dialogsPortalContext.ts";
-import ToastsPortal from "./ToastsPortal.vue";
-import { provideToastsPortalContext } from "./toastsPortalContext.ts";
+import { provideUiContext } from '../../contexts/uiContext.ts';
+import type { ComponentDefaults } from '../../foundations/componentDefaults.ts';
+import type { UiAccent, UiTheme } from '../../foundations/contracts.ts';
+import DialogsPortal from './DialogsPortal.vue';
+import { provideDialogsPortalContext } from './dialogsPortalContext.ts';
+import ToastsPortal from './ToastsPortal.vue';
+import { provideToastsPortalContext } from './toastsPortalContext.ts';
 
 /**
  * Upstream's `CladdProvider` renders **no DOM element** — it only publishes context. The
- * `dark`/`light` and `cui-color-*` classes that drive the token cascade belong on the app's own
+ * `dark`/`light` and `cladd-color-*` classes that drive the token cascade belong on the app's own
  * root element, exactly as a Cladd app does it:
  *
  * ```html
- * <html class="dark cui-color-brand">
+ * <html class="dark cladd-color-brand">
  * ```
  */
 
@@ -29,10 +29,10 @@ const props = withDefaults(
     theme?: UiTheme;
   }>(),
   {
-    accentColor: "brand",
+    accentColor: 'brand',
     defaults: undefined,
     overlaysRoot: undefined,
-    theme: "dark",
+    theme: 'dark',
   },
 );
 

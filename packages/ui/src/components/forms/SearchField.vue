@@ -1,17 +1,17 @@
 <script setup lang="ts">
-import { computed, useAttrs } from "vue";
+import { computed, useAttrs } from 'vue';
 
-import type { UiAccent } from "../../foundations/contracts.ts";
-import { useComponentDefaults } from "../../composables/useComponentDefaults.ts";
-import { cn } from "../../shared/cn.ts";
-import type { FieldSize } from "./form.contracts.ts";
-import Input from "./Input.vue";
-import SearchIcon from "./SearchIcon.vue";
+import { useComponentDefaults } from '../../composables/useComponentDefaults.ts';
+import type { UiAccent } from '../../foundations/contracts.ts';
+import { cn } from '../../shared/cn.ts';
+import type { FieldSize } from './form.contracts.ts';
+import Input from './Input.vue';
 import {
   searchFieldClasses,
   searchFieldIconClasses,
   type SearchFieldProps,
-} from "./searchField.contracts.ts";
+} from './searchField.contracts.ts';
+import SearchIcon from './SearchIcon.vue';
 
 defineOptions({ inheritAttrs: false });
 
@@ -24,11 +24,11 @@ const props = withDefaults(defineProps<SearchFieldProps>(), {
   size: undefined,
 });
 
-const d = useComponentDefaults("SearchField", props, {
+const d = useComponentDefaults('SearchField', props, {
   clearButton: true,
-  placeholder: "Search",
+  placeholder: 'Search',
   rounded: true,
-  size: "lg" as FieldSize,
+  size: 'lg' as FieldSize,
 });
 
 defineSlots<{
@@ -41,7 +41,7 @@ const emit = defineEmits<{
   keydown: [event: KeyboardEvent];
 }>();
 
-const model = defineModel<string>({ default: "" });
+const model = defineModel<string>({ default: '' });
 const attrs = useAttrs();
 const rootAttrs = computed(() => {
   const { class: _consumerClass, ...rest } = attrs;
@@ -50,15 +50,15 @@ const rootAttrs = computed(() => {
 const rootClass = computed(() => cn(searchFieldClasses, attrs.class));
 
 function clear(): void {
-  model.value = "";
-  emit("clear");
+  model.value = '';
+  emit('clear');
 }
 
 // Escape clears the field; only swallow it when there's something to clear so an empty field
 // still lets Escape bubble (e.g. to close a Popover).
 function onKeydown(event: KeyboardEvent): void {
-  emit("keydown", event);
-  if (event.defaultPrevented || event.key !== "Escape" || !model.value) return;
+  emit('keydown', event);
+  if (event.defaultPrevented || event.key !== 'Escape' || !model.value) return;
   event.preventDefault();
   event.stopPropagation();
   clear();

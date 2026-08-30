@@ -4,11 +4,11 @@
 
 ```vue
 <script setup lang="ts">
-import { Surface } from "@cladd-vue/ui";
+import { Surface } from '@cladd-vue/ui';
 </script>
 
 <template>
-  <Surface variant="gradient" outline class="cui-panel">
+  <Surface variant="gradient" outline class="cladd-panel">
     <Surface level="+1" hoverable clickable>Nested row</Surface>
   </Surface>
 </template>
@@ -72,15 +72,15 @@ Depth is resolved against the nearest enclosing surface context, which reports `
 </template>
 ```
 
-The resolved values are observable on the DOM as `data-cui-surface-level`, `data-cui-surface-variant`, and the `cui-surface-level-{n}` class. `resolveSurfaceLevel` and `clampSurfaceLevel` are exported for consumers that need the same arithmetic outside a component, and `useSurface()` returns the current `{ level, accent }` refs.
+The resolved values are observable on the DOM as `data-cladd-surface-level`, `data-cladd-surface-variant`, and the `cladd-surface-level-{n}` class. `resolveSurfaceLevel` and `clampSurfaceLevel` are exported for consumers that need the same arithmetic outside a component, and `useSurface()` returns the current `{ level, accent }` refs.
 
 ## Accent scoping
 
-The effective accent is `color`, then `accent`, then the accent published by the enclosing surface, then the provider accent from `UiProvider`. The `cui-accent-{name}` class is only applied when this surface sets `color` or `accent` explicitly, which keeps an accent scoped to its own subtree instead of leaking to siblings. The resolved value is always mirrored on `data-cui-accent`, and it is what descendants read through the surface context.
+The effective accent is `color`, then `accent`, then the accent published by the enclosing surface, then the provider accent from `UiProvider`. The `cladd-accent-{name}` class is only applied when this surface sets `color` or `accent` explicitly, which keeps an accent scoped to its own subtree instead of leaking to siblings. The resolved value is always mirrored on `data-cladd-accent`, and it is what descendants read through the surface context.
 
 ```vue
 <script setup lang="ts">
-import { Surface, UiProvider } from "@cladd-vue/ui";
+import { Surface, UiProvider } from '@cladd-vue/ui';
 </script>
 
 <template>
@@ -101,9 +101,9 @@ The contract follows the pinned Cladd `Surface.tsx`, `SurfaceContent.tsx`, and `
 
 Divergences from upstream that are intentional in this package:
 
-- Accent resolution ends at the provider accent, so `data-cui-accent` always carries a concrete token. Upstream publishes an empty region color when no ancestor set one.
+- Accent resolution ends at the provider accent, so `data-cladd-accent` always carries a concrete token. Upstream publishes an empty region color when no ancestor set one.
 - `accent` exists as an alias for `color` across this package; `color` still wins when both are given.
-- Styling is expressed as namespaced `cui-*` classes and `data-cui-*` attributes instead of inline Tailwind utility strings, with the upstream values moved into `styles/surfaces.css`.
+- Styling is expressed as namespaced `cladd-*` classes and `data-cladd-*` attributes instead of inline Tailwind utility strings, with the upstream values moved into `styles/surfaces.css`.
 - The content layer is internal. Upstream exports a separate `SurfaceContent` component; here it is produced by `wrapContent` and shaped with `contentClassName`.
 - There is no exported region-accent reset for portal boundaries. Overlay components re-apply the theme root on their own portal content instead.
 - Per-component provider defaults are not implemented. Upstream `Surface` reads `useComponentDefaults('Surface', props)`, so app-wide `defaults={{ Surface: … }}` changes its built-in defaults; this port resolves defaults from the component only.

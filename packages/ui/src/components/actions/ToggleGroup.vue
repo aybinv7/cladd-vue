@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import { computed, shallowRef } from "vue";
+import { computed, shallowRef } from 'vue';
 
-import { useComponentDefaults } from "../../composables/useComponentDefaults.ts";
-import Segmented from "./Segmented.vue";
-import type { ToggleGroupProps } from "./toggleGroup.contracts.ts";
-import { provideToggleGroupContext } from "./toggleGroupContext.ts";
+import { useComponentDefaults } from '../../composables/useComponentDefaults.ts';
+import Segmented from './Segmented.vue';
+import type { ToggleGroupProps } from './toggleGroup.contracts.ts';
+import { provideToggleGroupContext } from './toggleGroupContext.ts';
 
 defineOptions({ inheritAttrs: false });
 
@@ -26,31 +26,39 @@ const props = withDefaults(defineProps<ToggleGroupProps>(), {
 });
 
 const emit = defineEmits<{
-  "update:value": [value: string | string[] | undefined];
+  'update:value': [value: string | string[] | undefined];
 }>();
 
 defineSlots<{
   default?: () => unknown;
 }>();
 
-const d = useComponentDefaults("ToggleGroup", props, {
+const d = useComponentDefaults('ToggleGroup', props, {
   multiple: false,
 });
 const internalValue = shallowRef(d.value.defaultValue);
 const isControlled = computed(() => d.value.value !== undefined);
-const value = computed(() => (isControlled.value ? d.value.value : internalValue.value));
+const value = computed(() =>
+  isControlled.value ? d.value.value : internalValue.value,
+);
 
 function setValue(next: string | string[] | undefined): void {
   if (!isControlled.value) internalValue.value = next;
-  emit("update:value", next);
+  emit('update:value', next);
 }
 
 function toggleValue(itemValue: string): void {
   if (d.value.multiple) {
     const current = value.value;
-    const list = Array.isArray(current) ? current : current != null ? [current] : [];
+    const list = Array.isArray(current)
+      ? current
+      : current != null
+        ? [current]
+        : [];
     setValue(
-      list.includes(itemValue) ? list.filter((entry) => entry !== itemValue) : [...list, itemValue],
+      list.includes(itemValue)
+        ? list.filter((entry) => entry !== itemValue)
+        : [...list, itemValue],
     );
     return;
   }

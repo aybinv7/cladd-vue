@@ -1,7 +1,7 @@
-import type { Component } from "vue";
+import type { Component } from 'vue';
 
-import { useToastsPortalContext } from "../components/provider/toastsPortalContext.ts";
-import type { UiAccent } from "../foundations/contracts.ts";
+import { useToastsPortalContext } from '../components/provider/toastsPortalContext.ts';
+import type { UiAccent } from '../foundations/contracts.ts';
 
 export interface UseToastOptions {
   /** Extra classes applied to the toast root `Surface`. */

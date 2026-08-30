@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import { computed, useAttrs } from "vue";
+import { computed, useAttrs } from 'vue';
 
-import { useComponentDefaults } from "../../composables/useComponentDefaults.ts";
-import { cn } from "../../shared/cn.ts";
-import type { CollapsibleIndicatorProps } from "./collapsible.contracts.ts";
-import { useCollapsibleContext } from "./collapsibleContext.ts";
+import { useComponentDefaults } from '../../composables/useComponentDefaults.ts';
+import { cn } from '../../shared/cn.ts';
+import type { CollapsibleIndicatorProps } from './collapsible.contracts.ts';
+import { useCollapsibleContext } from './collapsibleContext.ts';
 
 defineOptions({ inheritAttrs: false });
 
@@ -22,10 +22,12 @@ const rootAttrs = computed(() => {
   return rest;
 });
 const collapsible = useCollapsibleContext();
-const d = useComponentDefaults("CollapsibleIndicator", props, {
-  as: "span" as CollapsibleIndicatorProps["as"],
+const d = useComponentDefaults('CollapsibleIndicator', props, {
+  as: 'span' as CollapsibleIndicatorProps['as'],
 });
-const rootClass = computed(() => cn("cui-collapsible-indicator inline-flex", attrs.class));
+const rootClass = computed(() =>
+  cn('cladd-collapsible-indicator inline-flex', attrs.class),
+);
 </script>
 
 <template>

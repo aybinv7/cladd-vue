@@ -1,17 +1,17 @@
 <script setup lang="ts">
-import { computed } from "vue";
+import { computed } from 'vue';
 
-import { useComponentDefaults } from "../../composables/useComponentDefaults.ts";
-import { useUiContext } from "../../contexts/uiContext.ts";
-import FocusRing from "../feedback/FocusRing.vue";
-import { cn } from "../../shared/cn.ts";
-import Surface from "../surface/Surface.vue";
+import { useComponentDefaults } from '../../composables/useComponentDefaults.ts';
+import { useUiContext } from '../../contexts/uiContext.ts';
+import { cn } from '../../shared/cn.ts';
+import FocusRing from '../feedback/FocusRing.vue';
+import Surface from '../surface/Surface.vue';
 import {
   switchRootSizes,
   switchThumbOffsets,
   switchThumbSizes,
   type SwitchProps,
-} from "./switch.contracts.ts";
+} from './switch.contracts.ts';
 
 defineOptions({ inheritAttrs: false });
 
@@ -47,36 +47,42 @@ defineSlots<{
 const model = defineModel<boolean>({ default: false });
 const emit = defineEmits<{
   change: [checked: boolean, event?: Event];
-  "update:checked": [checked: boolean];
+  'update:checked': [checked: boolean];
 }>();
 const ui = useUiContext();
-const d = useComponentDefaults("Switch", props, {
-  as: "label" as SwitchProps["as"],
+const d = useComponentDefaults('Switch', props, {
+  as: 'label' as SwitchProps['as'],
   disabled: false,
   input: true,
   outline: true,
   required: false,
-  size: "md" as SwitchProps["size"],
-  surfaceLevel: "+1",
+  size: 'md' as SwitchProps['size'],
+  surfaceLevel: '+1',
   thumbOutline: true,
-  thumbSurfaceLevel: "+2",
-  thumbVariant: "gradient" as SwitchProps["thumbVariant"],
-  value: "on",
-  variant: "solid" as SwitchProps["variant"],
+  thumbSurfaceLevel: '+2',
+  thumbVariant: 'gradient' as SwitchProps['thumbVariant'],
+  value: 'on',
+  variant: 'solid' as SwitchProps['variant'],
 });
-const isReadOnly = computed(() => d.value.readOnly ?? d.value.readonly ?? false);
+const isReadOnly = computed(
+  () => d.value.readOnly ?? d.value.readonly ?? false,
+);
 const checked = computed(() => d.value.checked ?? model.value);
-const currentAccent = computed(() => d.value.color ?? d.value.accent ?? ui.accentColor.value);
-const hoverable = computed(() => d.value.hoverable ?? d.value.as === "label");
-const focusable = computed(() => d.value.focusable ?? (d.value.as === "label" || d.value.input));
+const currentAccent = computed(
+  () => d.value.color ?? d.value.accent ?? ui.accentColor.value,
+);
+const hoverable = computed(() => d.value.hoverable ?? d.value.as === 'label');
+const focusable = computed(
+  () => d.value.focusable ?? (d.value.as === 'label' || d.value.input),
+);
 const inputId = computed(() => d.value.inputId ?? d.value.id);
 
 function setChecked(next: boolean, event?: Event): void {
   if (d.value.disabled || isReadOnly.value) return;
 
   model.value = next;
-  emit("update:checked", next);
-  emit("change", next, event);
+  emit('update:checked', next);
+  emit('change', next, event);
 }
 
 function handleInputChange(event: Event): void {
@@ -97,7 +103,7 @@ function handleRootClick(event: MouseEvent): void {
 
 function handleFallbackKeydown(event: KeyboardEvent): void {
   if (d.value.input || d.value.disabled || isReadOnly.value) return;
-  if (event.key !== " " && event.key !== "Enter") return;
+  if (event.key !== ' ' && event.key !== 'Enter') return;
 
   event.preventDefault();
   setChecked(!checked.value, event);
@@ -105,63 +111,65 @@ function handleFallbackKeydown(event: KeyboardEvent): void {
 
 const rootClass = computed(() =>
   cn(
-    "cui-switch group/cui-switch relative flex shrink-0 rounded-full select-none",
+    'cladd-switch group/cladd-switch relative flex shrink-0 rounded-full select-none',
     switchRootSizes[d.value.size],
   ),
 );
 
 const thumbClass = computed(() =>
   cn(
-    "z-10 rounded-full duration-300",
+    'z-10 rounded-full duration-300',
     switchThumbSizes[d.value.size],
     checked.value && switchThumbOffsets[d.value.size],
-    checked.value ? "text-cui-on-primary" : "text-cui-fg-soft",
-    d.value.disabled && "opacity-50",
+    checked.value ? 'text-cladd-on-primary' : 'text-cladd-fg-soft',
+    d.value.disabled && 'opacity-50',
   ),
 );
 
 const thumbFillClass = computed(() =>
   cn(
-    "absolute inset-0 size-full shrink-0 rounded-full duration-200",
-    !checked.value && "scale-0",
-    checked.value ? "opacity-100" : "opacity-0",
+    'absolute inset-0 size-full shrink-0 rounded-full duration-200',
+    !checked.value && 'scale-0',
+    checked.value ? 'opacity-100' : 'opacity-0',
   ),
 );
 
 const indicatorClass = computed(() =>
   cn(
-    "absolute inset-0",
-    d.value.size === "sm" && "scale-80",
-    checked.value && `cui-color-${currentAccent.value}`,
+    'absolute inset-0',
+    d.value.size === 'sm' && 'scale-80',
+    checked.value && `cladd-color-${currentAccent.value}`,
   ),
 );
 
 const indicatorRotationClass = computed(() =>
   cn(
-    "absolute inset-0 duration-300 group-active/cui-switch:scale-90",
-    checked.value && "rotate-180",
-    !checked.value && d.value.size === "sm" && "rotate-90",
+    'absolute inset-0 duration-300 group-active/cladd-switch:scale-90',
+    checked.value && 'rotate-180',
+    !checked.value && d.value.size === 'sm' && 'rotate-90',
   ),
 );
 
 const glyphLineBaseClass =
-  "absolute top-1/2 left-1/2 -mt-px -ml-2 h-0.5 w-4 rounded-full duration-300";
+  'absolute top-1/2 left-1/2 -mt-px -ml-2 h-0.5 w-4 rounded-full duration-300';
 
 const firstGlyphLineClass = computed(() =>
   cn(
     glyphLineBaseClass,
-    "rotate-45",
-    checked.value ? "bg-cui-on-primary" : "bg-cui-fg-soft",
-    checked.value ? "translate-x-0.5 translate-y-[-1.75px] scale-x-40" : "scale-x-75",
+    'rotate-45',
+    checked.value ? 'bg-cladd-on-primary' : 'bg-cladd-fg-soft',
+    checked.value
+      ? 'translate-x-0.5 translate-y-[-1.75px] scale-x-40'
+      : 'scale-x-75',
   ),
 );
 
 const secondGlyphLineClass = computed(() =>
   cn(
     glyphLineBaseClass,
-    "-rotate-45",
-    checked.value ? "bg-cui-on-primary" : "bg-cui-fg-soft",
-    checked.value ? "translate-x-[-1.5px] scale-x-60 -rotate-60" : "scale-x-75",
+    '-rotate-45',
+    checked.value ? 'bg-cladd-on-primary' : 'bg-cladd-fg-soft',
+    checked.value ? 'translate-x-[-1.5px] scale-x-60 -rotate-60' : 'scale-x-75',
   ),
 );
 </script>

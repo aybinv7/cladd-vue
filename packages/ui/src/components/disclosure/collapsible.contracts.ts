@@ -1,4 +1,4 @@
-import type { Component } from "vue";
+import type { Component } from 'vue';
 
 export interface CollapsibleRootProps {
   /** Disable the disclosure — the trigger stops toggling and gets `data-disabled`. */
@@ -10,7 +10,7 @@ export interface CollapsibleRootProps {
 }
 
 export type CollapsibleRootDefaultProps = Partial<
-  Omit<CollapsibleRootProps, "defaultOpen" | "open">
+  Omit<CollapsibleRootProps, 'defaultOpen' | 'open'>
 >;
 
 export interface CollapsiblePanelProps {
@@ -23,7 +23,9 @@ export interface CollapsiblePanelProps {
   keepMounted?: boolean;
 }
 
-export type CollapsiblePanelDefaultProps = Partial<Omit<CollapsiblePanelProps, "as">>;
+export type CollapsiblePanelDefaultProps = Partial<
+  Omit<CollapsiblePanelProps, 'as'>
+>;
 
 export interface CollapsibleIndicatorState {
   disabled: boolean;
@@ -35,4 +37,6 @@ export interface CollapsibleIndicatorProps {
   as?: string | Component;
 }
 
-export type CollapsibleIndicatorDefaultProps = Partial<Omit<CollapsibleIndicatorProps, "as">>;
+export type CollapsibleIndicatorDefaultProps = Partial<
+  Omit<CollapsibleIndicatorProps, 'as'>
+>;

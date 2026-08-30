@@ -1,4 +1,4 @@
-import { inject, provide, type InjectionKey, type Ref } from "vue";
+import { inject, provide, type InjectionKey, type Ref } from 'vue';
 
 export interface TabsContextValue {
   baseId: string;
@@ -6,14 +6,14 @@ export interface TabsContextValue {
   value: Readonly<Ref<string | undefined>>;
 }
 
-const tabsContextKey: InjectionKey<TabsContextValue> = Symbol("cui-tabs");
+const tabsContextKey: InjectionKey<TabsContextValue> = Symbol('cladd-tabs');
 
 export function useTabsContext(): TabsContextValue {
   const context = inject(tabsContextKey, null);
 
   if (!context) {
     throw new Error(
-      "@cladd-vue/ui: `TabsList`, `Tab` and `TabPanel` must be rendered inside a `Tabs` root.",
+      '@cladd-vue/ui: `TabsList`, `Tab` and `TabPanel` must be rendered inside a `Tabs` root.',
     );
   }
 

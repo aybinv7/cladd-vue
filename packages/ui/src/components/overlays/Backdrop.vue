@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { computed, useAttrs } from "vue";
+import { computed, useAttrs } from 'vue';
 
-import { cn } from "../../shared/cn.ts";
-import { backdropClasses } from "./overlay.contracts.ts";
+import { cn } from '../../shared/cn.ts';
+import { backdropClasses } from './overlay.contracts.ts';
 
 defineOptions({ inheritAttrs: false });
 

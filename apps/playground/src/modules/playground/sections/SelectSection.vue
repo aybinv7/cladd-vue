@@ -1,32 +1,39 @@
 <script setup lang="ts">
-import { Select } from "@cladd-vue/ui";
-import { computed, ref } from "vue";
-import type { UiAccent, UiSize } from "@cladd-vue/ui";
+import { Select } from '@cladd-vue/ui';
+import type { UiAccent, UiSize } from '@cladd-vue/ui';
+import { computed, ref } from 'vue';
 
-import CatalogSection from "../components/CatalogSection.vue";
-import ComponentPlayground from "../components/ComponentPlayground.vue";
-import PlaygroundColorControl from "../components/PlaygroundColorControl.vue";
-import PlaygroundSegmented from "../components/PlaygroundSegmented.vue";
-import PlaygroundSwitchControl from "../components/PlaygroundSwitchControl.vue";
-import PlaygroundToolbar from "../components/PlaygroundToolbar.vue";
+import CatalogSection from '../components/CatalogSection.vue';
+import ComponentPlayground from '../components/ComponentPlayground.vue';
+import PlaygroundColorControl from '../components/PlaygroundColorControl.vue';
+import PlaygroundSegmented from '../components/PlaygroundSegmented.vue';
+import PlaygroundSwitchControl from '../components/PlaygroundSwitchControl.vue';
+import PlaygroundToolbar from '../components/PlaygroundToolbar.vue';
 
 const props = defineProps<{
   accent: UiAccent;
   interactionsEnabled: boolean;
 }>();
 
-const fruits = ["Apple", "Banana", "Cherry", "Mango", "Pineapple", "Strawberry"] as const;
-const sizes = ["2xs", "xs", "sm", "md", "lg", "xl", "2xl"] as const;
+const fruits = [
+  'Apple',
+  'Banana',
+  'Cherry',
+  'Mango',
+  'Pineapple',
+  'Strawberry',
+] as const;
+const sizes = ['2xs', 'xs', 'sm', 'md', 'lg', 'xl', '2xl'] as const;
 
-const size = ref<UiSize>("md");
-const color = ref<UiAccent>("brand");
+const size = ref<UiSize>('md');
+const color = ref<UiAccent>('brand');
 const rounded = ref(false);
 const multiple = ref(false);
 const search = ref(false);
 const withTitle = ref(true);
 const keyboardHints = ref(true);
-const single = ref("Cherry");
-const many = ref<string[]>(["Apple", "Mango"]);
+const single = ref('Cherry');
+const many = ref<string[]>(['Apple', 'Mango']);
 
 const fruitValue = computed<string | string[]>({
   get: () => (multiple.value ? many.value : single.value),
@@ -53,7 +60,9 @@ const code = computed(
 );
 
 function filterFruits(query: string): readonly string[] {
-  return fruits.filter((fruit) => fruit.toLowerCase().includes(query.toLowerCase()));
+  return fruits.filter((fruit) =>
+    fruit.toLowerCase().includes(query.toLowerCase()),
+  );
 }
 </script>
 
@@ -84,7 +93,11 @@ function filterFruits(query: string): readonly string[] {
       </template>
       <template #controls>
         <PlaygroundToolbar>
-          <PlaygroundSegmented v-model="size" :items="sizes" label="Select size" />
+          <PlaygroundSegmented
+            v-model="size"
+            :items="sizes"
+            label="Select size"
+          />
         </PlaygroundToolbar>
         <PlaygroundToolbar>
           <PlaygroundSwitchControl v-model="multiple" label="multiple" />
@@ -94,7 +107,10 @@ function filterFruits(query: string): readonly string[] {
           <PlaygroundSwitchControl v-model="withTitle" label="title" />
         </PlaygroundToolbar>
         <PlaygroundToolbar>
-          <PlaygroundSwitchControl v-model="keyboardHints" label="keyboardHints" />
+          <PlaygroundSwitchControl
+            v-model="keyboardHints"
+            label="keyboardHints"
+          />
         </PlaygroundToolbar>
         <PlaygroundToolbar>
           <PlaygroundSwitchControl v-model="rounded" label="rounded" />

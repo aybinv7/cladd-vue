@@ -1,6 +1,13 @@
-import { inject, provide, ref, type Component, type InjectionKey, type Ref } from "vue";
+import {
+  inject,
+  provide,
+  ref,
+  type Component,
+  type InjectionKey,
+  type Ref,
+} from 'vue';
 
-import type { UiAccent } from "../../foundations/contracts.ts";
+import type { UiAccent } from '../../foundations/contracts.ts';
 
 /**
  * Shape of a queued toast in the imperative toast portal. Mirrors `Toast`'s props but adds an
@@ -31,7 +38,9 @@ export interface ToastsPortalContext {
   state: Ref<Record<string, boolean>>;
 }
 
-const toastsPortalContextKey: InjectionKey<ToastsPortalContext> = Symbol("cui-toasts-portal");
+const toastsPortalContextKey: InjectionKey<ToastsPortalContext> = Symbol(
+  'cladd-toasts-portal',
+);
 
 const fallback: ToastsPortalContext = {
   data: ref<ToastsPortalData[]>([]),

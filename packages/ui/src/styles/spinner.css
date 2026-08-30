@@ -1,7 +1,7 @@
 @theme {
-  --animate-cui-spinner: cui-spinner-rotate 1.5s infinite linear;
+  --animate-cladd-spinner: cladd-spinner-rotate 1.5s infinite linear;
 
-  @keyframes cui-spinner-rotate {
+  @keyframes cladd-spinner-rotate {
     0% {
       transform: rotate(0deg);
     }

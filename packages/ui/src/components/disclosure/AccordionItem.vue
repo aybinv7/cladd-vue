@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import { computed, useAttrs } from "vue";
+import { computed, useAttrs } from 'vue';
 
-import { useComponentDefaults } from "../../composables/useComponentDefaults.ts";
-import { cn } from "../../shared/cn.ts";
-import type { AccordionItemProps } from "./accordion.contracts.ts";
-import { useAccordionContext } from "./accordionContext.ts";
-import { provideCollapsibleContext } from "./collapsibleContext.ts";
+import { useComponentDefaults } from '../../composables/useComponentDefaults.ts';
+import { cn } from '../../shared/cn.ts';
+import type { AccordionItemProps } from './accordion.contracts.ts';
+import { useAccordionContext } from './accordionContext.ts';
+import { provideCollapsibleContext } from './collapsibleContext.ts';
 
 defineOptions({ inheritAttrs: false });
 
@@ -23,7 +23,7 @@ const rootAttrs = computed(() => {
   return rest;
 });
 const accordion = useAccordionContext();
-const d = useComponentDefaults("AccordionItem", props, {
+const d = useComponentDefaults('AccordionItem', props, {
   disabled: false,
 });
 
@@ -48,7 +48,7 @@ provideCollapsibleContext(
   })),
 );
 
-const rootClass = computed(() => cn("cui-accordion-item", attrs.class));
+const rootClass = computed(() => cn('cladd-accordion-item', attrs.class));
 </script>
 
 <template>

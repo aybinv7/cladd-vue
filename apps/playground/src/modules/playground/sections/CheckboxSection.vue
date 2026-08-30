@@ -1,25 +1,25 @@
 <script setup lang="ts">
-import { Checkbox } from "@cladd-vue/ui";
-import { computed, ref } from "vue";
-import type { UiAccent } from "@cladd-vue/ui";
+import { Checkbox } from '@cladd-vue/ui';
+import type { UiAccent } from '@cladd-vue/ui';
+import { computed, ref } from 'vue';
 
-import CatalogSection from "../components/CatalogSection.vue";
-import ComponentPlayground from "../components/ComponentPlayground.vue";
-import PlaygroundColorControl from "../components/PlaygroundColorControl.vue";
-import PlaygroundSegmented from "../components/PlaygroundSegmented.vue";
-import PlaygroundSwitchControl from "../components/PlaygroundSwitchControl.vue";
-import PlaygroundToolbar from "../components/PlaygroundToolbar.vue";
+import CatalogSection from '../components/CatalogSection.vue';
+import ComponentPlayground from '../components/ComponentPlayground.vue';
+import PlaygroundColorControl from '../components/PlaygroundColorControl.vue';
+import PlaygroundSegmented from '../components/PlaygroundSegmented.vue';
+import PlaygroundSwitchControl from '../components/PlaygroundSwitchControl.vue';
+import PlaygroundToolbar from '../components/PlaygroundToolbar.vue';
 
 const props = defineProps<{
   accent: UiAccent;
   interactionsEnabled: boolean;
 }>();
 
-const choiceSizes = ["xs", "sm", "md"] as const;
+const choiceSizes = ['xs', 'sm', 'md'] as const;
 type ChoiceSize = (typeof choiceSizes)[number];
 
-const size = ref<ChoiceSize>("md");
-const color = ref<UiAccent>("brand");
+const size = ref<ChoiceSize>('md');
+const color = ref<UiAccent>('brand');
 const checked = ref(true);
 const disabled = ref(false);
 const readOnly = ref(false);
@@ -58,7 +58,10 @@ function onChange(next: boolean): void {
 
 function onSubmit(event: Event): void {
   const form = event.target as HTMLFormElement;
-  submitted.value = [...new FormData(form).entries()].map(([key, value]) => [key, String(value)]);
+  submitted.value = [...new FormData(form).entries()].map(([key, value]) => [
+    key,
+    String(value),
+  ]);
 }
 </script>
 
@@ -89,7 +92,11 @@ function onSubmit(event: Event): void {
       </template>
       <template #controls>
         <PlaygroundToolbar>
-          <PlaygroundSegmented v-model="size" :items="choiceSizes" label="Checkbox size" />
+          <PlaygroundSegmented
+            v-model="size"
+            :items="choiceSizes"
+            label="Checkbox size"
+          />
         </PlaygroundToolbar>
         <PlaygroundToolbar>
           <PlaygroundSwitchControl v-model="checked" label="checked" />
@@ -104,7 +111,10 @@ function onSubmit(event: Event): void {
           <PlaygroundSwitchControl v-model="required" label="required" />
         </PlaygroundToolbar>
         <PlaygroundToolbar>
-          <PlaygroundSwitchControl v-model="thumbOutline" label="thumbOutline" />
+          <PlaygroundSwitchControl
+            v-model="thumbOutline"
+            label="thumbOutline"
+          />
         </PlaygroundToolbar>
         <PlaygroundToolbar>
           <PlaygroundSwitchControl v-model="hoverable" label="hoverable" />
@@ -125,7 +135,11 @@ function onSubmit(event: Event): void {
       <section class="checkbox-grid__panel">
         <h3 class="checkbox-grid__title">Sizes</h3>
         <div class="checkbox-grid__row">
-          <label v-for="entry in choiceSizes" :key="entry" class="checkbox-grid__item">
+          <label
+            v-for="entry in choiceSizes"
+            :key="entry"
+            class="checkbox-grid__item"
+          >
             <Checkbox :checked="true" :color="color" :size="entry" />
             <span class="checkbox-grid__label">{{ entry }}</span>
           </label>
@@ -166,7 +180,14 @@ function onSubmit(event: Event): void {
         <h3 class="checkbox-grid__title">Accents</h3>
         <div class="checkbox-grid__row">
           <label
-            v-for="entry in ['neutral', 'brand', 'red', 'green', 'blue', 'orange'] as UiAccent[]"
+            v-for="entry in [
+              'neutral',
+              'brand',
+              'red',
+              'green',
+              'blue',
+              'orange',
+            ] as UiAccent[]"
             :key="entry"
             class="checkbox-grid__item"
           >
@@ -180,15 +201,31 @@ function onSubmit(event: Event): void {
         <h3 class="checkbox-grid__title">Native form participation</h3>
         <form class="checkbox-grid__form" @submit.prevent="onSubmit">
           <label class="checkbox-grid__item">
-            <Checkbox v-model="formLogs" :color="color" name="logs" value="verbose" />
+            <Checkbox
+              v-model="formLogs"
+              :color="color"
+              name="logs"
+              value="verbose"
+            />
             <span class="checkbox-grid__label">logs=verbose</span>
           </label>
           <label class="checkbox-grid__item">
-            <Checkbox v-model="formTraces" :color="color" name="traces" value="all" />
+            <Checkbox
+              v-model="formTraces"
+              :color="color"
+              name="traces"
+              value="all"
+            />
             <span class="checkbox-grid__label">traces=all</span>
           </label>
           <label class="checkbox-grid__item">
-            <Checkbox :checked="true" :color="color" disabled name="ignored" value="nope" />
+            <Checkbox
+              :checked="true"
+              :color="color"
+              disabled
+              name="ignored"
+              value="nope"
+            />
             <span class="checkbox-grid__label">disabled (omitted)</span>
           </label>
           <button class="checkbox-grid__submit" type="submit">Submit</button>
@@ -196,8 +233,8 @@ function onSubmit(event: Event): void {
         <p class="checkbox-grid__readout">
           {{
             submitted.length
-              ? submitted.map(([k, v]) => `${k}=${v}`).join(", ")
-              : "no submission yet"
+              ? submitted.map(([k, v]) => `${k}=${v}`).join(', ')
+              : 'no submission yet'
           }}
         </p>
       </section>
@@ -205,7 +242,11 @@ function onSubmit(event: Event): void {
       <section class="checkbox-grid__panel">
         <h3 class="checkbox-grid__title">Change events</h3>
         <p class="checkbox-grid__readout">
-          {{ changeLog.length ? changeLog.join(" · ") : "toggle the playground checkbox" }}
+          {{
+            changeLog.length
+              ? changeLog.join(' · ')
+              : 'toggle the playground checkbox'
+          }}
         </p>
       </section>
     </div>
@@ -226,7 +267,7 @@ function onSubmit(event: Event): void {
 
 .checkbox-grid__title {
   margin: 0;
-  color: var(--cui-fg-soft);
+  color: var(--cladd-fg-soft);
   font-size: 12px;
   font-weight: 600;
   letter-spacing: 0.04em;
@@ -245,28 +286,28 @@ function onSubmit(event: Event): void {
   display: inline-flex;
   gap: 8px;
   align-items: center;
-  color: var(--cui-fg);
+  color: var(--cladd-fg);
   font-size: 12px;
 }
 
 .checkbox-grid__label {
-  color: var(--cui-fg-soft);
+  color: var(--cladd-fg-soft);
 }
 
 .checkbox-grid__submit {
   padding: 4px 10px;
-  border: 1px solid var(--cui-outline);
-  border-radius: var(--cui-radius-sm);
+  border: 1px solid var(--cladd-outline);
+  border-radius: var(--cladd-radius-sm);
   background: transparent;
-  color: var(--cui-fg);
+  color: var(--cladd-fg);
   font: inherit;
   cursor: pointer;
 }
 
 .checkbox-grid__readout {
   margin: 0;
-  color: var(--cui-fg-softer);
-  font-family: "Geist Mono", ui-monospace, monospace;
+  color: var(--cladd-fg-softer);
+  font-family: 'Geist Mono', ui-monospace, monospace;
   font-size: 11px;
 }
 </style>

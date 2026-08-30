@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { computed, useAttrs } from "vue";
+import { computed, useAttrs } from 'vue';
 
-import { cn } from "../../shared/cn.ts";
+import { cn } from '../../shared/cn.ts';
 
 defineOptions({ inheritAttrs: false });
 
@@ -15,7 +15,7 @@ const rootAttrs = computed(() => {
   return rest;
 });
 const rootClass = computed(() =>
-  cn("cui-toolbar-separator mx-1 h-1/2 w-px bg-cui-outline", attrs.class),
+  cn('cladd-toolbar-separator mx-1 h-1/2 w-px bg-cladd-outline', attrs.class),
 );
 </script>
 

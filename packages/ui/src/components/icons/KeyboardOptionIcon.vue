@@ -6,6 +6,8 @@
     width="24px"
     fill="currentColor"
   >
-    <path d="M591-200 314-680H120v-80h240l277 480h203v80H591Zm9-480v-80h240v80H600Z" />
+    <path
+      d="M591-200 314-680H120v-80h240l277 480h203v80H591Zm9-480v-80h240v80H600Z"
+    />
   </svg>
 </template>

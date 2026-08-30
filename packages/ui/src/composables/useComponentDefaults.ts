@@ -1,7 +1,7 @@
-import { computed, type ComputedRef } from "vue";
+import { computed, type ComputedRef } from 'vue';
 
-import { useUiContext } from "../contexts/uiContext.ts";
-import type { ComponentDefaults } from "../foundations/componentDefaults.ts";
+import { useUiContext } from '../contexts/uiContext.ts';
+import type { ComponentDefaults } from '../foundations/componentDefaults.ts';
 
 /**
  * Resolves a component's effective props, upstream's precedence:
@@ -26,7 +26,9 @@ export function useComponentDefaults<P extends object, B extends object>(
   return computed(() => {
     const merged: Record<string, unknown> = {
       ...builtins,
-      ...(ui.defaults.value[componentName] as Record<string, unknown> | undefined),
+      ...(ui.defaults.value[componentName] as
+        | Record<string, unknown>
+        | undefined),
     };
 
     for (const key in props) {

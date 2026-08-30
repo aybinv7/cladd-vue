@@ -1,7 +1,7 @@
-import { defineComponent, type PropType, type VNode } from "vue";
+import { defineComponent, type PropType, type VNode } from 'vue';
 
 export default defineComponent({
-  name: "VNodeRenderer",
+  name: 'VNodeRenderer',
   props: {
     node: {
       type: Object as PropType<VNode>,

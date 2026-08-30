@@ -1,19 +1,19 @@
 <script setup lang="ts">
-import { computed, shallowRef, useAttrs, useId, useSlots } from "vue";
+import { computed, shallowRef, useAttrs, useId, useSlots } from 'vue';
 
-import { useComponentDefaults } from "../../composables/useComponentDefaults.ts";
-import { useFocusTrap } from "../../composables/useFocusTrap.ts";
-import { useOverlayDismiss } from "../../composables/useOverlayDismiss.ts";
-import { useOverlayLifecycle } from "../../composables/useOverlayLifecycle.ts";
-import { useOverlayPhase } from "../../composables/useOverlayPhase.ts";
-import { provideSurfaceColorReset } from "../../contexts/surfaceContext.ts";
-import { useUiContext } from "../../contexts/uiContext.ts";
-import { cn } from "../../shared/cn.ts";
-import Button from "../actions/Button.vue";
-import VNodeRenderer from "../data-display/VNodeRenderer.ts";
-import Input from "../forms/Input.vue";
-import Surface from "../surface/Surface.vue";
-import Backdrop from "./Backdrop.vue";
+import { useComponentDefaults } from '../../composables/useComponentDefaults.ts';
+import { useFocusTrap } from '../../composables/useFocusTrap.ts';
+import { useOverlayDismiss } from '../../composables/useOverlayDismiss.ts';
+import { useOverlayLifecycle } from '../../composables/useOverlayLifecycle.ts';
+import { useOverlayPhase } from '../../composables/useOverlayPhase.ts';
+import { provideSurfaceColorReset } from '../../contexts/surfaceContext.ts';
+import { useUiContext } from '../../contexts/uiContext.ts';
+import { cn } from '../../shared/cn.ts';
+import Button from '../actions/Button.vue';
+import VNodeRenderer from '../data-display/VNodeRenderer.ts';
+import Input from '../forms/Input.vue';
+import Surface from '../surface/Surface.vue';
+import Backdrop from './Backdrop.vue';
 import {
   dialogButtonContentClasses,
   dialogButtonsClasses,
@@ -30,9 +30,12 @@ import {
   overlayTriggerClasses,
   resolveOverlayElement,
   type DialogProps,
-} from "./overlay.contracts.ts";
-import { dialogRootContextKey, useOverlayRootContext } from "./overlayRootContext.ts";
-import { cloneTriggerNode } from "./overlayTrigger.ts";
+} from './overlay.contracts.ts';
+import {
+  dialogRootContextKey,
+  useOverlayRootContext,
+} from './overlayRootContext.ts';
+import { cloneTriggerNode } from './overlayTrigger.ts';
 
 // Upstream keeps `className` (the dialog Surface) separate from `contentClassName` (the inner
 // content column). Vue's `class` fallthrough would land on the trigger, so it is routed here.
@@ -75,25 +78,25 @@ const emit = defineEmits<{
   opening: [];
 }>();
 
-const modelOpen = defineModel<boolean>("open", { default: undefined });
+const modelOpen = defineModel<boolean>('open', { default: undefined });
 const slots = useSlots();
 const attrs = useAttrs();
 const containerAttrs = computed(() => {
   const { class: _consumerClass, ...rest } = attrs;
   return rest;
 });
-const confirmationValue = shallowRef("");
+const confirmationValue = shallowRef('');
 const container = shallowRef<HTMLElement>();
 const surface = shallowRef<HTMLElement>();
 const ui = useUiContext();
 const root = useOverlayRootContext(dialogRootContextKey);
-const d = useComponentDefaults("Dialog", props, {
+const d = useComponentDefaults('Dialog', props, {
   backdropTransparent: false,
-  cancelAccent: "neutral" as DialogProps["cancelAccent"],
+  cancelAccent: 'neutral' as DialogProps['cancelAccent'],
   closeOnBackdropClick: true,
   closeOnEscape: true,
   surfaceLevel: 1,
-  variant: "gradient" as DialogProps["variant"],
+  variant: 'gradient' as DialogProps['variant'],
 });
 
 // Own `open` wins, then the surrounding DialogRoot's state, then `false` — upstream's
@@ -107,17 +110,25 @@ const model = computed<boolean>({
 });
 
 const id = useId();
-const titleId = `cui-dialog-title-${id}`;
-const descriptionId = `cui-dialog-description-${id}`;
+const titleId = `cladd-dialog-title-${id}`;
+const descriptionId = `cladd-dialog-description-${id}`;
 const { phase, setPhase } = useOverlayPhase(model);
 
-const mounted = computed(() => phase.value !== "closed");
+const mounted = computed(() => phase.value !== 'closed');
 const currentAccent = computed(
-  () => d.value.confirmAccent ?? d.value.color ?? d.value.accent ?? ui.accentColor.value,
+  () =>
+    d.value.confirmAccent ??
+    d.value.color ??
+    d.value.accent ??
+    ui.accentColor.value,
 );
-const currentOutline = computed(() => d.value.outline ?? ui.theme.value === "dark");
+const currentOutline = computed(
+  () => d.value.outline ?? ui.theme.value === 'dark',
+);
 const confirmationValid = computed(
-  () => !d.value.requireConfirmText || confirmationValue.value === d.value.requireConfirmText,
+  () =>
+    !d.value.requireConfirmText ||
+    confirmationValue.value === d.value.requireConfirmText,
 );
 const containerClass = dialogContainerClasses;
 const teleportTarget = computed(() => d.value.root ?? ui.overlaysRoot.value);
@@ -135,13 +146,13 @@ function open(): void {
 }
 
 function cancel(): void {
-  emit("cancel");
+  emit('cancel');
   close();
 }
 
 function confirm(): void {
   if (!confirmationValid.value) return;
-  emit("confirm");
+  emit('confirm');
   close();
 }
 
@@ -160,13 +171,13 @@ function hasChildOverlay(): boolean {
 const { opened } = useOverlayLifecycle({
   closeOnEscape: () => d.value.closeOnEscape && !hasChildOverlay(),
   element: surface,
-  onClose: () => emit("closing"),
+  onClose: () => emit('closing'),
   onClosed: () => {
-    confirmationValue.value = "";
-    emit("closed");
+    confirmationValue.value = '';
+    emit('closed');
   },
-  onOpen: () => emit("opening"),
-  onOpened: () => emit("opened"),
+  onOpen: () => emit('opening'),
+  onOpened: () => emit('opened'),
   phase,
   setPhase,
 });
@@ -180,14 +191,20 @@ useOverlayDismiss({
 useFocusTrap({ active: opened, container, initialFocus });
 
 const surfaceClass = computed(() =>
-  cn(dialogSurfaceClasses, opened.value ? dialogOpenedClasses : dialogHiddenClasses, attrs.class),
+  cn(
+    dialogSurfaceClasses,
+    opened.value ? dialogOpenedClasses : dialogHiddenClasses,
+    attrs.class,
+  ),
 );
-const contentClass = computed(() => cn(dialogContentClasses, d.value.contentClassName));
+const contentClass = computed(() =>
+  cn(dialogContentClasses, d.value.contentClassName),
+);
 const backdropClass = computed(() =>
   cn(
     overlayBackdropDurationClasses,
     d.value.backdropTransparent && overlayBackdropTransparentClasses,
-    opened.value ? "opacity-100" : "opacity-0",
+    opened.value ? 'opacity-100' : 'opacity-0',
   ),
 );
 
@@ -195,7 +212,9 @@ function onBackdropClick(): void {
   if (d.value.closeOnBackdropClick) close();
 }
 
-const triggerNode = computed(() => cloneTriggerNode(slots.trigger?.(), { onClick: open }));
+const triggerNode = computed(() =>
+  cloneTriggerNode(slots.trigger?.(), { onClick: open }),
+);
 
 provideSurfaceColorReset();
 </script>
@@ -210,7 +229,9 @@ provideSurfaceColorReset();
       v-if="mounted"
       v-bind="containerAttrs"
       ref="container"
-      :aria-describedby="d.description || $slots.description ? descriptionId : undefined"
+      :aria-describedby="
+        d.description || $slots.description ? descriptionId : undefined
+      "
       :aria-labelledby="d.title || $slots.title ? titleId : undefined"
       aria-modal="true"
       :class="containerClass"

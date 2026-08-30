@@ -1,34 +1,34 @@
 <script setup lang="ts">
-import { Chip } from "@cladd-vue/ui";
-import { computed, ref } from "vue";
-import type { UiAccent } from "@cladd-vue/ui";
+import { Chip } from '@cladd-vue/ui';
+import type { UiAccent } from '@cladd-vue/ui';
+import { computed, ref } from 'vue';
 
-import CatalogSection from "../components/CatalogSection.vue";
-import ComponentPlayground from "../components/ComponentPlayground.vue";
-import PlaygroundColorControl from "../components/PlaygroundColorControl.vue";
-import PlaygroundSegmented from "../components/PlaygroundSegmented.vue";
-import PlaygroundSwitchControl from "../components/PlaygroundSwitchControl.vue";
-import PlaygroundToolbar from "../components/PlaygroundToolbar.vue";
+import CatalogSection from '../components/CatalogSection.vue';
+import ComponentPlayground from '../components/ComponentPlayground.vue';
+import PlaygroundColorControl from '../components/PlaygroundColorControl.vue';
+import PlaygroundSegmented from '../components/PlaygroundSegmented.vue';
+import PlaygroundSwitchControl from '../components/PlaygroundSwitchControl.vue';
+import PlaygroundToolbar from '../components/PlaygroundToolbar.vue';
 
 const props = defineProps<{
   accent: UiAccent;
   interactionsEnabled: boolean;
 }>();
 
-const color = ref<UiAccent>("neutral");
+const color = ref<UiAccent>('neutral');
 const disabled = ref(false);
 const rounded = ref(false);
-const size = ref("md");
-const variant = ref("gradient");
-const sizes = ["2xs", "xs", "sm", "md", "lg", "xl", "2xl"] as const;
-const variants = ["gradient", "solid", "transparent", "gradient-fill"] as const;
+const size = ref('md');
+const variant = ref('gradient');
+const sizes = ['2xs', 'xs', 'sm', 'md', 'lg', 'xl', '2xl'] as const;
+const variants = ['gradient', 'solid', 'transparent', 'gradient-fill'] as const;
 const code = computed(
   () => `<Chip
   color="${color.value}"
   size="${size.value}"
   variant="${variant.value}"
-  ${rounded.value ? "rounded" : ':rounded="false"'}
-  ${disabled.value ? "disabled" : ':disabled="false"'}
+  ${rounded.value ? 'rounded' : ':rounded="false"'}
+  ${disabled.value ? 'disabled' : ':disabled="false"'}
 >
   Connected
 </Chip>`,
@@ -56,10 +56,18 @@ const code = computed(
       </template>
       <template #controls>
         <PlaygroundToolbar>
-          <PlaygroundSegmented v-model="size" :items="sizes" label="Chip size" />
+          <PlaygroundSegmented
+            v-model="size"
+            :items="sizes"
+            label="Chip size"
+          />
         </PlaygroundToolbar>
         <PlaygroundToolbar>
-          <PlaygroundSegmented v-model="variant" :items="variants" label="Chip variant" />
+          <PlaygroundSegmented
+            v-model="variant"
+            :items="variants"
+            label="Chip variant"
+          />
         </PlaygroundToolbar>
         <PlaygroundToolbar>
           <PlaygroundSwitchControl v-model="rounded" label="rounded" />

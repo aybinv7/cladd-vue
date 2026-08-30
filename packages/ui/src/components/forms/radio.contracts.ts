@@ -1,7 +1,7 @@
-import type { Component } from "vue";
+import type { Component } from 'vue';
 
-import type { UiAccent } from "../../foundations/contracts.ts";
-import type { ChoiceSize } from "./form.contracts.ts";
+import type { UiAccent } from '../../foundations/contracts.ts';
+import type { ChoiceSize } from './form.contracts.ts';
 
 export interface RadioProps {
   accent?: UiAccent;
@@ -37,26 +37,26 @@ export interface RadioProps {
   value?: string;
 }
 
-export type RadioDefaultProps = Partial<Omit<RadioProps, "as">>;
+export type RadioDefaultProps = Partial<Omit<RadioProps, 'as'>>;
 
 export interface RadioGroupProps {
   disabled?: boolean;
   loop?: boolean;
   name?: string;
-  orientation?: "horizontal" | "vertical";
+  orientation?: 'horizontal' | 'vertical';
   required?: boolean;
 }
 
 export type RadioGroupDefaultProps = Partial<RadioGroupProps>;
 
 export const radioRootSizes: Record<ChoiceSize, string> = {
-  xs: "size-cui-thumb-xs p-0",
-  sm: "size-cui-thumb-sm p-1",
-  md: "size-cui-thumb-md p-1",
+  xs: 'size-cladd-thumb-xs p-0',
+  sm: 'size-cladd-thumb-sm p-1',
+  md: 'size-cladd-thumb-md p-1',
 };
 
 export const radioIndicatorSizes: Record<ChoiceSize, string> = {
-  xs: "size-1.5",
-  sm: "size-2",
-  md: "size-2",
+  xs: 'size-1.5',
+  sm: 'size-2',
+  md: 'size-2',
 };

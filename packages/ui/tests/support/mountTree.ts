@@ -1,4 +1,4 @@
-import { createApp, nextTick, type App, type VNode } from "vue";
+import { createApp, nextTick, type App, type VNode } from 'vue';
 
 export interface MountedTree {
   app: App;
@@ -9,9 +9,12 @@ export interface MountedTree {
  * Mounts into a `#app` container, because overlays teleport into the context `overlaysRoot`
  * (upstream's `'#app, #__next, #root'`) and a Cladd app owns that element, not the library.
  */
-export function mountTree(vnode: VNode, warnHandler?: (message: string) => void): MountedTree {
-  const root = document.createElement("div");
-  root.id = "app";
+export function mountTree(
+  vnode: VNode,
+  warnHandler?: (message: string) => void,
+): MountedTree {
+  const root = document.createElement('div');
+  root.id = 'app';
   document.body.append(root);
   const app = createApp({ render: () => vnode });
 

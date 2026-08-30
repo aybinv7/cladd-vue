@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Surface } from "@cladd-vue/ui";
+import { Surface } from '@cladd-vue/ui';
 
 defineProps<{
   description: string;
@@ -18,7 +18,12 @@ defineProps<{
         <p>{{ description }}</p>
       </div>
     </header>
-    <Surface class="catalog-section__canvas" :level="2" outline variant="gradient">
+    <Surface
+      class="catalog-section__canvas"
+      :level="2"
+      outline
+      variant="gradient"
+    >
       <slot />
     </Surface>
   </section>

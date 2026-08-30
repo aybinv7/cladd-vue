@@ -1,6 +1,12 @@
-import { inject, provide, shallowRef, type InjectionKey, type ShallowRef } from "vue";
+import {
+  inject,
+  provide,
+  shallowRef,
+  type InjectionKey,
+  type ShallowRef,
+} from 'vue';
 
-import type { UiAccent } from "../../foundations/contracts.ts";
+import type { UiAccent } from '../../foundations/contracts.ts';
 
 /**
  * Shape of the currently open dialog in the imperative dialog portal. The portal renders at most
@@ -40,7 +46,9 @@ export interface DialogsPortalContext {
   state: ShallowRef<boolean>;
 }
 
-const dialogsPortalContextKey: InjectionKey<DialogsPortalContext> = Symbol("cui-dialogs-portal");
+const dialogsPortalContextKey: InjectionKey<DialogsPortalContext> = Symbol(
+  'cladd-dialogs-portal',
+);
 
 const fallback: DialogsPortalContext = {
   data: shallowRef<DialogsPortalData | null>(null),

@@ -1,7 +1,11 @@
-import type { Component } from "vue";
+import type { Component } from 'vue';
 
-import type { SurfaceLevelInput, SurfaceVariant, UiAccent } from "../../foundations/contracts.ts";
-import type { SwitchSize } from "./form.contracts.ts";
+import type {
+  SurfaceLevelInput,
+  SurfaceVariant,
+  UiAccent,
+} from '../../foundations/contracts.ts';
+import type { SwitchSize } from './form.contracts.ts';
 
 export interface SwitchProps {
   accent?: UiAccent;
@@ -44,19 +48,19 @@ export interface SwitchProps {
   variant?: SurfaceVariant;
 }
 
-export type SwitchDefaultProps = Partial<Omit<SwitchProps, "as">>;
+export type SwitchDefaultProps = Partial<Omit<SwitchProps, 'as'>>;
 
 export const switchRootSizes: Record<SwitchSize, string> = {
-  sm: "w-10 p-1",
-  md: "w-12 p-1",
+  sm: 'w-10 p-1',
+  md: 'w-12 p-1',
 };
 
 export const switchThumbSizes: Record<SwitchSize, string> = {
-  sm: "size-cui-thumb-xs",
-  md: "size-cui-thumb-sm",
+  sm: 'size-cladd-thumb-xs',
+  md: 'size-cladd-thumb-sm',
 };
 
 export const switchThumbOffsets: Record<SwitchSize, string> = {
-  sm: "translate-x-cui-thumb-xs",
-  md: "translate-x-cui-thumb-sm",
+  sm: 'translate-x-cladd-thumb-xs',
+  md: 'translate-x-cladd-thumb-sm',
 };

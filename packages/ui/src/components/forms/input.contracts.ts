@@ -1,7 +1,7 @@
-import type { Component } from "vue";
+import type { Component } from 'vue';
 
-import type { UiAccent, UiSize } from "../../foundations/contracts.ts";
-import type { FieldSize } from "./form.contracts.ts";
+import type { UiAccent, UiSize } from '../../foundations/contracts.ts';
+import type { FieldSize } from './form.contracts.ts';
 
 export interface InputProps {
   accent?: UiAccent;
@@ -30,7 +30,15 @@ export interface InputProps {
   /** `id` for the inner `<input>`. */
   inputId?: string;
   /** Native `inputMode` hint. */
-  inputMode?: "decimal" | "email" | "none" | "numeric" | "search" | "tel" | "text" | "url";
+  inputMode?:
+    | 'decimal'
+    | 'email'
+    | 'none'
+    | 'numeric'
+    | 'search'
+    | 'tel'
+    | 'text'
+    | 'url';
   /** Native `max` attribute. */
   max?: number | string;
   /** Native `maxLength` attribute. */
@@ -61,52 +69,52 @@ export interface InputProps {
   valid?: boolean;
 }
 
-export type InputDefaultProps = Partial<Omit<InputProps, "as">>;
+export type InputDefaultProps = Partial<Omit<InputProps, 'as'>>;
 
 export const inputFontSizes: Record<FieldSize, string> = {
-  sm: "text-cui-xs",
-  md: "text-cui-xs",
-  lg: "text-cui-xs",
-  xl: "text-cui-xs",
-  "2xl": "text-cui-xs",
+  sm: 'text-cladd-xs',
+  md: 'text-cladd-xs',
+  lg: 'text-cladd-xs',
+  xl: 'text-cladd-xs',
+  '2xl': 'text-cladd-xs',
 };
 
 export const inputIconWrapClasses: Record<FieldSize, string> = {
-  sm: "left-2.5 [&>svg]:size-4",
-  md: "left-2.5 [&>svg]:size-4",
-  lg: "left-2.5 [&>svg]:size-4",
-  xl: "left-2.5 [&>svg]:size-4",
-  "2xl": "left-3.5 [&>svg]:size-4",
+  sm: 'left-2.5 [&>svg]:size-4',
+  md: 'left-2.5 [&>svg]:size-4',
+  lg: 'left-2.5 [&>svg]:size-4',
+  xl: 'left-2.5 [&>svg]:size-4',
+  '2xl': 'left-3.5 [&>svg]:size-4',
 };
 
 export const inputPaddingNoIcon: Record<FieldSize, string> = {
-  sm: "px-2.5",
-  md: "px-2.5",
-  lg: "px-2.5",
-  xl: "px-2.5",
-  "2xl": "px-3.5",
+  sm: 'px-2.5',
+  md: 'px-2.5',
+  lg: 'px-2.5',
+  xl: 'px-2.5',
+  '2xl': 'px-3.5',
 };
 
 export const inputPaddingWithIcon: Record<FieldSize, string> = {
-  sm: "pl-8.5 pr-2",
-  md: "pl-8.5 pr-2",
-  lg: "pl-8.5 pr-3",
-  xl: "pl-8.5 pr-3",
-  "2xl": "pl-9.5 pr-4",
+  sm: 'pl-8.5 pr-2',
+  md: 'pl-8.5 pr-2',
+  lg: 'pl-8.5 pr-3',
+  xl: 'pl-8.5 pr-3',
+  '2xl': 'pl-9.5 pr-4',
 };
 
 export const inputClearButtonSizes: Record<FieldSize, UiSize> = {
-  sm: "2xs",
-  md: "xs",
-  lg: "sm",
-  xl: "md",
-  "2xl": "lg",
+  sm: '2xs',
+  md: 'xs',
+  lg: 'sm',
+  xl: 'md',
+  '2xl': 'lg',
 };
 
 export const inputClearGlyphSizes: Record<FieldSize, string> = {
-  sm: "size-3!",
-  md: "size-3.5!",
-  lg: "size-4",
-  xl: "size-4",
-  "2xl": "size-4",
+  sm: 'size-3!',
+  md: 'size-3.5!',
+  lg: 'size-4',
+  xl: 'size-4',
+  '2xl': 'size-4',
 };

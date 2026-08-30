@@ -6,9 +6,14 @@
 /* Applies to direct children of a hovered surface that is not "self-pressed".
    Direct-child `>` keeps nested surfaces isolated from ancestor state.
    Guarded by `(hover: hover)` so the state doesn't stick on touch devices. */
-@custom-variant cui-surface-hover {
+@custom-variant cladd-surface-hover {
   @media (hover: hover) {
-    &:where(.cui-hoverable:hover:not(.cui-clickable:active:not(:has(.cui-clickable:active))) > *) {
+    &:where(
+      .cladd-hoverable:hover:not(
+          .cladd-clickable:active:not(:has(.cladd-clickable:active))
+        )
+        > *
+    ) {
       @slot;
     }
   }
@@ -16,7 +21,7 @@
 
 /* Applies to direct children of a "self-pressed" surface — :active and not
    wrapping another active clickable, i.e. the deepest pressed surface. */
-@custom-variant cui-surface-press (&:where(.cui-clickable:active:not(:has(.cui-clickable:active)) > *));
+@custom-variant cladd-surface-press (&:where(.cladd-clickable:active:not(:has(.cladd-clickable:active)) > *));
 
 @import "./colors.css";
 @import "./radius.css";

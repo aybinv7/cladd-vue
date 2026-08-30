@@ -4,14 +4,19 @@
 
 ```vue
 <script setup lang="ts">
-import { ref } from "vue";
-import { Checkbox } from "@cladd-vue/ui";
+import { ref } from 'vue';
+import { Checkbox } from '@cladd-vue/ui';
 
 const subscribed = ref(false);
 </script>
 
 <template>
-  <Checkbox v-model="subscribed" color="green" name="newsletter" value="weekly" />
+  <Checkbox
+    v-model="subscribed"
+    color="green"
+    name="newsletter"
+    value="weekly"
+  />
 </template>
 ```
 

@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { Button, Chip, Shortcut } from "@cladd-vue/ui";
-import type { UiTheme } from "@cladd-vue/ui";
+import { Button, Chip, Shortcut } from '@cladd-vue/ui';
+import type { UiTheme } from '@cladd-vue/ui';
 
 defineProps<{
   componentCount: number;
@@ -26,7 +26,9 @@ const emit = defineEmits<{
       </div>
     </div>
     <div class="playground-header__metrics">
-      <Chip size="xs" variant="transparent">{{ componentCount }} components</Chip>
+      <Chip size="xs" variant="transparent"
+        >{{ componentCount }} components</Chip
+      >
       <Chip size="xs" variant="transparent">{{ stateCount }} states</Chip>
     </div>
     <div class="playground-header__actions">
@@ -39,7 +41,7 @@ const emit = defineEmits<{
         variant="transparent"
         @click="emit('toggleTheme')"
       >
-        {{ theme === "dark" ? "☼" : "◐" }}
+        {{ theme === 'dark' ? '☼' : '◐' }}
       </Button>
     </div>
   </header>

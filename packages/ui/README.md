@@ -12,7 +12,7 @@ Surface, action, data-display, feedback, form, and overlay foundations are avail
 
 - Vue 3.5 and TypeScript public API
 - Native DOM semantics with package-owned Vue interaction composables
-- Tailwind v4 styling ported from upstream, namespaced under `cui-`
+- Tailwind v4 styling ported from upstream, namespaced under `cladd-`
 - Dark-first theme with light-theme support
 - Five contextual surface levels
 - Seven control sizes with nested controls eight pixels smaller
@@ -35,13 +35,13 @@ no build is required before running the playground.
 ## Usage
 
 ```ts
-import "@cladd-vue/ui/styles.css";
+import '@cladd-vue/ui/styles.css';
 ```
 
 ```vue
 <script setup lang="ts">
-import { Button, Checkbox, Input, Surface, UiProvider } from "@cladd-vue/ui";
-import "@cladd-vue/ui/styles.css";
+import { Button, Checkbox, Input, Surface, UiProvider } from '@cladd-vue/ui';
+import '@cladd-vue/ui/styles.css';
 </script>
 
 <template>

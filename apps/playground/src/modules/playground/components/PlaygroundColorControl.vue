@@ -1,18 +1,18 @@
 <script setup lang="ts">
-import { Button, type UiAccent } from "@cladd-vue/ui";
+import { Button, type UiAccent } from '@cladd-vue/ui';
 
 const colors: readonly UiAccent[] = [
-  "neutral",
-  "brand",
-  "red",
-  "pink",
-  "purple",
-  "blue",
-  "cyan",
-  "lime",
-  "green",
-  "yellow",
-  "orange",
+  'neutral',
+  'brand',
+  'red',
+  'pink',
+  'purple',
+  'blue',
+  'cyan',
+  'lime',
+  'green',
+  'yellow',
+  'orange',
 ];
 
 const model = defineModel<UiAccent>({ required: true });

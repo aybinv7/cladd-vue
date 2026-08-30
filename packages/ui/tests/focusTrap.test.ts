@@ -1,3 +1,4 @@
+import { expect, test } from 'vite-plus/test';
 import {
   createApp,
   defineComponent,
@@ -7,8 +8,7 @@ import {
   shallowRef,
   type Ref,
   type VNode,
-} from "vue";
-import { expect, test } from "vite-plus/test";
+} from 'vue';
 
 import {
   focusTrapFocusableSelector,
@@ -16,9 +16,9 @@ import {
   focusTrapTopmostModalSelector,
   getFocusTrapFocusable,
   isFocusTrapVisible,
-} from "../src/composables/focusTrap.contracts.ts";
-import { useFocusTrap } from "../src/composables/useFocusTrap.ts";
-import { byTestId, type MountedTree } from "./support/mountTree.ts";
+} from '../src/composables/focusTrap.contracts.ts';
+import { useFocusTrap } from '../src/composables/useFocusTrap.ts';
+import { byTestId, type MountedTree } from './support/mountTree.ts';
 
 interface TrapHarnessConfig {
   children?: () => VNode[];
@@ -31,8 +31,8 @@ interface TrapHarnessConfig {
 }
 
 function defaultChildren(): VNode[] {
-  return ["first", "middle", "last"].map((label) =>
-    h("button", { "data-label": label, type: "button" }, label),
+  return ['first', 'middle', 'last'].map((label) =>
+    h('button', { 'data-label': label, type: 'button' }, label),
   );
 }
 
@@ -45,7 +45,8 @@ function createTrapHarness(config: TrapHarnessConfig) {
       useFocusTrap({
         container,
         initialFocus: initialFocusSelector
-          ? () => container.value?.querySelector<HTMLElement>(initialFocusSelector)
+          ? () =>
+              container.value?.querySelector<HTMLElement>(initialFocusSelector)
           : undefined,
         active: config.open,
         restoreFocus: config.restoreFocus,
@@ -55,10 +56,10 @@ function createTrapHarness(config: TrapHarnessConfig) {
       return () =>
         config.open.value
           ? h(
-              "div",
+              'div',
               {
-                class: config.containerClass ?? "cui-dialog",
-                "data-testid": "trap-container",
+                class: config.containerClass ?? 'cladd-dialog',
+                'data-testid': 'trap-container',
                 ref: container,
                 tabindex: config.containerTabindex,
               },
@@ -70,7 +71,7 @@ function createTrapHarness(config: TrapHarnessConfig) {
 }
 
 function mountConnectedTree(vnode: VNode): MountedTree {
-  const root = document.createElement("div");
+  const root = document.createElement('div');
   document.body.append(root);
   const app = createApp({ render: () => vnode });
   app.mount(root);
@@ -87,19 +88,21 @@ function cleanupTree(mounted: MountedTree): void {
 }
 
 function appendTrigger(label: string): HTMLButtonElement {
-  const trigger = document.createElement("button");
-  trigger.type = "button";
+  const trigger = document.createElement('button');
+  trigger.type = 'button';
   trigger.dataset.label = label;
   document.body.append(trigger);
   return trigger;
 }
 
 function trapContainer(mounted: MountedTree): HTMLElement {
-  return byTestId(mounted.root, "trap-container");
+  return byTestId(mounted.root, 'trap-container');
 }
 
 function trapButton(mounted: MountedTree, label: string): HTMLButtonElement {
-  const button = trapContainer(mounted).querySelector<HTMLButtonElement>(`[data-label="${label}"]`);
+  const button = trapContainer(mounted).querySelector<HTMLButtonElement>(
+    `[data-label="${label}"]`,
+  );
 
   if (!button) {
     throw new Error(`Missing trap button: ${label}`);
@@ -109,40 +112,43 @@ function trapButton(mounted: MountedTree, label: string): HTMLButtonElement {
 }
 
 function pressTab(shiftKey = false): KeyboardEvent {
-  const event = new KeyboardEvent("keydown", {
+  const event = new KeyboardEvent('keydown', {
     bubbles: true,
     cancelable: true,
-    key: "Tab",
+    key: 'Tab',
     shiftKey,
   });
-  const target = (document.activeElement as HTMLElement | null) ?? document.body;
+  const target =
+    (document.activeElement as HTMLElement | null) ?? document.body;
   target.dispatchEvent(event);
   return event;
 }
 
-test("locks the Cladd focusable selector list", () => {
+test('locks the Cladd focusable selector list', () => {
   expect([...focusTrapFocusableSelectors]).toEqual([
-    "a[href]",
-    "area[href]",
-    "button:not([disabled])",
+    'a[href]',
+    'area[href]',
+    'button:not([disabled])',
     'input:not([disabled]):not([type="hidden"])',
-    "select:not([disabled])",
-    "textarea:not([disabled])",
+    'select:not([disabled])',
+    'textarea:not([disabled])',
     '[tabindex]:not([tabindex="-1"])',
     '[contenteditable="true"]',
-    "audio[controls]",
-    "video[controls]",
-    "iframe",
-    "object",
-    "embed",
-    "summary",
+    'audio[controls]',
+    'video[controls]',
+    'iframe',
+    'object',
+    'embed',
+    'summary',
   ]);
-  expect(focusTrapFocusableSelector).toBe(focusTrapFocusableSelectors.join(","));
-  expect(focusTrapTopmostModalSelector).toBe(".cui-dialog, .cui-popup");
+  expect(focusTrapFocusableSelector).toBe(
+    focusTrapFocusableSelectors.join(','),
+  );
+  expect(focusTrapTopmostModalSelector).toBe('.cladd-dialog, .cladd-popup');
 });
 
-test("filters focusable candidates through the Cladd visibility predicate", () => {
-  const container = document.createElement("div");
+test('filters focusable candidates through the Cladd visibility predicate', () => {
+  const container = document.createElement('div');
   container.innerHTML = [
     '<a href="#anchor" data-label="anchor">anchor</a>',
     '<button type="button" hidden data-label="hidden">hidden</button>',
@@ -153,18 +159,17 @@ test("filters focusable candidates through the Cladd visibility predicate", () =
     '<div tabindex="-1" data-label="excluded-tabindex">excluded</div>',
     '<summary data-label="summary">summary</summary>',
     '<iframe data-label="iframe"></iframe>',
-  ].join("");
+  ].join('');
   document.body.append(container);
 
-  expect(getFocusTrapFocusable(container).map((element) => element.dataset.label)).toEqual([
-    "anchor",
-    "editable",
-    "summary",
-    "iframe",
-  ]);
+  expect(
+    getFocusTrapFocusable(container).map((element) => element.dataset.label),
+  ).toEqual(['anchor', 'editable', 'summary', 'iframe']);
 
   const anchor = container.querySelector<HTMLElement>('[data-label="anchor"]');
-  const ariaHidden = container.querySelector<HTMLElement>('[data-label="aria-hidden"]');
+  const ariaHidden = container.querySelector<HTMLElement>(
+    '[data-label="aria-hidden"]',
+  );
 
   expect(anchor && isFocusTrapVisible(anchor)).toBe(true);
   expect(ariaHidden && isFocusTrapVisible(ariaHidden)).toBe(false);
@@ -172,32 +177,32 @@ test("filters focusable candidates through the Cladd visibility predicate", () =
   container.remove();
 });
 
-test("moves focus into the container when mounted already open", async () => {
-  const outside = appendTrigger("outside");
+test('moves focus into the container when mounted already open', async () => {
+  const outside = appendTrigger('outside');
   outside.focus();
   const mounted = mountHarness({ open: ref(true) });
   await nextTick();
 
-  expect(document.activeElement).toBe(trapButton(mounted, "first"));
+  expect(document.activeElement).toBe(trapButton(mounted, 'first'));
 
   cleanupTree(mounted);
   outside.remove();
 });
 
-test("honors the initial focus target inside the container", async () => {
+test('honors the initial focus target inside the container', async () => {
   const mounted = mountHarness({
     initialFocusSelector: '[data-label="middle"]',
     open: ref(true),
   });
   await nextTick();
 
-  expect(document.activeElement).toBe(trapButton(mounted, "middle"));
+  expect(document.activeElement).toBe(trapButton(mounted, 'middle'));
 
   cleanupTree(mounted);
 });
 
-test("leaves focus untouched when initial focus is disabled", async () => {
-  const outside = appendTrigger("outside");
+test('leaves focus untouched when initial focus is disabled', async () => {
+  const outside = appendTrigger('outside');
   outside.focus();
   const mounted = mountHarness({ open: ref(true), setInitialFocus: false });
   await nextTick();
@@ -208,56 +213,56 @@ test("leaves focus untouched when initial focus is disabled", async () => {
   outside.remove();
 });
 
-test("wraps Tab and Shift+Tab at the container boundaries", async () => {
+test('wraps Tab and Shift+Tab at the container boundaries', async () => {
   const mounted = mountHarness({ open: ref(true) });
   await nextTick();
 
-  trapButton(mounted, "last").focus();
+  trapButton(mounted, 'last').focus();
   const forward = pressTab();
 
   expect(forward.defaultPrevented).toBe(true);
-  expect(document.activeElement).toBe(trapButton(mounted, "first"));
+  expect(document.activeElement).toBe(trapButton(mounted, 'first'));
 
   const backward = pressTab(true);
 
   expect(backward.defaultPrevented).toBe(true);
-  expect(document.activeElement).toBe(trapButton(mounted, "last"));
+  expect(document.activeElement).toBe(trapButton(mounted, 'last'));
 
-  trapButton(mounted, "middle").focus();
+  trapButton(mounted, 'middle').focus();
   const untrapped = pressTab();
 
   expect(untrapped.defaultPrevented).toBe(false);
-  expect(document.activeElement).toBe(trapButton(mounted, "middle"));
+  expect(document.activeElement).toBe(trapButton(mounted, 'middle'));
 
   cleanupTree(mounted);
 });
 
-test("pulls focus back inside when Tab arrives from outside the container", async () => {
-  const outside = appendTrigger("outside");
+test('pulls focus back inside when Tab arrives from outside the container', async () => {
+  const outside = appendTrigger('outside');
   const mounted = mountHarness({ open: ref(true) });
   await nextTick();
 
   outside.focus();
   expect(pressTab().defaultPrevented).toBe(true);
-  expect(document.activeElement).toBe(trapButton(mounted, "first"));
+  expect(document.activeElement).toBe(trapButton(mounted, 'first'));
 
   outside.focus();
   expect(pressTab(true).defaultPrevented).toBe(true);
-  expect(document.activeElement).toBe(trapButton(mounted, "last"));
+  expect(document.activeElement).toBe(trapButton(mounted, 'last'));
 
   cleanupTree(mounted);
   outside.remove();
 });
 
-test("falls back to the container when nothing inside is focusable", async () => {
+test('falls back to the container when nothing inside is focusable', async () => {
   const mounted = mountHarness({
-    children: () => [h("span", "no focusable content")],
+    children: () => [h('span', 'no focusable content')],
     open: ref(true),
   });
   await nextTick();
   const container = trapContainer(mounted);
 
-  expect(container.getAttribute("tabindex")).toBe("-1");
+  expect(container.getAttribute('tabindex')).toBe('-1');
   expect(document.activeElement).toBe(container);
 
   const event = pressTab();
@@ -268,46 +273,46 @@ test("falls back to the container when nothing inside is focusable", async () =>
   cleanupTree(mounted);
 });
 
-test("keeps a preset container tabindex untouched", async () => {
+test('keeps a preset container tabindex untouched', async () => {
   const mounted = mountHarness({
-    children: () => [h("span", "no focusable content")],
-    containerTabindex: "0",
+    children: () => [h('span', 'no focusable content')],
+    containerTabindex: '0',
     open: ref(true),
   });
   await nextTick();
   const container = trapContainer(mounted);
 
-  expect(container.getAttribute("tabindex")).toBe("0");
+  expect(container.getAttribute('tabindex')).toBe('0');
   expect(document.activeElement).toBe(container);
 
   cleanupTree(mounted);
 });
 
-test("skips trapping when the container is not the topmost modal layer", async () => {
+test('skips trapping when the container is not the topmost modal layer', async () => {
   const mounted = mountHarness({ open: ref(true) });
   await nextTick();
-  const laterModal = document.createElement("div");
-  laterModal.className = "cui-popup";
+  const laterModal = document.createElement('div');
+  laterModal.className = 'cladd-popup';
   document.body.append(laterModal);
 
-  trapButton(mounted, "last").focus();
+  trapButton(mounted, 'last').focus();
   const event = pressTab();
 
   expect(event.defaultPrevented).toBe(false);
-  expect(document.activeElement).toBe(trapButton(mounted, "last"));
+  expect(document.activeElement).toBe(trapButton(mounted, 'last'));
 
   laterModal.remove();
   cleanupTree(mounted);
 });
 
-test("restores focus to the trigger when the trap closes", async () => {
-  const trigger = appendTrigger("trigger");
+test('restores focus to the trigger when the trap closes', async () => {
+  const trigger = appendTrigger('trigger');
   trigger.focus();
   const open = ref(true);
   const mounted = mountHarness({ open });
   await nextTick();
 
-  expect(document.activeElement).toBe(trapButton(mounted, "first"));
+  expect(document.activeElement).toBe(trapButton(mounted, 'first'));
 
   open.value = false;
   await nextTick();
@@ -318,14 +323,14 @@ test("restores focus to the trigger when the trap closes", async () => {
   trigger.remove();
 });
 
-test("keeps focus in place when focus restoration is disabled", async () => {
-  const trigger = appendTrigger("trigger");
+test('keeps focus in place when focus restoration is disabled', async () => {
+  const trigger = appendTrigger('trigger');
   trigger.focus();
   const open = ref(true);
   const mounted = mountHarness({ open, restoreFocus: false });
   await nextTick();
 
-  expect(document.activeElement).toBe(trapButton(mounted, "first"));
+  expect(document.activeElement).toBe(trapButton(mounted, 'first'));
 
   open.value = false;
   await nextTick();
@@ -336,8 +341,8 @@ test("keeps focus in place when focus restoration is disabled", async () => {
   trigger.remove();
 });
 
-test("skips restoration when the previously focused element left the document", async () => {
-  const trigger = appendTrigger("trigger");
+test('skips restoration when the previously focused element left the document', async () => {
+  const trigger = appendTrigger('trigger');
   trigger.focus();
   const open = ref(true);
   const mounted = mountHarness({ open });
@@ -353,8 +358,8 @@ test("skips restoration when the previously focused element left the document", 
   cleanupTree(mounted);
 });
 
-test("restores focus and drops listeners on unmount", async () => {
-  const trigger = appendTrigger("trigger");
+test('restores focus and drops listeners on unmount', async () => {
+  const trigger = appendTrigger('trigger');
   trigger.focus();
   const mounted = mountHarness({ open: ref(true) });
   await nextTick();

@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { RouterLink } from "vue-router";
+import { RouterLink } from 'vue-router';
 
-import type { CatalogEntry } from "../playground.types";
+import type { CatalogEntry } from '../playground.types';
 
 defineProps<{
   entries: CatalogEntry[];
@@ -17,7 +17,7 @@ defineProps<{
     <nav>
       <RouterLink v-for="entry in entries" :key="entry.id" :to="entry.path">
         <span class="section-nav__index">{{
-          String(entries.indexOf(entry) + 1).padStart(2, "0")
+          String(entries.indexOf(entry) + 1).padStart(2, '0')
         }}</span>
         <span class="section-nav__copy">
           <strong>{{ entry.label }}</strong>

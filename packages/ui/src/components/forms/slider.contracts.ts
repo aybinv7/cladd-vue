@@ -1,5 +1,9 @@
-import type { UiAccent } from "../../foundations/contracts.ts";
-import type { ChoiceSize, SliderScale, SliderVariant } from "./form.contracts.ts";
+import type { UiAccent } from '../../foundations/contracts.ts';
+import type {
+  ChoiceSize,
+  SliderScale,
+  SliderVariant,
+} from './form.contracts.ts';
 
 export interface SliderProps {
   accent?: UiAccent;
@@ -44,40 +48,42 @@ export interface SliderProps {
   variant?: SliderVariant;
 }
 
-export type SliderDefaultProps = Partial<Omit<SliderProps, "value" | "defaultValue">>;
+export type SliderDefaultProps = Partial<
+  Omit<SliderProps, 'value' | 'defaultValue'>
+>;
 
 export const sliderRootHeights: Record<ChoiceSize, string> = {
-  xs: "h-cui-thumb-xs",
-  sm: "h-cui-thumb-sm",
-  md: "h-cui-thumb-md",
+  xs: 'h-cladd-thumb-xs',
+  sm: 'h-cladd-thumb-sm',
+  md: 'h-cladd-thumb-md',
 };
 
 export const sliderThumbSizes: Record<ChoiceSize, string> = {
-  xs: "size-cui-thumb-xs",
-  sm: "size-cui-thumb-sm",
-  md: "size-cui-thumb-md",
+  xs: 'size-cladd-thumb-xs',
+  sm: 'size-cladd-thumb-sm',
+  md: 'size-cladd-thumb-md',
 };
 
 export const sliderTrackBarClasses: Record<ChoiceSize, string> = {
-  xs: "-mt-0.75 h-1.5",
-  sm: "-mt-0.75 h-1.5",
-  md: "-mt-1 h-2",
+  xs: '-mt-0.75 h-1.5',
+  sm: '-mt-0.75 h-1.5',
+  md: '-mt-1 h-2',
 };
 
 export const sliderRangeInsets: Record<ChoiceSize, string> = {
-  xs: "right-px left-px",
-  sm: "right-px left-px",
-  md: "right-0.75 left-0.75",
+  xs: 'right-px left-px',
+  sm: 'right-px left-px',
+  md: 'right-0.75 left-0.75',
 };
 
 export const sliderValueOffsets: Record<ChoiceSize, string> = {
-  xs: "left-2",
-  sm: "left-2.5",
-  md: "left-3",
+  xs: 'left-2',
+  sm: 'left-2.5',
+  md: 'left-3',
 };
 
 export const sliderThumbSpacingVars: Record<ChoiceSize, string> = {
-  xs: "var(--spacing-cui-thumb-xs)",
-  sm: "var(--spacing-cui-thumb-sm)",
-  md: "var(--spacing-cui-thumb-md)",
+  xs: 'var(--spacing-cladd-thumb-xs)',
+  sm: 'var(--spacing-cladd-thumb-sm)',
+  md: 'var(--spacing-cladd-thumb-md)',
 };

@@ -1,13 +1,16 @@
 <script setup lang="ts">
-import { computed, useAttrs, type Component } from "vue";
+import { computed, useAttrs, type Component } from 'vue';
 
-import { useComponentDefaults } from "../../composables/useComponentDefaults.ts";
-import { provideSurfaceContext, useSurface } from "../../contexts/surfaceContext.ts";
-import { useUiContext } from "../../contexts/uiContext.ts";
-import type { UiAccent } from "../../foundations/contracts.ts";
-import { cn } from "../../shared/cn.ts";
-import type { SurfaceCutProps } from "./surface.contracts.ts";
-import { resolveSurfaceInnerElement } from "./surface.shared.ts";
+import { useComponentDefaults } from '../../composables/useComponentDefaults.ts';
+import {
+  provideSurfaceContext,
+  useSurface,
+} from '../../contexts/surfaceContext.ts';
+import { useUiContext } from '../../contexts/uiContext.ts';
+import type { UiAccent } from '../../foundations/contracts.ts';
+import { cn } from '../../shared/cn.ts';
+import type { SurfaceCutProps } from './surface.contracts.ts';
+import { resolveSurfaceInnerElement } from './surface.shared.ts';
 
 defineOptions({ inheritAttrs: false });
 
@@ -26,12 +29,12 @@ const props = withDefaults(defineProps<SurfaceCutProps>(), {
   wrapContent: undefined,
 });
 
-const d = useComponentDefaults("SurfaceCut", props, {
-  as: "div" as string | Component,
+const d = useComponentDefaults('SurfaceCut', props, {
+  as: 'div' as string | Component,
   clickable: false,
   hoverable: false,
   outline: false,
-  overlayPosition: "above" as "above" | "below",
+  overlayPosition: 'above' as 'above' | 'below',
   pressed: false,
   wrapContent: true,
 });
@@ -49,46 +52,49 @@ const rootAttrs = computed(() => {
 const parentSurface = useSurface();
 // Upstream's `color = ''` — no accent-color fallback; `color || inheritedColor` is published.
 const explicitColor = computed(() => d.value.color ?? d.value.accent);
-const providedColor = computed(() => explicitColor.value ?? parentSurface.color.value);
+const providedColor = computed(
+  () => explicitColor.value ?? parentSurface.color.value,
+);
 const providedLevel = computed(() => parentSurface.level.value - 1);
 const innerElement = computed(() => resolveSurfaceInnerElement(d.value.as));
 
 const rootClass = computed(() =>
   cn(
-    "cui-surface-cut relative text-cui-fg",
-    explicitColor.value && `cui-color-${explicitColor.value}`,
-    d.value.hoverable && "cui-hoverable",
-    d.value.clickable && "cui-clickable",
+    'cladd-surface-cut relative text-cladd-fg',
+    explicitColor.value && `cladd-color-${explicitColor.value}`,
+    d.value.hoverable && 'cladd-hoverable',
+    d.value.clickable && 'cladd-clickable',
     attrs.class,
   ),
 );
 
 const backgroundClass = computed(() =>
   cn(
-    "cui-surface-cut__background pointer-events-none absolute inset-0 rounded-[inherit] bg-cui-surface-cut",
-    d.value.outline && "shadow-cui-cut-outline",
+    'cladd-surface-cut__background pointer-events-none absolute inset-0 rounded-[inherit] bg-cladd-surface-cut',
+    d.value.outline && 'shadow-cladd-cut-outline',
     d.value.bgClassName,
   ),
 );
 
 const overlayClass = computed(() =>
   cn(
-    "cui-surface-cut__overlay pointer-events-none absolute inset-0 rounded-[inherit] opacity-0 duration-200",
+    'cladd-surface-cut__overlay pointer-events-none absolute inset-0 rounded-[inherit] opacity-0 duration-200',
     d.value.hoverable &&
       !d.value.pressed &&
-      "cui-surface-hover:bg-cui-surface-hover cui-surface-hover:opacity-100",
+      'cladd-surface-hover:bg-cladd-surface-hover cladd-surface-hover:opacity-100',
     d.value.clickable &&
       (d.value.pressed
-        ? "bg-cui-surface-pressed opacity-100"
-        : "cui-surface-press:bg-cui-surface-pressed cui-surface-press:opacity-100"),
+        ? 'bg-cladd-surface-pressed opacity-100'
+        : 'cladd-surface-press:bg-cladd-surface-pressed cladd-surface-press:opacity-100'),
     d.value.overlayClassName,
   ),
 );
 
 const contentClass = computed(() =>
   cn(
-    "cui-surface-cut__content relative",
-    d.value.clickable && "duration-200 cui-surface-press:scale-95 cui-surface-press:opacity-75",
+    'cladd-surface-cut__content relative',
+    d.value.clickable &&
+      'duration-200 cladd-surface-press:scale-95 cladd-surface-press:opacity-75',
     d.value.contentClassName,
   ),
 );

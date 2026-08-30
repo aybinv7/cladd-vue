@@ -1,10 +1,13 @@
-import type { SurfaceLevel, SurfaceLevelInput } from "./contracts.ts";
+import type { SurfaceLevel, SurfaceLevelInput } from './contracts.ts';
 
 const minimumSurfaceLevel = 1;
 const maximumSurfaceLevel = 5;
 
 export function clampSurfaceLevel(level: number): SurfaceLevel {
-  return Math.min(maximumSurfaceLevel, Math.max(minimumSurfaceLevel, level)) as SurfaceLevel;
+  return Math.min(
+    maximumSurfaceLevel,
+    Math.max(minimumSurfaceLevel, level),
+  ) as SurfaceLevel;
 }
 
 export function resolveSurfaceLevel(
@@ -15,7 +18,7 @@ export function resolveSurfaceLevel(
     return clampSurfaceLevel(parentLevel + 1);
   }
 
-  if (typeof level === "string") {
+  if (typeof level === 'string') {
     const parsedLevel = Number.parseInt(level, 10);
 
     if (!Number.isFinite(parsedLevel)) {
@@ -23,7 +26,9 @@ export function resolveSurfaceLevel(
     }
 
     return clampSurfaceLevel(
-      level.startsWith("+") || level.startsWith("-") ? parentLevel + parsedLevel : parsedLevel,
+      level.startsWith('+') || level.startsWith('-')
+        ? parentLevel + parsedLevel
+        : parsedLevel,
     );
   }
 

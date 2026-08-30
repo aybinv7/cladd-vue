@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import { computed } from "vue";
+import { computed } from 'vue';
 
-import { useComponentDefaults } from "../../composables/useComponentDefaults.ts";
-import SegmentedButton from "../actions/SegmentedButton.vue";
-import type { ButtonProps } from "../actions/button.contracts.ts";
-import type { TabProps } from "./tabs.contracts.ts";
-import { tabId, tabPanelId, useTabsContext } from "./tabsContext.ts";
+import { useComponentDefaults } from '../../composables/useComponentDefaults.ts';
+import type { ButtonProps } from '../actions/button.contracts.ts';
+import SegmentedButton from '../actions/SegmentedButton.vue';
+import type { TabProps } from './tabs.contracts.ts';
+import { tabId, tabPanelId, useTabsContext } from './tabsContext.ts';
 
 defineOptions({ inheritAttrs: false });
 
@@ -37,7 +37,7 @@ defineSlots<{
   default?: () => unknown;
 }>();
 
-const d = useComponentDefaults("Tab", props, {});
+const d = useComponentDefaults('Tab', props, {});
 const { value: selectedValue, setValue, baseId } = useTabsContext();
 const selected = computed(() => selectedValue.value === d.value.value);
 

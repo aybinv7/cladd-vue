@@ -1,6 +1,6 @@
-import { onUnmounted, shallowRef, type Ref } from "vue";
+import { onUnmounted, shallowRef, type Ref } from 'vue';
 
-import { resolveOverlayElement } from "../components/overlays/overlay.contracts.ts";
+import { resolveOverlayElement } from '../components/overlays/overlay.contracts.ts';
 
 let anchorSequence = 0;
 
@@ -13,7 +13,7 @@ export interface AnchorPosition {
 export function useAnchorPosition(): AnchorPosition {
   anchorSequence += 1;
   const anchorElement = shallowRef<HTMLElement>();
-  const anchorName = shallowRef(`--cui-anchor-${anchorSequence}`);
+  const anchorName = shallowRef(`--cladd-anchor-${anchorSequence}`);
   const ownedElements = new Set<HTMLElement>();
 
   function setAnchorElement(value: unknown): void {
@@ -21,19 +21,19 @@ export function useAnchorPosition(): AnchorPosition {
     anchorElement.value = element;
     if (!element) return;
 
-    const existing = element.style.getPropertyValue("anchor-name");
+    const existing = element.style.getPropertyValue('anchor-name');
     if (existing) {
       anchorName.value = existing;
       return;
     }
 
-    element.style.setProperty("anchor-name", anchorName.value);
+    element.style.setProperty('anchor-name', anchorName.value);
     ownedElements.add(element);
   }
 
   onUnmounted(() => {
     for (const element of ownedElements) {
-      element.style.removeProperty("anchor-name");
+      element.style.removeProperty('anchor-name');
     }
     ownedElements.clear();
   });

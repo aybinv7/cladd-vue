@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import { ToggleButton, ToggleGroup } from "@cladd-vue/ui";
-import { computed, ref } from "vue";
-import type { UiAccent } from "@cladd-vue/ui";
+import { ToggleButton, ToggleGroup } from '@cladd-vue/ui';
+import type { UiAccent } from '@cladd-vue/ui';
+import { computed, ref } from 'vue';
 
-import CatalogSection from "../components/CatalogSection.vue";
-import ComponentPlayground from "../components/ComponentPlayground.vue";
-import PlaygroundSwitchControl from "../components/PlaygroundSwitchControl.vue";
-import PlaygroundToolbar from "../components/PlaygroundToolbar.vue";
+import CatalogSection from '../components/CatalogSection.vue';
+import ComponentPlayground from '../components/ComponentPlayground.vue';
+import PlaygroundSwitchControl from '../components/PlaygroundSwitchControl.vue';
+import PlaygroundToolbar from '../components/PlaygroundToolbar.vue';
 
 const props = defineProps<{
   accent: UiAccent;
@@ -14,9 +14,9 @@ const props = defineProps<{
 }>();
 
 const toggleMultiple = ref(true);
-const toggleValue = ref<string | string[] | undefined>("bold");
+const toggleValue = ref<string | string[] | undefined>('bold');
 const toggleCode = computed(
-  () => `<ToggleGroup v-model:value="value" ${toggleMultiple.value ? "multiple" : ""}>
+  () => `<ToggleGroup v-model:value="value" ${toggleMultiple.value ? 'multiple' : ''}>
   <ToggleButton value="bold">Bold</ToggleButton>
   <ToggleButton value="italic">Italic</ToggleButton>
   <ToggleButton value="underline">Underline</ToggleButton>
@@ -34,8 +34,12 @@ const toggleCode = computed(
     <ComponentPlayground :code="toggleCode" preview-surface>
       <template #preview>
         <ToggleGroup v-model:value="toggleValue" :multiple="toggleMultiple">
-          <ToggleButton :disabled="!props.interactionsEnabled" value="bold">Bold</ToggleButton>
-          <ToggleButton :disabled="!props.interactionsEnabled" value="italic">Italic</ToggleButton>
+          <ToggleButton :disabled="!props.interactionsEnabled" value="bold"
+            >Bold</ToggleButton
+          >
+          <ToggleButton :disabled="!props.interactionsEnabled" value="italic"
+            >Italic</ToggleButton
+          >
           <ToggleButton :disabled="!props.interactionsEnabled" value="underline"
             >Underline</ToggleButton
           >

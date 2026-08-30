@@ -1,33 +1,45 @@
 <script setup lang="ts">
-import { Surface, SurfaceCut, UiProvider, type UiTheme } from "../../src/index.ts";
+import {
+  Surface,
+  SurfaceCut,
+  UiProvider,
+  type UiTheme,
+} from '../../src/index.ts';
 
-const themes: UiTheme[] = ["dark", "light"];
+const themes: UiTheme[] = ['dark', 'light'];
 </script>
 
 <template>
-  <div class="cui-fixture-grid">
-    <!-- The theme cascade lives on the app's own element (`dark`/`light` + `cui-color-*`), like a
+  <div class="cladd-fixture-grid">
+    <!-- The theme cascade lives on the app's own element (`dark`/`light` + `cladd-color-*`), like a
          Cladd app; `UiProvider` only publishes context. -->
     <div
       v-for="theme in themes"
       :key="theme"
-      class="cui-fixture-shell cui-color-cyan"
+      class="cladd-fixture-shell cladd-color-cyan"
       :class="theme"
     >
       <UiProvider accent-color="cyan" :theme="theme">
-        <Surface class="cui-fixture-panel" :level="1" variant="gradient" outline>
-          <div class="cui-fixture-heading">
+        <Surface
+          class="cladd-fixture-panel"
+          :level="1"
+          variant="gradient"
+          outline
+        >
+          <div class="cladd-fixture-heading">
             <span>Device workspace</span>
-            <span class="cui-fixture-meta">{{ theme }}</span>
+            <span class="cladd-fixture-meta">{{ theme }}</span>
           </div>
-          <Surface class="cui-fixture-row" hoverable>
+          <Surface class="cladd-fixture-row" hoverable>
             <span>Pixel 9 Pro</span>
-            <span class="cui-fixture-status">connected</span>
+            <span class="cladd-fixture-status">connected</span>
           </Surface>
-          <Surface variant="transparent" class="cui-fixture-group">
-            <Surface class="cui-fixture-inspector" accent="purple" outline>
+          <Surface variant="transparent" class="cladd-fixture-group">
+            <Surface class="cladd-fixture-inspector" accent="purple" outline>
               <span>Storage inspector</span>
-              <SurfaceCut class="cui-fixture-cut">IndexedDB / 14 stores</SurfaceCut>
+              <SurfaceCut class="cladd-fixture-cut"
+                >IndexedDB / 14 stores</SurfaceCut
+              >
             </Surface>
           </Surface>
         </Surface>
@@ -37,32 +49,32 @@ const themes: UiTheme[] = ["dark", "light"];
 </template>
 
 <style scoped>
-.cui-fixture-grid {
+.cladd-fixture-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 16px;
   font-family: Geist, sans-serif;
 }
 
-.cui-fixture-shell {
+.cladd-fixture-shell {
   padding: 24px;
-  background: var(--cui-bg);
+  background: var(--cladd-bg);
 }
 
-.cui-fixture-panel {
+.cladd-fixture-panel {
   overflow: hidden;
   border-radius: 18px;
 }
 
-.cui-fixture-panel > :deep(.cui-surface__content) {
+.cladd-fixture-panel > :deep(.cladd-surface__content) {
   flex-direction: column;
   gap: 1px;
   padding: 6px;
 }
 
-.cui-fixture-heading,
-.cui-fixture-row,
-.cui-fixture-inspector {
+.cladd-fixture-heading,
+.cladd-fixture-row,
+.cladd-fixture-inspector {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -71,42 +83,42 @@ const themes: UiTheme[] = ["dark", "light"];
   font-size: 12px;
 }
 
-.cui-fixture-heading {
-  color: var(--cui-fg-soft);
+.cladd-fixture-heading {
+  color: var(--cladd-fg-soft);
   text-transform: uppercase;
   letter-spacing: 0.08em;
 }
 
-.cui-fixture-meta,
-.cui-fixture-status {
-  color: var(--cui-fg-softer);
+.cladd-fixture-meta,
+.cladd-fixture-status {
+  color: var(--cladd-fg-softer);
   font-size: 10px;
 }
 
-.cui-fixture-row,
-.cui-fixture-inspector,
-.cui-fixture-cut {
+.cladd-fixture-row,
+.cladd-fixture-inspector,
+.cladd-fixture-cut {
   border-radius: 10px;
 }
 
-.cui-fixture-group > :deep(.cui-surface__content) {
+.cladd-fixture-group > :deep(.cladd-surface__content) {
   display: block;
   padding-top: 5px;
 }
 
-.cui-fixture-inspector {
+.cladd-fixture-inspector {
   gap: 10px;
 }
 
-.cui-fixture-inspector > :deep(.cui-surface__content) {
+.cladd-fixture-inspector > :deep(.cladd-surface__content) {
   width: 100%;
   align-items: center;
   justify-content: space-between;
 }
 
-.cui-fixture-cut {
+.cladd-fixture-cut {
   padding: 4px 8px;
-  color: var(--cui-fg-soft);
+  color: var(--cladd-fg-soft);
   font-size: 10px;
 }
 </style>

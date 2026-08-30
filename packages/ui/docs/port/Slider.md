@@ -29,7 +29,7 @@ Read upstream paths below as `reference/cladd/<path>`. Vue paths are relative to
 | `className` | `Slider.tsx:79` | `class` through the root element | `Slider.vue:207` | — | transposed | |
 | `color` | `Slider.tsx:85`, resolution `260` | `color` | `Slider.vue:16,39,97`–`99` | `undefined` | transposed | `isTrack ? colorProp : (colorProp ?? accentColor)` reproduced; Vue inserts the `accent` prop into the fallback chain. |
 | `thumbOutline` | `Slider.tsx:87`, default `145` | `thumbOutline` | `Slider.vue:32,55,272` | `true` | ported | |
-| `rangeFill` | `Slider.tsx:93`, default `146` | `rangeFill` | `Slider.vue:24,47,232` | `false` | deviated | The `gradient-fill` / `gradient` switch (`Slider.tsx:295`) is ported, but the companion handle recolour that upstream applies when `rangeFill && progress > 0.5` (`Slider.tsx:327`–`329`) has no Vue equivalent: the handle keeps `--cui-foreground-softer` over a filled range. |
+| `rangeFill` | `Slider.tsx:93`, default `146` | `rangeFill` | `Slider.vue:24,47,232` | `false` | deviated | The `gradient-fill` / `gradient` switch (`Slider.tsx:295`) is ported, but the companion handle recolour that upstream applies when `rangeFill && progress > 0.5` (`Slider.tsx:327`–`329`) has no Vue equivalent: the handle keeps `--cladd-foreground-softer` over a filled range. |
 | `rangeOutline` | `Slider.tsx:99`, default `147` | `rangeOutline` | `Slider.vue:25,48,231` | `true` | ported | |
 | `input` | `Slider.tsx:103`, default `148` | `input` | `Slider.vue:20,43` | `false` → `true` | deviated | Reserved and read by neither implementation, but the published default differs. Upstream keeps `false`; Vue documents it as always-on and defaults to `true`. |
 | `debounce` | `Slider.tsx:105`, default `149` | `debounce` | `Slider.vue:17,40,152`–`155` | `0` | ported | |
@@ -101,15 +101,15 @@ Read upstream paths below as `reference/cladd/<path>`. Vue paths are relative to
 - Conflicting `touch-action` declarations: `forms.css:534` sets `none` and `forms.css:678` sets
   `pan-y` at equal specificity in the same layer. `pan-y` wins by order and matches upstream
   (`Slider.tsx:267`), but the pair is order-fragile and one of the two is dead.
-- Orphan CSS with no upstream counterpart and no consumer in `Slider.vue`: `.cui-slider__thumb`
-  (`forms.css:597`–`625`, `638`–`641`, `650`–`663`), `.cui-slider__thumb-line`
+- Orphan CSS with no upstream counterpart and no consumer in `Slider.vue`: `.cladd-slider__thumb`
+  (`forms.css:597`–`625`, `638`–`641`, `650`–`663`), `.cladd-slider__thumb-line`
   (`forms.css:627`–`648`), the `[data-orientation="vertical"]` rules (`forms.css:546`–`550`,
-  `569`–`572`, `592`–`595`), and `.cui-slider__track > .cui-surface__content`
+  `569`–`572`, `592`–`595`), and `.cladd-slider__track > .cladd-surface__content`
   (`forms.css:574`–`579`, unreachable because both tracks render with `wrap-content` false and are
-  `SurfaceCut`). `Slider.vue` renders `cui-slider__handle` and `cui-slider__thumb-surface`, never
-  `cui-slider__thumb`, and never sets `data-orientation`; upstream has no vertical slider.
-- `--cui-slider-value` is referenced at `forms.css:586` and `600` but never defined. `Slider.vue`
-  publishes `--cui-slider-progress` and `--cui-slider-progress-percent` (`Slider.vue:106`–`112`), so
+  `SurfaceCut`). `Slider.vue` renders `cladd-slider__handle` and `cladd-slider__thumb-surface`, never
+  `cladd-slider__thumb`, and never sets `data-orientation`; upstream has no vertical slider.
+- `--cladd-slider-value` is referenced at `forms.css:586` and `600` but never defined. `Slider.vue`
+  publishes `--cladd-slider-progress` and `--cladd-slider-progress-percent` (`Slider.vue:106`–`112`), so
   both declarations are invalid at computed-value time. Dead, and no upstream counterpart.
 - Upstream `Slider.tsx:367` applies `group-focus-within/slider:-translate-x-3` and
   `group-active/slider:-translate-x-3` to the thumb-variant range fill, but the root declares
@@ -142,6 +142,6 @@ Fixed 2026-08-03, verified against `reference/cladd/src/components/Slider.tsx`:
 Still open, deliberately deferred to the styling rework in `plans/tailwind-realignment.md`, since these
 are CSS-shape items in a file scheduled for replacement by ported upstream utilities: `disabled` dimming
 the whole root instead of only the range and handle, the missing `rangeFill && progress > 0.5` handle
-recolour, the orphan `.cui-slider__thumb*` and `[data-orientation]` rules, and the two conflicting
+recolour, the orphan `.cladd-slider__thumb*` and `[data-orientation]` rules, and the two conflicting
 `touch-action` declarations. The behavioural deviations (`step` rounding, `progress` clamping, `log`
 fallback when `min <= 0`, arrow-key handling under `log`) remain registered and unresolved.

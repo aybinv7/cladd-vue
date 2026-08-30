@@ -1,9 +1,12 @@
 <script setup lang="ts">
-import { computed, useSlots } from "vue";
+import { computed, useSlots } from 'vue';
 
-import { popupRootContextKey, useOverlayRootContext } from "./overlayRootContext.ts";
-import { cloneTriggerNode } from "./overlayTrigger.ts";
-import VNodeRenderer from "../data-display/VNodeRenderer.ts";
+import VNodeRenderer from '../data-display/VNodeRenderer.ts';
+import {
+  popupRootContextKey,
+  useOverlayRootContext,
+} from './overlayRootContext.ts';
+import { cloneTriggerNode } from './overlayTrigger.ts';
 
 defineSlots<{
   default?: () => unknown;

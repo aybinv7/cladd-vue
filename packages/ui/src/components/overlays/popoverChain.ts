@@ -1,12 +1,21 @@
-import { inject, onUnmounted, provide, watch, type InjectionKey, type Ref } from "vue";
+import {
+  inject,
+  onUnmounted,
+  provide,
+  watch,
+  type InjectionKey,
+  type Ref,
+} from 'vue';
 
-import type { OverlayPhase } from "../../foundations/contracts.ts";
+import type { OverlayPhase } from '../../foundations/contracts.ts';
 
 export interface PopoverChainContext {
   register: (close: () => void) => () => void;
 }
 
-const popoverChainKey: InjectionKey<PopoverChainContext> = Symbol("cui-popover-chain");
+const popoverChainKey: InjectionKey<PopoverChainContext> = Symbol(
+  'cladd-popover-chain',
+);
 const openTopLevelPopovers = new Set<() => void>();
 
 export function usePopoverChain(options: {
@@ -37,7 +46,7 @@ export function usePopoverChain(options: {
   }
 
   watch(
-    () => options.phase.value !== "closed",
+    () => options.phase.value !== 'closed',
     (live) => {
       if (!live) {
         detach();
@@ -56,7 +65,7 @@ export function usePopoverChain(options: {
   );
 
   watch(options.phase, (phase) => {
-    if (phase !== "closing") return;
+    if (phase !== 'closing') return;
     for (const closeChild of childCloses) closeChild();
   });
 

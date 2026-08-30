@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { computed, provide, shallowRef, watch } from "vue";
+import { computed, provide, shallowRef, watch } from 'vue';
 
-import { useComponentDefaults } from "../../composables/useComponentDefaults.ts";
-import type { RadioGroupProps } from "./radio.contracts.ts";
-import { radioGroupKey } from "./radioGroupContext.ts";
+import { useComponentDefaults } from '../../composables/useComponentDefaults.ts';
+import type { RadioGroupProps } from './radio.contracts.ts';
+import { radioGroupKey } from './radioGroupContext.ts';
 
 const props = withDefaults(defineProps<RadioGroupProps>(), {
   disabled: undefined,
@@ -13,14 +13,14 @@ const props = withDefaults(defineProps<RadioGroupProps>(), {
   required: undefined,
 });
 
-const d = useComponentDefaults("RadioGroup", props, {
+const d = useComponentDefaults('RadioGroup', props, {
   disabled: false,
   loop: true,
-  orientation: "vertical" as RadioGroupProps["orientation"],
+  orientation: 'vertical' as RadioGroupProps['orientation'],
   required: false,
 });
 
-const model = defineModel<string>({ default: "" });
+const model = defineModel<string>({ default: '' });
 const value = shallowRef(model.value);
 
 watch(model, (next) => (value.value = next));
@@ -36,7 +36,7 @@ provide(radioGroupKey, {
 
 <template>
   <div
-    class="cui-radio-group flex gap-2"
+    class="cladd-radio-group flex gap-2"
     :class="d.orientation === 'horizontal' ? 'flex-row' : 'flex-col'"
     :data-orientation="d.orientation"
     role="radiogroup"

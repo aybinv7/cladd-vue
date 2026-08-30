@@ -56,12 +56,12 @@ bun add @cladd-vue/ui
 ```
 
 ```ts
-import "@cladd-vue/ui/styles.css";
+import '@cladd-vue/ui/styles.css';
 ```
 
 ```vue
 <script setup lang="ts">
-import { Button, Input, Surface, UiProvider } from "@cladd-vue/ui";
+import { Button, Input, Surface, UiProvider } from '@cladd-vue/ui';
 </script>
 
 <template>

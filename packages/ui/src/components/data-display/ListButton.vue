@@ -1,11 +1,12 @@
 <script setup lang="ts">
-import { computed, type Component } from "vue";
+import { computed, type Component } from 'vue';
 
-import { useComponentDefaults } from "../../composables/useComponentDefaults.ts";
-import type { SurfaceVariant, UiSize } from "../../foundations/contracts.ts";
-import { cn } from "../../shared/cn.ts";
-import Button from "../actions/Button.vue";
-import { buttonIconSizes } from "../actions/button.contracts.ts";
+import { useComponentDefaults } from '../../composables/useComponentDefaults.ts';
+import type { SurfaceVariant, UiSize } from '../../foundations/contracts.ts';
+import { cn } from '../../shared/cn.ts';
+import { buttonIconSizes } from '../actions/button.contracts.ts';
+import Button from '../actions/Button.vue';
+import type { ListButtonProps } from './dataDisplay.contracts.ts';
 import {
   listButtonAfterClasses,
   listButtonClasses,
@@ -15,8 +16,7 @@ import {
   listButtonIconClasses,
   listButtonInnerContentClasses,
   listButtonTitleClasses,
-} from "./list.contracts.ts";
-import type { ListButtonProps } from "./dataDisplay.contracts.ts";
+} from './list.contracts.ts';
 
 const props = withDefaults(defineProps<ListButtonProps>(), {
   accent: undefined,
@@ -39,15 +39,15 @@ const props = withDefaults(defineProps<ListButtonProps>(), {
   variant: undefined,
 });
 
-const d = useComponentDefaults("ListButton", props, {
-  as: "button" as string | Component,
+const d = useComponentDefaults('ListButton', props, {
+  as: 'button' as string | Component,
   disabled: false,
   outline: false,
   readOnly: false,
   rounded: true,
   selected: false,
-  size: "lg" as UiSize,
-  variant: "transparent" as SurfaceVariant,
+  size: 'lg' as UiSize,
+  variant: 'transparent' as SurfaceVariant,
 });
 
 defineSlots<{
@@ -60,19 +60,27 @@ defineSlots<{
 
 const iconSizeClass = computed(() => buttonIconSizes[d.value.size]);
 const rootClass = computed(() => cn(listButtonClasses));
-const contentClass = computed(() => cn(listButtonContentClasses, d.value.contentClassName));
+const contentClass = computed(() =>
+  cn(listButtonContentClasses, d.value.contentClassName),
+);
 const iconClass = computed(() =>
   cn(listButtonIconClasses, iconSizeClass.value, d.value.iconClassName),
 );
 const innerContentClass = computed(() =>
   cn(listButtonInnerContentClasses, d.value.innerContentClassName),
 );
-const headerClass = computed(() => cn(listButtonHeaderClasses, d.value.headerClassName));
+const headerClass = computed(() =>
+  cn(listButtonHeaderClasses, d.value.headerClassName),
+);
 const titleClass = computed(() =>
   cn(listButtonTitleClasses, iconSizeClass.value, d.value.titleClassName),
 );
-const footerClass = computed(() => cn(listButtonFooterClasses, d.value.footerClassName));
-const afterClass = computed(() => cn(listButtonAfterClasses, iconSizeClass.value));
+const footerClass = computed(() =>
+  cn(listButtonFooterClasses, d.value.footerClassName),
+);
+const afterClass = computed(() =>
+  cn(listButtonAfterClasses, iconSizeClass.value),
+);
 </script>
 
 <template>
@@ -95,16 +103,26 @@ const afterClass = computed(() => cn(listButtonAfterClasses, iconSizeClass.value
       <slot name="icon" />
     </div>
     <div
-      v-if="$slots.default || d.footer || $slots.footer || d.header || $slots.header"
+      v-if="
+        $slots.default || d.footer || $slots.footer || d.header || $slots.header
+      "
       :class="innerContentClass"
     >
-      <div v-if="d.header || $slots.header" :class="headerClass" data-part="header">
+      <div
+        v-if="d.header || $slots.header"
+        :class="headerClass"
+        data-part="header"
+      >
         <slot name="header">{{ d.header }}</slot>
       </div>
       <div :class="titleClass" data-part="title">
         <slot />
       </div>
-      <div v-if="d.footer || $slots.footer" :class="footerClass" data-part="footer">
+      <div
+        v-if="d.footer || $slots.footer"
+        :class="footerClass"
+        data-part="footer"
+      >
         <slot name="footer">{{ d.footer }}</slot>
       </div>
     </div>

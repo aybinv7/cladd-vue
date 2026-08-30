@@ -1,20 +1,20 @@
 <script setup lang="ts">
-import { Button, Dialog } from "@cladd-vue/ui";
-import { computed, ref } from "vue";
-import type { UiAccent } from "@cladd-vue/ui";
+import { Button, Dialog } from '@cladd-vue/ui';
+import type { UiAccent } from '@cladd-vue/ui';
+import { computed, ref } from 'vue';
 
-import CatalogSection from "../components/CatalogSection.vue";
-import ComponentPlayground from "../components/ComponentPlayground.vue";
-import PlaygroundColorControl from "../components/PlaygroundColorControl.vue";
-import PlaygroundSwitchControl from "../components/PlaygroundSwitchControl.vue";
-import PlaygroundToolbar from "../components/PlaygroundToolbar.vue";
+import CatalogSection from '../components/CatalogSection.vue';
+import ComponentPlayground from '../components/ComponentPlayground.vue';
+import PlaygroundColorControl from '../components/PlaygroundColorControl.vue';
+import PlaygroundSwitchControl from '../components/PlaygroundSwitchControl.vue';
+import PlaygroundToolbar from '../components/PlaygroundToolbar.vue';
 
 const props = defineProps<{
   accent: UiAccent;
   interactionsEnabled: boolean;
 }>();
 
-const color = ref<UiAccent>("neutral");
+const color = ref<UiAccent>('neutral');
 const open = ref(false);
 const confirm = ref(false);
 
@@ -57,7 +57,10 @@ const code = computed(
       </template>
       <template #controls>
         <PlaygroundToolbar>
-          <PlaygroundSwitchControl v-model="confirm" label="confirmation action" />
+          <PlaygroundSwitchControl
+            v-model="confirm"
+            label="confirmation action"
+          />
         </PlaygroundToolbar>
         <PlaygroundToolbar>
           <PlaygroundColorControl v-model="color" />

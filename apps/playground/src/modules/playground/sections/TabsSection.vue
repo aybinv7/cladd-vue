@@ -1,35 +1,35 @@
 <script setup lang="ts">
-import { Tab, TabPanel, Tabs, TabsList } from "@cladd-vue/ui";
-import { computed, ref } from "vue";
-import type { UiAccent } from "@cladd-vue/ui";
+import { Tab, TabPanel, Tabs, TabsList } from '@cladd-vue/ui';
+import type { UiAccent } from '@cladd-vue/ui';
+import { computed, ref } from 'vue';
 
-import CatalogSection from "../components/CatalogSection.vue";
-import ComponentPlayground from "../components/ComponentPlayground.vue";
-import PlaygroundSegmented from "../components/PlaygroundSegmented.vue";
-import PlaygroundSwitchControl from "../components/PlaygroundSwitchControl.vue";
-import PlaygroundToolbar from "../components/PlaygroundToolbar.vue";
+import CatalogSection from '../components/CatalogSection.vue';
+import ComponentPlayground from '../components/ComponentPlayground.vue';
+import PlaygroundSegmented from '../components/PlaygroundSegmented.vue';
+import PlaygroundSwitchControl from '../components/PlaygroundSwitchControl.vue';
+import PlaygroundToolbar from '../components/PlaygroundToolbar.vue';
 
 defineProps<{
   accent: UiAccent;
   interactionsEnabled: boolean;
 }>();
 
-const tabValue = ref("overview");
-const size = ref("md");
+const tabValue = ref('overview');
+const size = ref('md');
 const rounded = ref(true);
 const keepMounted = ref(false);
-const sizes = ["sm", "md", "lg"] as const;
+const sizes = ['sm', 'md', 'lg'] as const;
 
 const code = computed(
   () => `<Tabs v-model:value="value">
-  <TabsList size="${size.value}" ${rounded.value ? "" : ':rounded="false"'}>
+  <TabsList size="${size.value}" ${rounded.value ? '' : ':rounded="false"'}>
     <Tab value="overview">Overview</Tab>
     <Tab value="activity">Activity</Tab>
     <Tab value="settings">Settings</Tab>
   </TabsList>
-  <TabPanel value="overview" ${keepMounted.value ? "keep-mounted" : ""}>Overview content</TabPanel>
-  <TabPanel value="activity" ${keepMounted.value ? "keep-mounted" : ""}>Activity content</TabPanel>
-  <TabPanel value="settings" ${keepMounted.value ? "keep-mounted" : ""}>Settings content</TabPanel>
+  <TabPanel value="overview" ${keepMounted.value ? 'keep-mounted' : ''}>Overview content</TabPanel>
+  <TabPanel value="activity" ${keepMounted.value ? 'keep-mounted' : ''}>Activity content</TabPanel>
+  <TabPanel value="settings" ${keepMounted.value ? 'keep-mounted' : ''}>Settings content</TabPanel>
 </Tabs>`,
 );
 </script>
@@ -47,16 +47,30 @@ const code = computed(
           <Tabs v-model:value="tabValue">
             <TabsList :rounded="rounded" :size="size">
               <Tab value="overview">Overview</Tab>
-              <Tab :disabled="!interactionsEnabled" value="activity">Activity</Tab>
+              <Tab :disabled="!interactionsEnabled" value="activity"
+                >Activity</Tab
+              >
               <Tab value="settings">Settings</Tab>
             </TabsList>
-            <TabPanel :keep-mounted="keepMounted" class="tabs-section__panel" value="overview">
+            <TabPanel
+              :keep-mounted="keepMounted"
+              class="tabs-section__panel"
+              value="overview"
+            >
               Overview content
             </TabPanel>
-            <TabPanel :keep-mounted="keepMounted" class="tabs-section__panel" value="activity">
+            <TabPanel
+              :keep-mounted="keepMounted"
+              class="tabs-section__panel"
+              value="activity"
+            >
               Activity content
             </TabPanel>
-            <TabPanel :keep-mounted="keepMounted" class="tabs-section__panel" value="settings">
+            <TabPanel
+              :keep-mounted="keepMounted"
+              class="tabs-section__panel"
+              value="settings"
+            >
               Settings content
             </TabPanel>
           </Tabs>

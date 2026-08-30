@@ -1,6 +1,6 @@
-import { onMounted, onUnmounted, type Ref } from "vue";
+import { onMounted, onUnmounted, type Ref } from 'vue';
 
-import { popoverContainerSelector } from "../components/overlays/overlay.contracts.ts";
+import { popoverContainerSelector } from '../components/overlays/overlay.contracts.ts';
 
 export interface OverlayDismissOptions {
   closeOnOutsideClick: () => boolean;
@@ -40,7 +40,7 @@ export function useOverlayDismiss(options: OverlayDismissOptions): void {
 
     if (!wasPointerDown) return;
     if (pointerDownInside) return;
-    if (!target.closest("body")) return;
+    if (!target.closest('body')) return;
     if (!options.closeOnOutsideClick()) return;
 
     const nextSibling = container?.nextElementSibling;
@@ -50,12 +50,12 @@ export function useOverlayDismiss(options: OverlayDismissOptions): void {
   }
 
   onMounted(() => {
-    document.addEventListener("pointerdown", onPointerDown);
-    document.addEventListener("click", onDocumentClick);
+    document.addEventListener('pointerdown', onPointerDown);
+    document.addEventListener('click', onDocumentClick);
   });
 
   onUnmounted(() => {
-    document.removeEventListener("pointerdown", onPointerDown);
-    document.removeEventListener("click", onDocumentClick);
+    document.removeEventListener('pointerdown', onPointerDown);
+    document.removeEventListener('click', onDocumentClick);
   });
 }

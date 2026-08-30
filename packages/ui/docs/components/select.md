@@ -4,19 +4,24 @@
 
 ```vue
 <script setup lang="ts">
-import { ref } from "vue";
-import { Select } from "@cladd-vue/ui";
+import { ref } from 'vue';
+import { Select } from '@cladd-vue/ui';
 
-const priority = ref("medium");
+const priority = ref('medium');
 const priorities = [
-  { label: "Low", value: "low" },
-  { label: "Medium", value: "medium" },
-  { label: "High", value: "high" },
+  { label: 'Low', value: 'low' },
+  { label: 'Medium', value: 'medium' },
+  { label: 'High', value: 'high' },
 ];
 </script>
 
 <template>
-  <Select v-model="priority" color="brand" :options="priorities" title="Priority" />
+  <Select
+    v-model="priority"
+    color="brand"
+    :options="priorities"
+    title="Priority"
+  />
 </template>
 ```
 

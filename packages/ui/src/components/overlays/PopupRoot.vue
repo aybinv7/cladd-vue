@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { popupRootContextKey } from "./overlayRootContext.ts";
-import { useOverlayRoot, type OverlayRootProps } from "./overlayRoot.ts";
+import { useOverlayRoot, type OverlayRootProps } from './overlayRoot.ts';
+import { popupRootContextKey } from './overlayRootContext.ts';
 
 const props = withDefaults(defineProps<OverlayRootProps>(), {
   defaultOpen: false,
@@ -8,14 +8,14 @@ const props = withDefaults(defineProps<OverlayRootProps>(), {
 });
 
 const emit = defineEmits<{
-  "update:open": [open: boolean];
+  'update:open': [open: boolean];
 }>();
 
 defineSlots<{
   default?: () => unknown;
 }>();
 
-useOverlayRoot(popupRootContextKey, props, (open) => emit("update:open", open));
+useOverlayRoot(popupRootContextKey, props, (open) => emit('update:open', open));
 </script>
 
 <template>

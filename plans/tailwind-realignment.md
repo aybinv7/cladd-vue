@@ -89,8 +89,8 @@ Tailwind is out of scope for the same reason it is out of scope upstream.
    working shape, which is what upstream's own playground does, is a single CSS entry:
 
    ```css
-   @import "tailwindcss";
-   @import "@cladd-vue/ui/styles.css";
+   @import 'tailwindcss';
+   @import '@cladd-vue/ui/styles.css';
    ```
 
    Verified: playground CSS 88.5 kB with zero leaked at-rules, tokens resolving live in the browser

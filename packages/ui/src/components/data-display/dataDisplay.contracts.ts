@@ -1,11 +1,11 @@
-import type { Component } from "vue";
+import type { Component } from 'vue';
 
 import type {
   SurfaceLevelInput,
   SurfaceVariant,
   UiAccent,
   UiSize,
-} from "../../foundations/contracts.ts";
+} from '../../foundations/contracts.ts';
 
 export interface ChipProps {
   accent?: UiAccent;
@@ -28,7 +28,9 @@ export interface ChipProps {
   variant?: SurfaceVariant;
 }
 
-export type ChipDefaultProps = Partial<Omit<ChipProps, "as" | "icon" | "iconProps">>;
+export type ChipDefaultProps = Partial<
+  Omit<ChipProps, 'as' | 'icon' | 'iconProps'>
+>;
 
 export interface ShortcutProps {
   accent?: UiAccent;
@@ -43,7 +45,7 @@ export interface ShortcutProps {
   variant?: SurfaceVariant;
 }
 
-export type ShortcutDefaultProps = Partial<Omit<ShortcutProps, "as">>;
+export type ShortcutDefaultProps = Partial<Omit<ShortcutProps, 'as'>>;
 
 export interface ListButtonProps {
   accent?: UiAccent;
@@ -75,7 +77,7 @@ export interface ListButtonProps {
 }
 
 export type ListButtonDefaultProps = Partial<
-  Omit<ListButtonProps, "as" | "footer" | "header" | "selected">
+  Omit<ListButtonProps, 'as' | 'footer' | 'header' | 'selected'>
 >;
 
 /** `List`, `ListItem`, `ListTitle`, `ListSeparator` and `SectionTitle` take no props of their own

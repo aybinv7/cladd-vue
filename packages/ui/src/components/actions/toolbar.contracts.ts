@@ -1,12 +1,12 @@
-import type { Component } from "vue";
+import type { Component } from 'vue';
 
 import type {
   SurfaceLevelInput,
   SurfaceVariant,
   UiAccent,
   UiSize,
-} from "../../foundations/contracts.ts";
-import type { ButtonProps } from "./button.contracts.ts";
+} from '../../foundations/contracts.ts';
+import type { ButtonProps } from './button.contracts.ts';
 
 export interface ToolbarProps {
   /** Polymorphic root element. Defaults to `'div'`. */
@@ -15,7 +15,7 @@ export interface ToolbarProps {
   buttonOutline?: boolean;
   /** Surface variant applied to child `ToolbarButton`s through context. Default `'transparent'`. */
   buttonVariant?: SurfaceVariant;
-  /** Accent color token. Sets the toolbar's `cui-color-{name}` class. */
+  /** Accent color token. Sets the toolbar's `cladd-color-{name}` class. */
   color?: UiAccent;
   /** Extra classes for the inner content wrapper. */
   contentClassName?: string;
@@ -31,6 +31,6 @@ export interface ToolbarProps {
   variant?: SurfaceVariant;
 }
 
-export type ToolbarDefaultProps = Partial<Omit<ToolbarProps, "as">>;
+export type ToolbarDefaultProps = Partial<Omit<ToolbarProps, 'as'>>;
 
-export type ToolbarButtonDefaultProps = Partial<Omit<ButtonProps, "as">>;
+export type ToolbarButtonDefaultProps = Partial<Omit<ButtonProps, 'as'>>;

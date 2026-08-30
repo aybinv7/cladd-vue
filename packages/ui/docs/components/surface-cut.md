@@ -4,7 +4,7 @@
 
 ```vue
 <script setup lang="ts">
-import { Surface, SurfaceCut } from "@cladd-vue/ui";
+import { Surface, SurfaceCut } from '@cladd-vue/ui';
 </script>
 
 <template>
@@ -43,12 +43,12 @@ import { Surface, SurfaceCut } from "@cladd-vue/ui";
 
 ## Depth
 
-A cut publishes `parentLevel - 1` to its subtree and exposes the level it was cut from as `data-cui-surface-cut-from-level`. It does not clamp that published value, because the nested `Surface` that consumes it clamps on read: a `SurfaceCut` at the root of a tree publishes a negative depth, and the first `Surface` inside it still resolves to level `1`.
+A cut publishes `parentLevel - 1` to its subtree and exposes the level it was cut from as `data-cladd-surface-cut-from-level`. It does not clamp that published value, because the nested `Surface` that consumes it clamps on read: a `SurfaceCut` at the root of a tree publishes a negative depth, and the first `Surface` inside it still resolves to level `1`.
 
 ```vue
 <template>
   <Surface :level="4">
-    <!-- data-cui-surface-cut-from-level="4" -->
+    <!-- data-cladd-surface-cut-from-level="4" -->
     <SurfaceCut>
       <!-- level 4 again, so the row does not look stacked on the panel -->
       <Surface hoverable clickable />
@@ -61,11 +61,11 @@ Because the cut is one depth step back, the usual composition is panel â†’ cut â
 
 ## Accent scoping
 
-Accent resolution matches `Surface`: `color`, then `accent`, then the accent published by the enclosing surface, then the provider accent. The `cui-accent-{name}` class is only added when this cut sets `color` or `accent` explicitly, so the accent stays scoped to its subtree, while `data-cui-accent` always mirrors the resolved token for descendants reading `useSurface()`.
+Accent resolution matches `Surface`: `color`, then `accent`, then the accent published by the enclosing surface, then the provider accent. The `cladd-accent-{name}` class is only added when this cut sets `color` or `accent` explicitly, so the accent stays scoped to its subtree, while `data-cladd-accent` always mirrors the resolved token for descendants reading `useSurface()`.
 
 ```vue
 <script setup lang="ts">
-import { Input, SurfaceCut, UiProvider } from "@cladd-vue/ui";
+import { Input, SurfaceCut, UiProvider } from '@cladd-vue/ui';
 </script>
 
 <template>
@@ -87,8 +87,8 @@ The contract follows the pinned Cladd `SurfaceCut.tsx` and `SurfaceContext.tsx` 
 Divergences from upstream that are intentional in this package:
 
 - Upstream renders the cut's background, overlay, and content layers as `<div>` unconditionally. This port applies the same phrasing-element swap as `Surface`, so `as="label"` or `as="button"` produces `<span>` layers.
-- Accent resolution ends at the provider accent, so `data-cui-accent` always carries a concrete token; upstream publishes an empty region color when no ancestor set one.
+- Accent resolution ends at the provider accent, so `data-cladd-accent` always carries a concrete token; upstream publishes an empty region color when no ancestor set one.
 - `accent` exists as an alias for `color`; `color` still wins when both are given.
-- Styling is expressed as namespaced `cui-*` classes and `data-cui-*` attributes instead of inline Tailwind utility strings.
+- Styling is expressed as namespaced `cladd-*` classes and `data-cladd-*` attributes instead of inline Tailwind utility strings.
 - The content layer is internal. Upstream exports a separate `SurfaceCutContent` component; here it is produced by `wrapContent` and shaped with `contentClassName`.
 - Per-component provider defaults are not implemented. Upstream `SurfaceCut` reads `useComponentDefaults('SurfaceCut', props)`; this port resolves defaults from the component only.

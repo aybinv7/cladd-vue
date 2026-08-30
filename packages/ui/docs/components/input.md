@@ -4,14 +4,19 @@
 
 ```vue
 <script setup lang="ts">
-import { ref } from "vue";
-import { Input } from "@cladd-vue/ui";
+import { ref } from 'vue';
+import { Input } from '@cladd-vue/ui';
 
-const filter = ref("");
+const filter = ref('');
 </script>
 
 <template>
-  <Input v-model="filter" placeholder="Filter targets" clearable info-message="Package name" />
+  <Input
+    v-model="filter"
+    placeholder="Filter targets"
+    clearable
+    info-message="Package name"
+  />
 </template>
 ```
 
@@ -66,10 +71,10 @@ The component sets `inheritAttrs: false` and forwards every remaining attribute 
 
 ```vue
 <script setup lang="ts">
-import { ref, onMounted } from "vue";
-import { Input } from "@cladd-vue/ui";
+import { ref, onMounted } from 'vue';
+import { Input } from '@cladd-vue/ui';
 
-const value = ref("");
+const value = ref('');
 const field = ref<InstanceType<typeof Input>>();
 
 onMounted(() => field.value?.select());
@@ -86,10 +91,10 @@ onMounted(() => field.value?.select());
 
 ```vue
 <script setup lang="ts">
-import { computed, ref } from "vue";
-import { Input } from "@cladd-vue/ui";
+import { computed, ref } from 'vue';
+import { Input } from '@cladd-vue/ui';
 
-const serial = ref("");
+const serial = ref('');
 const valid = computed(() => serial.value.length > 0);
 </script>
 
@@ -122,7 +127,7 @@ Divergences from upstream:
 - `clearLabel` is forwarded to the clear control as a `label` attribute rather than as `aria-label`, so the clear control has no accessible name today. Upstream sets `aria-label={clearLabel}`.
 - No `displayValue`. Upstream can render a formatted node in place of the raw value while unfocused or read-only.
 - No `inputComponent` / `inputComponentProps`. The control is always a native `<input>`; a masked-input library cannot be swapped in.
-- No `as` polymorphic root, and no `className`, `contentClassName`, `inputClassName`, or `iconClassName` escape hatches. Extra classes go on the root through normal Vue class binding, and inner layers are styled through the `cui-input__*` selectors.
+- No `as` polymorphic root, and no `className`, `contentClassName`, `inputClassName`, or `iconClassName` escape hatches. Extra classes go on the root through normal Vue class binding, and inner layers are styled through the `cladd-input__*` selectors.
 - Keyboard handling is not a prop. Upstream takes `onKeyDown`; here native listeners are forwarded to the control through attributes.
 - `prefix`, `suffix`, and `icon` are slots rather than node props, and the icon is laid out in the field's flex row instead of being absolutely positioned with size-specific offsets.
 - Per-component provider defaults are not implemented; upstream `Input` reads `useComponentDefaults('Input', props)`.

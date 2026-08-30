@@ -1,4 +1,4 @@
-import { inject, provide, type ComputedRef, type InjectionKey } from "vue";
+import { inject, provide, type ComputedRef, type InjectionKey } from 'vue';
 
 export interface AccordionContextValue {
   baseId: string;
@@ -8,18 +8,22 @@ export interface AccordionContextValue {
 }
 
 const accordionContextKey: InjectionKey<ComputedRef<AccordionContextValue>> =
-  Symbol("cui-accordion");
+  Symbol('cladd-accordion');
 
 export function useAccordionContext(): ComputedRef<AccordionContextValue> {
   const context = inject(accordionContextKey, null);
 
   if (!context) {
-    throw new Error("@cladd-vue/ui: `AccordionItem` must be rendered inside an `AccordionRoot`.");
+    throw new Error(
+      '@cladd-vue/ui: `AccordionItem` must be rendered inside an `AccordionRoot`.',
+    );
   }
 
   return context;
 }
 
-export function provideAccordionContext(value: ComputedRef<AccordionContextValue>): void {
+export function provideAccordionContext(
+  value: ComputedRef<AccordionContextValue>,
+): void {
   provide(accordionContextKey, value);
 }

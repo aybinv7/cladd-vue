@@ -1,21 +1,29 @@
 <script setup lang="ts">
-import { computed, onUnmounted, shallowRef, useAttrs, useId, useSlots, watch } from "vue";
+import {
+  computed,
+  onUnmounted,
+  shallowRef,
+  useAttrs,
+  useId,
+  useSlots,
+  watch,
+} from 'vue';
 
-import { useComponentDefaults } from "../../composables/useComponentDefaults.ts";
-import VNodeRenderer from "../data-display/VNodeRenderer.ts";
+import { useComponentDefaults } from '../../composables/useComponentDefaults.ts';
+import VNodeRenderer from '../data-display/VNodeRenderer.ts';
 import {
   overlayTriggerClasses,
   resolveOverlayElement,
   type TooltipProps,
-} from "./overlay.contracts.ts";
-import { cloneTriggerNode } from "./overlayTrigger.ts";
-import TooltipPrimitive from "./TooltipPrimitive.vue";
+} from './overlay.contracts.ts';
+import { cloneTriggerNode } from './overlayTrigger.ts';
+import TooltipPrimitive from './TooltipPrimitive.vue';
 import {
   clearTooltipGlobalTimeout,
   collapseTooltipGlobalTimeout,
   getTooltipGlobalTimeout,
   scheduleTooltipGlobalTimeoutReset,
-} from "./tooltipTimeout.ts";
+} from './tooltipTimeout.ts';
 
 defineOptions({ inheritAttrs: false });
 
@@ -45,18 +53,18 @@ const emit = defineEmits<{
   opening: [];
 }>();
 
-const model = defineModel<boolean>("open", { default: false });
+const model = defineModel<boolean>('open', { default: false });
 const slots = useSlots();
 const attrs = useAttrs();
 const anchorElement = shallowRef<HTMLElement>();
 const pointerTimeout = shallowRef<number>();
 const visible = shallowRef(false);
 const preventContextMenu = shallowRef(false);
-const tooltipId = `cui-tooltip-${useId()}`;
-const d = useComponentDefaults("Tooltip", props, {
+const tooltipId = `cladd-tooltip-${useId()}`;
+const d = useComponentDefaults('Tooltip', props, {
   disabled: false,
   offset: 4,
-  position: "top" as TooltipProps["position"],
+  position: 'top' as TooltipProps['position'],
   timeout: true,
 });
 
@@ -80,7 +88,8 @@ function show(): void {
 function hide(): void {
   visible.value = false;
   model.value = false;
-  if (pointerTimeout.value !== undefined) window.clearTimeout(pointerTimeout.value);
+  if (pointerTimeout.value !== undefined)
+    window.clearTimeout(pointerTimeout.value);
   pointerTimeout.value = undefined;
   if (d.value.timeout) scheduleTooltipGlobalTimeoutReset();
 }
@@ -94,25 +103,25 @@ function onContextMenu(event: Event): void {
 }
 
 function onPointer(event: PointerEvent): void {
-  const mouseEvents = ["pointerenter", "pointerleave", "pointercancel"];
-  const touchEvents = ["pointerdown", "pointerup", "pointercancel"];
+  const mouseEvents = ['pointerenter', 'pointerleave', 'pointercancel'];
+  const touchEvents = ['pointerdown', 'pointerup', 'pointercancel'];
 
   if (
-    (event.pointerType === "mouse" && !mouseEvents.includes(event.type)) ||
-    (event.pointerType === "touch" && !touchEvents.includes(event.type))
+    (event.pointerType === 'mouse' && !mouseEvents.includes(event.type)) ||
+    (event.pointerType === 'touch' && !touchEvents.includes(event.type))
   ) {
     return;
   }
-  if (event.type === "pointerenter") show();
-  if (event.type === "pointerleave" || event.type === "pointercancel") {
+  if (event.type === 'pointerenter') show();
+  if (event.type === 'pointerleave' || event.type === 'pointercancel') {
     preventContextMenu.value = false;
     hide();
   }
-  if (event.type === "pointerdown" && !visible.value) {
+  if (event.type === 'pointerdown' && !visible.value) {
     preventContextMenu.value = true;
     show();
   }
-  if (event.type === "pointerup") {
+  if (event.type === 'pointerup') {
     preventContextMenu.value = false;
     hide();
   }
@@ -124,28 +133,28 @@ watch(
   anchorElement,
   (element, previous, onCleanup) => {
     if (previous) {
-      previous.removeEventListener("click", onClick);
-      previous.removeEventListener("contextmenu", onContextMenu);
-      previous.removeEventListener("pointerenter", onPointer);
-      previous.removeEventListener("pointerdown", onPointer);
-      previous.removeEventListener("pointerleave", onPointer);
+      previous.removeEventListener('click', onClick);
+      previous.removeEventListener('contextmenu', onContextMenu);
+      previous.removeEventListener('pointerenter', onPointer);
+      previous.removeEventListener('pointerdown', onPointer);
+      previous.removeEventListener('pointerleave', onPointer);
     }
     if (!element) return;
-    element.addEventListener("click", onClick);
-    element.addEventListener("contextmenu", onContextMenu);
-    element.addEventListener("pointerenter", onPointer);
-    element.addEventListener("pointerdown", onPointer);
-    element.addEventListener("pointerleave", onPointer);
-    document.addEventListener("pointerup", onPointer);
-    document.addEventListener("pointercancel", onPointer);
+    element.addEventListener('click', onClick);
+    element.addEventListener('contextmenu', onContextMenu);
+    element.addEventListener('pointerenter', onPointer);
+    element.addEventListener('pointerdown', onPointer);
+    element.addEventListener('pointerleave', onPointer);
+    document.addEventListener('pointerup', onPointer);
+    document.addEventListener('pointercancel', onPointer);
     onCleanup(() => {
-      element.removeEventListener("click", onClick);
-      element.removeEventListener("contextmenu", onContextMenu);
-      element.removeEventListener("pointerenter", onPointer);
-      element.removeEventListener("pointerdown", onPointer);
-      element.removeEventListener("pointerleave", onPointer);
-      document.removeEventListener("pointerup", onPointer);
-      document.removeEventListener("pointercancel", onPointer);
+      element.removeEventListener('click', onClick);
+      element.removeEventListener('contextmenu', onContextMenu);
+      element.removeEventListener('pointerenter', onPointer);
+      element.removeEventListener('pointerdown', onPointer);
+      element.removeEventListener('pointerleave', onPointer);
+      document.removeEventListener('pointerup', onPointer);
+      document.removeEventListener('pointercancel', onPointer);
     });
   },
   { immediate: true },
@@ -155,18 +164,23 @@ watch(
 function syncDescription(open: boolean): void {
   const element = anchorElement.value;
   if (!element) return;
-  if (open) element.setAttribute("aria-describedby", tooltipId);
-  else element.removeAttribute("aria-describedby");
+  if (open) element.setAttribute('aria-describedby', tooltipId);
+  else element.removeAttribute('aria-describedby');
 }
 
-watch([model, anchorElement], ([open]) => syncDescription(open), { immediate: true });
-
-onUnmounted(() => {
-  if (pointerTimeout.value !== undefined) window.clearTimeout(pointerTimeout.value);
-  anchorElement.value?.removeAttribute("aria-describedby");
+watch([model, anchorElement], ([open]) => syncDescription(open), {
+  immediate: true,
 });
 
-const triggerNode = computed(() => cloneTriggerNode(slots.trigger?.(), { ref: setAnchor }));
+onUnmounted(() => {
+  if (pointerTimeout.value !== undefined)
+    window.clearTimeout(pointerTimeout.value);
+  anchorElement.value?.removeAttribute('aria-describedby');
+});
+
+const triggerNode = computed(() =>
+  cloneTriggerNode(slots.trigger?.(), { ref: setAnchor }),
+);
 const primitiveAttrs = computed(() => {
   const { class: consumerClass, ...rest } = attrs;
   return { attrs: rest, class: consumerClass };
@@ -175,7 +189,11 @@ const primitiveAttrs = computed(() => {
 
 <template>
   <VNodeRenderer v-if="triggerNode" :node="triggerNode" />
-  <span v-else-if="slots.trigger" :class="overlayTriggerClasses" :ref="setAnchor">
+  <span
+    v-else-if="slots.trigger"
+    :class="overlayTriggerClasses"
+    :ref="setAnchor"
+  >
     <slot name="trigger" />
   </span>
   <TooltipPrimitive

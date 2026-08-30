@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { Surface } from "@cladd-vue/ui";
+import { Surface } from '@cladd-vue/ui';
 
-import PlaygroundCode from "./PlaygroundCode.vue";
+import PlaygroundCode from './PlaygroundCode.vue';
 
 const props = withDefaults(
   defineProps<{

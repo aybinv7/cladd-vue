@@ -4,8 +4,8 @@
 
 ```vue
 <script setup lang="ts">
-import { ref } from "vue";
-import { Slider } from "@cladd-vue/ui";
+import { ref } from 'vue';
+import { Slider } from '@cladd-vue/ui';
 
 const volume = ref(40);
 </script>

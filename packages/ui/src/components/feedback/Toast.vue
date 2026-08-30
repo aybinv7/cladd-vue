@@ -1,18 +1,29 @@
 <script setup lang="ts">
-import { computed, onMounted, onUnmounted, shallowRef, useAttrs, type Component } from "vue";
+import {
+  computed,
+  onMounted,
+  onUnmounted,
+  shallowRef,
+  useAttrs,
+  type Component,
+} from 'vue';
 
-import { useComponentDefaults } from "../../composables/useComponentDefaults.ts";
-import { useOverlayLifecycle } from "../../composables/useOverlayLifecycle.ts";
-import { useOverlayPhase } from "../../composables/useOverlayPhase.ts";
-import { provideSurfaceColorReset } from "../../contexts/surfaceContext.ts";
-import { useUiContext } from "../../contexts/uiContext.ts";
-import type { SurfaceVariant, UiAccent } from "../../foundations/contracts.ts";
-import { cn } from "../../shared/cn.ts";
-import Button from "../actions/Button.vue";
-import { resolveOverlayElement } from "../overlays/overlay.contracts.ts";
-import { toastRootContextKey, useOverlayRootContext } from "../overlays/overlayRootContext.ts";
-import Surface from "../surface/Surface.vue";
-import CloseIcon from "./CloseIcon.vue";
+import { useComponentDefaults } from '../../composables/useComponentDefaults.ts';
+import { useOverlayLifecycle } from '../../composables/useOverlayLifecycle.ts';
+import { useOverlayPhase } from '../../composables/useOverlayPhase.ts';
+import { provideSurfaceColorReset } from '../../contexts/surfaceContext.ts';
+import { useUiContext } from '../../contexts/uiContext.ts';
+import type { SurfaceVariant, UiAccent } from '../../foundations/contracts.ts';
+import { cn } from '../../shared/cn.ts';
+import Button from '../actions/Button.vue';
+import { resolveOverlayElement } from '../overlays/overlay.contracts.ts';
+import {
+  toastRootContextKey,
+  useOverlayRootContext,
+} from '../overlays/overlayRootContext.ts';
+import Surface from '../surface/Surface.vue';
+import CloseIcon from './CloseIcon.vue';
+import type { ToastProps } from './feedback.contracts.ts';
 import {
   toastCloseWrapperClasses,
   toastClosingClasses,
@@ -29,8 +40,7 @@ import {
   toastSurfaceClasses,
   toastTextClasses,
   toastTitleClasses,
-} from "./toast.contracts.ts";
-import type { ToastProps } from "./feedback.contracts.ts";
+} from './toast.contracts.ts';
 
 defineOptions({ inheritAttrs: false });
 
@@ -49,13 +59,13 @@ const props = withDefaults(defineProps<ToastProps>(), {
   variant: undefined,
 });
 
-const d = useComponentDefaults("Toast", props, {
+const d = useComponentDefaults('Toast', props, {
   closeButton: true,
-  color: "neutral" as UiAccent,
+  color: 'neutral' as UiAccent,
   outline: true,
   stopPropagationOnClick: false,
   timeout: toastDefaultTimeout,
-  variant: "gradient" as SurfaceVariant,
+  variant: 'gradient' as SurfaceVariant,
 });
 
 defineSlots<{
@@ -68,7 +78,7 @@ const emit = defineEmits<{
   closed: [];
 }>();
 
-const modelOpen = defineModel<boolean>("open", { default: undefined });
+const modelOpen = defineModel<boolean>('open', { default: undefined });
 const attrs = useAttrs();
 const ui = useUiContext();
 const root = useOverlayRootContext(toastRootContextKey);
@@ -84,9 +94,9 @@ const model = computed<boolean>({
 });
 
 const { phase, setPhase } = useOverlayPhase(model);
-const mounted = computed(() => phase.value !== "closed");
+const mounted = computed(() => phase.value !== 'closed');
 const currentSurfaceLevel = computed(
-  () => d.value.surfaceLevel ?? (ui.theme.value === "dark" ? 3 : 1),
+  () => d.value.surfaceLevel ?? (ui.theme.value === 'dark' ? 3 : 1),
 );
 const teleportTarget = computed(() => d.value.root ?? ui.overlaysRoot.value);
 
@@ -101,7 +111,7 @@ function close(): void {
 const { opened } = useOverlayLifecycle({
   closeOnEscape: () => false,
   element: surface,
-  onClosed: () => emit("closed"),
+  onClosed: () => emit('closed'),
   phase,
   setPhase,
 });
@@ -111,15 +121,19 @@ const surfaceClass = computed(() =>
     toastSurfaceClasses,
     !opened.value && toastHiddenClasses,
     opened.value && toastOpenedClasses,
-    phase.value === "closing" && toastClosingClasses,
+    phase.value === 'closing' && toastClosingClasses,
     attrs.class,
   ),
 );
 const contentClass = computed(() =>
   cn(
     toastContentClasses,
-    d.value.title && d.value.text ? toastContentWithBothClasses : toastContentWithOneClasses,
-    d.value.closeButton ? toastContentCloseButtonClasses : toastContentNoCloseButtonClasses,
+    d.value.title && d.value.text
+      ? toastContentWithBothClasses
+      : toastContentWithOneClasses,
+    d.value.closeButton
+      ? toastContentCloseButtonClasses
+      : toastContentNoCloseButtonClasses,
   ),
 );
 const surfaceAttrs = computed(() => {
@@ -167,10 +181,18 @@ provideSurfaceColorReset();
         :class="toastCopyClasses"
         data-part="content"
       >
-        <div v-if="d.title || $slots.title" :class="toastTitleClasses" data-part="title">
+        <div
+          v-if="d.title || $slots.title"
+          :class="toastTitleClasses"
+          data-part="title"
+        >
           <slot name="title">{{ d.title }}</slot>
         </div>
-        <div v-if="d.text || $slots.text" :class="toastTextClasses" data-part="text">
+        <div
+          v-if="d.text || $slots.text"
+          :class="toastTextClasses"
+          data-part="text"
+        >
           <slot name="text">{{ d.text }}</slot>
         </div>
       </div>
@@ -178,7 +200,13 @@ provideSurfaceColorReset();
       <slot />
 
       <div v-if="d.closeButton" :class="toastCloseWrapperClasses">
-        <Button data-part="close" :outline="false" rounded variant="transparent" @click="close">
+        <Button
+          data-part="close"
+          :outline="false"
+          rounded
+          variant="transparent"
+          @click="close"
+        >
           <CloseIcon />
         </Button>
       </div>
