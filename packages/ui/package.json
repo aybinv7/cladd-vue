@@ -30,6 +30,7 @@
   ],
   "type": "module",
   "sideEffects": [
+    "./src/cladd.css",
     "./src/styles/**/*.css"
   ],
   "exports": {
@@ -38,7 +39,7 @@
       "types": "./dist/index.d.mts",
       "import": "./dist/index.mjs"
     },
-    "./css": "./src/styles/index.css",
+    "./css": "./src/cladd.css",
     "./package.json": "./package.json"
   },
   "publishConfig": {

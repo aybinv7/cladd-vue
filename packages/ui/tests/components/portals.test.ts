@@ -4,7 +4,7 @@ import { defineComponent, h, nextTick } from 'vue';
 import {
   toastOpenedClasses,
   toastSurfaceClasses,
-} from '../../src/components/feedback/toast.contracts.ts';
+} from '../../src/components/toast.contracts.ts';
 import {
   Toast,
   ToastRoot,

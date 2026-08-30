@@ -7,17 +7,17 @@ import {
   buttonIconSizes,
   buttonPaddings,
   buttonVerticalPaddings,
-} from '../../src/components/actions/button.contracts.ts';
+} from '../../src/components/button.contracts.ts';
 import {
   chipFontSizes,
   chipIconSizes,
   chipRoundedClasses,
-} from '../../src/components/data-display/chip.contracts.ts';
+} from '../../src/components/chip.contracts.ts';
 import {
   shortcutFontSizes,
   shortcutIconSizes,
   shortcutRoundedClasses,
-} from '../../src/components/data-display/shortcut.contracts.ts';
+} from '../../src/components/shortcut.contracts.ts';
 import {
   overlayPhases,
   resolveSurfaceLevel,
@@ -61,20 +61,17 @@ const spinnerCss = readFileSync(
   join(process.cwd(), 'src', 'styles', 'spinner.css'),
   'utf8',
 );
-const indexCss = readFileSync(
-  join(process.cwd(), 'src', 'styles', 'index.css'),
-  'utf8',
-);
+const indexCss = readFileSync(join(process.cwd(), 'src', 'cladd.css'), 'utf8');
 const focusRingSource = readFileSync(
-  join(process.cwd(), 'src', 'components', 'feedback', 'FocusRing.vue'),
+  join(process.cwd(), 'src', 'components', 'FocusRing.vue'),
   'utf8',
 );
 const spinnerSource = readFileSync(
-  join(process.cwd(), 'src', 'components', 'feedback', 'Spinner.vue'),
+  join(process.cwd(), 'src', 'components', 'Spinner.vue'),
   'utf8',
 );
 const surfaceSource = readFileSync(
-  join(process.cwd(), 'src', 'components', 'surface', 'Surface.vue'),
+  join(process.cwd(), 'src', 'components', 'Surface.vue'),
   'utf8',
 );
 
@@ -207,11 +204,10 @@ test('publishes stable surface and sizing tokens', () => {
 });
 
 test('ships only the stylesheets Cladd hand-authors', () => {
-  // Upstream's file list, minus the ones whose contents are Vue-side utility strings now.
+  // Upstream keeps the entry at src/cladd.css and the partials in src/styles.
   expect(styleFiles).toEqual([
     'colors.css',
     'font-size.css',
-    'index.css',
     'input.css',
     'radius.css',
     'safe-areas.css',

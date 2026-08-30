@@ -3,8 +3,11 @@ import { readFileSync, readdirSync } from 'node:fs';
 import { expect, test } from 'vite-plus/test';
 
 import {
+  entryStylesheet,
+  srcPath,
   stylesPath,
   upstreamHydrated,
+  upstreamPath,
   upstreamStylesPath,
 } from '../support/paths.ts';
 
@@ -81,5 +84,30 @@ test.skipIf(!upstreamHydrated)(
         /(?:--)?cui-/u,
       );
     }
+  },
+);
+
+test.skipIf(!upstreamHydrated)(
+  'matches upstream cladd.css line for line',
+  () => {
+    const upstream = normalize(
+      readFileSync(upstreamPath(entryStylesheet), 'utf8'),
+    );
+    const ported = normalize(readFileSync(srcPath(entryStylesheet), 'utf8'));
+
+    const drift = ported
+      .map((line, index) => ({ index, line, upstream: upstream[index] }))
+      .filter((entry) => entry.line !== entry.upstream);
+
+    expect(
+      drift.map(
+        (entry) => `${entryStylesheet}:${entry.index + 1} ${entry.line.trim()}`,
+      ),
+      'cladd.css drifted from reference/cladd',
+    ).toEqual([]);
+
+    expect(ported.length, 'cladd.css has a different line count').toBe(
+      upstream.length,
+    );
   },
 );

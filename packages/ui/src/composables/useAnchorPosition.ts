@@ -1,6 +1,6 @@
 import { onUnmounted, shallowRef, type Ref } from 'vue';
 
-import { resolveOverlayElement } from '../components/overlays/overlay.contracts.ts';
+import { resolveOverlayElement } from '../components/overlay.contracts.ts';
 
 let anchorSequence = 0;
 

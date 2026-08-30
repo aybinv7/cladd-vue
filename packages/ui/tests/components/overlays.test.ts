@@ -18,7 +18,7 @@ import {
   popoverSurfaceClasses,
   tooltipOrigins,
   tooltipSurfaceClasses,
-} from '../../src/components/overlays/overlay.contracts.ts';
+} from '../../src/components/overlay.contracts.ts';
 import {
   popupCardClasses,
   popupCardContentClasses,
@@ -28,7 +28,7 @@ import {
   popupWrapperClasses,
   popupWrapperClosedClasses,
   popupWrapperOpenedClasses,
-} from '../../src/components/overlays/popup.contracts.ts';
+} from '../../src/components/popup.contracts.ts';
 import { Popover } from '../../src/index.ts';
 import { byTestId, click, mountTree } from '../support/mountTree.ts';
 
@@ -37,7 +37,7 @@ const colorsCss = readFileSync(
   'utf8',
 );
 const stylesIndex = readFileSync(
-  join(process.cwd(), 'src', 'styles', 'index.css'),
+  join(process.cwd(), 'src', 'cladd.css'),
   'utf8',
 );
 const safeAreasCss = readFileSync(

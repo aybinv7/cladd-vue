@@ -80,7 +80,7 @@ Tailwind is out of scope for the same reason it is out of scope upstream.
    `tailwindcss` / `@tailwindcss/vite` as dev dependencies, all from the existing catalog pins;
    `src/shared/cn.ts` ported from `reference/cladd/src/shared/cn.ts` with its `safe-*` class groups and
    the size, text, and radius theme scales renamed to `cui-`; `@source "../"` plus the
-   `cui-surface-hover` and `cui-surface-press` custom variants added to `src/styles/index.css`, mirroring
+   `cui-surface-hover` and `cui-surface-press` custom variants added to `src/cladd.css`, mirroring
    `cladd.css`.
 
    Consumer wiring matters and is easy to get wrong: Tailwind must own the whole CSS chain from one

@@ -4,7 +4,7 @@
 - Upstream files: `src/components/Slider.tsx`, `src/components/FocusRing.tsx`,
   `src/shared/size-utls.ts`, `src/shared/rounded-classes.ts`, `src/styles/slider.css`,
   `src/styles/radius.css`, `src/styles/spacing.css`, `src/styles/font-size.css`
-- Vue files: `src/components/forms/Slider.vue`, `src/components/forms/form.contracts.ts`,
+- Vue files: `src/components/Slider.vue`, `src/components/form.contracts.ts`,
   `src/styles/forms.css`, `src/styles/tokens.css`
 - Diffed: 2026-08-03, upstream read from `reference/cladd/`
 

@@ -6,11 +6,11 @@
 
 ## Verification performed
 
-| Command                      | Result                                                            |
-| ---------------------------- | ----------------------------------------------------------------- |
-| `vp run @cladd-vue/ui#test`  | pass, 41 tests across 5 files                                     |
-| `vp run @cladd-vue/ui#check` | pass, 76 files formatted, 52 files without lint or type errors    |
-| `vp run @cladd-vue/ui#build` | **fail**, parse error on `src/components/surface/Surface.vue:1:1` |
+| Command                      | Result                                                         |
+| ---------------------------- | -------------------------------------------------------------- |
+| `vp run @cladd-vue/ui#test`  | pass, 41 tests across 5 files                                  |
+| `vp run @cladd-vue/ui#check` | pass, 76 files formatted, 52 files without lint or type errors |
+| `vp run @cladd-vue/ui#build` | **fail**, parse error on `src/components/Surface.vue:1:1`      |
 
 Everything else below is source reading, not executed evidence.
 
@@ -49,7 +49,7 @@ Fix depends on the distribution decision in `tailwind-realignment.md`. Mirroring
 source removes the SFC build entirely. Otherwise use a rolldown-compatible Vue plugin in `pack.plugins`,
 then verify externalized Vue and tree shaking.
 
-Related: `./styles.css` exports `./src/styles/index.css`, raw source shipped through `files`, so
+Related: `./styles.css` exports `./src/cladd.css`, raw source shipped through `files`, so
 published CSS bypasses the build and consumers pay seven chained `@import`s. Decide deliberately.
 
 ## High

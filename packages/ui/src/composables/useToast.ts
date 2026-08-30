@@ -1,6 +1,6 @@
 import type { Component } from 'vue';
 
-import { useToastsPortalContext } from '../components/provider/toastsPortalContext.ts';
+import { useToastsPortalContext } from '../components/toastsPortalContext.ts';
 import type { Color } from '../types.ts';
 
 export interface UseToastOptions {

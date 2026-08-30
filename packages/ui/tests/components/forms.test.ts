@@ -5,7 +5,6 @@ import { expect, test } from 'vite-plus/test';
 import { h, nextTick, ref } from 'vue';
 
 import FormFixture from '../../fixtures/forms/FormFixture.vue';
-import { sectionTitleClasses } from '../../src/components/data-display/list.contracts.ts';
 import {
   inputClearButtonSizes,
   inputClearGlyphSizes,
@@ -13,8 +12,9 @@ import {
   inputIconWrapClasses,
   inputPaddingNoIcon,
   inputPaddingWithIcon,
-} from '../../src/components/forms/input.contracts.ts';
-import { searchFieldClasses } from '../../src/components/forms/searchField.contracts.ts';
+} from '../../src/components/input.contracts.ts';
+import { sectionTitleClasses } from '../../src/components/list.contracts.ts';
+import { searchFieldClasses } from '../../src/components/searchField.contracts.ts';
 import {
   selectDropdownIconClasses,
   selectEmptyClasses,
@@ -33,19 +33,19 @@ import {
   selectTriggerClasses,
   selectTriggerContentClasses,
   selectTriggerDropdownPaddingClasses,
-} from '../../src/components/forms/select.contracts.ts';
+} from '../../src/components/select.contracts.ts';
 import {
   sliderRangeInsets,
   sliderThumbSpacingVars,
   sliderTrackBarClasses,
   sliderValueOffsets,
-} from '../../src/components/forms/slider.contracts.ts';
+} from '../../src/components/slider.contracts.ts';
 import {
   textareaIconWrapClasses,
   textareaPaddingNoIcon,
   textareaPaddingVertical,
   textareaPaddingWithIcon,
-} from '../../src/components/forms/textarea.contracts.ts';
+} from '../../src/components/textarea.contracts.ts';
 import {
   Checkbox,
   Input,
@@ -64,11 +64,11 @@ const sliderCss = readFileSync(
   'utf8',
 );
 const selectSource = readFileSync(
-  join(process.cwd(), 'src', 'components', 'forms', 'Select.vue'),
+  join(process.cwd(), 'src', 'components', 'Select.vue'),
   'utf8',
 );
 const stylesIndex = readFileSync(
-  join(process.cwd(), 'src', 'styles', 'index.css'),
+  join(process.cwd(), 'src', 'cladd.css'),
   'utf8',
 );
 const checkboxGlyph = readFileSync(

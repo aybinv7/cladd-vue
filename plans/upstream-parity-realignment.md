@@ -68,10 +68,11 @@ Comparing _export lists_ instead of filenames leaves a much shorter list:
 
 ## 4. File layout
 
-- [ ] Flatten `src/components/*` to match upstream. The port groups by category (`actions/`, `forms/`,
-      `overlays/`, `surface/`, …); upstream is one flat directory plus `icons/`.
-- [ ] `src/styles/index.css` → `src/cladd.css` at the package root, with upstream's
-      `@source "./"; @source "./components";` and `@import "./styles/*.css"` paths.
+- [x] `src/components/*` flattened to match upstream: one directory plus `icons/`. 102 files moved,
+      every relative import re-resolved against its new location.
+- [x] `src/cladd.css` → `src/cladd.css`, with upstream's `@source "./"; @source "./components";`
+      and `@import "./styles/*.css"` paths. **Byte-identical to upstream**, and now covered by the
+      parity test alongside the eight partials.
 - [x] `composables/useTheme.ts` and camelCase `shared/` filenames stay as they are. Decided: filename
       and directory idiom is part of the React-to-Vue transposition, like `.tsx` becoming `.vue`.
       Upstream `hooks/use-theme.ts` maps to `composables/useTheme.ts`, `shared/rounded-classes.ts` to

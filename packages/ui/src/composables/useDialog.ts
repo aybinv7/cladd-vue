@@ -1,4 +1,4 @@
-import { useDialogsPortalContext } from '../components/provider/dialogsPortalContext.ts';
+import { useDialogsPortalContext } from '../components/dialogsPortalContext.ts';
 import { useAccentColor } from '../contexts/uiContext.ts';
 import type { Color } from '../types.ts';
 

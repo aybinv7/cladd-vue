@@ -1,6 +1,6 @@
 import { onMounted, onUnmounted, type Ref } from 'vue';
 
-import { popoverContainerSelector } from '../components/overlays/overlay.contracts.ts';
+import { popoverContainerSelector } from '../components/overlay.contracts.ts';
 
 export interface OverlayDismissOptions {
   closeOnOutsideClick: () => boolean;

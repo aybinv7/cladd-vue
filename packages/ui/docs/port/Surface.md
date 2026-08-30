@@ -3,7 +3,7 @@
 - Upstream commit: `fadd8efe935111f31d7c933238db5ce5d3a55d71` (`@cladd-ui/react` 0.18.5)
 - Upstream files: `src/components/Surface.tsx`, `src/components/SurfaceContext.tsx`,
   `src/cladd.css`, `src/styles/radius.css`, `src/styles/spacing.css`
-- Vue files: `src/components/surface/Surface.vue`, `src/components/surface/surface.shared.ts`,
+- Vue files: `src/components/Surface.vue`, `src/components/surface.shared.ts`,
   `src/foundations/surfaceLevel.ts`, `src/foundations/contracts.ts`,
   `src/contexts/surfaceContext.ts`, `src/styles/surfaces.css`, `src/styles/tokens.css`
 - Diffed: 2026-08-03, upstream read from `reference/cladd/`

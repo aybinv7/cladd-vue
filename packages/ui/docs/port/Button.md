@@ -4,8 +4,8 @@
 - Upstream files: `src/components/Button.tsx`, `src/components/FocusRing.tsx`,
   `src/components/SurfaceCut.tsx`, `src/shared/size-utls.ts`, `src/shared/rounded-classes.ts`,
   `src/styles/radius.css`, `src/styles/spacing.css`, `src/styles/font-size.css`
-- Vue files: `src/components/actions/Button.vue`, `src/components/actions/button.contracts.ts`,
-  `src/components/feedback/FocusRing.vue`, `src/components/feedback/Spinner.vue`,
+- Vue files: `src/components/Button.vue`, `src/components/button.contracts.ts`,
+  `src/components/FocusRing.vue`, `src/components/Spinner.vue`,
   `src/styles/controls.css`, `src/styles/tokens.css`
 - Diffed: 2026-08-03, upstream read from `reference/cladd/`
 

@@ -31,3 +31,6 @@ export function upstreamPath(...segments: string[]): string {
 export function upstreamStylesPath(...segments: string[]): string {
   return upstreamPath('styles', ...segments);
 }
+
+/** Upstream's stylesheet entry is `src/cladd.css`; the port keeps the same path. */
+export const entryStylesheet = 'cladd.css';
