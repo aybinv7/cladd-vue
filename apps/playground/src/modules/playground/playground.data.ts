@@ -106,9 +106,30 @@ export const catalogEntries: CatalogEntry[] = [
     label: 'Accordion',
     path: '/components/accordion',
   },
+  {
+    count: 8,
+    description: 'Text-weight polymorphic action',
+    id: 'link',
+    label: 'Link',
+    path: '/components/link',
+  },
+  {
+    count: 14,
+    description: 'Steppers and drag-to-scrub numerics',
+    id: 'numbers',
+    label: 'Numbers',
+    path: '/components/numbers',
+  },
+  {
+    count: 12,
+    description: 'One-time code entry',
+    id: 'otp',
+    label: 'OTP field',
+    path: '/components/otp',
+  },
 ];
 
-export const catalogComponentCount = 38;
+export const catalogComponentCount = 48;
 export const catalogStateCount = catalogEntries.reduce(
   (sum, entry) => sum + entry.count,
   0,

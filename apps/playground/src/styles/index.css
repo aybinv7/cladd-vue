@@ -412,6 +412,12 @@ kbd {
   min-width: 0;
 }
 
+.playground-hint {
+  color: var(--playground-muted);
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+}
+
 .specimen-row--baseline {
   align-items: baseline;
 }

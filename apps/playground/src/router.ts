@@ -86,6 +86,21 @@ export const router = createRouter({
           component: () =>
             import('./modules/playground/sections/AccordionSection.vue'),
         },
+        {
+          path: 'link',
+          component: () =>
+            import('./modules/playground/sections/LinkSection.vue'),
+        },
+        {
+          path: 'numbers',
+          component: () =>
+            import('./modules/playground/sections/NumbersSection.vue'),
+        },
+        {
+          path: 'otp',
+          component: () =>
+            import('./modules/playground/sections/OtpSection.vue'),
+        },
       ],
     },
     {

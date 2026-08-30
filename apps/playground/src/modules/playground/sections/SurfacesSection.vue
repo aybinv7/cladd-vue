@@ -1,5 +1,11 @@
 <script setup lang="ts">
-import { Surface, SurfaceCut } from '@cladd-vue/ui';
+import {
+  Surface,
+  SurfaceContent,
+  SurfaceContextProvider,
+  SurfaceCut,
+  SurfaceCutContent,
+} from '@cladd-vue/ui';
 import type { Color, SurfaceLevel, SurfaceVariant } from '@cladd-vue/ui';
 
 import CatalogSection from '../components/CatalogSection.vue';
@@ -84,6 +90,42 @@ defineProps<{
           </SurfaceCut>
         </Surface>
       </Surface>
+    </div>
+
+    <div class="specimen-group">
+      <div class="specimen-label">
+        <span>Content layers</span>
+        <code>SurfaceContent · SurfaceCutContent</code>
+      </div>
+      <div class="specimen-row">
+        <Surface class="nested-surface__child" outline :wrap-content="false">
+          <SurfaceContent class="nested-surface__copy">
+            <span>SurfaceContent</span>
+            <strong>Always h-full</strong>
+          </SurfaceContent>
+        </Surface>
+        <SurfaceCut :wrap-content="false">
+          <SurfaceCutContent class="nested-surface__copy" :full-height="false">
+            <span>SurfaceCutContent</span>
+            <strong>fullHeight false</strong>
+          </SurfaceCutContent>
+        </SurfaceCut>
+      </div>
+    </div>
+
+    <div class="specimen-group">
+      <div class="specimen-label">
+        <span>Published context</span>
+        <code>SurfaceContextProvider</code>
+      </div>
+      <div class="specimen-row">
+        <SurfaceContextProvider color="cyan" :level="3">
+          <Surface class="nested-surface__child" outline variant="gradient">
+            <span>Reads level 3 and cyan</span>
+            <strong>Without a parent Surface</strong>
+          </Surface>
+        </SurfaceContextProvider>
+      </div>
     </div>
   </CatalogSection>
 </template>
