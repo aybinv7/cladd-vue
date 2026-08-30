@@ -38,6 +38,7 @@ const props = withDefaults(defineProps<InputProps>(), {
   infoMessage: undefined,
   inputClassName: undefined,
   inputId: undefined,
+  inputProps: undefined,
   inputMode: undefined,
   max: undefined,
   maxLength: undefined,
@@ -211,6 +212,7 @@ function clearValue(): void {
 
 defineExpose({
   focus: () => inputElement.value?.focus(),
+  inputElement,
   select: () => inputElement.value?.select(),
 });
 </script>
@@ -253,6 +255,7 @@ defineExpose({
         <input
           :id="d.inputId"
           ref="inputElement"
+          v-bind="d.inputProps"
           :autofocus="d.autoFocus"
           :class="controlClass"
           data-part="control"

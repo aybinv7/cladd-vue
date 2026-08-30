@@ -27,6 +27,11 @@ import type {
 import type { InputDefaultProps } from '../components/input.contracts.ts';
 import type { LinkDefaultProps } from '../components/link.contracts.ts';
 import type {
+  OTPFieldDefaultProps,
+  OTPFieldInputDefaultProps,
+  OTPFieldSeparatorDefaultProps,
+} from '../components/otpField.contracts.ts';
+import type {
   DialogDefaultProps,
   PopoverDefaultProps,
   TooltipDefaultProps,
@@ -107,6 +112,9 @@ export interface ComponentDefaults {
   Slider?: SliderDefaultProps;
   Spinner?: SpinnerDefaultProps;
   Link?: LinkDefaultProps;
+  OTPField?: OTPFieldDefaultProps;
+  OTPFieldInput?: OTPFieldInputDefaultProps;
+  OTPFieldSeparator?: OTPFieldSeparatorDefaultProps;
   Surface?: SurfaceDefaultProps;
   SurfaceContent?: SurfaceContentDefaultProps;
   SurfaceCut?: SurfaceCutDefaultProps;

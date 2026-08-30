@@ -38,6 +38,17 @@ export { default as SurfaceContextProvider } from './components/SurfaceContextPr
 export { default as SurfaceCut } from './components/SurfaceCut.vue';
 export { default as SurfaceCutContent } from './components/SurfaceCutContent.vue';
 export { default as Link } from './components/Link.vue';
+export { default as OTPField } from './components/OTPField.vue';
+export { default as OTPFieldInput } from './components/OTPFieldInput.vue';
+export { default as OTPFieldSeparator } from './components/OTPFieldSeparator.vue';
+export type {
+  OTPFieldProps,
+  OTPFieldDefaultProps,
+  OTPFieldInputProps,
+  OTPFieldInputDefaultProps,
+  OTPFieldSeparatorProps,
+  OTPFieldSeparatorDefaultProps,
+} from './components/otpField.contracts.ts';
 export type {
   LinkProps,
   LinkDefaultProps,

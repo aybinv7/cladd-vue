@@ -37,9 +37,16 @@ const transposed: Record<string, Record<string, string>> = {
     icon: 'the icon slot',
     prefix: 'the prefix slot',
     suffix: 'the suffix slot',
-    inputRef: 'a template ref',
+    inputRef: 'a template ref; the element is exposed as inputElement',
+    inputComponentProps: 'inputProps',
+    inputProps: 'extra: the Vue spelling of inputComponentProps',
   },
   ListButtonProps: { icon: 'the icon slot', after: 'the after slot' },
+  OTPFieldProps: { value: 'v-model' },
+  OTPFieldInputProps: {
+    index:
+      'claimed from the field context during setup, not injected by the parent',
+  },
   PopupProps: {
     open: 'v-model:open',
     'aria-label': 'ariaLabel; Vue normalises hyphenated attrs onto props',
@@ -106,7 +113,7 @@ const transposed: Record<string, Record<string, string>> = {
  */
 const notImplemented: Record<string, string[]> = {
   DialogProps: ['inertContainer', 'lazy', 'stopPropagationOnClick'],
-  InputProps: ['displayValue', 'inputComponent', 'inputComponentProps'],
+  InputProps: ['displayValue', 'inputComponent'],
   SwitchProps: ['event'],
   TextareaProps: ['inputPadding'],
 };

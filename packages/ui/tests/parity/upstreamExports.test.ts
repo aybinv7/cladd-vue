@@ -19,9 +19,6 @@ const notYetPorted = new Set([
   'ColorPicker',
   'NumberField',
   'NumberScrubber',
-  'OTPField',
-  'OTPFieldInput',
-  'OTPFieldSeparator',
 ]);
 
 /**

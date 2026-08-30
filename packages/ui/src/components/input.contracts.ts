@@ -29,6 +29,8 @@ export interface InputProps {
   inputClassName?: string;
   /** `id` for the inner `<input>`. */
   inputId?: string;
+  /** Extra props spread onto the inner `<input>`. Upstream's `inputComponentProps`. */
+  inputProps?: Record<string, unknown>;
   /** Native `inputMode` hint. */
   inputMode?:
     | 'decimal'
