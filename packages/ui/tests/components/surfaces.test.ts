@@ -3,7 +3,14 @@ import { defineComponent, h } from 'vue';
 
 import SurfaceFixture from '../../fixtures/surfaces/SurfaceFixture.vue';
 import { useUiContext } from '../../src/contexts/uiContext.ts';
-import { Surface, SurfaceCut, CladdProvider } from '../../src/index.ts';
+import {
+  CladdProvider,
+  Link,
+  Surface,
+  SurfaceContent,
+  SurfaceCut,
+  SurfaceCutContent,
+} from '../../src/index.ts';
 import { byTestId, mountTree } from '../support/mountTree.ts';
 
 test('publishes theme and accent as context without rendering an element', () => {
@@ -198,5 +205,46 @@ test('renders the isolated dark and light consumer fixture', () => {
   expect(shells[0]?.classList.contains('dark')).toBe(true);
   expect(shells[1]?.classList.contains('light')).toBe(true);
   expect(shells[0]?.classList.contains('cladd-color-cyan')).toBe(true);
+  mounted.app.unmount();
+});
+
+test('renders SurfaceContent and SurfaceCutContent with upstream classes', () => {
+  const mounted = mountTree(
+    h('div', null, [
+      h(SurfaceContent, { 'data-testid': 'content' }, () => 'body'),
+      h(SurfaceCutContent, { 'data-testid': 'cut' }, () => 'body'),
+      h(
+        SurfaceCutContent,
+        { 'data-testid': 'cut-auto', fullHeight: false },
+        () => 'body',
+      ),
+    ]),
+  );
+
+  expect(byTestId(mounted.root, 'content').className).toBe('relative h-full');
+  expect(byTestId(mounted.root, 'cut').className).toBe('relative h-full');
+  expect(byTestId(mounted.root, 'cut-auto').className).toBe('relative');
+  mounted.app.unmount();
+});
+
+test('switches Link between anchor and button on href', () => {
+  const mounted = mountTree(
+    h('div', null, [
+      h(Link, { 'data-testid': 'button-link' }, () => 'Press'),
+      h(Link, { 'data-testid': 'anchor-link', href: '#target' }, () => 'Go'),
+      h(Link, { 'data-testid': 'off-link', disabled: true }, () => 'Off'),
+    ]),
+  );
+
+  expect(byTestId(mounted.root, 'button-link').tagName).toBe('BUTTON');
+  expect(byTestId(mounted.root, 'anchor-link').tagName).toBe('A');
+  expect(byTestId(mounted.root, 'anchor-link').getAttribute('href')).toBe(
+    '#target',
+  );
+
+  const off = byTestId(mounted.root, 'off-link');
+  expect(off.getAttribute('data-disabled')).toBe('true');
+  expect(off.getAttribute('tabindex')).toBe('-1');
+  expect(off.className).toContain('pointer-events-none');
   mounted.app.unmount();
 });

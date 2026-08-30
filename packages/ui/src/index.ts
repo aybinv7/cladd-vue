@@ -33,7 +33,21 @@ export { default as ToastTrigger } from './components/ToastTrigger.vue';
 export type { ComponentDefaults } from './foundations/componentDefaults.ts';
 export { default as CladdProvider } from './components/CladdProvider.vue';
 export { default as Surface } from './components/Surface.vue';
+export { default as SurfaceContent } from './components/SurfaceContent.vue';
+export { default as SurfaceContextProvider } from './components/SurfaceContextProvider.vue';
 export { default as SurfaceCut } from './components/SurfaceCut.vue';
+export { default as SurfaceCutContent } from './components/SurfaceCutContent.vue';
+export { default as Link } from './components/Link.vue';
+export type {
+  LinkProps,
+  LinkDefaultProps,
+} from './components/link.contracts.ts';
+export type {
+  SurfaceContentProps,
+  SurfaceContentDefaultProps,
+  SurfaceCutContentProps,
+  SurfaceCutContentDefaultProps,
+} from './components/surface.contracts.ts';
 export { default as Button } from './components/Button.vue';
 export type { ButtonSurface } from './components/button.contracts.ts';
 export { default as Segmented } from './components/Segmented.vue';

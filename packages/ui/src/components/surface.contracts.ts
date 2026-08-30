@@ -46,3 +46,29 @@ export interface SurfaceCutProps {
 }
 
 export type SurfaceCutDefaultProps = Partial<Omit<SurfaceCutProps, 'as'>>;
+
+export interface SurfaceContentProps {
+  /**
+   * Polymorphic root element. Defaults to `'div'`.
+   *
+   * `Surface` passes `'span'` automatically when the surface renders as phrasing content (e.g. `as="kbd"`), so the wrapper stays valid inside `<p>`, `<button>`, etc.
+   */
+  as?: string | Component;
+}
+
+/** Shape of `SurfaceContent` defaults that can be supplied via `CladdProvider`'s `defaults` prop. */
+export type SurfaceContentDefaultProps = Partial<
+  Omit<SurfaceContentProps, 'as'>
+>;
+
+export interface SurfaceCutContentProps {
+  /** Polymorphic root element. Defaults to `'div'`. */
+  as?: string | Component;
+  /** Stretch the content to `h-full`. Default `true`. Set `false` for content sized by intrinsic height. */
+  fullHeight?: boolean;
+}
+
+/** Shape of `SurfaceCutContent` defaults that can be supplied via `CladdProvider`'s `defaults` prop. */
+export type SurfaceCutContentDefaultProps = Partial<
+  Omit<SurfaceCutContentProps, 'as'>
+>;

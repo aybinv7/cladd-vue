@@ -17,15 +17,11 @@ import { typeExports, valueExports } from '../support/upstream.ts';
 const notYetPorted = new Set([
   'ColorEditor',
   'ColorPicker',
-  'Link',
   'NumberField',
   'NumberScrubber',
   'OTPField',
   'OTPFieldInput',
   'OTPFieldSeparator',
-  'SurfaceContent',
-  'SurfaceContextProvider',
-  'SurfaceCutContent',
 ]);
 
 /**

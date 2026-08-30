@@ -25,6 +25,7 @@ import type {
   ToastDefaultProps,
 } from '../components/feedback.contracts.ts';
 import type { InputDefaultProps } from '../components/input.contracts.ts';
+import type { LinkDefaultProps } from '../components/link.contracts.ts';
 import type {
   DialogDefaultProps,
   PopoverDefaultProps,
@@ -44,6 +45,8 @@ import type {
 import type { SelectDefaultProps } from '../components/select.contracts.ts';
 import type { SliderDefaultProps } from '../components/slider.contracts.ts';
 import type {
+  SurfaceContentDefaultProps,
+  SurfaceCutContentDefaultProps,
   SurfaceCutDefaultProps,
   SurfaceDefaultProps,
 } from '../components/surface.contracts.ts';
@@ -103,8 +106,11 @@ export interface ComponentDefaults {
   Shortcut?: ShortcutDefaultProps;
   Slider?: SliderDefaultProps;
   Spinner?: SpinnerDefaultProps;
+  Link?: LinkDefaultProps;
   Surface?: SurfaceDefaultProps;
+  SurfaceContent?: SurfaceContentDefaultProps;
   SurfaceCut?: SurfaceCutDefaultProps;
+  SurfaceCutContent?: SurfaceCutContentDefaultProps;
   Switch?: SwitchDefaultProps;
   Tab?: TabDefaultProps;
   TabPanel?: TabPanelDefaultProps;
