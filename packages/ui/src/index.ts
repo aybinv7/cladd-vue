@@ -38,6 +38,12 @@ export { default as SurfaceContextProvider } from './components/SurfaceContextPr
 export { default as SurfaceCut } from './components/SurfaceCut.vue';
 export { default as SurfaceCutContent } from './components/SurfaceCutContent.vue';
 export { default as Link } from './components/Link.vue';
+export { default as NumberField } from './components/NumberField.vue';
+export type {
+  NumberFieldProps,
+  NumberFieldDefaultProps,
+  NumberFieldSize,
+} from './components/numberField.contracts.ts';
 export { default as NumberScrubber } from './components/NumberScrubber.vue';
 export type {
   NumberScrubberProps,
