@@ -27,7 +27,7 @@ defineOptions({ inheritAttrs: false });
 
 const props = withDefaults(defineProps<InputProps>(), {
   as: undefined,
-  autofocus: undefined,
+  autoFocus: undefined,
   clearButton: undefined,
   clearLabel: undefined,
   color: undefined,
@@ -75,7 +75,7 @@ const ui = useUiContext();
 const attrs = useAttrs();
 const d = useComponentDefaults('Input', props, {
   as: 'div' as NonNullable<InputProps['as']>,
-  autofocus: false,
+  autoFocus: false,
   clearButton: false,
   clearLabel: 'Clear',
   disabled: false,
@@ -253,7 +253,7 @@ defineExpose({
         <input
           :id="d.inputId"
           ref="inputElement"
-          :autofocus="d.autofocus"
+          :autofocus="d.autoFocus"
           :class="controlClass"
           data-part="control"
           :disabled="d.disabled"

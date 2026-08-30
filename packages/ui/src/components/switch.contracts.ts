@@ -30,7 +30,6 @@ export interface SwitchProps {
   outline?: boolean;
   /** Block toggling without the disabled visual treatment. */
   readOnly?: boolean;
-  readonly?: boolean;
   required?: boolean;
   /** Switch size token. Drives track width and thumb size. Default `'md'`. */
   size?: SwitchSize;

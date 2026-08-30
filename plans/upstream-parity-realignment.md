@@ -104,6 +104,34 @@ conversion that is not ported.
 counterpart, when the port exports something upstream does not, and when the not-yet-ported list goes
 stale. The list is the work queue; it may only shrink.
 
+## 7. Prop-level parity
+
+`tests/parity/upstreamProps.test.ts` compares every `XProps` interface against upstream's
+`XOwnProps`/`XProps`, ignoring props that cannot survive a Vue port (`children`, `className`, `ref`,
+`style`, `on*`). Verified it fails by adding a prop Chip does not have.
+
+Real divergences it found and that are now fixed:
+
+- [x] `readonly` was declared alongside `readOnly` on Checkbox, Radio and Switch, resolved as
+      `readOnly ?? readonly`. The same duplicate-spelling defect as `accent`; the alias is gone.
+- [x] Input's `autofocus` renamed to upstream's `autoFocus`. The template still binds the native
+      lowercase attribute.
+- [x] Dialog's `description`, `cancelText` and `confirmText` renamed to upstream's `text`,
+      `cancelButtonText` and `confirmButtonText` (Dialog.tsx:173,189,191). `useDialog` and the portal
+      context already used upstream's names, so DialogsPortal now passes them straight through
+      instead of translating.
+
+Deliberate transpositions are listed in the test with what each became: `open` is `v-model:open`,
+ReactNode props are slots, `*Ref` props are template refs, and hyphenated `aria-*` props are the
+camelCase spellings Vue normalises onto.
+
+Upstream props with no Vue equivalent yet, tracked as `notImplemented` in the same test:
+
+- `Dialog`: `inertContainer`, `lazy`, `stopPropagationOnClick`
+- `Input`: `displayValue`, `inputComponent`, `inputComponentProps`
+- `Switch`: `event`
+- `Textarea`: `inputPadding`
+
 ## 6. Type safety
 
 `vp lint --typeCheck` never covered `.vue` templates, so the port carried 77 type errors nobody could

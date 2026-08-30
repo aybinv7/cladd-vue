@@ -259,16 +259,16 @@ export type PopoverDefaultProps = Partial<
 export interface DialogProps {
   backdropTransparent?: boolean;
   cancelButtonColor?: Color;
-  cancelText?: string;
+  cancelButtonText?: string;
   /** Default `true`. */
   closeOnBackdropClick?: boolean;
   /** Default `true`. */
   closeOnEscape?: boolean;
   color?: Color;
   confirmButtonColor?: Color;
-  confirmText?: string;
+  confirmButtonText?: string;
   contentClassName?: string;
-  description?: string;
+  text?: string;
   /** Outline ring on the dialog surface. Default `true` for dark, `false` for light. */
   outline?: boolean;
   requireConfirmText?: string;
@@ -279,7 +279,7 @@ export interface DialogProps {
 }
 
 export type DialogDefaultProps = Partial<
-  Omit<DialogProps, 'title' | 'description' | 'requireConfirmText'>
+  Omit<DialogProps, 'title' | 'text' | 'requireConfirmText'>
 >;
 
 export interface TooltipPrimitiveProps {

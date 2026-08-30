@@ -28,7 +28,6 @@ const props = withDefaults(defineProps<CheckboxProps>(), {
   inputId: undefined,
   name: undefined,
   readOnly: undefined,
-  readonly: undefined,
   required: undefined,
   size: undefined,
   thumbOutline: undefined,
@@ -49,9 +48,7 @@ const d = useComponentDefaults('Checkbox', props, {
   size: 'sm' as NonNullable<CheckboxProps['size']>,
   thumbOutline: true,
 });
-const isReadOnly = computed(
-  () => d.value.readOnly ?? d.value.readonly ?? false,
-);
+const isReadOnly = computed(() => d.value.readOnly ?? false);
 const checked = computed(() => d.value.checked ?? model.value);
 const currentAccent = computed(() => d.value.color ?? ui.accentColor.value);
 const hoverable = computed(() => d.value.hoverable ?? d.value.as === 'label');

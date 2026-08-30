@@ -21,7 +21,7 @@ const closedCount = ref(0);
   <CladdProvider accent-color="brand" theme="dark">
     <Dialog
       v-model:open="dialogOpen"
-      description="Dialog description"
+      text="Dialog description"
       title="Dialog title"
       @closed="closedCount += 1"
     >
@@ -48,8 +48,8 @@ const closedCount = ref(0);
 
     <Dialog
       v-model:open="guardedDialogOpen"
-      confirm-text="Delete"
-      description="This action cannot be undone."
+      confirm-button-text="Delete"
+      text="This action cannot be undone."
       require-confirm-text="target"
       title="Delete target?"
     >

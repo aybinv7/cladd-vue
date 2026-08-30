@@ -8,7 +8,7 @@ export interface InputProps {
   /** Polymorphic wrapper element. Defaults to `'div'`. */
   as?: string | Component;
   /** Native `autoFocus` — focus the input on mount. Default `false`. */
-  autofocus?: boolean;
+  autoFocus?: boolean;
   /** Render a clear (X) button on the right. Hidden when the value is empty. Default `false`. */
   clearButton?: boolean;
   /** Accessible label for the clear button. Default `'Clear'`. */

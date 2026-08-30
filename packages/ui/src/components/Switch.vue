@@ -28,7 +28,6 @@ const props = withDefaults(defineProps<SwitchProps>(), {
   name: undefined,
   outline: undefined,
   readOnly: undefined,
-  readonly: undefined,
   required: undefined,
   size: undefined,
   surfaceLevel: undefined,
@@ -63,9 +62,7 @@ const d = useComponentDefaults('Switch', props, {
   value: 'on',
   variant: 'solid' as NonNullable<SwitchProps['variant']>,
 });
-const isReadOnly = computed(
-  () => d.value.readOnly ?? d.value.readonly ?? false,
-);
+const isReadOnly = computed(() => d.value.readOnly ?? false);
 const checked = computed(() => d.value.checked ?? model.value);
 const currentAccent = computed(() => d.value.color ?? ui.accentColor.value);
 const focusable = computed(

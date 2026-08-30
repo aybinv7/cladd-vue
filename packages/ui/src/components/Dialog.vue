@@ -45,13 +45,13 @@ const props = withDefaults(defineProps<DialogProps>(), {
   backdropTransparent: undefined,
   contentClassName: undefined,
   cancelButtonColor: undefined,
-  cancelText: undefined,
+  cancelButtonText: undefined,
   closeOnBackdropClick: undefined,
   closeOnEscape: undefined,
   color: undefined,
   confirmButtonColor: undefined,
-  confirmText: undefined,
-  description: undefined,
+  confirmButtonText: undefined,
+  text: undefined,
   outline: undefined,
   requireConfirmText: undefined,
   root: undefined,
@@ -63,7 +63,7 @@ const props = withDefaults(defineProps<DialogProps>(), {
 defineSlots<{
   actions?: (props: { close: () => void }) => unknown;
   default?: (props: { close: () => void }) => unknown;
-  description?: () => unknown;
+  text?: () => unknown;
   title?: () => unknown;
   trigger?: () => unknown;
 }>();
@@ -226,9 +226,7 @@ provideSurfaceColorReset();
       v-if="mounted"
       v-bind="containerAttrs"
       ref="container"
-      :aria-describedby="
-        d.description || $slots.description ? descriptionId : undefined
-      "
+      :aria-describedby="d.text || $slots.text ? descriptionId : undefined"
       :aria-labelledby="d.title || $slots.title ? titleId : undefined"
       aria-modal="true"
       :class="containerClass"
@@ -254,16 +252,16 @@ provideSurfaceColorReset();
           <slot name="title">{{ d.title }}</slot>
         </div>
         <div
-          v-if="d.description || $slots.description"
+          v-if="d.text || $slots.text"
           :id="descriptionId"
           :class="dialogTextClasses"
           data-part="text"
         >
-          <slot name="description">{{ d.description }}</slot>
+          <slot name="text">{{ d.text }}</slot>
         </div>
         <slot :close="close" />
         <Input
-          v-if="d.requireConfirmText && d.confirmText"
+          v-if="d.requireConfirmText && d.confirmButtonText"
           v-model="confirmationValue"
           :color="currentAccent"
           data-part="input"
@@ -272,13 +270,13 @@ provideSurfaceColorReset();
           size="lg"
         />
         <div
-          v-if="$slots.actions || d.cancelText || d.confirmText"
+          v-if="$slots.actions || d.cancelButtonText || d.confirmButtonText"
           :class="dialogButtonsClasses"
           data-part="buttons"
         >
           <slot name="actions" :close="close">
             <Button
-              v-if="d.cancelText"
+              v-if="d.cancelButtonText"
               :color="d.cancelButtonColor"
               :content-class-name="dialogButtonContentClasses"
               data-part="cancel"
@@ -287,10 +285,10 @@ provideSurfaceColorReset();
               variant="transparent"
               @click="cancel"
             >
-              {{ d.cancelText }}
+              {{ d.cancelButtonText }}
             </Button>
             <Button
-              v-if="d.confirmText"
+              v-if="d.confirmButtonText"
               :color="currentAccent"
               :content-class-name="dialogButtonContentClasses"
               data-part="confirm"
@@ -299,7 +297,7 @@ provideSurfaceColorReset();
               size="lg"
               @click="confirm"
             >
-              {{ d.confirmText }}
+              {{ d.confirmButtonText }}
             </Button>
           </slot>
         </div>

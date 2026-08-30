@@ -16,10 +16,10 @@ function onClosed(): void {
     v-if="data"
     v-model:open="state"
     :cancel-button-color="data.cancelButtonColor"
-    :cancel-text="data.cancelButtonText"
+    :cancel-button-text="data.cancelButtonText"
     :confirm-button-color="data.confirmButtonColor"
-    :confirm-text="data.confirmButtonText"
-    :description="data.text"
+    :confirm-button-text="data.confirmButtonText"
+    :text="data.text"
     :require-confirm-text="
       data.requireConfirmText ? String(data.requireConfirmText) : undefined
     "

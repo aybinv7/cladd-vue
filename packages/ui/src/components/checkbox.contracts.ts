@@ -27,7 +27,6 @@ export interface CheckboxProps {
   name?: string;
   /** Block toggling without the disabled visual treatment. */
   readOnly?: boolean;
-  readonly?: boolean;
   /** Native `required` — forwarded to the hidden `<input>`. */
   required?: boolean;
   /** Checkbox size token. Default `'sm'`. */

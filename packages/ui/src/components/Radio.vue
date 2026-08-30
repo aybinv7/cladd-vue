@@ -26,7 +26,6 @@ const props = withDefaults(defineProps<RadioProps>(), {
   inputId: undefined,
   name: undefined,
   readOnly: undefined,
-  readonly: undefined,
   required: undefined,
   size: undefined,
   thumbOutline: undefined,
@@ -47,9 +46,7 @@ const d = useComponentDefaults('Radio', props, {
   size: 'sm' as NonNullable<RadioProps['size']>,
   thumbOutline: true,
 });
-const isReadOnly = computed(
-  () => d.value.readOnly ?? d.value.readonly ?? false,
-);
+const isReadOnly = computed(() => d.value.readOnly ?? false);
 const checked = computed(() => d.value.checked ?? model.value);
 const disabled = computed(() => d.value.disabled);
 const name = computed(() => d.value.name);
