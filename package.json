@@ -1,0 +1,52 @@
+{
+  "name": "cladd-vue",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Vue 3 port of the Cladd UI contracts, plus its visual acceptance playground.",
+  "license": "MIT",
+  "workspaces": [
+    "packages/*",
+    "apps/*",
+    "tools/*"
+  ],
+  "type": "module",
+  "scripts": {
+    "dev": "vp run playground#dev",
+    "prepare": "vp config"
+  },
+  "devDependencies": {
+    "vite": "catalog:",
+    "vite-plus": "catalog:"
+  },
+  "overrides": {
+    "vite": "catalog:"
+  },
+  "devEngines": {
+    "packageManager": {
+      "name": "bun",
+      "version": "1.4.0",
+      "onFail": "download"
+    }
+  },
+  "engines": {
+    "node": ">=22.18.0"
+  },
+  "catalog": {
+    "@tailwindcss/vite": "4.2.2",
+    "@types/node": "^24.10.1",
+    "@vitejs/plugin-vue": "6.0.8",
+    "@vue/tsconfig": "^0.9.1",
+    "clsx": "^2.1.1",
+    "happy-dom": "20.10.6",
+    "shiki": "^3.23.0",
+    "tailwind-merge": "^3.6.0",
+    "tailwindcss": "4.2.2",
+    "typescript": "^6.0.2",
+    "unplugin-vue": "^7.2.0",
+    "vite": "npm:@voidzero-dev/vite-plus-core@0.3.0",
+    "vite-plus": "0.3.0",
+    "vue": "^3.5.42",
+    "vue-router": "^5.3.0",
+    "vue-tsc": "^3.3.11"
+  }
+}
