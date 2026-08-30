@@ -69,26 +69,40 @@ export interface ButtonProps {
   clickable?: boolean;
   /** Accent color token. Sets the button's `cladd-color-{name}` class. */
   color?: Color;
+  /** Extra classes for the inner content row. */
   contentClassName?: string;
+  /** Visually dim the button (40% opacity) and disable pointer events. */
   disabled?: boolean;
   /** Default `true`. */
   focusable?: boolean;
+  /** Force the focus ring on, regardless of actual keyboard focus. */
   focused?: boolean;
   /** Default `true`. */
   hoverable?: boolean;
+  /** Show a centered `Spinner` overlay and fade the button's content out. Also sets `data-loading` for styling hooks. */
   loading?: boolean;
+  /** Allow text to wrap onto multiple lines, switching height to `min-h-*` and using pill radii compatible with multi-line content. */
   multiline?: boolean;
   /** Default `true`. */
   outline?: boolean;
+  /** Force the pressed visual state, regardless of pointer activity. */
   pressed?: boolean;
+  /** Block clicks while keeping the button visually enabled - useful for "selected" segmented buttons. */
   readOnly?: boolean;
+  /** When `true`, applies fully rounded corners (`rounded-full`, or matching pill radius for `multiline`).
+   *
+   * Default size-specific corner radii are used when `false`.
+   */
   rounded?: boolean;
   /** Default `'md'`. */
   size?: UiSize;
+  /** Render as an icon-only square button: forces `aspect-square` and drops horizontal padding. */
   square?: boolean;
   /** `'surface'` (default) for a regular button, `'cut'` for an inset look. */
   surface?: ButtonSurface;
+  /** Forwarded to the underlying `Surface` as `level` - see `SurfaceProps.level` for the relative-offset (`"+1"`/`"-1"`) syntax. */
   surfaceLevel?: SurfaceLevelInput;
+  /** Render the focus ring flush against the element (`inset-0`) instead of offset outside it (`-inset-1.5`). Use when the button sits at the edge of an `overflow` container, where the offset ring would add unwanted scroll overflow. Default `false`. */
   tightFocusRing?: boolean;
   /** Default `'gradient'`. */
   variant?: SurfaceVariant;

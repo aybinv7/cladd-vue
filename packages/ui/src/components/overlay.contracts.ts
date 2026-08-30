@@ -224,10 +224,15 @@ export const dialogButtonContentClasses = 'px-4';
 export const overlayTriggerClasses = 'cladd-overlay-trigger contents';
 
 export interface PopoverProps {
+  /**
+   * External anchor ref. When provided the trigger button is **not rendered** - the caller owns the trigger and `popoverState` wiring.
+   */
   anchorElement?: HTMLElement;
+  /** Anchor to a fixed rectangle instead of an element, for a context menu at a pointer position. */
   anchorRect?: DOMRectReadOnly;
   /** Render a backdrop behind the popover. Default `false`. */
   backdrop?: boolean;
+  /** Render the backdrop without its tint, so the app stays visible behind the popover. */
   backdropTransparent?: boolean;
   /** Default `true`. */
   closeOnBackdropClick?: boolean;
@@ -237,6 +242,7 @@ export interface PopoverProps {
   color?: Color;
   /** Extra classes for the inner scrollable content area. */
   contentClassName?: string;
+  /** Whether the whole accordion is disabled. */
   disabled?: boolean;
   /** Set to `true` when rendered inside a lazy-loaded boundary so it opens on the next tick. */
   lazy?: boolean;
@@ -261,16 +267,23 @@ export type PopoverDefaultProps = Partial<
 >;
 
 export interface DialogProps {
+  /** Render the backdrop without its tint, so the app stays visible behind the dialog. */
   backdropTransparent?: boolean;
+  /** Color for the cancel button. Default `'neutral'`. */
   cancelButtonColor?: Color;
+  /** Label for the cancel button. When omitted, the cancel button is not rendered. */
   cancelButtonText?: string;
   /** Default `true`. */
   closeOnBackdropClick?: boolean;
   /** Default `true`. */
   closeOnEscape?: boolean;
+  /** Accent color token. Sets the button's `cladd-color-{name}` class - drives text and ring colors. */
   color?: Color;
+  /** Color for the confirm button. Default: theme accent color. */
   confirmButtonColor?: Color;
+  /** Label for the confirm button. When omitted, the confirm button is not rendered. */
   confirmButtonText?: string;
+  /** Extra classes applied to the inner content area. Default includes `flex flex-col gap-4 p-4`. */
   contentClassName?: string;
   /**
    * Selector for the container made `inert` while the dialog is open. Default `'.app-container'`.
@@ -282,13 +295,21 @@ export interface DialogProps {
   lazy?: boolean;
   /** Stop click propagation on backdrop and surface. Useful when the dialog is rendered inside a clickable parent. */
   stopPropagationOnClick?: boolean;
+  /** Body text slot. Rendered as `<div>` with `text-cladd-sm leading-relaxed`. Auto-wired to `aria-describedby`. */
   text?: string;
   /** Outline ring on the dialog surface. Default `true` for dark, `false` for light. */
   outline?: boolean;
+  /**
+   * "Type to confirm" guard. When set, renders an `Input` and disables the confirm button until the user types this exact string - used for destructive actions (e.g. type the project name to delete).
+   */
   requireConfirmText?: string;
+  /** Portal target selector. Default `'#app, #__next, #root'` (first match wins). */
   root?: string | HTMLElement;
+  /** Forwarded to the underlying `Surface` as `level`. Default `1`. */
   surfaceLevel?: SurfaceLevelInput;
+  /** Title slot. Rendered as `<div>` with `text-cladd-md font-semibold`. Auto-wired to `aria-labelledby`. */
   title?: string;
+  /** Surface variant. Default depends on theme: `'solid'` for light, `'gradient'` for dark. */
   variant?: SurfaceVariant;
 }
 
@@ -297,13 +318,25 @@ export type DialogDefaultProps = Partial<
 >;
 
 export interface TooltipPrimitiveProps {
+  /** Ref to the element the tooltip should anchor against (CSS anchor positioning). */
   anchorElement?: HTMLElement;
+  /** Accent color token. Sets the tooltip's `cladd-color-{name}` class. */
   color?: Color;
+  /** Extra classes applied to the inner content area. Default includes `px-2 py-1`. */
   contentClassName?: string;
+  /** Distance from anchor in pixels (number) or any CSS length (`'8px'`, `'50%'`). Default `4`. */
   offset?: OverlayOffsetValue;
+  /** Anchor side. Default `'top'`. */
   position?: TooltipPosition;
+  /** Portal target selector. Default `'#app, #__next, #root'`. */
   root?: string | HTMLElement;
+  /**
+   * Forwarded to the underlying `Surface` as `level`.
+   *
+   * Default depends on theme: `1` for light theme, `5` for dark theme - so the tooltip pops on top of any surface.
+   */
   surfaceLevel?: SurfaceLevelInput;
+  /** Tailwind z-index utility for the tooltip surface. Default `'z-50'`. */
   zIndex?: string;
 }
 
@@ -312,16 +345,29 @@ export type TooltipPrimitiveDefaultProps = Partial<
 >;
 
 export interface TooltipProps {
+  /** The Vue spelling of upstream's `aria-label`. */
   ariaLabel?: string;
+  /** Accent color token. Sets the tooltip's `cladd-color-{name}` class. */
   color?: Color;
+  /** Extra classes applied to the inner content area. Default includes `px-2 py-1`. */
   contentClassName?: string;
+  /** Whether the whole accordion is disabled. */
   disabled?: boolean;
+  /** Distance from anchor in pixels (number) or any CSS length (`'8px'`, `'50%'`). Default `4`. */
   offset?: OverlayOffsetValue;
+  /** Anchor side. Default `'top'`. */
   position?: TooltipPosition;
+  /** Portal target selector. Default `'#app, #__next, #root'`. */
   root?: string | HTMLElement;
+  /**
+   * Forwarded to the underlying `Surface` as `level`.
+   *
+   * Default depends on theme: `1` for light theme, `5` for dark theme - so the tooltip pops on top of any surface.
+   */
   surfaceLevel?: SurfaceLevelInput;
   /** Delay showing the tooltip using a shared global timer. Default `true`. */
   timeout?: boolean;
+  /** Tailwind z-index utility for the tooltip surface. Default `'z-50'`. */
   zIndex?: string;
 }
 

@@ -8,6 +8,7 @@ export const searchFieldIconClasses = 'text-cladd-fg-softer';
 export interface SearchFieldProps {
   /** Default `true`. */
   clearButton?: boolean;
+  /** Accent color token. Sets the button's `cladd-color-{name}` class - drives text and ring colors. */
   color?: Color;
   /** Default `'Search'`. */
   placeholder?: string;

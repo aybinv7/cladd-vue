@@ -67,8 +67,11 @@ Comparing _export lists_ instead of filenames leaves a much shorter list:
       divergence: upstream defaults `size` to `'sm'` and returns `string | undefined`, where the port
       had made the parameter required.
 - [x] `shared/nextTick.ts` ported and exported; upstream exports it from its index.
-- [ ] Restore upstream's JSDoc on every public prop. The port stripped it under a no-comments rule
-      that no longer applies to ported documentation. This is the largest remaining shape item.
+- [x] Upstream's JSDoc restored on every public prop. 160 of 506 were undocumented; 148 took upstream's
+      own wording (including forwarded props, which take it from the component they forward to, and
+      the Vue-spelled `aria-*` and `anchorElement` props, which take it from their upstream
+      counterpart). The last 12 have no upstream counterpart at all and carry a one-line note saying
+      what they are. `tests/parity/upstreamProps.test.ts` now fails on any undocumented public prop.
 - [ ] `*.contracts.ts` files have no upstream counterpart. Decide per file whether the constants live
       where upstream puts them (inline, or in `shared/`) and collapse the rest.
 - [ ] `useOverlayLifecycle`'s local `runAfterTwoFrames` duplicates `shared/nextTick`.

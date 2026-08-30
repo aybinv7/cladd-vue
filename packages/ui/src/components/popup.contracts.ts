@@ -6,27 +6,37 @@ import type { Color } from '../types.ts';
 import type { OverlayRootProps } from './overlayRoot.ts';
 
 export interface PopupProps {
+  /** The Vue spelling of upstream's `aria-describedby`. */
   ariaDescribedby?: string;
+  /** The Vue spelling of upstream's `aria-label`. */
   ariaLabel?: string;
+  /** The Vue spelling of upstream's `aria-labelledby`. */
   ariaLabelledby?: string;
   /** Default `true`. */
   backdrop?: boolean;
+  /** Extra classes for the backdrop element. */
   backdropClassName?: string;
   /** Default `true`. */
   closeButton?: boolean;
+  /** Accent color token for the close button. */
   closeButtonColor?: Color;
   /** Default `true`. */
   closeOnBackdropClick?: boolean;
   /** Default `true`. */
   closeOnEscape?: boolean;
+  /** Extra classes for the inner content column (where children + header live). */
   contentClassName?: string;
   /** Default `true`. */
   header?: boolean;
+  /** Extra classes for the header row. */
   headerClassName?: string;
   /** Selector for the element to mark `inert` while the popup is open. Default `'.app-container'`. */
   inertContainer?: string;
+  /** Set to `true` when the popup is rendered behind an async boundary so it opens on the next tick (after the chunk has resolved and mounted). Default `false`. */
   lazy?: boolean;
+  /** Portal target selector. Default `'#app, #__next, #root'`. */
   root?: string | HTMLElement;
+  /** Extra classes for the scrollable wrap that holds the content column. */
   wrapClassName?: string;
 }
 
@@ -35,6 +45,7 @@ export type PopupDefaultProps = Partial<
 >;
 
 export interface PopupContentProps {
+  /** Extra classes for the inner content area. Default includes `!h-auto w-full p-4`. */
   contentClassName?: string;
   /** Default `true`. */
   outline?: boolean;

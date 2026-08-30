@@ -29,43 +29,100 @@ export interface SelectProps {
    * owns the trigger and the open state (upstream's `anchorRef`).
    */
   anchorElement?: HTMLElement;
+  /** Close the popover after a single-select pick. Default `true`. Has no effect when `multiple`. */
   closeOnSelect?: boolean;
+  /** Accent color for the trigger button. Forwarded to `Button.color`. */
   color?: Color;
+  /** Extra classes for the trigger button's inner content row. */
   contentClassName?: string;
+  /** Visually dim the trigger and prevent the popover from opening. */
   disabled?: boolean;
+  /** Show the chevron-down indicator on the right of the trigger. Default `true`. */
   dropdownIcon?: boolean;
+  /** Force the focus ring on, regardless of actual keyboard focus. */
   focused?: boolean;
+  /**
+   * Extracts the comparable key `V` from each option. Default: identity (`V = T`).
+   *
+   * Required when options are objects and `value` should be a key (e.g. `id`)
+   * rather than a full option reference.
+   */
   getOptionValue?: (option: SelectOptionInput) => SelectValue;
+  /** Forwarded to the underlying surface. Defaults to `true`.  Suppressed automatically when `disabled` or `readOnly`. */
   hoverable?: boolean;
+  /** Default color for the per-option indicator (Radio/Checkbox). Overridden per-option by `optionIndicatorColor`. */
   indicatorColor?: Color;
+  /** Custom "is this option selected?" predicate - overrides the built-in equality check. */
   isChecked?: (option: SelectOptionInput) => boolean;
+  /** Predicate that disables individual options - dims them and prevents selection. */
   isOptionDisabled?: (option: SelectOptionInput) => boolean;
+  /** Extra classes for the icon wrapper. */
   iconClassName?: string;
+  /**
+   * Show numeric quick-pick hints (0–9) next to options, and bind `0`–`9` keys to select them.
+   *
+   * Default `true`. See `noneOptionValue` for how the digits map to options.
+   */
   keyboardHints?: boolean;
+  /** Extra classes for the per-option `Shortcut` hint's key element. */
   keyboardHintsClassName?: string;
+  /** `outline` forwarded to the per-option `Shortcut` hint. Default `false`. */
   keyboardHintsOutline?: boolean;
+  /** `size` forwarded to the per-option `Shortcut` hint. Default `'md'`. */
   keyboardHintsSize?: UiSize;
+  /** `variant` forwarded to the per-option `Shortcut` hint. Default `'transparent'`. */
   keyboardHintsVariant?: SurfaceVariant;
+  /** Forwarded to the trigger `Button` - allows wrapping the value across multiple lines. */
   multiline?: boolean;
+  /** Allow more than one item open at once. Selection becomes an array. Default `false`. */
   multiple?: boolean;
+  /**
+   * Value of the "none/initial" option that should be mapped to the 0 key.
+   *
+   *  If set, this option gets hint "0" and remaining options get 1-9 in order.
+   *
+   *  If not set, straight ordering: 1, 2, 3, ..., 9, 0 (for 10th).
+   */
   noneOptionValue?: SelectValue;
+  /** Per-option indicator color. Return `undefined` to fall back to `indicatorColor`. */
   optionIndicatorColor?: (params: SelectOptionParams) => Color | undefined;
+  /** Read an option's secondary line. Declared explicitly where upstream reads it through its option renderer. */
   optionInfo?: (params: SelectOptionParams) => string | undefined;
+  /** Read an option's label. Declared explicitly where upstream reads it through its option renderer. */
   optionLabel?: (params: SelectOptionParams) => string;
+  /** All available options. Compared against `value` via `getOptionValue` (default: identity). */
   options?: readonly SelectOptionInput[];
+  /** Render the trigger button's surface outline ring. Forwarded to `Button.outline`. */
   outline?: boolean;
+  /** Placeholder node shown in the trigger when `value` is empty and no `children` are provided. */
   placeholder?: string;
+  /** Extra classes applied to the value/placeholder container inside the trigger. */
   placeholderClassName?: string;
+  /** Accent color for the popover. Forwarded to `Popover.color`. */
   popoverColor?: Color;
+  /** Default `'w-auto min-w-[160px]'`. */
   popoverClassName?: string;
+  /** Default `['-50%', 4]` - half-width inward shift on the cross axis, 4px main-axis gap. */
   popoverOffset?: PopoverOffset;
+  /** Default `'bottom-end'`. */
   popoverPosition?: PopoverPosition;
+  /**
+   * Surface level for the popover.
+   *
+   * Default same as Popover's `surfaceLevel` prop.
+   */
   popoverSurfaceLevel?: number | string;
+  /** Show the trigger with the current value but block opening the popover. */
   readOnly?: boolean;
+  /** Force the pressed visual state, regardless of pointer activity. */
   pressed?: boolean;
+  /** Reverse the visual order of `icon` ↔ value inside the trigger button. */
   reverse?: boolean;
+  /** Pill-style trigger button. Forwarded to `Button.rounded`. */
   rounded?: boolean;
+  /** Scroll the popover so the currently selected option is centered when it opens. */
   scrollToSelected?: boolean;
+  /** Render a search bar at the top of the popover. Pair with `onSearch` to filter options. */
   search?: boolean;
   /**
    * Filter callback invoked with the current query — returns the filtered list of options.
@@ -74,14 +131,25 @@ export interface SelectProps {
    * The Select keeps no internal filter state; callers control matching.
    */
   searchFilter?: (query: string) => readonly SelectOptionInput[];
+  /** Auto-focus the search input when the popover opens (skipped on iOS/Android to avoid keyboard popup). */
   searchFocus?: boolean;
+  /** Empty-state text. Default `'Nothing found'`. */
   searchNotFound?: string;
+  /** Default `'Search'`. */
   searchPlaceholder?: string;
+  /** Trigger button size. Forwarded to `Button.size`. */
   size?: UiSize;
+  /**
+   * Trigger button surface type, forwarded to the underlying `Button.surface`: `'surface'` (default) for a regular button, `'cut'` for an inset/recessed look.
+   */
   surface?: ButtonSurface;
+  /** Render the focus ring flush against the element (`inset-0`) instead of offset outside it (`-inset-1.5`). Use when the button sits at the edge of an `overflow` container, where the offset ring would add unwanted scroll overflow. Default `false`. */
   tightFocusRing?: boolean;
+  /** Title shown at the top of the popover (above the search bar, if any). */
   title?: string;
+  /** Extra classes for the value display inside the trigger button. */
   valueClassName?: string;
+  /** Underlying `Surface` variant - see `SurfaceVariant`. Defaults to `'gradient'`. */
   variant?: SurfaceVariant;
 }
 

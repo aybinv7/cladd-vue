@@ -20,6 +20,7 @@ export interface SpinnerProps {
 export type SpinnerDefaultProps = Partial<SpinnerProps>;
 
 export interface FocusRingProps {
+  /** Accent color token. Sets the button's `cladd-color-{name}` class - drives text and ring colors. */
   color?: Color;
   /** Show the ring regardless of focus state. Default `false`. */
   force?: boolean;
@@ -40,17 +41,21 @@ export interface ToastProps {
   color?: Color;
   /** Icon component rendered before the text content. Receives `iconProps`. */
   icon?: Component;
+  /** Props forwarded to the `icon` component. */
   iconProps?: Record<string, unknown>;
   /** Outline ring on the toast surface. Default `true`. */
   outline?: boolean;
+  /** Portal target selector. Default `'#app, #__next, #root'`. */
   root?: string | HTMLElement;
   /** Stop click propagation on the toast surface. */
   stopPropagationOnClick?: boolean;
   /** Default depends on theme: `3` for dark, `1` for light. */
   surfaceLevel?: SurfaceLevelInput;
+  /** Body text slot. Rendered as a smaller line under `title`. */
   text?: string;
   /** Auto-close after this many ms. Pass `0` to disable auto-close. Default `5000`. */
   timeout?: number;
+  /** Title slot. Rendered as a bold line above `text`. */
   title?: string;
   /** Surface variant. Default `'gradient'`. */
   variant?: SurfaceVariant;

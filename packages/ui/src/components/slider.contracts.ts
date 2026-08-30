@@ -23,6 +23,7 @@ export interface SliderProps {
   max?: number;
   /** Default `0`. */
   min?: number;
+  /** Native `name` - used for form submission and to group radio-like checkboxes. */
   name?: string;
   /** Render the active range as a bold filled accent instead of the subtle raised surface. Default `false`. */
   rangeFill?: boolean;

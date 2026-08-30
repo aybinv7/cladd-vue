@@ -268,3 +268,35 @@ test.skipIf(!upstreamHydrated)('keeps the not-implemented list honest', () => {
     'these are implemented now and should leave the not-implemented list',
   ).toEqual([]);
 });
+
+test('documents every public prop', () => {
+  const undocumented: string[] = [];
+  const dir = join(packageRoot, 'src', 'components');
+
+  for (const file of readdirSync(dir).filter((name) => name.endsWith('.ts'))) {
+    const source = readFileSync(join(dir, file), 'utf8');
+
+    for (const block of source.matchAll(
+      /export interface (\w+Props) \{(.*?)\n\}/gsu,
+    )) {
+      const lines = block[2].split('\n');
+
+      for (const [index, line] of lines.entries()) {
+        const prop = /^ {2}(?:readonly )?([A-Za-z_$][\w$-]*)\??\s*:/u.exec(
+          line,
+        );
+        if (!prop) continue;
+
+        const previous = (lines[index - 1] ?? '').trim();
+        if (previous.endsWith('*/') || previous.startsWith('*')) continue;
+
+        undocumented.push(`${block[1]}.${prop[1]}`);
+      }
+    }
+  }
+
+  expect(
+    undocumented.sort(),
+    'public props without JSDoc; port upstream\u2019s wording where it exists',
+  ).toEqual([]);
+});

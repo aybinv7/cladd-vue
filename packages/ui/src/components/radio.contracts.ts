@@ -19,6 +19,7 @@ export interface RadioProps {
   focusable?: boolean;
   /** Auto-computed when omitted: `true` if `as === 'label'`. */
   hoverable?: boolean;
+  /** Native `id`. Used as the hidden input's `id` when `inputId` is not set. */
   id?: string;
   /** Render a hidden native input. Default `true`. */
   input?: boolean;

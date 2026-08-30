@@ -21,6 +21,7 @@ export interface CheckboxProps {
   focusable?: boolean;
   /** Auto-computed when omitted: `true` if `as === 'label'`. */
   hoverable?: boolean;
+  /** Native `id`. Used as the hidden input's `id` when `inputId` is not set. */
   id?: string;
   /** Render a hidden native `<input type="checkbox">`. Default `true`. */
   input?: boolean;
