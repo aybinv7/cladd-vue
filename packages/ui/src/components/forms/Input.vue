@@ -7,8 +7,8 @@ import { cn } from '../../shared/cn.ts';
 import { roundedClasses } from '../../shared/roundedClasses.ts';
 import { rootSizeClasses } from '../../shared/sizeClasses.ts';
 import Button from '../actions/Button.vue';
-import CloseIcon from '../feedback/CloseIcon.vue';
 import FocusRing from '../feedback/FocusRing.vue';
+import CloseIcon from '../icons/CloseIcon.vue';
 import SurfaceCut from '../surface/SurfaceCut.vue';
 import {
   inputClearButtonSizes,
@@ -74,7 +74,7 @@ const model = defineModel<string>({ default: '' });
 const ui = useUiContext();
 const attrs = useAttrs();
 const d = useComponentDefaults('Input', props, {
-  as: 'div' as InputProps['as'],
+  as: 'div' as NonNullable<InputProps['as']>,
   autofocus: false,
   clearButton: false,
   clearLabel: 'Clear',
@@ -82,7 +82,7 @@ const d = useComponentDefaults('Input', props, {
   readOnly: false,
   required: false,
   rounded: false,
-  size: 'lg' as InputProps['size'],
+  size: 'lg' as NonNullable<InputProps['size']>,
   tightFocusRing: false,
   type: 'text',
   valid: true,

@@ -33,13 +33,13 @@ const rootAttrs = computed(() => {
   return rest;
 });
 const d = useComponentDefaults('Toolbar', props, {
-  as: 'div' as ToolbarProps['as'],
+  as: 'div' as NonNullable<ToolbarProps['as']>,
   buttonOutline: false,
-  buttonVariant: 'transparent' as ToolbarProps['buttonVariant'],
+  buttonVariant: 'transparent' as NonNullable<ToolbarProps['buttonVariant']>,
   outline: true,
   rounded: true,
-  size: 'md' as ToolbarProps['size'],
-  variant: 'gradient' as ToolbarProps['variant'],
+  size: 'md' as NonNullable<ToolbarProps['size']>,
+  variant: 'gradient' as NonNullable<ToolbarProps['variant']>,
 });
 
 provideToolbarContext(

@@ -16,7 +16,7 @@ const props = withDefaults(defineProps<RadioGroupProps>(), {
 const d = useComponentDefaults('RadioGroup', props, {
   disabled: false,
   loop: true,
-  orientation: 'vertical' as RadioGroupProps['orientation'],
+  orientation: 'vertical' as NonNullable<RadioGroupProps['orientation']>,
   required: false,
 });
 

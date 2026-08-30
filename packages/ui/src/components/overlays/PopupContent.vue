@@ -27,7 +27,7 @@ const attrs = useAttrs();
 const d = useComponentDefaults('PopupContent', props, {
   outline: true,
   surfaceLevel: 1,
-  variant: 'solid' as PopupContentProps['variant'],
+  variant: 'solid' as NonNullable<PopupContentProps['variant']>,
 });
 const rootAttrs = computed(() => {
   const { class: _consumerClass, ...rest } = attrs;

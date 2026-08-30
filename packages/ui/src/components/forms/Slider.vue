@@ -72,13 +72,13 @@ const d = useComponentDefaults('Slider', props, {
   rangeOutline: true,
   readOnly: false,
   rounded: false,
-  scale: 'linear' as SliderProps['scale'],
-  size: 'sm' as SliderProps['size'],
+  scale: 'linear' as NonNullable<SliderProps['scale']>,
+  size: 'sm' as NonNullable<SliderProps['size']>,
   step: 1,
   throttle: 0,
   thumbOutline: true,
   tightFocusRing: false,
-  variant: 'thumb' as SliderProps['variant'],
+  variant: 'thumb' as NonNullable<SliderProps['variant']>,
 });
 const labellingAttributeNames = [
   'aria-label',

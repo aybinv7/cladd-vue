@@ -63,7 +63,7 @@ const tooltipId = `cladd-tooltip-${useId()}`;
 const d = useComponentDefaults('Tooltip', props, {
   disabled: false,
   offset: 4,
-  position: 'top' as TooltipProps['position'],
+  position: 'top' as NonNullable<TooltipProps['position']>,
   timeout: true,
 });
 

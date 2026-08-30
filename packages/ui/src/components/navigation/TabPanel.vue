@@ -24,7 +24,7 @@ const rootAttrs = computed(() => {
 });
 const { value: selectedValue, baseId } = useTabsContext();
 const d = useComponentDefaults('TabPanel', props, {
-  as: 'div' as TabPanelProps['as'],
+  as: 'div' as NonNullable<TabPanelProps['as']>,
   keepMounted: false,
 });
 const selected = computed(() => selectedValue.value === d.value.value);

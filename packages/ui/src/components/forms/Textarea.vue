@@ -56,11 +56,11 @@ const model = defineModel<string>({ default: '' });
 const ui = useUiContext();
 const attrs = useAttrs();
 const d = useComponentDefaults('Textarea', props, {
-  as: 'div' as TextareaProps['as'],
+  as: 'div' as NonNullable<TextareaProps['as']>,
   disabled: false,
   readOnly: false,
   rounded: false,
-  size: 'lg' as TextareaProps['size'],
+  size: 'lg' as NonNullable<TextareaProps['size']>,
   tightFocusRing: false,
   updateContentOnChange: true,
   valid: true,

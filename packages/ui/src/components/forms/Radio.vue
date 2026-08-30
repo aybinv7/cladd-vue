@@ -42,11 +42,11 @@ const emit = defineEmits<{
 const group = inject(radioGroupKey, undefined);
 const ui = useUiContext();
 const d = useComponentDefaults('Radio', props, {
-  as: 'label' as RadioProps['as'],
+  as: 'label' as NonNullable<RadioProps['as']>,
   disabled: false,
   input: true,
   required: false,
-  size: 'sm' as RadioProps['size'],
+  size: 'sm' as NonNullable<RadioProps['size']>,
   thumbOutline: true,
 });
 const isReadOnly = computed(

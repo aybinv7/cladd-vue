@@ -73,7 +73,7 @@ const stylesIndex = readFileSync(
   'utf8',
 );
 const checkboxGlyph = readFileSync(
-  join(process.cwd(), 'src', 'components', 'forms', 'CheckboxGlyph.vue'),
+  join(process.cwd(), 'src', 'components', 'icons', 'CheckIcon.vue'),
   'utf8',
 );
 

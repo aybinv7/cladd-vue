@@ -17,13 +17,13 @@ import type { SurfaceVariant } from '../../foundations/contracts.ts';
 import { cn } from '../../shared/cn.ts';
 import type { Color } from '../../types.ts';
 import Button from '../actions/Button.vue';
+import CloseIcon from '../icons/CloseIcon.vue';
 import { resolveOverlayElement } from '../overlays/overlay.contracts.ts';
 import {
   toastRootContextKey,
   useOverlayRootContext,
 } from '../overlays/overlayRootContext.ts';
 import Surface from '../surface/Surface.vue';
-import CloseIcon from './CloseIcon.vue';
 import type { ToastProps } from './feedback.contracts.ts';
 import {
   toastCloseWrapperClasses,
@@ -79,7 +79,9 @@ const emit = defineEmits<{
   closed: [];
 }>();
 
-const modelOpen = defineModel<boolean>('open', { default: undefined });
+const modelOpen = defineModel<boolean | undefined>('open', {
+  default: undefined,
+});
 const attrs = useAttrs();
 const ui = useUiContext();
 const root = useOverlayRootContext(toastRootContextKey);

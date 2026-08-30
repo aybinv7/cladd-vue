@@ -3,6 +3,7 @@ import { computed, useAttrs } from 'vue';
 
 import { useComponentDefaults } from '../../composables/useComponentDefaults.ts';
 import { cn } from '../../shared/cn.ts';
+import SearchIcon from '../icons/SearchIcon.vue';
 import type { FieldSize } from './form.contracts.ts';
 import Input from './Input.vue';
 import {
@@ -10,7 +11,6 @@ import {
   searchFieldIconClasses,
   type SearchFieldProps,
 } from './searchField.contracts.ts';
-import SearchIcon from './SearchIcon.vue';
 
 defineOptions({ inheritAttrs: false });
 

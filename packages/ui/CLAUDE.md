@@ -14,8 +14,12 @@ Before any other consideration, ask what upstream does and match it. This outran
 below, every convention in the repository root, and every instinct to improve something.
 
 - A file that exists upstream must diff clean against `reference/cladd/` apart from framework
-  transposition. `tests/upstreamParity.test.ts` enforces this for stylesheets; extend it as more
-  surfaces reach parity.
+  transposition. `tests/parity/upstreamStyles.test.ts` enforces this for stylesheets; extend it as
+  more surfaces reach parity.
+- Compare **export lists**, never filenames. Upstream declares several components per file:
+  `DialogRoot`, `DialogTrigger` and `DialogClose` all live in `Dialog.tsx`. A component missing from
+  `reference/cladd/src/components/` is not evidence it is missing from upstream, and an audit built
+  that way will call faithful ports inventions.
 - Upstream's literal tables stay literal. Do not replace a hand-written list with a generator, a
   `.map()`, or a shared helper, even when the output is identical. `shared/cn.ts` is the cautionary
   example: the port turned flat upstream arrays into `sizeScale.map()` and `radiusVariant()` and made

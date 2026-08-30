@@ -76,7 +76,9 @@ const emit = defineEmits<{
   opening: [];
 }>();
 
-const modelOpen = defineModel<boolean>('open', { default: undefined });
+const modelOpen = defineModel<boolean | undefined>('open', {
+  default: undefined,
+});
 const slots = useSlots();
 const attrs = useAttrs();
 const surfaceAttrs = computed(() => {
@@ -95,7 +97,7 @@ const d = useComponentDefaults('Popover', props, {
   closeOnEscape: true,
   disabled: false,
   lazy: false,
-  position: 'bottom' as PopoverProps['position'],
+  position: 'bottom' as NonNullable<PopoverProps['position']>,
   viewportMargin: 4,
 });
 

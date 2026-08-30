@@ -24,7 +24,7 @@ const rootAttrs = computed(() => {
 });
 const collapsible = useCollapsibleContext();
 const d = useComponentDefaults('CollapsiblePanel', props, {
-  as: 'div' as CollapsiblePanelProps['as'],
+  as: 'div' as NonNullable<CollapsiblePanelProps['as']>,
   keepMounted: false,
 });
 

@@ -14,7 +14,7 @@ Evidence was gathered by diffing the port against the vendored checkout, not by 
       indent, trailing commas, Tailwind class sorting through `cn`/`clsx`/`twMerge`).
 - [x] Upstream's duplicate `.light .cladd-color-neutral` selector restored rather than "cleaned up".
 - [x] `tailwind-merge` moved from `^3.6.0` to upstream's `^3.5.0`.
-- [x] `tests/upstreamParity.test.ts` added. It diffs every stylesheet against the vendored checkout,
+- [x] `tests/parity/upstreamStyles.test.ts` added. It diffs every stylesheet against the vendored checkout,
       fails on drift, and skips only when `reference/cladd` has not been hydrated.
 
 **Result: 7 of 8 stylesheets are byte-identical to upstream.** The exception is one line in
@@ -23,45 +23,48 @@ recorded as an allowance in the parity test.
 
 ## 1. Public API names
 
-The port renamed upstream's public surface. Every rename is a second contract to maintain and a
-permanent diff.
-
-- [ ] `accent` prop → `color`, everywhere. Upstream `Button.tsx:44` documents `color?: Color` driving
-      the `cladd-color-{name}` class. The port ships `accent` **and** `color` with `color` winning,
-      documented as "Port alias" in nine component docs. Delete the alias.
-- [ ] `UiProvider` → `CladdProvider`.
-- [ ] `UiAccent` → `Color`, and widen it to upstream's `| (string & {})` escape hatch. Upstream's
-      `types.ts` is eleven names plus that union member; the port ships a closed union, so a consumer
-      cannot pass a custom accent that upstream accepts.
-- [ ] `UiSize` → upstream's per-component size types (`ButtonSize` and friends are declared in the
-      component file, not centrally).
-- [ ] `useUiContext` / `UiContextValue` → upstream's `use-theme` / `use-accent-color` /
-      `use-overlays-root` split.
-- [ ] `@cladd-vue/ui/styles.css` export subpath → upstream's `./css`.
+- [x] `accent` prop deleted; upstream's `color` is the only spelling. `popoverAccent` ->
+      `popoverColor`, `cancelAccent` -> `cancelButtonColor`, `confirmAccent` -> `confirmButtonColor`.
+- [x] `UiProvider` -> `CladdProvider`.
+- [x] `UiAccent` -> `Color` in `src/types.ts`, ported verbatim including `| (string & {})`.
+- [x] `uiAccents`, `useUiContext`, `useOverlaysRoot`, `defaultOverlaysRoot` and `UiContextValue`
+      un-exported. Upstream's index exports none of them.
+- [x] Styles subpath `./styles.css` -> `./css`.
+- [x] `CheckIcon`, `CloseIcon`, `DropdownIcon` and `SearchIcon` exported, matching upstream's index.
+- [ ] `UiSize` / `UiTheme` still centralized in `foundations/contracts.ts`. Upstream declares size
+      unions per component (`ButtonSize` in `Button.tsx`) and has no theme union at all.
 
 ## 2. Invented components
 
-Sixteen components in the port have no upstream counterpart. Upstream exposes `Dialog`, `Popover`,
-`Popup` and `Toast` as single components; the port invented Radix-style compounds.
+**This section was wrong when first written and is corrected here.** The original audit compared
+_filenames_ against `reference/cladd/src/components/`, which lists one file per component. Upstream
+declares several components per file: `DialogRoot`, `DialogTrigger` and `DialogClose` all live inside
+`Dialog.tsx`, and the same holds for Popover, Popup and Toast. All twelve are exported from upstream's
+`index.ts` (lines 123-129, 189-207, 314-320). They are a faithful port, not an invention.
 
-- [ ] Remove `DialogRoot`, `DialogTrigger`, `DialogClose`.
-- [ ] Remove `PopoverRoot`, `PopoverTrigger`, `PopoverClose`.
-- [ ] Remove `PopupRoot`, `PopupTrigger`, `PopupClose`.
-- [ ] Remove `ToastRoot`, `ToastTrigger`, `ToastClose`.
-- [ ] Remove `RadioGroup`, `CheckboxGlyph`, `SelectDropdownIcon`; fold their behavior back into the
-      upstream component that owns it.
-- [ ] Delete the duplicated icons: `forms/SearchIcon.vue` and `feedback/CloseIcon.vue` shadow the
-      copies in `components/icons/`, which is where upstream keeps them.
+Comparing _export lists_ instead of filenames leaves a much shorter list:
+
+- [x] `CheckboxGlyph` deleted. Upstream's `Checkbox.tsx:15,215` renders `icons/CheckIcon`.
+- [x] `SelectDropdownIcon` deleted. Upstream's `Select.tsx:17,648` renders `icons/DropdownIcon`.
+- [x] `forms/SearchIcon.vue` and `feedback/CloseIcon.vue` deleted; they shadowed the copies in
+      `components/icons/`, which is where upstream keeps them and which already matched upstream.
+- [ ] `RadioGroup` is the only component the port exports that upstream does not. Upstream groups
+      radios with the native `name` attribute (`Radio.tsx:29-30,175`). Removing it changes `Radio`,
+      the form fixture, the playground and three tests, so it lands on its own.
 
 ## 3. Code shape
 
-- [ ] `shared/cn.ts`: restore upstream's flat literal arrays. The port replaced them with
-      `safeGroup()`, `safeNumberGroup()`, `sizeScale.map()`, `radiusVariant()` and `overlayRadii`.
-      Same output, undiffable source.
+- [x] `shared/cn.ts` restored to upstream's flat literal arrays. **Byte-identical to upstream.**
+- [x] `shared/roundedClasses.ts` and `shared/sizeClasses.ts` ported verbatim from
+      `rounded-classes.ts` and `size-utls.ts`. **Byte-identical to upstream.** This also fixed a real
+      divergence: upstream defaults `size` to `'sm'` and returns `string | undefined`, where the port
+      had made the parameter required.
+- [x] `shared/nextTick.ts` ported and exported; upstream exports it from its index.
 - [ ] Restore upstream's JSDoc on every public prop. The port stripped it under a no-comments rule
-      that no longer applies to ported documentation.
+      that no longer applies to ported documentation. This is the largest remaining shape item.
 - [ ] `*.contracts.ts` files have no upstream counterpart. Decide per file whether the constants live
       where upstream puts them (inline, or in `shared/`) and collapse the rest.
+- [ ] `useOverlayLifecycle`'s local `runAfterTwoFrames` duplicates `shared/nextTick`.
 
 ## 4. File layout
 
@@ -79,12 +82,30 @@ Sixteen components in the port have no upstream counterpart. Upstream exposes `D
 
 ## 5. Not yet ported
 
-Upstream components with no port at all. These are additions, not realignment, and come after the
-above.
+Upstream exports the port does not, taken from upstream's `index.ts` rather than its filenames:
 
-`ColorEditor`, `ColorPicker`, `Link`, `ModalController`, `NumberField`, `NumberScrubber`, `OTPField`,
-`OTPFieldInput`, `OTPFieldSeparator`, `SurfaceContent`, `SurfaceCutContent`, and the `calendar/`
-entrypoint (`Calendar`, `CalendarIcon`, `DatePicker`).
+`Backdrop`, `ColorEditor`, `ColorPicker`, `Link`, `NumberField`, `NumberScrubber`, `OTPField`,
+`OTPFieldInput`, `OTPFieldSeparator`, `SurfaceContent`, `SurfaceContextProvider`, `SurfaceCutContent`,
+and the `calendar/` entrypoint (`Calendar`, `CalendarIcon`, `DatePicker`).
+
+`Backdrop` exists as `overlays/Backdrop.vue` but is not exported. `ColorEditor` and `ColorPicker` also
+need `shared/color.ts`, which is roughly 300 lines of HSV conversion and is not ported.
+
+## 6. Type safety
+
+`vp lint --typeCheck` never covered `.vue` templates, so the port carried 77 type errors nobody could
+see. `vp run typecheck` (vue-tsc) now surfaces them and is wired into `ready`.
+
+- [x] Built-in defaults were cast `as SomeProps['x']`, which is `X | undefined` and poisoned every
+      lookup table indexed by that value. Narrowed to `as NonNullable<SomeProps['x']>`, 18 files,
+      which cleared 40 errors on its own.
+- [x] `defineModel<boolean>('open', { default: undefined })` widened to `boolean | undefined`.
+      Keeping the runtime options identical matters: dropping `{ default: undefined }` instead breaks
+      `ToastRoot`.
+- [ ] 15 errors remain, listed by `vp run typecheck`. Three are unused locals that look like real
+      defects rather than dead code: `Shortcut.vue` computes `rootClass` and never applies it,
+      `Switch.vue` computes `hoverable` and never applies it, `TooltipPrimitive.vue` computes
+      `surfaceStyle` and never applies it. Each needs checking against upstream before deletion.
 
 ## Sequencing
 

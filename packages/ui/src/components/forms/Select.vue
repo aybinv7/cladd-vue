@@ -19,6 +19,7 @@ import List from '../data-display/List.vue';
 import ListButton from '../data-display/ListButton.vue';
 import SectionTitle from '../data-display/SectionTitle.vue';
 import Shortcut from '../data-display/Shortcut.vue';
+import DropdownIcon from '../icons/DropdownIcon.vue';
 import Popover from '../overlays/Popover.vue';
 import Surface from '../surface/Surface.vue';
 import Checkbox from './Checkbox.vue';
@@ -57,7 +58,6 @@ import {
   type SelectProps,
   type SelectValue,
 } from './select.contracts.ts';
-import SelectDropdownIcon from './SelectDropdownIcon.vue';
 
 defineOptions({ inheritAttrs: false });
 
@@ -157,15 +157,17 @@ const d = useComponentDefaults('Select', props, {
   hoverable: true,
   keyboardHints: true,
   keyboardHintsOutline: false,
-  keyboardHintsSize: 'md' as SelectProps['keyboardHintsSize'],
-  keyboardHintsVariant: 'transparent' as SelectProps['keyboardHintsVariant'],
+  keyboardHintsSize: 'md' as NonNullable<SelectProps['keyboardHintsSize']>,
+  keyboardHintsVariant: 'transparent' as NonNullable<
+    SelectProps['keyboardHintsVariant']
+  >,
   multiline: false,
   multiple: false,
-  options: [] as SelectProps['options'],
+  options: [] as NonNullable<SelectProps['options']>,
   outline: true,
   placeholder: '',
   popoverOffset: selectPopoverOffset,
-  popoverPosition: 'bottom-end' as SelectProps['popoverPosition'],
+  popoverPosition: 'bottom-end' as NonNullable<SelectProps['popoverPosition']>,
   readOnly: false,
   pressed: false,
   reverse: false,
@@ -175,10 +177,10 @@ const d = useComponentDefaults('Select', props, {
   searchFocus: false,
   searchNotFound: 'Nothing found',
   searchPlaceholder: 'Search',
-  size: 'md' as SelectProps['size'],
-  surface: 'surface' as SelectProps['surface'],
+  size: 'md' as NonNullable<SelectProps['size']>,
+  surface: 'surface' as NonNullable<SelectProps['surface']>,
   tightFocusRing: false,
-  variant: 'gradient' as SelectProps['variant'],
+  variant: 'gradient' as NonNullable<SelectProps['variant']>,
 });
 const query = ref('');
 const selectedItemIndex = ref(-1);
@@ -564,7 +566,7 @@ onBeforeUnmount(() => document.removeEventListener('keydown', onKeydown));
       }}</slot>
     </div>
     <slot v-if="d.dropdownIcon" name="dropdownIcon">
-      <SelectDropdownIcon
+      <DropdownIcon
         :class="selectDropdownIconClasses"
         data-part="dropdown-icon"
       />

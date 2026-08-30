@@ -1,72 +1,36 @@
 import { clsx, type ClassValue } from 'clsx';
 import { extendTailwindMerge, validators } from 'tailwind-merge';
 
-const safeGroup = (prefix: string) => ({
+const safe = (prefix: string) => ({
   [prefix]: ['safe', { safe: [validators.isNumber] }],
 });
 
-const safeNumberGroup = (prefix: string) => ({
-  [prefix]: [{ safe: [validators.isNumber] }],
-});
-
-const sizeScale = [
-  'cladd-3xs',
-  'cladd-2xs',
-  'cladd-xs',
-  'cladd-sm',
-  'cladd-md',
-  'cladd-lg',
-  'cladd-xl',
-  'cladd-2xl',
-];
-
-const nestedSizeScale = sizeScale.map((token) =>
-  token.replace('cladd-', 'cladd-nested-'),
-);
-
-const thumbScale = ['cladd-thumb-xs', 'cladd-thumb-sm', 'cladd-thumb-md'];
-
-const radiusLadder = ['cladd', ...sizeScale];
-
-const radiusVariant = (infix: string) =>
-  ['2xs', 'xs', 'sm', 'md', 'lg', 'xl', '2xl'].map(
-    (token) => `cladd-${infix}${token}`,
-  );
-
-const overlayRadii = [
-  'cladd-popover',
-  'cladd-dialog',
-  'cladd-toast',
-  'cladd-popup',
-  'cladd-tooltip',
-];
-
-const uiTailwindMerge = extendTailwindMerge({
+const customTwMerge = extendTailwindMerge({
   extend: {
     classGroups: {
-      pl: [safeGroup('pl')],
-      pr: [safeGroup('pr')],
-      pt: [safeGroup('pt')],
-      pb: [safeGroup('pb')],
-      px: [safeNumberGroup('px')],
-      py: [safeNumberGroup('py')],
+      pl: [safe('pl')],
+      pr: [safe('pr')],
+      pt: [safe('pt')],
+      pb: [safe('pb')],
+      px: [{ px: [{ safe: [validators.isNumber] }] }],
+      py: [{ py: [{ safe: [validators.isNumber] }] }],
 
-      ml: [safeGroup('ml')],
-      mr: [safeGroup('mr')],
-      mt: [safeGroup('mt')],
-      mb: [safeGroup('mb')],
-      mx: [safeNumberGroup('mx')],
-      my: [safeNumberGroup('my')],
+      ml: [safe('ml')],
+      mr: [safe('mr')],
+      mt: [safe('mt')],
+      mb: [safe('mb')],
+      mx: [{ mx: [{ safe: [validators.isNumber] }] }],
+      my: [{ my: [{ safe: [validators.isNumber] }] }],
 
-      'scroll-ml': [safeNumberGroup('scroll-ml')],
-      'scroll-mr': [safeNumberGroup('scroll-mr')],
-      'scroll-mt': [safeNumberGroup('scroll-mt')],
-      'scroll-mb': [safeNumberGroup('scroll-mb')],
+      'scroll-ml': [{ 'scroll-ml': [{ safe: [validators.isNumber] }] }],
+      'scroll-mr': [{ 'scroll-mr': [{ safe: [validators.isNumber] }] }],
+      'scroll-mt': [{ 'scroll-mt': [{ safe: [validators.isNumber] }] }],
+      'scroll-mb': [{ 'scroll-mb': [{ safe: [validators.isNumber] }] }],
 
-      left: [safeGroup('left')],
-      right: [safeGroup('right')],
-      top: [safeGroup('top')],
-      bottom: [safeGroup('bottom')],
+      left: [safe('left')],
+      right: [safe('right')],
+      top: [safe('top')],
+      bottom: [safe('bottom')],
     },
     theme: {
       text: [
@@ -77,20 +41,90 @@ const uiTailwindMerge = extendTailwindMerge({
         'cladd-sm',
         'cladd-md',
       ],
-      spacing: [...sizeScale, ...thumbScale, ...nestedSizeScale],
+      spacing: [
+        'cladd-3xs',
+        'cladd-2xs',
+        'cladd-xs',
+        'cladd-sm',
+        'cladd-md',
+        'cladd-lg',
+        'cladd-xl',
+        'cladd-2xl',
+        'cladd-thumb-xs',
+        'cladd-thumb-sm',
+        'cladd-thumb-md',
+        'cladd-nested-3xs',
+        'cladd-nested-2xs',
+        'cladd-nested-xs',
+        'cladd-nested-sm',
+        'cladd-nested-md',
+        'cladd-nested-lg',
+        'cladd-nested-xl',
+        'cladd-nested-2xl',
+        'cladd-thumb-sm',
+        'cladd-thumb-md',
+      ],
       radius: [
-        ...radiusLadder,
-        ...radiusVariant('full-'),
-        ...radiusVariant('wrap-'),
-        ...radiusVariant('wrap-full-'),
-        ...radiusVariant('focus-'),
-        ...radiusVariant('focus-full-'),
-        ...overlayRadii,
+        'cladd',
+        'cladd-3xs',
+        'cladd-2xs',
+        'cladd-xs',
+        'cladd-sm',
+        'cladd-md',
+        'cladd-lg',
+        'cladd-xl',
+        'cladd-2xl',
+
+        'cladd-full-2xs',
+        'cladd-full-xs',
+        'cladd-full-sm',
+        'cladd-full-md',
+        'cladd-full-lg',
+        'cladd-full-xl',
+        'cladd-full-2xl',
+
+        'cladd-wrap-2xs',
+        'cladd-wrap-xs',
+        'cladd-wrap-sm',
+        'cladd-wrap-md',
+        'cladd-wrap-lg',
+        'cladd-wrap-xl',
+        'cladd-wrap-2xl',
+
+        'cladd-wrap-full-2xs',
+        'cladd-wrap-full-xs',
+        'cladd-wrap-full-sm',
+        'cladd-wrap-full-md',
+        'cladd-wrap-full-lg',
+        'cladd-wrap-full-xl',
+        'cladd-wrap-full-2xl',
+
+        'cladd-focus-2xs',
+        'cladd-focus-xs',
+        'cladd-focus-sm',
+        'cladd-focus-md',
+        'cladd-focus-lg',
+        'cladd-focus-xl',
+        'cladd-focus-2xl',
+
+        'cladd-focus-full-2xs',
+        'cladd-focus-full-xs',
+        'cladd-focus-full-sm',
+        'cladd-focus-full-md',
+        'cladd-focus-full-lg',
+        'cladd-focus-full-xl',
+        'cladd-focus-full-2xl',
+
+        'cladd-popover',
+        'cladd-dialog',
+        'cladd-toast',
+        'cladd-popup',
+        'cladd-tooltip',
       ],
     },
   },
 });
 
-export function cn(...inputs: ClassValue[]): string {
-  return uiTailwindMerge(clsx(inputs));
+export function cn(...inputs: ClassValue[]) {
+  return customTwMerge(clsx(inputs));
 }

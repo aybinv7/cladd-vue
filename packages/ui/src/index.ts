@@ -131,3 +131,11 @@ export type {
   SliderVariant,
   SwitchSize,
 } from './components/forms/form.contracts.ts';
+
+export { default as CloseIcon } from './components/icons/CloseIcon.vue';
+export { default as SearchIcon } from './components/icons/SearchIcon.vue';
+export { default as DropdownIcon } from './components/icons/DropdownIcon.vue';
+export { default as CheckIcon } from './components/icons/CheckIcon.vue';
+
+export { cn } from './shared/cn.ts';
+export { nextTick } from './shared/nextTick.ts';

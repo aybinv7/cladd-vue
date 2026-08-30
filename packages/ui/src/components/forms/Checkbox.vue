@@ -5,13 +5,13 @@ import { useComponentDefaults } from '../../composables/useComponentDefaults.ts'
 import { useUiContext } from '../../contexts/uiContext.ts';
 import { cn } from '../../shared/cn.ts';
 import FocusRing from '../feedback/FocusRing.vue';
+import CheckIcon from '../icons/CheckIcon.vue';
 import Surface from '../surface/Surface.vue';
 import {
   checkboxIndicatorSizes,
   checkboxRootSizes,
   type CheckboxProps,
 } from './checkbox.contracts.ts';
-import CheckboxGlyph from './CheckboxGlyph.vue';
 
 defineOptions({ inheritAttrs: false });
 
@@ -42,11 +42,11 @@ const emit = defineEmits<{
 }>();
 const ui = useUiContext();
 const d = useComponentDefaults('Checkbox', props, {
-  as: 'label' as CheckboxProps['as'],
+  as: 'label' as NonNullable<CheckboxProps['as']>,
   disabled: false,
   input: true,
   required: false,
-  size: 'sm' as CheckboxProps['size'],
+  size: 'sm' as NonNullable<CheckboxProps['size']>,
   thumbOutline: true,
 });
 const isReadOnly = computed(
@@ -187,7 +187,7 @@ const indicatorClass = computed(() =>
       variant="gradient-fill"
       :wrap-content="false"
     />
-    <CheckboxGlyph
+    <CheckIcon
       :class="indicatorClass"
       data-part="indicator"
       :data-state="checked ? 'checked' : 'unchecked'"

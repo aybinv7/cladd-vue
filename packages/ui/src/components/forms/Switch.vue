@@ -50,18 +50,18 @@ const emit = defineEmits<{
 }>();
 const ui = useUiContext();
 const d = useComponentDefaults('Switch', props, {
-  as: 'label' as SwitchProps['as'],
+  as: 'label' as NonNullable<SwitchProps['as']>,
   disabled: false,
   input: true,
   outline: true,
   required: false,
-  size: 'md' as SwitchProps['size'],
+  size: 'md' as NonNullable<SwitchProps['size']>,
   surfaceLevel: '+1',
   thumbOutline: true,
   thumbSurfaceLevel: '+2',
-  thumbVariant: 'gradient' as SwitchProps['thumbVariant'],
+  thumbVariant: 'gradient' as NonNullable<SwitchProps['thumbVariant']>,
   value: 'on',
-  variant: 'solid' as SwitchProps['variant'],
+  variant: 'solid' as NonNullable<SwitchProps['variant']>,
 });
 const isReadOnly = computed(
   () => d.value.readOnly ?? d.value.readonly ?? false,

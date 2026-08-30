@@ -10,7 +10,7 @@ import { useUiContext } from '../../contexts/uiContext.ts';
 import { cn } from '../../shared/cn.ts';
 import Button from '../actions/Button.vue';
 import VNodeRenderer from '../data-display/VNodeRenderer.ts';
-import CloseIcon from '../feedback/CloseIcon.vue';
+import CloseIcon from '../icons/CloseIcon.vue';
 import Surface from '../surface/Surface.vue';
 import Backdrop from './Backdrop.vue';
 import {
@@ -86,7 +86,9 @@ const emit = defineEmits<{
   opening: [];
 }>();
 
-const modelOpen = defineModel<boolean>('open', { default: undefined });
+const modelOpen = defineModel<boolean | undefined>('open', {
+  default: undefined,
+});
 const slots = useSlots();
 const attrs = useAttrs();
 const ui = useUiContext();

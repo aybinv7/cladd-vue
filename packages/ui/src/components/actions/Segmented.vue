@@ -32,12 +32,12 @@ const ui = useUiContext();
 const surface = useSurface();
 const toolbar = useToolbarContext();
 const d = useComponentDefaults('Segmented', props, {
-  as: 'div' as SegmentedProps['as'],
+  as: 'div' as NonNullable<SegmentedProps['as']>,
   disabled: false,
   outline: false,
   rounded: toolbar.value.rounded ?? true,
-  size: toolbar.value.size ?? ('md' as SegmentedProps['size']),
-  variant: 'transparent' as SegmentedProps['variant'],
+  size: toolbar.value.size ?? ('md' as NonNullable<SegmentedProps['size']>),
+  variant: 'transparent' as NonNullable<SegmentedProps['variant']>,
 });
 
 provideSegmentedContext(

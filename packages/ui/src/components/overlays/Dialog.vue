@@ -77,7 +77,9 @@ const emit = defineEmits<{
   opening: [];
 }>();
 
-const modelOpen = defineModel<boolean>('open', { default: undefined });
+const modelOpen = defineModel<boolean | undefined>('open', {
+  default: undefined,
+});
 const slots = useSlots();
 const attrs = useAttrs();
 const containerAttrs = computed(() => {
@@ -91,11 +93,11 @@ const ui = useUiContext();
 const root = useOverlayRootContext(dialogRootContextKey);
 const d = useComponentDefaults('Dialog', props, {
   backdropTransparent: false,
-  cancelButtonColor: 'neutral' as DialogProps['cancelButtonColor'],
+  cancelButtonColor: 'neutral' as NonNullable<DialogProps['cancelButtonColor']>,
   closeOnBackdropClick: true,
   closeOnEscape: true,
   surfaceLevel: 1,
-  variant: 'gradient' as DialogProps['variant'],
+  variant: 'gradient' as NonNullable<DialogProps['variant']>,
 });
 
 // Own `open` wins, then the surrounding DialogRoot's state, then `false` — upstream's

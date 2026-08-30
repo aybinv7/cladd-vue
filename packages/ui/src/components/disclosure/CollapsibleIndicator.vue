@@ -23,7 +23,7 @@ const rootAttrs = computed(() => {
 });
 const collapsible = useCollapsibleContext();
 const d = useComponentDefaults('CollapsibleIndicator', props, {
-  as: 'span' as CollapsibleIndicatorProps['as'],
+  as: 'span' as NonNullable<CollapsibleIndicatorProps['as']>,
 });
 const rootClass = computed(() =>
   cn('cladd-collapsible-indicator inline-flex', attrs.class),

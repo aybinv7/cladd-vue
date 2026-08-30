@@ -55,7 +55,7 @@ const surface = shallowRef<HTMLElement>();
 const { anchorName, setAnchorElement } = useAnchorPosition();
 const d = useComponentDefaults('TooltipPrimitive', props, {
   offset: 4,
-  position: 'top' as TooltipPrimitiveProps['position'],
+  position: 'top' as NonNullable<TooltipPrimitiveProps['position']>,
   zIndex: tooltipZIndexClasses,
 });
 const { phase, setPhase } = useOverlayPhase(model);
