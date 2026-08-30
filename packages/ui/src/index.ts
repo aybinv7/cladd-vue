@@ -1,13 +1,5 @@
 export { type Color } from './types.ts';
 
-export {
-  overlayPhases,
-  surfaceLevels,
-  surfaceVariants,
-  uiSizes,
-  uiThemes,
-} from './foundations/contracts.ts';
-
 export type {
   OverlayPhase,
   SurfaceLevel,
@@ -17,11 +9,11 @@ export type {
   UiTheme,
 } from './foundations/contracts.ts';
 
-export {
-  clampSurfaceLevel,
-  resolveSurfaceLevel,
-} from './foundations/surfaceLevel.ts';
 export { useSurface } from './contexts/surfaceContext.ts';
+export {
+  useCollapsibleContext,
+  type CollapsibleContextValue,
+} from './components/collapsibleContext.ts';
 export { useAccentColor, useTheme } from './contexts/uiContext.ts';
 export { useComponentDefaults } from './composables/useComponentDefaults.ts';
 export { useDevice } from './composables/useDevice.ts';
@@ -44,7 +36,6 @@ export { default as CladdProvider } from './components/CladdProvider.vue';
 export { default as Surface } from './components/Surface.vue';
 export { default as SurfaceCut } from './components/SurfaceCut.vue';
 export { default as Button } from './components/Button.vue';
-export { buttonSpinnerSizes } from './components/button.contracts.ts';
 export type { ButtonSurface } from './components/button.contracts.ts';
 export { default as Segmented } from './components/Segmented.vue';
 export { default as SegmentedButton } from './components/SegmentedButton.vue';
@@ -91,12 +82,7 @@ export type {
 } from './components/select.contracts.ts';
 export { default as Switch } from './components/Switch.vue';
 export { default as Textarea } from './components/Textarea.vue';
-export {
-  choiceSizes,
-  fieldSizes,
-  sliderVariants,
-  switchSizes,
-} from './components/form.contracts.ts';
+export { default as Backdrop } from './components/Backdrop.vue';
 export { default as Dialog } from './components/Dialog.vue';
 export { default as DialogClose } from './components/DialogClose.vue';
 export { default as DialogRoot } from './components/DialogRoot.vue';
@@ -112,11 +98,6 @@ export { default as PopupRoot } from './components/PopupRoot.vue';
 export { default as PopupTrigger } from './components/PopupTrigger.vue';
 export { default as Tooltip } from './components/Tooltip.vue';
 export { default as TooltipPrimitive } from './components/TooltipPrimitive.vue';
-export {
-  popoverPositionConfigs,
-  popoverPositions,
-  tooltipPositions,
-} from './components/overlay.contracts.ts';
 export type {
   OverlayOffsetValue,
   PopoverOffset,

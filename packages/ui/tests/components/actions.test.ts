@@ -2,6 +2,7 @@ import { expect, test } from 'vite-plus/test';
 import { h, nextTick } from 'vue';
 
 import ActionFixture from '../../fixtures/actions/ActionFixture.vue';
+import { buttonSpinnerSizes } from '../../src/components/button.contracts.ts';
 import {
   Button,
   Chip,
@@ -14,7 +15,6 @@ import {
   Toolbar,
   ToolbarButton,
   ToolbarSeparator,
-  buttonSpinnerSizes,
 } from '../../src/index.ts';
 import { byTestId, click, mountTree } from '../support/mountTree.ts';
 

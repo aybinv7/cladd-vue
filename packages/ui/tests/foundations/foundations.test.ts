@@ -20,12 +20,12 @@ import {
 } from '../../src/components/shortcut.contracts.ts';
 import {
   overlayPhases,
-  resolveSurfaceLevel,
   surfaceLevels,
   surfaceVariants,
   uiSizes,
   uiThemes,
-} from '../../src/index.ts';
+} from '../../src/foundations/contracts.ts';
+import { resolveSurfaceLevel } from '../../src/foundations/surfaceLevel.ts';
 import { roundedClasses } from '../../src/shared/roundedClasses.ts';
 import {
   nestedSizeClasses,

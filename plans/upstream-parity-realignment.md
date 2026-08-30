@@ -31,6 +31,13 @@ recorded as an allowance in the parity test.
       un-exported. Upstream's index exports none of them.
 - [x] Styles subpath `./styles.css` -> `./css`.
 - [x] `CheckIcon`, `CloseIcon`, `DropdownIcon` and `SearchIcon` exported, matching upstream's index.
+- [x] Fifteen invented runtime tables un-exported: `uiSizes`, `uiThemes`, `surfaceLevels`,
+      `surfaceVariants`, `overlayPhases`, `clampSurfaceLevel`, `resolveSurfaceLevel`,
+      `buttonSpinnerSizes`, `choiceSizes`, `fieldSizes`, `sliderVariants`, `switchSizes`,
+      `popoverPositions`, `popoverPositionConfigs`, `tooltipPositions`. They stay internal; upstream
+      exports none of them.
+- [x] `Backdrop` and `useCollapsibleContext` exported. Both were implemented but missing from the
+      index.
 - [ ] `UiSize` / `UiTheme` still centralized in `foundations/contracts.ts`. Upstream declares size
       unions per component (`ButtonSize` in `Button.tsx`) and has no theme union at all.
 
@@ -89,8 +96,13 @@ Upstream exports the port does not, taken from upstream's `index.ts` rather than
 `OTPFieldInput`, `OTPFieldSeparator`, `SurfaceContent`, `SurfaceContextProvider`, `SurfaceCutContent`,
 and the `calendar/` entrypoint (`Calendar`, `CalendarIcon`, `DatePicker`).
 
-`Backdrop` exists as `overlays/Backdrop.vue` but is not exported. `ColorEditor` and `ColorPicker` also
-need `shared/color.ts`, which is roughly 300 lines of HSV conversion and is not ported.
+`Backdrop` and `useCollapsibleContext` were implemented but not exported, and now are, leaving eleven
+genuine gaps. `ColorEditor` and `ColorPicker` also need `shared/color.ts`, roughly 300 lines of HSV
+conversion that is not ported.
+
+`tests/parity/upstreamExports.test.ts` locks this: it fails when an upstream export has no
+counterpart, when the port exports something upstream does not, and when the not-yet-ported list goes
+stale. The list is the work queue; it may only shrink.
 
 ## 6. Type safety
 

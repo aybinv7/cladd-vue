@@ -1,13 +1,17 @@
 <script setup lang="ts">
-import {
-  Surface,
-  SurfaceCut,
-  surfaceLevels,
-  surfaceVariants,
-} from '@cladd-vue/ui';
-import type { Color } from '@cladd-vue/ui';
+import { Surface, SurfaceCut } from '@cladd-vue/ui';
+import type { Color, SurfaceLevel, SurfaceVariant } from '@cladd-vue/ui';
 
 import CatalogSection from '../components/CatalogSection.vue';
+
+const surfaceLevels: SurfaceLevel[] = [1, 2, 3, 4, 5];
+const surfaceVariants: SurfaceVariant[] = [
+  'transparent',
+  'solid',
+  'gradient',
+  'solid-fill',
+  'gradient-fill',
+];
 
 defineProps<{
   accent: Color;
