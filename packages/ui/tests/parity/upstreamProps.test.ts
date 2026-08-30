@@ -42,6 +42,7 @@ const transposed: Record<string, Record<string, string>> = {
     inputProps: 'extra: the Vue spelling of inputComponentProps',
   },
   ListButtonProps: { icon: 'the icon slot', after: 'the after slot' },
+  NumberScrubberProps: { value: 'v-model', icon: 'the icon slot' },
   OTPFieldProps: { value: 'v-model' },
   OTPFieldInputProps: {
     index:

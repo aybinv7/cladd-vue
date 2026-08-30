@@ -38,6 +38,12 @@ export { default as SurfaceContextProvider } from './components/SurfaceContextPr
 export { default as SurfaceCut } from './components/SurfaceCut.vue';
 export { default as SurfaceCutContent } from './components/SurfaceCutContent.vue';
 export { default as Link } from './components/Link.vue';
+export { default as NumberScrubber } from './components/NumberScrubber.vue';
+export type {
+  NumberScrubberProps,
+  NumberScrubberDefaultProps,
+  NumberScrubberSize,
+} from './components/numberScrubber.contracts.ts';
 export { default as OTPField } from './components/OTPField.vue';
 export { default as OTPFieldInput } from './components/OTPFieldInput.vue';
 export { default as OTPFieldSeparator } from './components/OTPFieldSeparator.vue';

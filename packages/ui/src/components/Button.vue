@@ -87,7 +87,10 @@ const surfaceProps = computed(() => ({
     ? { level: d.value.surfaceLevel, variant: d.value.variant }
     : undefined),
 }));
-const rootProps = computed(() => ({ ...surfaceProps.value, ...attrs }));
+const rootProps = computed(() => {
+  const { class: _consumerClass, ...rest } = attrs;
+  return { ...surfaceProps.value, ...rest };
+});
 const isNativeButton = computed(() => d.value.as === 'button');
 const radii = computed(() =>
   roundedClasses(d.value.size, d.value.rounded, d.value.multiline),
@@ -116,6 +119,7 @@ const rootClass = computed(() =>
     d.value.square && 'aspect-square',
     d.value.disabled && 'pointer-events-none',
     !inactive.value && isLink.value ? 'cursor-pointer' : 'cursor-auto',
+    attrs.class,
   ),
 );
 

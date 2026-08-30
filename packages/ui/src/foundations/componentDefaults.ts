@@ -26,6 +26,7 @@ import type {
 } from '../components/feedback.contracts.ts';
 import type { InputDefaultProps } from '../components/input.contracts.ts';
 import type { LinkDefaultProps } from '../components/link.contracts.ts';
+import type { NumberScrubberDefaultProps } from '../components/numberScrubber.contracts.ts';
 import type {
   OTPFieldDefaultProps,
   OTPFieldInputDefaultProps,
@@ -112,6 +113,7 @@ export interface ComponentDefaults {
   Slider?: SliderDefaultProps;
   Spinner?: SpinnerDefaultProps;
   Link?: LinkDefaultProps;
+  NumberScrubber?: NumberScrubberDefaultProps;
   OTPField?: OTPFieldDefaultProps;
   OTPFieldInput?: OTPFieldInputDefaultProps;
   OTPFieldSeparator?: OTPFieldSeparatorDefaultProps;
