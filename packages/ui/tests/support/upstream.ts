@@ -43,6 +43,29 @@ export function valueExports(indexPath: string): Set<string> {
   return names;
 }
 
+/** Type-only names exported from an `index.ts`, following `as` aliases. */
+export function typeExports(indexPath: string): Set<string> {
+  const source = readFileSync(indexPath, 'utf8').replace(/\r\n/gu, '\n');
+  const names = new Set<string>();
+
+  for (const block of source.matchAll(/export\s*(?:type\s*)?\{([^}]*)\}/gu)) {
+    const typeBlock = block[0].startsWith('export type');
+    for (const entry of block[1].split(',')) {
+      const line = entry.trim();
+      if (!line) continue;
+      if (!typeBlock && !line.startsWith('type ')) continue;
+
+      const match = VALUE_EXPORT.exec(line.replace(/^type\s+/u, ''));
+      if (!match) continue;
+
+      const name = match[2] ?? match[3];
+      if (name) names.add(name);
+    }
+  }
+
+  return names;
+}
+
 /**
  * Prop names declared directly on an interface body, ignoring nested object
  * types. Returns an empty set when the interface is absent.

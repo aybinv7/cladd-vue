@@ -20,6 +20,12 @@ below, every convention in the repository root, and every instinct to improve so
   `DialogRoot`, `DialogTrigger` and `DialogClose` all live in `Dialog.tsx`. A component missing from
   `reference/cladd/src/components/` is not evidence it is missing from upstream, and an audit built
   that way will call faithful ports inventions.
+- **A file with no React in it is copied, not retyped.** Run
+  `grep -LE "from 'react'|React\.|</|/>" reference/cladd/src/**/*.ts` to find them: `types.ts`,
+  `shared/cn.ts`, `shared/color.ts`, `shared/rounded-classes.ts`, `shared/size-utls.ts`,
+  `shared/next-tick.ts`, `hooks/use-device.ts`. Copy the file, rename it to the Vue path idiom, and
+  verify with a diff. Hand-retyping a framework-agnostic file is slower, burns tokens, and produces
+  the drift this whole plan exists to undo. Only files that actually contain React get ported by hand.
 - Upstream's literal tables stay literal. Do not replace a hand-written list with a generator, a
   `.map()`, or a shared helper, even when the output is identical. `shared/cn.ts` is the cautionary
   example: the port turned flat upstream arrays into `sizeScale.map()` and `radiusVariant()` and made

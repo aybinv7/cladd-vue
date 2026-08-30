@@ -104,6 +104,23 @@ conversion that is not ported.
 counterpart, when the port exports something upstream does not, and when the not-yet-ported list goes
 stale. The list is the work queue; it may only shrink.
 
+## 8. Pure files are copied, not ported
+
+Every upstream file with no React in it is a direct copy. Copied so far and verified byte-identical:
+`types.ts`, `shared/cn.ts`, `shared/color.ts`, `shared/rounded-classes.ts` (as `roundedClasses.ts`),
+`shared/size-utls.ts` (as `sizeClasses.ts`), `shared/next-tick.ts` (as `nextTick.ts`), and
+`hooks/use-device.ts` (as `composables/useDevice.ts`). That is every pure file upstream has.
+
+`shared/color.ts` is 402 lines of HSV conversion and was the stated blocker for `ColorEditor` and
+`ColorPicker`. It was never a blocker; it was a copy.
+
+Debt this surfaced: the port exports 16 types upstream does not. Upstream declares a size union per
+component (`ButtonSize`, `CheckboxSize`, `ChipSize`, `InputSize`, `RadioSize`, ...) where the port
+centralised `UiSize`, `ChoiceSize` and `FieldSize`; upstream has no `UiTheme`, `SurfaceLevel`,
+`SurfaceLevelInput` or `OverlayPhase` union at all; and `SelectValue`, `SelectOption*` and `DialogApi`
+are Vue-side surfaces with no upstream counterpart. Listed as `allowedExtraTypeExports` in
+`tests/parity/upstreamExports.test.ts`.
+
 ## 7. Prop-level parity
 
 `tests/parity/upstreamProps.test.ts` compares every `XProps` interface against upstream's

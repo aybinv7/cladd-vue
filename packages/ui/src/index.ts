@@ -17,7 +17,6 @@ export {
 export { useAccentColor, useTheme } from './contexts/uiContext.ts';
 export { useComponentDefaults } from './composables/useComponentDefaults.ts';
 export { useDevice } from './composables/useDevice.ts';
-export type { DeviceInfo } from './composables/useDevice.ts';
 export { useDialog } from './composables/useDialog.ts';
 export type {
   DialogApi,

@@ -1,44 +1,35 @@
-export interface DeviceInfo {
+let deviceCalculated: ReturnType<typeof calcDevice> | null = null;
+
+interface DeviceInfo {
+  ios: boolean;
   android: boolean;
   desktop: boolean;
-  ios: boolean;
-  ipad: boolean;
+  mobile: boolean;
   iphone: boolean;
   ipod: boolean;
-  mobile: boolean;
+  ipad: boolean;
 }
 
-interface DeviceOverrides {
-  userAgent?: string;
-}
-
-interface NwWindow {
-  DocumentTouch?: unknown;
-  nw?: unknown;
-}
-
-let deviceCalculated: DeviceInfo | null = null;
-
-function calcDevice({ userAgent }: DeviceOverrides = {}): DeviceInfo | null {
+function calcDevice({
+  userAgent,
+}: { userAgent?: string } = {}): DeviceInfo | null {
   if (typeof window === 'undefined') return null;
-  const nwWindow = window as unknown as NwWindow;
   const supportTouch =
-    'ontouchstart' in window ||
-    Boolean(
-      nwWindow.DocumentTouch &&
-      document instanceof (nwWindow.DocumentTouch as typeof Object),
-    );
+    typeof window !== 'undefined' &&
+    ('ontouchstart' in window ||
+      ((window as any).DocumentTouch &&
+        document instanceof (window as any).DocumentTouch));
   const platform = window.navigator.platform;
   const ua = userAgent || window.navigator.userAgent;
 
   const device: DeviceInfo = {
+    ios: false,
     android: false,
     desktop: false,
-    ios: false,
-    ipad: false,
+    mobile: false,
     iphone: false,
     ipod: false,
-    mobile: false,
+    ipad: false,
   };
 
   const android = ua.match(/(Android);?[\s/]+([\d.]+)?/);
@@ -48,34 +39,61 @@ function calcDevice({ userAgent }: DeviceOverrides = {}): DeviceInfo | null {
     !ipad && ua.match(/(iPhone\sOS|iOS|iPhone;\sCPU\sOS)\s([\d_]+)/);
 
   const electron = ua.toLowerCase().indexOf('electron') >= 0;
-  const nwjs = typeof nwWindow.nw !== 'undefined';
+  const nwjs =
+    typeof (window as any).nw !== 'undefined' &&
+    // @ts-ignore
+    typeof process !== 'undefined' &&
+    // @ts-ignore
+    typeof process.versions !== 'undefined' &&
+    // @ts-ignore
+    typeof process.versions.nw !== 'undefined';
   let macos = platform === 'MacIntel';
 
   if (!ipad && macos && supportTouch) {
     ipad = ua.match(/(Version)\/([\d.]+)/);
-    if (!ipad) ipad = ['', 'Version', '13_0_0'] as unknown as RegExpMatchArray;
+    if (!ipad) ipad = ['', 'Version', '13_0_0'] as RegExpMatchArray;
     macos = false;
   }
 
-  if (android) device.android = true;
-  if (ipad || iphone || ipod) device.ios = true;
-  if (iphone && !ipod) device.iphone = true;
-  if (ipad) device.ipad = true;
-  if (ipod) device.ipod = true;
+  // Android
+  if (android) {
+    device.android = true;
+  }
+  if (ipad || iphone || ipod) {
+    device.ios = true;
+  }
+  // iOS
+  if (iphone && !ipod) {
+    device.iphone = true;
+  }
+  if (ipad) {
+    device.ipad = true;
+  }
+  if (ipod) {
+    device.ipod = true;
+  }
 
+  // Desktop
   device.desktop = !(device.ios || device.android) || electron || nwjs;
+
+  // mobile
   device.mobile = device.ios || device.android;
 
+  // Export object
   return device;
 }
 
-export function useDevice(
-  overrides: DeviceOverrides = {},
+function useDevice(
+  overrides: { userAgent?: string } = {},
   reset?: boolean,
 ): DeviceInfo {
   if (!deviceCalculated || reset) {
-    const result = calcDevice(overrides);
-    if (result) deviceCalculated = result;
+    const res = calcDevice(overrides);
+    if (res) {
+      deviceCalculated = calcDevice(overrides);
+    }
   }
-  return deviceCalculated ?? ({} as DeviceInfo);
+  return deviceCalculated || ({} as DeviceInfo);
 }
+
+export { useDevice };
