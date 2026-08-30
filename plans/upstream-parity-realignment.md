@@ -69,11 +69,13 @@ Sixteen components in the port have no upstream counterpart. Upstream exposes `D
       `overlays/`, `surface/`, …); upstream is one flat directory plus `icons/`.
 - [ ] `src/styles/index.css` → `src/cladd.css` at the package root, with upstream's
       `@source "./"; @source "./components";` and `@import "./styles/*.css"` paths.
-- [ ] `composables/` and its camelCase filenames vs upstream `hooks/use-theme.ts`. **Open question,
-      see below.**
-- [ ] `shared/roundedClasses.ts` / `sizeClasses.ts` vs upstream `shared/rounded-classes.ts` /
-      `size-utls.ts` (note upstream's typo, which a verbatim port keeps).
-- [ ] `foundations/` and `contexts/` have no upstream counterpart.
+- [x] `composables/useTheme.ts` and camelCase `shared/` filenames stay as they are. Decided: filename
+      and directory idiom is part of the React-to-Vue transposition, like `.tsx` becoming `.vue`.
+      Upstream `hooks/use-theme.ts` maps to `composables/useTheme.ts`, `shared/rounded-classes.ts` to
+      `shared/roundedClasses.ts`, and `shared/size-utls.ts` to `shared/sizeClasses.ts`. The contents
+      still port verbatim; only the path idiom moves.
+- [ ] `foundations/` and `contexts/` have no upstream counterpart. Fold them into the upstream homes
+      (`types.ts`, `shared/`, and the component that owns each context).
 
 ## 5. Not yet ported
 
@@ -83,13 +85,6 @@ above.
 `ColorEditor`, `ColorPicker`, `Link`, `ModalController`, `NumberField`, `NumberScrubber`, `OTPField`,
 `OTPFieldInput`, `OTPFieldSeparator`, `SurfaceContent`, `SurfaceCutContent`, and the `calendar/`
 entrypoint (`Calendar`, `CalendarIcon`, `DatePicker`).
-
-## Open question
-
-`hooks/use-theme.ts` is React idiom; `composables/useTheme.ts` is Vue idiom. Verbatim porting argues
-for the former, Vue convention and the repository's own naming rules argue for the latter. This is the
-one divergence that cannot be settled by reading upstream, because upstream has no opinion about Vue.
-Resolve it before section 4 starts, then apply the answer to `shared/` filenames as well.
 
 ## Sequencing
 

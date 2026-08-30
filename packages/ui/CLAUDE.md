@@ -28,6 +28,11 @@ below, every convention in the repository root, and every instinct to improve so
   parity test where one applies. An unrecorded deviation is a defect regardless of whether it looks
   better.
 
+The one thing upstream cannot decide is Vue file idiom, because upstream has no opinion about Vue.
+Settled: directory and filename style transposes along with the framework. `hooks/use-theme.ts`
+becomes `composables/useTheme.ts`, `shared/rounded-classes.ts` becomes `shared/roundedClasses.ts`.
+File _contents_ still port verbatim. Do not reopen this.
+
 Read these files before implementation:
 
 1. `docs/architecture.md`
