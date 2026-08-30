@@ -111,11 +111,44 @@ const pickerValue = computed({
 const rootClass = computed(() =>
   cn(
     'cladd-calendar',
-    currentColor.value && `cladd-color-${currentColor.value}`,
     d.value.disabled && 'pointer-events-none opacity-50',
     attrs.class,
   ),
 );
+
+function isSameDay(left: Date, right: Date): boolean {
+  return (
+    left.getFullYear() === right.getFullYear() &&
+    left.getMonth() === right.getMonth() &&
+    left.getDate() === right.getDate()
+  );
+}
+
+function isSelected(date: Date): boolean {
+  const value = model.value;
+  if (value === undefined) return false;
+  if (value instanceof Date) return isSameDay(value, date);
+  if (Array.isArray(value))
+    return value.some((entry) => isSameDay(entry, date));
+
+  const range = value as DateRange;
+  return Boolean(
+    (range.from && isSameDay(range.from, date)) ||
+    (range.to && isSameDay(range.to, date)),
+  );
+}
+
+/**
+ * Upstream colours the day button only when it is selected or today
+ * (`Calendar.tsx:285`), leaving the caption, weekday row and the other days on
+ * the theme foreground. Scoping the accent per cell keeps that, where putting
+ * `cladd-color-*` on the panel would tint the whole thing.
+ */
+function dayClass(date: Date): string {
+  if (!currentColor.value) return '';
+  const today = d.value.showToday && isSameDay(date, new Date());
+  return isSelected(date) || today ? `cladd-color-${currentColor.value}` : '';
+}
 
 /**
  * The dependency types its header slot as a union across date, month and year
@@ -150,13 +183,20 @@ const ui = computed(() => ({
     tokens.value.box,
     tokens.value.dayText,
   ),
+  dayClass,
   navBtnPrev: 'cladd-calendar__nav',
   navBtnNext: 'cladd-calendar__nav',
 }));
 </script>
 
 <template>
-  <div v-bind="rootAttrs" :class="rootClass" data-part="calendar">
+  <div
+    v-bind="rootAttrs"
+    :class="rootClass"
+    data-part="calendar"
+    :data-show-today="d.showToday"
+    :data-size="d.size"
+  >
     <div
       v-if="slots.header"
       :class="cn('mb-2', d.headerClassName)"

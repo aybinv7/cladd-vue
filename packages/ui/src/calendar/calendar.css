@@ -41,6 +41,23 @@
   --dp-cell-padding: 0;
 }
 
+/* Cell geometry follows the Cladd size token, mirroring upstream's SIZES table. */
+.cladd-calendar[data-size="sm"] {
+  --dp-cell-size: var(--spacing-cladd-sm);
+}
+.cladd-calendar[data-size="md"] {
+  --dp-cell-size: var(--spacing-cladd-md);
+}
+.cladd-calendar[data-size="lg"] {
+  --dp-cell-size: var(--spacing-cladd-lg);
+}
+.cladd-calendar[data-size="xl"] {
+  --dp-cell-size: var(--spacing-cladd-xl);
+}
+.cladd-calendar[data-size="2xl"] {
+  --dp-cell-size: var(--spacing-cladd-2xl);
+}
+
 /* The Cladd surface already draws the panel. */
 .cladd-calendar .dp--menu {
   border: 0;
@@ -76,6 +93,12 @@
 
 .cladd-calendar .dp--cell-offset {
   color: var(--cladd-fg-softest);
+}
+
+/* `showToday` off drops the ring entirely. */
+.cladd-calendar[data-show-today="false"] .dp--today:not(.dp--active) {
+  border-color: transparent;
+  color: inherit;
 }
 
 /* Upstream has no time picker and no action row in the calendar panel. */

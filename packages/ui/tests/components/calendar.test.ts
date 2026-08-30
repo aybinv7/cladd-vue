@@ -16,18 +16,23 @@ function part(root: HTMLElement, name: string): HTMLElement {
  * happy-dom, so these cover the wrapper: the container, the accent cascade, the
  * slots and the trigger. The grid itself is the dependency's to test.
  */
-test('renders a calendar container carrying the accent class', () => {
+test('renders a calendar container without tinting the whole panel', () => {
   const mounted = mountTree(
     h('div', null, [
-      h(Calendar, { color: 'cyan', 'data-testid': 'calendar' }),
+      h(Calendar, { color: 'cyan', 'data-testid': 'calendar', size: 'lg' }),
       h(Calendar, { 'data-testid': 'disabled', disabled: true }),
     ]),
   );
 
   const root = byTestId(mounted.root, 'calendar');
   expect(root.className).toContain('cladd-calendar');
-  expect(root.className).toContain('cladd-color-cyan');
   expect(root.getAttribute('data-part')).toBe('calendar');
+  expect(root.getAttribute('data-size')).toBe('lg');
+
+  // Upstream colours only the selected and today cells (Calendar.tsx:285), so
+  // the accent must not sit on the panel where it would tint the caption,
+  // the weekday row and every other day.
+  expect(root.className).not.toContain('cladd-color-cyan');
 
   expect(byTestId(mounted.root, 'disabled').className).toContain(
     'pointer-events-none',
