@@ -3,6 +3,7 @@ import type {
   SurfaceVariant,
 } from '../foundations/contracts.ts';
 import type { Color } from '../types.ts';
+import type { OverlayRootProps } from './overlayRoot.ts';
 
 export interface PopupProps {
   ariaDescribedby?: string;
@@ -107,3 +108,12 @@ export function popupStackTransform(step: number): string {
 export const popupStackTransitionDuration = '400ms';
 
 export const popupStackTransformOrigin = 'top';
+
+/** Stateful, non-visual root that owns a `Popup`'s open state. */
+export type PopupRootProps = OverlayRootProps;
+
+/** Takes no own props; upstream's are the native element props plus `children` and `ref`. */
+export type PopupTriggerProps = Record<string, never>;
+
+/** Takes no own props; upstream's are the native element props plus `children` and `ref`. */
+export type PopupCloseProps = Record<string, never>;

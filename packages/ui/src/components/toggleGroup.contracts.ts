@@ -1,5 +1,6 @@
 import type { SurfaceVariant } from '../foundations/contracts.ts';
 import type { Color } from '../types.ts';
+import type { ButtonProps } from './button.contracts.ts';
 import type { SegmentedProps } from './segmented.contracts.ts';
 
 export interface ToggleGroupOwnProps {
@@ -38,3 +39,5 @@ export interface ToggleButtonOwnProps {
 export type ToggleButtonDefaultProps = Partial<
   Omit<ToggleButtonOwnProps, 'defaultSelected' | 'selected' | 'value'>
 >;
+
+export type ToggleButtonProps = Omit<ButtonProps, 'as'> & ToggleButtonOwnProps;

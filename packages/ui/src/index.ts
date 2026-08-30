@@ -293,3 +293,50 @@ export type {
   ToolbarDefaultProps,
   ToolbarProps,
 } from './components/toolbar.contracts.ts';
+
+// Upstream exports the props type of every component.
+export type { CladdProviderProps } from './components/claddProvider.contracts.ts';
+export type { CollapsibleTriggerProps } from './components/collapsible.contracts.ts';
+export type { SectionTitleProps } from './components/dataDisplay.contracts.ts';
+export type {
+  ListItemProps,
+  ListProps,
+  ListSeparatorProps,
+  ListTitleProps,
+} from './components/list.contracts.ts';
+export type {
+  BackdropDefaultProps,
+  BackdropProps,
+  DialogCloseProps,
+  DialogRootProps,
+  DialogTriggerProps,
+  PopoverCloseProps,
+  PopoverRootProps,
+  PopoverTriggerProps,
+} from './components/overlay.contracts.ts';
+export type {
+  PopupCloseProps,
+  PopupRootProps,
+  PopupTriggerProps,
+} from './components/popup.contracts.ts';
+export type { TabsListProps } from './components/tabs.contracts.ts';
+export type {
+  ToastCloseProps,
+  ToastRootProps,
+  ToastTriggerProps,
+} from './components/toast.contracts.ts';
+export type { ToggleButtonProps } from './components/toggleGroup.contracts.ts';
+export type {
+  ToolbarButtonProps,
+  ToolbarSeparatorDefaultProps,
+  ToolbarSeparatorProps,
+} from './components/toolbar.contracts.ts';
+
+// Upstream aliases the collapsible primitives under the accordion names.
+export type {
+  CollapsibleIndicatorProps as AccordionIndicatorProps,
+  CollapsibleIndicatorState as AccordionIndicatorState,
+  CollapsiblePanelDefaultProps as AccordionPanelDefaultProps,
+  CollapsiblePanelProps as AccordionPanelProps,
+  CollapsibleTriggerProps as AccordionTriggerProps,
+} from './components/collapsible.contracts.ts';

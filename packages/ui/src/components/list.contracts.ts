@@ -31,3 +31,15 @@ export const listButtonFooterClasses =
   'text-cladd-xs leading-tight font-normal text-cladd-fg-softer';
 
 export const listButtonAfterClasses = 'ml-auto shrink-0 [&>svg]:shrink-0';
+
+/** Takes no own props; upstream's are the native element props plus `children` and `ref`. */
+export type ListProps = Record<string, never>;
+
+/** Takes no own props; upstream's are the native element props plus `children` and `ref`. */
+export type ListItemProps = Record<string, never>;
+
+/** Takes no own props; upstream's are the native element props plus `children` and `ref`. */
+export type ListSeparatorProps = Record<string, never>;
+
+/** Takes no own props; upstream's are the native element props plus `children` and `ref`. */
+export type ListTitleProps = Record<string, never>;

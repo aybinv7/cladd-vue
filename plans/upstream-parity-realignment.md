@@ -141,10 +141,16 @@ Vue-side surface a consumer needs to type a `v-model` binding or slot props (`Di
   not exported from its index, so they are internal here too.
 
 The other half of the gap was larger: upstream exports the props type of every component and the port
-exported almost none. 75 `XProps` / `XDefaultProps` types now ship. The remaining 31 are declared
-inline in their `.vue` via `defineProps<{...}>()`, so there is nothing to re-export; they are listed
-as `typesNotYetPorted` and a new test fails if an upstream type export goes missing without being on
-that list.
+exported almost none, so a consumer could not type a wrapper. All 106 now ship. The last 31 needed
+their props interface lifted out of `defineProps<{...}>()` into a contracts file first — mostly
+aliases (`DialogRootProps` is `OverlayRootProps`, `ToolbarButtonProps` is `ButtonProps`,
+`TabsListProps` is `SegmentedProps`) and a set of components that genuinely take no own props, plus
+`CladdProviderProps` extracted into its own contracts file. The accordion names are alias re-exports
+of the collapsible types, as upstream does it.
+
+**Every queue in the parity tests is now empty**: `notYetPorted`, `typesNotYetPorted`,
+`allowedExtraExports` and `notImplemented`. The only remaining allowance is five Vue-side type exports
+a consumer needs for `v-model` and slot props.
 
 ## 7. Prop-level parity
 

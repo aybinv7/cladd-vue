@@ -34,3 +34,6 @@ export interface TabPanelProps {
 }
 
 export type TabPanelDefaultProps = Partial<Omit<TabPanelProps, 'as' | 'value'>>;
+
+/** `TabsList` renders a `Segmented` and takes its props. */
+export type TabsListProps = SegmentedProps;

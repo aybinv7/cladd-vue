@@ -95,3 +95,6 @@ export type ListTitleDefaultProps = Record<string, never>;
 export type ListSeparatorDefaultProps = Record<string, never>;
 
 export type SectionTitleDefaultProps = Record<string, never>;
+
+/** Takes no own props; upstream's are the native element props plus `children` and `ref`. */
+export type SectionTitleProps = Record<string, never>;

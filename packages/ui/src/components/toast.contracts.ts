@@ -1,3 +1,4 @@
+import type { OverlayRootProps } from './overlayRoot.ts';
 export const toastSurfaceClasses =
   'cladd-toast fixed right-safe-4 bottom-safe-4 z-50 max-w-full origin-bottom rounded-cladd-toast';
 
@@ -35,3 +36,12 @@ export const toastTextClasses = 'text-cladd-xs leading-relaxed';
 export const toastCloseWrapperClasses = 'ml-auto';
 
 export const toastDefaultTimeout = 5000;
+
+/** Stateful, non-visual root that owns a `Toast`'s open state. */
+export type ToastRootProps = OverlayRootProps;
+
+/** Takes no own props; upstream's are the native element props plus `children` and `ref`. */
+export type ToastTriggerProps = Record<string, never>;
+
+/** Takes no own props; upstream's are the native element props plus `children` and `ref`. */
+export type ToastCloseProps = Record<string, never>;

@@ -3,6 +3,7 @@ import type {
   SurfaceVariant,
 } from '../foundations/contracts.ts';
 import type { Color } from '../types.ts';
+import type { OverlayRootProps } from './overlayRoot.ts';
 
 export const popoverPositions = [
   'top-start',
@@ -435,3 +436,27 @@ export function resolveOverlayElement(value: unknown): HTMLElement | undefined {
   }
   return undefined;
 }
+
+/** Stateful, non-visual root that owns a `Dialog`'s open state. */
+export type DialogRootProps = OverlayRootProps;
+
+/** Takes no own props; upstream's are the native element props plus `children` and `ref`. */
+export type DialogTriggerProps = Record<string, never>;
+
+/** Takes no own props; upstream's are the native element props plus `children` and `ref`. */
+export type DialogCloseProps = Record<string, never>;
+
+/** Stateful, non-visual root that owns a `Popover`'s open state. */
+export type PopoverRootProps = OverlayRootProps;
+
+/** Takes no own props; upstream's are the native element props plus `children` and `ref`. */
+export type PopoverTriggerProps = Record<string, never>;
+
+/** Takes no own props; upstream's are the native element props plus `children` and `ref`. */
+export type PopoverCloseProps = Record<string, never>;
+
+/** Takes no own props; upstream's are the native element props plus `children` and `ref`. */
+export type BackdropProps = Record<string, never>;
+
+/** Shape of `Backdrop` defaults that can be supplied via `CladdProvider`'s `defaults` prop. */
+export type BackdropDefaultProps = Partial<BackdropProps>;

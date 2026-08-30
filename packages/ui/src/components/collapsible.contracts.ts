@@ -40,3 +40,6 @@ export interface CollapsibleIndicatorProps {
 export type CollapsibleIndicatorDefaultProps = Partial<
   Omit<CollapsibleIndicatorProps, 'as'>
 >;
+
+/** Takes no own props; upstream's are the native element props plus `children` and `ref`. */
+export type CollapsibleTriggerProps = Record<string, never>;
