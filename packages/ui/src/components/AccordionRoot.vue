@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, shallowRef, useId } from 'vue';
+import { computed, getCurrentInstance, shallowRef, useId } from 'vue';
 
 import { useComponentDefaults } from '../composables/useComponentDefaults.ts';
 import type { AccordionRootProps } from './accordion.contracts.ts';
@@ -25,14 +25,28 @@ const d = useComponentDefaults('AccordionRoot', props, {
   multiple: false,
 });
 const baseId = useId();
-const internalValue = shallowRef(d.value.defaultValue);
-const isControlled = computed(() => d.value.value !== undefined);
+
+// Controlled when the `value` prop is bound at all, not when it currently
+// resolves to a defined value — matching upstream's `'value' in props`
+// (`AccordionRoot.tsx:770-774`, with an explicit comment warning that `value
+// !== undefined` is wrong: an "everything closed" selection is legitimately
+// `undefined`, so that check would flip a controlled accordion to
+// uncontrolled the moment it closes, and resurface stale state). Vue's
+// declared props are always present on the `props` object regardless of
+// whether the caller bound them, so the presence check has to read the
+// actual vnode props the parent passed instead of the resolved `props`
+// object.
+const instance = getCurrentInstance();
+const isControlled = Boolean(
+  instance && instance.vnode.props && 'value' in instance.vnode.props,
+);
+const internalValue = shallowRef(props.defaultValue);
 const value = computed(() =>
-  isControlled.value ? d.value.value : internalValue.value,
+  isControlled ? props.value : internalValue.value,
 );
 
 function setValue(next: string | string[] | undefined): void {
-  if (!isControlled.value) internalValue.value = next;
+  if (!isControlled) internalValue.value = next;
   emit('update:value', next);
 }
 

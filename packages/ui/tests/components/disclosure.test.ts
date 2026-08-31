@@ -1,5 +1,5 @@
 import { expect, test } from 'vite-plus/test';
-import { h } from 'vue';
+import { defineComponent, h, nextTick, ref } from 'vue';
 
 import {
   AccordionIndicator,
@@ -137,6 +137,51 @@ test('AccordionRoot with multiple keeps every opened item open independently', a
   ).not.toBeNull();
   expect(
     mounted.root.querySelector('[data-testid="panel-two"]'),
+  ).not.toBeNull();
+  mounted.app.unmount();
+});
+
+test('AccordionRoot stays controlled when its bound value clears to undefined', async () => {
+  const value = ref<string | undefined>('one');
+  const harness = defineComponent({
+    setup() {
+      return () =>
+        h(
+          AccordionRoot,
+          {
+            'onUpdate:value': (next: string | string[] | undefined) =>
+              (value.value = next as string | undefined),
+            value: value.value,
+          },
+          () => [
+            h(AccordionItem, { value: 'one' }, () => [
+              h(AccordionTrigger, null, () =>
+                h('button', { 'data-testid': 'trigger-one' }, 'One'),
+              ),
+              h(
+                AccordionPanel,
+                { 'data-testid': 'panel-one' },
+                () => 'One content',
+              ),
+            ]),
+          ],
+        );
+    },
+  });
+  const mounted = mountTree(h(harness));
+
+  // Clearing the bound value to `undefined` (everything closed) must not
+  // flip the accordion to uncontrolled — clicking afterward should still
+  // update the parent's ref rather than silently falling back to internal
+  // state.
+  value.value = undefined;
+  await nextTick();
+  expect(mounted.root.querySelector('[data-testid="panel-one"]')).toBeNull();
+
+  await click(byTestId(mounted.root, 'trigger-one'));
+  expect(value.value).toBe('one');
+  expect(
+    mounted.root.querySelector('[data-testid="panel-one"]'),
   ).not.toBeNull();
   mounted.app.unmount();
 });

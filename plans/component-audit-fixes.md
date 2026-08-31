@@ -1,0 +1,68 @@
+# Component audit fixes
+
+Found by a five-way parity audit against `reference/cladd`, run independently of the existing
+`tests/parity/*` suite and `plans/upstream-parity-realignment.md` (both of which have known blind
+spots — happy-dom can't render real layout, and the export/prop readers have been wrong before).
+
+## High severity
+
+- [ ] `Input.vue` / `Textarea.vue` — consumer `class` isn't put last in `cn(...)`; it relies on
+      Vue's attrs-merge order instead, which puts the consumer's class _first_, so the component's
+      own `opacity-50`/rounded classes win over a conflicting consumer utility. Same bug class as
+      the earlier Button/Checkbox/Chip sweep, reintroduced through the attrs path instead of a
+      literal `cn()` ordering mistake. (`Input.tsx:286-292`, `Textarea.tsx:238-242`)
+- [ ] `SurfaceCut.vue` — `outline` defaults to `false`; upstream defaults `true`
+      (`SurfaceCut.tsx:448`), and the port's own `surface.contracts.ts:54` JSDoc already says
+      `true`. Every `SurfaceCut` is missing its inset ring by default.
+- [ ] `ToggleGroup.vue` — `isControlled` computed as `d.value.value !== undefined` instead of
+      upstream's `'value' in props` (`ToggleGroup.tsx:79-83`, which has an explicit comment warning
+      against the `!== undefined` inference: an empty selection is legitimately `undefined`, so a
+      controlled group that clears flips to uncontrolled and desyncs from the parent's state).
+- [ ] `AccordionRoot.vue` — same bug as `ToggleGroup`: `d.value.value !== undefined` instead of
+      `'value' in props` (`AccordionRoot.tsx:770-774`, same warning comment). A controlled
+      single-open accordion that closes to `undefined` can pop back open with stale state.
+- [ ] `Dialog.vue` — confirm button keeps `currentAccent` regardless of confirmation state; upstream
+      drops the color to `undefined` while the type-to-confirm text doesn't match yet
+      (`Dialog.tsx:474-478`).
+- [ ] `DialogsPortal.vue` — drops `lazy` and `stopPropagationOnClick` when forwarding imperative
+      dialog data to `<Dialog>` (`DialogsPortal.tsx:12-31`). Both are silently ignored by callers of
+      the imperative API.
+- [ ] `Popover.vue` — uses the wrong reset primitive. Unconditionally resets _color_ context via
+      `provideSurfaceColorReset()`; upstream never resets color for `Popover` (only `Dialog` does)
+      and instead conditionally flattens the surface _level_ to `0` when the popover's own resolved
+      level is `1` and the theme is `light` (`Popover.tsx:388-396`, `PopoverSurfaceReset`).
+- [ ] `Button.vue` — `disabled` is only wired to the native `<button>` case; a polymorphic
+      `as="SomeComponent"` target never receives it. Upstream always passes
+      `disabled={disabled || readOnly}` through to `WrapComponent` regardless of tag
+      (`Button.tsx:~215`).
+- [ ] `foundations/componentDefaults.ts` — `ComponentDefaults` interface is missing `Backdrop` and
+      `ToolbarSeparator` entries (`ThemeContext.tsx:68-125` has both). App-wide defaults for these
+      two components are unreachable, and a type error if a consumer tries.
+
+## Lower severity / edge cases (fix opportunistically, lower priority than the above)
+
+- [ ] `FocusRing.vue` — merges consumer class via plain attrs fallthrough instead of `cn(...)`, so
+      tailwind-merge dedup doesn't apply to it specifically.
+- [ ] `OTPFieldInput.vue` — claims its index once at mount (`claimIndex()`) rather than recomputing
+      from live child order every render like upstream's `useMemo` does. Only matters if a consumer
+      dynamically reorders `OTPFieldInput` cells at runtime.
+- [ ] `SurfaceCut.vue` — stray `text-cladd-fg` class on the root (`SurfaceCut.vue:60`) that upstream
+      doesn't set (`SurfaceCut.tsx:486`). Unclear real-world visual impact; verify with a rendered
+      comparison before changing.
+- [ ] `surfaceLevel.ts` — silently "fixes" an upstream edge case: a malformed numeric-string level
+      falls back to `clampSurfaceLevel(parentLevel + 1)` instead of reproducing upstream's `NaN`
+      result (`Surface.tsx:158-171`). Byte-for-byte mandate says match it; practically harmless.
+- [ ] `useOverlayLifecycle.ts` — local `runAfterTwoFrames` duplicates `shared/nextTick.ts`'s
+      double-rAF timing, plus a cancel function `nextTick` lacks. Structural debt, already flagged
+      in `plans/upstream-parity-realignment.md`, no behavior impact today.
+
+## Confirm intentional, not a bug
+
+- `Select.vue` is a non-generic, union-typed option model vs. upstream's generic `Select<T, V>` —
+  a real API-shape difference, not a regression. Flagging for awareness, not fixing here.
+
+## Clean (audited, no findings)
+
+Popup*, Toast*, Backdrop, Segmented*, Toolbar*, Tabs family, List family, Link, Surface/
+SurfaceContent, Spinner, ColorEditor/ColorPicker, Collapsible family, `shared/*` copies, `types.ts`,
+`useDevice.ts`, Checkbox/Radio/Switch, NumberField/NumberScrubber, SearchField, Chip, Shortcut.

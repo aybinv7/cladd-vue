@@ -75,6 +75,10 @@ const emit = defineEmits<{
 const model = defineModel<string>({ default: '' });
 const ui = useUiContext();
 const attrs = useAttrs();
+const rootAttrs = computed(() => {
+  const { class: _consumerClass, ...rest } = attrs;
+  return rest;
+});
 const d = useComponentDefaults('Input', props, {
   as: 'div' as NonNullable<InputProps['as']>,
   inputComponent: 'input' as NonNullable<InputProps['inputComponent']>,
@@ -112,6 +116,7 @@ const rootClass = computed(() =>
     'cladd-input group/cladd-input',
     d.value.disabled && 'opacity-50',
     radii.value.itemRoundedClasses,
+    attrs.class,
   ),
 );
 
@@ -221,7 +226,7 @@ defineExpose({
 
 <template>
   <SurfaceCut
-    v-bind="attrs"
+    v-bind="rootAttrs"
     :as="d.as"
     :class="rootClass"
     :color="d.color"

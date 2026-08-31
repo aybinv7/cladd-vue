@@ -30,7 +30,7 @@ const d = useComponentDefaults('SurfaceCut', props, {
   as: 'div' as string | Component,
   clickable: false,
   hoverable: false,
-  outline: false,
+  outline: true,
   overlayPosition: 'above' as 'above' | 'below',
   pressed: false,
   wrapContent: true,
@@ -57,7 +57,7 @@ const innerElement = computed(() => resolveSurfaceInnerElement(d.value.as));
 
 const rootClass = computed(() =>
   cn(
-    'cladd-surface-cut relative text-cladd-fg',
+    'cladd-surface-cut relative',
     explicitColor.value && `cladd-color-${explicitColor.value}`,
     d.value.hoverable && 'cladd-hoverable',
     d.value.clickable && 'cladd-clickable',

@@ -56,6 +56,10 @@ const emit = defineEmits<{
 const model = defineModel<string>({ default: '' });
 const ui = useUiContext();
 const attrs = useAttrs();
+const rootAttrs = computed(() => {
+  const { class: _consumerClass, ...rest } = attrs;
+  return rest;
+});
 const d = useComponentDefaults('Textarea', props, {
   as: 'div' as NonNullable<TextareaProps['as']>,
   disabled: false,
@@ -89,6 +93,7 @@ const rootClass = computed(() =>
     'cladd-textarea group/cladd-textarea relative',
     d.value.disabled && 'opacity-50',
     radii.value.itemRoundedClasses,
+    attrs.class,
   ),
 );
 
@@ -187,7 +192,7 @@ defineExpose({ focus: () => controlElement.value?.focus() });
 
 <template>
   <SurfaceCut
-    v-bind="attrs"
+    v-bind="rootAttrs"
     :as="d.as"
     :class="rootClass"
     :color="d.color"

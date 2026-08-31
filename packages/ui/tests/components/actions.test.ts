@@ -1,5 +1,5 @@
 import { expect, test } from 'vite-plus/test';
-import { h, nextTick } from 'vue';
+import { defineComponent, h, nextTick, ref } from 'vue';
 
 import ActionFixture from '../../fixtures/actions/ActionFixture.vue';
 import { buttonSpinnerSizes } from '../../src/components/button.contracts.ts';
@@ -400,6 +400,52 @@ test('ToggleGroup selects a single value and clicking the active one clears it',
   await click(byTestId(mounted.root, 'list'));
   expect(byTestId(mounted.root, 'list').getAttribute('aria-pressed')).toBe(
     'false',
+  );
+  mounted.app.unmount();
+});
+
+test('ToggleGroup stays controlled when its bound value clears to undefined', async () => {
+  const value = ref<string | undefined>('grid');
+  const harness = defineComponent({
+    setup() {
+      return () =>
+        h(
+          ToggleGroup,
+          {
+            'onUpdate:value': (next: string | string[] | undefined) =>
+              (value.value = next as string | undefined),
+            value: value.value,
+          },
+          () => [
+            h(
+              ToggleButton,
+              { 'data-testid': 'grid', value: 'grid' },
+              () => 'Grid',
+            ),
+            h(
+              ToggleButton,
+              { 'data-testid': 'list', value: 'list' },
+              () => 'List',
+            ),
+          ],
+        );
+    },
+  });
+  const mounted = mountTree(h(harness));
+
+  // Clearing the bound value to `undefined` (an empty selection) must not
+  // flip the group to uncontrolled — clicking afterward should still update
+  // the parent's ref rather than silently falling back to internal state.
+  value.value = undefined;
+  await nextTick();
+  expect(byTestId(mounted.root, 'grid').getAttribute('aria-pressed')).toBe(
+    'false',
+  );
+
+  await click(byTestId(mounted.root, 'list'));
+  expect(value.value).toBe('list');
+  expect(byTestId(mounted.root, 'list').getAttribute('aria-pressed')).toBe(
+    'true',
   );
   mounted.app.unmount();
 });
