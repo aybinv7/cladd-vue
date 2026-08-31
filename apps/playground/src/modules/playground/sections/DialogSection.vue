@@ -5,7 +5,6 @@ import { computed, ref } from 'vue';
 
 import CatalogSection from '../components/CatalogSection.vue';
 import ComponentPlayground from '../components/ComponentPlayground.vue';
-import OverlayEventLog from '../components/OverlayEventLog.vue';
 import PlaygroundColorControl from '../components/PlaygroundColorControl.vue';
 import PlaygroundSwitchControl from '../components/PlaygroundSwitchControl.vue';
 import PlaygroundToolbar from '../components/PlaygroundToolbar.vue';
@@ -21,11 +20,6 @@ const confirm = ref(false);
 const lazy = ref(false);
 const transparentBackdrop = ref(false);
 const stopPropagationOnClick = ref(false);
-const events = ref<string[]>([]);
-
-function record(event: string): void {
-  events.value = [...events.value.slice(-3), event];
-}
 
 const code = computed(
   () => `<Dialog
@@ -65,16 +59,11 @@ const code = computed(
           :stop-propagation-on-click="stopPropagationOnClick"
           text="The target can be attached again without losing its stored inspection state."
           title="Disconnect WebView?"
-          @closed="record('closed')"
-          @closing="record('closing')"
-          @opened="record('opened')"
-          @opening="record('opening')"
         >
           <template #trigger>
             <Button :disabled="!props.interactionsEnabled">Open dialog</Button>
           </template>
         </Dialog>
-        <OverlayEventLog :events="events" @clear="events = []" />
       </template>
       <template #controls>
         <PlaygroundToolbar>

@@ -16,7 +16,6 @@ import { computed, ref } from 'vue';
 
 import CatalogSection from '../components/CatalogSection.vue';
 import ComponentPlayground from '../components/ComponentPlayground.vue';
-import OverlayEventLog from '../components/OverlayEventLog.vue';
 import PlaygroundSegmented from '../components/PlaygroundSegmented.vue';
 import PlaygroundSwitchControl from '../components/PlaygroundSwitchControl.vue';
 import PlaygroundToolbar from '../components/PlaygroundToolbar.vue';
@@ -32,7 +31,6 @@ const popoverBackdrop = ref(false);
 const popoverBackdropTransparent = ref(false);
 const popoverLazy = ref(false);
 const popoverViewportMargin = ref(4);
-const events = ref<string[]>([]);
 
 const popoverPositions = [
   'top-start',
@@ -49,10 +47,6 @@ const popoverPositions = [
   'right-end',
   'center',
 ] as const;
-
-function record(event: string): void {
-  events.value = [...events.value.slice(-3), event];
-}
 
 const target = {
   host: 'localhost:5175',
@@ -122,10 +116,6 @@ const popoverRootCode = `<PopoverRoot>
           :lazy="popoverLazy"
           :position="popoverPosition"
           :viewport-margin="popoverViewportMargin"
-          @closed="record('closed')"
-          @closing="record('closing')"
-          @opened="record('opened')"
-          @opening="record('opening')"
         >
           <template #trigger>
             <Button :disabled="!props.interactionsEnabled">Open popover</Button>
@@ -148,7 +138,6 @@ const popoverRootCode = `<PopoverRoot>
             </List>
           </template>
         </Popover>
-        <OverlayEventLog :events="events" @clear="events = []" />
       </template>
       <template #controls>
         <PlaygroundToolbar>

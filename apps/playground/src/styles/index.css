@@ -744,53 +744,9 @@ kbd {
 
 .component-example__preview-surface-content {
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 16px;
-  min-height: 120px;
   padding: 16px;
-  padding-bottom: 60px;
-}
-
-.overlay-event-log {
-  position: absolute;
-  right: 16px;
-  bottom: 16px;
-  left: 16px;
-  display: flex;
-  min-height: 28px;
-  align-items: center;
-  gap: 8px;
-  padding: 4px 6px 4px 10px;
-  border: 1px solid var(--cladd-outline);
-  border-radius: 10px;
-  background: color-mix(in oklab, var(--cladd-bg) 78%, transparent);
-  color: var(--cladd-fg-soft);
-  font-family: var(--font-mono);
-  font-size: 11px;
-  line-height: 1;
-  backdrop-filter: blur(12px);
-  pointer-events: none;
-}
-
-.overlay-event-log .cladd-button {
-  pointer-events: auto;
-}
-
-.overlay-event-log__label {
-  color: var(--cladd-fg-softer);
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-
-.overlay-event-log__events {
-  min-width: 0;
-  flex: 1;
-  overflow: hidden;
-  color: var(--cladd-fg);
-  text-overflow: ellipsis;
-  white-space: nowrap;
 }
 
 .component-example__controls {
