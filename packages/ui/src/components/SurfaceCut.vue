@@ -89,7 +89,7 @@ const overlayClass = computed(() =>
 
 const contentClass = computed(() =>
   cn(
-    'cladd-surface-cut__content relative',
+    'cladd-surface-cut__content relative h-full',
     d.value.clickable &&
       'duration-200 cladd-surface-press:scale-95 cladd-surface-press:opacity-75',
     d.value.contentClassName,

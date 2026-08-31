@@ -36,8 +36,11 @@
 
   --dp-menu-padding: 0;
   --dp-menu-min-width: 0;
-  --dp-row-margin: 2px 0;
+  /* upstream `week: 'mt-0.5 flex'` */
+  --dp-row-margin: 2px 0 0;
+  /* upstream `weekday: '... pb-1 ...'` */
   --dp-calendar-header-cell-padding: 0 0 4px;
+  /* upstream `day: '... p-0 ...'` */
   --dp-cell-padding: 0;
 }
 
@@ -58,6 +61,11 @@
   --dp-cell-size: var(--spacing-cladd-2xl);
 }
 
+/* upstream `month: 'flex flex-col gap-4'` separates the caption from the grid. */
+.cladd-calendar [data-part="caption"] {
+  margin-bottom: 16px;
+}
+
 /* The Cladd surface already draws the panel. */
 .cladd-calendar .dp--menu {
   border: 0;
@@ -72,11 +80,11 @@
   border-bottom: 0;
 }
 
-/* Weekday row: upstream renders it soft and small, not bold, and sizes it from
-   the `weekdayText` token rather than the caption size. */
+/* upstream `weekday: 'flex items-center justify-center pb-1 font-normal
+   text-cladd-fg-soft'` plus the `col` and `weekdayText` size tokens. */
 .cladd-calendar .dp--calendar-header {
-  font-weight: 500;
-  color: var(--cladd-fg-softest);
+  font-weight: 400;
+  color: var(--cladd-fg-soft);
 }
 
 .cladd-calendar .dp--calendar-header-item {

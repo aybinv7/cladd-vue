@@ -248,3 +248,20 @@ test('switches Link between anchor and button on href', () => {
   expect(off.className).toContain('pointer-events-none');
   mounted.app.unmount();
 });
+
+test('stretches the cut content wrapper to the surface height', () => {
+  // Upstream wraps children in `SurfaceCutContent`, whose `fullHeight` default
+  // is `true` (`SurfaceCutContent.tsx:33,43`). Without it a `self-stretch` cut
+  // sits taller than its own content and the text rides the top edge, which is
+  // what NumberField's read-only value chip was doing.
+  const mounted = mountTree(
+    h(SurfaceCut, { 'data-testid': 'cut' }, () => 'value'),
+  );
+
+  const content = byTestId(mounted.root, 'cut').querySelector(
+    '.cladd-surface-cut__content',
+  );
+
+  expect(content?.className).toContain('h-full');
+  mounted.app.unmount();
+});
