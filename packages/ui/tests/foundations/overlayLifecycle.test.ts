@@ -311,6 +311,73 @@ test('restores focus to the dialog trigger after escape', async () => {
     .forEach((node) => node.remove());
 });
 
+test('covers all 13 popover positions and both tooltip origins', async () => {
+  const { popoverPositionConfigs, tooltipOrigins } =
+    await import('../../src/components/overlay.contracts.ts');
+  const { buildPopoverPositionStyle, buildTooltipPositionStyle } =
+    await import('../../src/components/overlay.contracts.ts');
+  const popoverPositions = Object.keys(popoverPositionConfigs) as Array<
+    keyof typeof popoverPositionConfigs
+  >;
+  expect(popoverPositions).toHaveLength(13);
+  popoverPositions.forEach((position) => {
+    const style = buildPopoverPositionStyle({
+      anchorName: '--a',
+      position,
+      viewportMargin: 4,
+    });
+    expect(style.positionArea).toBeTruthy();
+    expect(style.positionAnchor).toBe('--a');
+    expect(popoverPositionConfigs[position].origin).toMatch(/^origin-/);
+  });
+  expect(tooltipOrigins.top).toBe('origin-bottom');
+  expect(tooltipOrigins.bottom).toBe('origin-top');
+  expect(
+    buildTooltipPositionStyle({ anchorName: '--a', position: 'top' })
+      .positionArea,
+  ).toBe('top center');
+  expect(
+    buildTooltipPositionStyle({ anchorName: '--a', position: 'bottom' })
+      .positionArea,
+  ).toBe('bottom center');
+});
+
+test('synthetically completes transition when element is not visible (reduced-motion fast path)', async () => {
+  const phase = ref<OverlayPhase>('opening');
+  let closed = false;
+  const harness = defineComponent({
+    setup() {
+      const element = shallowRef<HTMLElement>();
+      useOverlayLifecycle({
+        element,
+        onClosed: () => {
+          closed = true;
+        },
+        phase,
+        setPhase: (next) => {
+          phase.value = next;
+        },
+      });
+      return () => h('div', { ref: element });
+    },
+  });
+  const mounted = mountConnected(h(harness));
+  await nextTick();
+  const el = mounted.root.querySelector('div') as HTMLElement & {
+    checkVisibility?: () => boolean;
+  };
+  el.checkVisibility = () => false;
+  await settle();
+  expect(phase.value).toBe('opened');
+  expect(closed).toBe(false);
+  phase.value = 'closing';
+  await settle();
+  expect(closed).toBe(true);
+  expect(phase.value).toBe('closed');
+  mounted.app.unmount();
+  mounted.root.remove();
+});
+
 test('exposes correct popover origin and viewport style', async () => {
   const { Popover } = await import('../../src/index.ts');
   const { buildPopoverPositionStyle, popoverPositionConfigs } =

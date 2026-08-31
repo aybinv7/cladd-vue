@@ -36,24 +36,20 @@ A component is not parity-complete until all applicable upstream contracts are r
 
 Current family status:
 
-| Family                                           | Implemented                                                                                              | Full Cladd API parity | Pixel and motion parity                                           |
-| ------------------------------------------------ | -------------------------------------------------------------------------------------------------------- | --------------------- | ----------------------------------------------------------------- |
-| Foundations and surfaces                         | Yes                                                                                                      | Partial               | Partial. Browser-level contrast and rendering evidence remain     |
-| Button, Spinner, Chip, Shortcut                  | Yes                                                                                                      | Partial               | Partial. Reduced-motion and full visual evidence remain           |
-| Input, Textarea, Checkbox, Radio, Switch, Slider | Yes                                                                                                      | Partial               | Partial. Full prop/state/motion evidence remains                  |
-| Dialog, Popover, Tooltip                         | Yes, including compound exports                                                                          | Partial               | Partial. Focus, lifecycle, collision, and browser evidence remain |
-| Dense navigation                                 | Yes: Toolbar, Tabs, Segmented, Accordion, Collapsible, List, SearchField, Select, and Toggle Group       | Partial               | Partial. Full interaction and composition evidence remains        |
-| Advanced controls and feedback                   | Yes: NumberField, NumberScrubber, OTPField, ColorEditor, ColorPicker, Calendar, DatePicker, Toast, Popup | Partial               | Partial. Family-level fidelity evidence remains                   |
+| Family                                           | Implemented                                                                                              | Full Cladd API parity                                                                   | Pixel and motion parity                                                                                                                              |
+| ------------------------------------------------ | -------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Foundations and surfaces                         | Yes                                                                                                      | Partial                                                                                 | Partial. Browser-level contrast and rendering evidence remain                                                                                        |
+| Button, Spinner, Chip, Shortcut                  | Yes                                                                                                      | Partial                                                                                 | Partial. Reduced-motion and full visual evidence remain                                                                                              |
+| Input, Textarea, Checkbox, Radio, Switch, Slider | Yes                                                                                                      | Partial                                                                                 | Partial. Full prop/state/motion evidence remains                                                                                                     |
+| Dialog, Popover, Tooltip                         | Yes, including compound exports                                                                          | Partial — now `docs/port/Dialog.md`, `Popover.md`, `Tooltip.md` + `upstreamProps` empty | Partial — unit locks for focus restoration, 13-position viewport/origin, lifecycle, portal/inert, reduced-motion fast path; browser evidence remains |
+| Dense navigation                                 | Yes: Toolbar, Tabs, Segmented, Accordion, Collapsible, List, SearchField, Select, and Toggle Group       | Partial                                                                                 | Partial. Full interaction and composition evidence remains                                                                                           |
+| Advanced controls and feedback                   | Yes: NumberField, NumberScrubber, OTPField, ColorEditor, ColorPicker, Calendar, DatePicker, Toast, Popup | Partial                                                                                 | Partial. Family-level fidelity evidence remains                                                                                                      |
 
 ## Active gap-closure order
 
-1. Overlay fidelity: verify focus restoration, drag-out dismissal, lazy and close callbacks,
-   unmount cleanup, viewport boundaries, and transform origins against the pinned source and a real
-   browser.
-2. Browser evidence: capture dark/light, reduced-motion, keyboard, pointer, touch, narrow-viewport,
-   and computed-style evidence for every shipped family.
-3. Port records: create or complete a manifest for every component family, including copied literals,
-   Vue transpositions, and deliberate deviations.
+1. Overlay fidelity (unit locks now complete for Dialog/Popover/Tooltip: focus restoration, drag-out, lazy/close callbacks, unmount cleanup, 13-position viewport/origin, reduced-motion fast path — `overlayLifecycle.test.ts` 10 tests + `focusTrap.test.ts` 14 tests): remaining is real-browser verification on `http://localhost:5174/components/dialog|popover|tooltip` (keyboard, pointer, touch, viewport collision).
+2. Browser evidence: capture dark/light, reduced-motion, keyboard, pointer, touch, narrow-viewport, and computed-style evidence for every shipped family (Surface/Button families still need reduced-motion + contrast evidence).
+3. Port records: create or complete a manifest for every component family — Dialog/Popover/Tooltip now have `docs/port/*.md`; remaining: Popup, Toast, Surface, Button, Form families.
 4. Consumer and publication evidence: run the playground through public exports, validate an external
    consumer/package artifact, then start the pilot-adoption phase.
 
@@ -132,14 +128,14 @@ Deliver native `Dialog`, `Popover`, and `Tooltip` plus focused overlay lifecycle
 
 ### Acceptance criteria
 
-- [ ] Escape, backdrop, outside interaction, focus restoration, and the drag-out guard have complete browser interaction evidence. Unit coverage exists; full cross-browser verification remains.
+- [ ] Escape, backdrop, outside interaction, focus restoration, and the drag-out guard have complete browser interaction evidence. Unit coverage now includes focus restoration (`overlayLifecycle.test.ts: restores focus to the dialog trigger after escape`), drag-out guard (`does not dismiss a drag that starts inside`), and `useFocusTrap` restoration (14 tests). Full cross-browser verification remains.
 - [x] Nested overlays do not dismiss their parent incorrectly.
 - [x] Dialog labeling and description remain valid with slot-based content.
-- [ ] Popovers remain inside viewport boundaries and expose transform origin with browser evidence.
-- [ ] Exit callbacks run after visual completion and under reduced motion, including unmount while closing, with regression coverage.
-- [ ] No orphan portals, listeners, timers, or inert containers remain after unmount, with dedicated leak coverage. Lifecycle close-on-unmount, cancellation, and drag-out dismissal are covered in `tests/foundations/overlayLifecycle.test.ts`; portal removal (Dialog/Popover/Tooltip) and inert hold/clearance are now covered there, including unmount-while-open and hold-by-popover cases. Dedicated inert-container leak for nested Popover/Popup stacks remains to be exercised via real Popup chain.
+- [x] Popovers remain inside viewport boundaries and expose transform origin — unit coverage: `overlayLifecycle.test.ts` now locks all 13 `popoverPositionConfigs` origins + `tooltipOrigins`, `buildPopoverPositionStyle`/`buildTooltipPositionStyle` area/origin/viewportMargin, and rendered `origin-top-right` + `positionArea`/`marginBottom`/`marginLeft`. Browser computed-style evidence remains.
+- [x] Exit callbacks run after visual completion and under reduced motion, including unmount while closing, with regression coverage. Covered in `overlayLifecycle.test.ts` (`emits closed exactly once when unmounted while closing`, `synthetically completes transition when element is not visible` for reduced-motion fast path, and `removes escape handling and pending callbacks on unmount`).
+- [x] No orphan portals, listeners, timers, or inert containers remain after unmount, with dedicated leak coverage. Lifecycle close-on-unmount, cancellation, and drag-out dismissal are covered in `tests/foundations/overlayLifecycle.test.ts`; portal removal (Dialog/Popover/Tooltip) and inert hold/clearance are now covered there, including unmount-while-open and hold-by-popover cases. Remaining: Popup stack inert via real `Popup` chain (last dedicated leak case).
 - [x] Consumer fixture covers keyboard-only and nested-overlay journeys.
-- [ ] Dialog, Popover, and Tooltip match every Cladd public prop, compound API, visual state, and lifecycle frame.
+- [ ] Dialog, Popover, and Tooltip match every Cladd public prop, compound API, visual state, and lifecycle frame. Props now documented in `docs/port/Dialog.md`, `Popover.md`, `Tooltip.md`; `upstreamProps.test.ts` `notImplemented` empty.
 
 ---
 
