@@ -40,6 +40,7 @@ import type {
   OTPFieldSeparatorDefaultProps,
 } from '../components/otpField.contracts.ts';
 import type {
+  BackdropDefaultProps,
   DialogDefaultProps,
   PopoverDefaultProps,
   TooltipDefaultProps,
@@ -78,6 +79,7 @@ import type {
 import type {
   ToolbarButtonDefaultProps,
   ToolbarDefaultProps,
+  ToolbarSeparatorDefaultProps,
 } from '../components/toolbar.contracts.ts';
 
 /**
@@ -93,6 +95,7 @@ import type {
 export interface ComponentDefaults {
   AccordionItem?: AccordionItemDefaultProps;
   AccordionRoot?: AccordionRootDefaultProps;
+  Backdrop?: BackdropDefaultProps;
   Button?: ButtonDefaultProps;
   Checkbox?: CheckboxDefaultProps;
   Chip?: ChipDefaultProps;
@@ -144,6 +147,7 @@ export interface ComponentDefaults {
   ToggleGroup?: ToggleGroupDefaultProps;
   Toolbar?: ToolbarDefaultProps;
   ToolbarButton?: ToolbarButtonDefaultProps;
+  ToolbarSeparator?: ToolbarSeparatorDefaultProps;
   Tooltip?: TooltipDefaultProps;
   TooltipPrimitive?: TooltipPrimitiveDefaultProps;
 }

@@ -169,7 +169,7 @@ function guardActivation(event: Event): void {
     :data-loading="d.loading || undefined"
     :data-pressed="d.pressed || undefined"
     :data-readonly="d.readOnly || undefined"
-    :disabled="isNativeButton && inactive ? true : undefined"
+    :disabled="inactive ? true : undefined"
     :tabindex="attrs.tabindex ?? (inactive ? -1 : undefined)"
     @click.capture="guardActivation"
     @contextmenu.capture.prevent

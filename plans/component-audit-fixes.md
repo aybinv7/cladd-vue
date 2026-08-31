@@ -42,13 +42,18 @@ spots — happy-dom can't render real layout, and the export/prop readers have b
       `1` and the theme is `light`. Fixed by replicating `Surface`'s own level-resolution math in
       `Popover.vue` and conditionally wrapping the default slot in `SurfaceContextProvider` when
       that condition holds.
-- [ ] `Button.vue` — `disabled` is only wired to the native `<button>` case; a polymorphic
+- [x] `Button.vue` — `disabled` is only wired to the native `<button>` case; a polymorphic
       `as="SomeComponent"` target never receives it. Upstream always passes
       `disabled={disabled || readOnly}` through to `WrapComponent` regardless of tag
-      (`Button.tsx:~215`).
-- [ ] `foundations/componentDefaults.ts` — `ComponentDefaults` interface is missing `Backdrop` and
+      (`Button.tsx:~215`). Fixed: `:disabled` binding no longer gated on `isNativeButton`.
+- [x] `foundations/componentDefaults.ts` — `ComponentDefaults` interface is missing `Backdrop` and
       `ToolbarSeparator` entries (`ThemeContext.tsx:68-125` has both). App-wide defaults for these
-      two components are unreachable, and a type error if a consumer tries.
+      two components are unreachable, and a type error if a consumer tries. Fixed: both entries
+      added (both `*DefaultProps` types already existed and were already exported from the index,
+      just missing from this interface). Neither component calls `useComponentDefaults` at the
+      runtime level, same as `List`/`SectionTitle` — their only real prop is `className`/`class`,
+      which flows through `attrs` in this codebase's idiom, not the defaults cascade, so there is no
+      runtime gap to close beyond the type.
 
 ## Lower severity / edge cases (fix opportunistically, lower priority than the above)
 

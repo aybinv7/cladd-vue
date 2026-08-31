@@ -119,6 +119,17 @@ test('emits the Cladd button state attributes', () => {
   mounted.app.unmount();
 });
 
+test('forwards disabled to a polymorphic non-button target', () => {
+  const mounted = mountTree(h(Button, { as: 'a', disabled: true, href: '#' }));
+  const anchor = mounted.root.querySelector('.cladd-button') as HTMLElement;
+
+  // Upstream always passes `disabled={disabled || readOnly}` through to
+  // whatever tag `as` renders, native button or not (`Button.tsx:~215`).
+  expect(anchor.tagName).toBe('A');
+  expect(anchor.getAttribute('disabled')).not.toBeNull();
+  mounted.app.unmount();
+});
+
 test('scopes the accent text hook to non-neutral colors like Cladd', () => {
   const neutral = mountTree(h(Button, { color: 'neutral' }));
   const accented = mountTree(h(Button, { color: 'orange' }));
