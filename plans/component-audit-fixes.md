@@ -57,8 +57,10 @@ spots — happy-dom can't render real layout, and the export/prop readers have b
 
 ## Lower severity / edge cases (fix opportunistically, lower priority than the above)
 
-- [ ] `FocusRing.vue` — merges consumer class via plain attrs fallthrough instead of `cn(...)`, so
-      tailwind-merge dedup doesn't apply to it specifically.
+- [x] `FocusRing.vue` — merges consumer class via plain attrs fallthrough instead of `cn(...)`, so
+      tailwind-merge dedup doesn't apply to it specifically. Fixed with the same
+      `rootAttrs`/`attrs.class`-last pattern as everywhere else; locked in
+      `tests/components/classPrecedence.test.ts` alongside Input and Textarea.
 - [ ] `OTPFieldInput.vue` — claims its index once at mount (`claimIndex()`) rather than recomputing
       from live child order every render like upstream's `useMemo` does. Only matters if a consumer
       dynamically reorders `OTPFieldInput` cells at runtime.

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed } from 'vue';
+import { computed, useAttrs } from 'vue';
 
 import { useComponentDefaults } from '../composables/useComponentDefaults.ts';
 import { useUiContext } from '../contexts/uiContext.ts';
@@ -9,6 +9,8 @@ import {
   focusRingGroupClasses,
   type FocusRingGroup,
 } from './focusRing.contracts.ts';
+
+defineOptions({ inheritAttrs: false });
 
 const props = withDefaults(
   defineProps<{
@@ -26,6 +28,11 @@ const props = withDefaults(
 );
 
 const ui = useUiContext();
+const attrs = useAttrs();
+const rootAttrs = computed(() => {
+  const { class: _consumerClass, ...rest } = attrs;
+  return rest;
+});
 const d = useComponentDefaults('FocusRing', props, {
   force: false,
   offset: true,
@@ -42,10 +49,11 @@ const ringClass = computed(() =>
     `cladd-color-${currentAccent.value}`,
     d.value.force && 'scale-100 opacity-100',
     !d.value.force && groupClasses.value,
+    attrs.class,
   ),
 );
 </script>
 
 <template>
-  <span :class="ringClass" data-part="focus-ring" />
+  <span v-bind="rootAttrs" :class="ringClass" data-part="focus-ring" />
 </template>

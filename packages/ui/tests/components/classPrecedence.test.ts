@@ -4,12 +4,15 @@ import { h } from 'vue';
 import Button from '../../src/components/Button.vue';
 import Checkbox from '../../src/components/Checkbox.vue';
 import Chip from '../../src/components/Chip.vue';
+import FocusRing from '../../src/components/FocusRing.vue';
+import Input from '../../src/components/Input.vue';
 import NumberScrubber from '../../src/components/NumberScrubber.vue';
 import Radio from '../../src/components/Radio.vue';
 import Segmented from '../../src/components/Segmented.vue';
 import Shortcut from '../../src/components/Shortcut.vue';
 import Surface from '../../src/components/Surface.vue';
 import Switch from '../../src/components/Switch.vue';
+import Textarea from '../../src/components/Textarea.vue';
 import { byTestId, mountTree } from '../support/mountTree.ts';
 
 /**
@@ -60,12 +63,34 @@ const cases = [
     lose: 'cursor-ew-resize',
   },
   { component: Surface, name: 'Surface', win: 'static', lose: 'relative' },
+  {
+    component: Input,
+    name: 'Input',
+    win: 'opacity-100',
+    lose: 'opacity-50',
+    props: { disabled: true },
+  },
+  {
+    component: Textarea,
+    name: 'Textarea',
+    win: 'opacity-100',
+    lose: 'opacity-50',
+    props: { disabled: true },
+  },
+  {
+    component: FocusRing,
+    name: 'FocusRing',
+    win: 'inset-4',
+    lose: 'inset-0',
+    props: { offset: false },
+  },
 ];
 
 for (const testCase of cases) {
   test(`${testCase.name} lets a consumer class win`, () => {
     const mounted = mountTree(
       h(testCase.component, {
+        ...testCase.props,
         class: testCase.win,
         'data-testid': 'root',
       }),
