@@ -29,14 +29,17 @@ defineOptions({ inheritAttrs: false });
 
 const props = withDefaults(defineProps<TooltipProps>(), {
   ariaLabel: undefined,
+  'aria-label': undefined,
   color: undefined,
   contentClassName: undefined,
   disabled: undefined,
   offset: undefined,
+  onClick: undefined,
   position: undefined,
   root: undefined,
   surfaceLevel: undefined,
   timeout: undefined,
+  tooltip: undefined,
   zIndex: undefined,
 });
 
@@ -66,6 +69,9 @@ const d = useComponentDefaults('Tooltip', props, {
   position: 'top' as NonNullable<TooltipProps['position']>,
   timeout: true,
 });
+const effectiveAriaLabel = computed(
+  () => d.value.ariaLabel ?? d.value['aria-label'],
+);
 
 function setAnchor(value: unknown): void {
   anchorElement.value = resolveOverlayElement(value);
@@ -93,7 +99,8 @@ function hide(): void {
   if (d.value.timeout) scheduleTooltipGlobalTimeoutReset();
 }
 
-function onClick(): void {
+function onClick(event: MouseEvent): void {
+  d.value.onClick?.(event);
   if (visible.value) hide();
 }
 
@@ -199,7 +206,7 @@ const primitiveAttrs = computed(() => {
     v-bind="primitiveAttrs.attrs"
     v-model:open="model"
     :anchor-element="anchorElement"
-    :aria-label="d.ariaLabel"
+    :aria-label="effectiveAriaLabel"
     :class="primitiveAttrs.class"
     :color="d.color"
     :content-class-name="d.contentClassName"
@@ -215,6 +222,7 @@ const primitiveAttrs = computed(() => {
     @opened="emit('opened')"
     @opening="emit('opening')"
   >
-    <slot />
+    <slot v-if="$slots.default" />
+    <template v-else-if="d.tooltip">{{ d.tooltip }}</template>
   </TooltipPrimitive>
 </template>

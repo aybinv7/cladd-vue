@@ -228,8 +228,10 @@ export interface PopoverProps {
    * External anchor ref. When provided the trigger button is **not rendered** - the caller owns the trigger and `popoverState` wiring.
    */
   anchorElement?: HTMLElement;
-  /** Anchor to a fixed rectangle instead of an element, for a context menu at a pointer position. */
-  anchorRect?: DOMRectReadOnly;
+  /** Alias for `anchorElement` — mirrors upstream `anchorRef` (React `RefObject`). */
+  anchorRef?: HTMLElement;
+  /** Anchor to a fixed rectangle instead of an element, for a context menu at a pointer position. Accepts `DOMRectReadOnly` or `Ref<DOMRectReadOnly>` to match upstream. */
+  anchorRect?: DOMRectReadOnly | { value: DOMRectReadOnly };
   /** Render a backdrop behind the popover. Default `false`. */
   backdrop?: boolean;
   /** Render the backdrop without its tint, so the app stays visible behind the popover. */
@@ -252,8 +254,8 @@ export interface PopoverProps {
   outline?: boolean;
   /** Anchor side + alignment, or `'center'`. Default `'bottom'`. */
   position?: PopoverPosition;
-  /** Portal target. Default `'#app, #__next, #root'`. */
-  root?: string | HTMLElement;
+  /** Portal target. Default `'#app, #__next, #root'`. Pass `false` for inline (no portal) to match upstream `root: false`. */
+  root?: string | HTMLElement | false;
   /** Forwarded to the underlying `Surface` as `level`. Default depends on theme. */
   surfaceLevel?: SurfaceLevelInput;
   /** Surface variant. Default depends on theme. */
@@ -269,6 +271,20 @@ export type PopoverDefaultProps = Partial<
 export interface DialogProps {
   /** Render the backdrop without its tint, so the app stays visible behind the dialog. */
   backdropTransparent?: boolean;
+  /** @deprecated Use `ariaLabel` — kebab `aria-label` alias for React migration. */
+  'aria-label'?: string;
+  /** @deprecated Use `ariaLabelledby` — kebab `aria-labelledby` alias. */
+  'aria-labelledby'?: string;
+  /** @deprecated Use `ariaDescribedby` — kebab `aria-describedby` alias. */
+  'aria-describedby'?: string;
+  /** ARIA label fallback when no title is set. Mirrors upstream `aria-label`. */
+  ariaLabel?: string;
+  /** Override auto-wired `aria-labelledby` (title id). */
+  ariaLabelledby?: string;
+  /** Override auto-wired `aria-describedby` (text id). */
+  ariaDescribedby?: string;
+  /** Custom button row — alias for the `buttons` slot. Mirrors upstream `buttons` ReactNode. */
+  buttons?: unknown;
   /** Color for the cancel button. Default `'neutral'`. */
   cancelButtonColor?: Color;
   /** Label for the cancel button. When omitted, the cancel button is not rendered. */
@@ -303,8 +319,8 @@ export interface DialogProps {
    * "Type to confirm" guard. When set, renders an `Input` and disables the confirm button until the user types this exact string - used for destructive actions (e.g. type the project name to delete).
    */
   requireConfirmText?: string;
-  /** Portal target selector. Default `'#app, #__next, #root'` (first match wins). */
-  root?: string | HTMLElement;
+  /** Portal target selector. Default `'#app, #__next, #root'` (first match wins). Pass `false` for inline (no portal) to match upstream `root: false`. */
+  root?: string | HTMLElement | false;
   /** Forwarded to the underlying `Surface` as `level`. Default `1`. */
   surfaceLevel?: SurfaceLevelInput;
   /** Title slot. Rendered as `<div>` with `text-cladd-md font-semibold`. Auto-wired to `aria-labelledby`. */
@@ -320,6 +336,8 @@ export type DialogDefaultProps = Partial<
 export interface TooltipPrimitiveProps {
   /** Ref to the element the tooltip should anchor against (CSS anchor positioning). */
   anchorElement?: HTMLElement;
+  /** Alias for `anchorElement` — mirrors upstream `anchorRef`. */
+  anchorRef?: HTMLElement;
   /** Accent color token. Sets the tooltip's `cladd-color-{name}` class. */
   color?: Color;
   /** Extra classes applied to the inner content area. Default includes `px-2 py-1`. */
@@ -347,6 +365,8 @@ export type TooltipPrimitiveDefaultProps = Partial<
 export interface TooltipProps {
   /** The Vue spelling of upstream's `aria-label`. */
   ariaLabel?: string;
+  /** Kebab alias for `ariaLabel` — `aria-label` as upstream spells it. */
+  'aria-label'?: string;
   /** Accent color token. Sets the tooltip's `cladd-color-{name}` class. */
   color?: Color;
   /** Extra classes applied to the inner content area. Default includes `px-2 py-1`. */
@@ -355,6 +375,8 @@ export interface TooltipProps {
   disabled?: boolean;
   /** Distance from anchor in pixels (number) or any CSS length (`'8px'`, `'50%'`). Default `4`. */
   offset?: OverlayOffsetValue;
+  /** Composed onto the trigger — mirrors upstream `onClick` on the wrapper. */
+  onClick?: (event: MouseEvent) => void;
   /** Anchor side. Default `'top'`. */
   position?: TooltipPosition;
   /** Portal target selector. Default `'#app, #__next, #root'`. */
@@ -367,6 +389,8 @@ export interface TooltipProps {
   surfaceLevel?: SurfaceLevelInput;
   /** Delay showing the tooltip using a shared global timer. Default `true`. */
   timeout?: boolean;
+  /** Content for the tooltip — mirrors upstream `tooltip` prop; also available via default slot. */
+  tooltip?: string;
   /** Tailwind z-index utility for the tooltip surface. Default `'z-50'`. */
   zIndex?: string;
 }

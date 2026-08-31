@@ -51,6 +51,7 @@ defineOptions({ inheritAttrs: false });
 
 const props = withDefaults(defineProps<PopoverProps>(), {
   anchorElement: undefined,
+  anchorRef: undefined,
   anchorRect: undefined,
   backdrop: undefined,
   backdropTransparent: undefined,
@@ -158,13 +159,40 @@ const surfaceStyle = computed(() =>
     viewportMargin: d.value.viewportMargin,
   }),
 );
+const resolvedAnchorRect = computed(() => {
+  const raw = d.value.anchorRect as unknown;
+  if (!raw) return undefined;
+  if (
+    typeof raw === 'object' &&
+    raw !== null &&
+    'value' in (raw as Record<string, unknown>)
+  ) {
+    const maybeRef = (raw as { value: unknown }).value;
+    if (maybeRef instanceof DOMRect) return maybeRef as DOMRectReadOnly;
+    if (
+      maybeRef &&
+      typeof maybeRef === 'object' &&
+      'left' in (maybeRef as Record<string, unknown>)
+    )
+      return maybeRef as DOMRectReadOnly;
+  }
+  return raw as DOMRectReadOnly;
+});
 const anchorRectStyle = computed(() =>
-  d.value.anchorRect
-    ? buildAnchorRectStyle(d.value.anchorRect, anchorName.value)
+  resolvedAnchorRect.value
+    ? buildAnchorRectStyle(resolvedAnchorRect.value, anchorName.value)
     : undefined,
 );
 const containerClass = popoverContainerClasses;
-const teleportTarget = computed(() => d.value.root ?? ui.overlaysRoot.value);
+const teleportTarget = computed(() => {
+  const root = d.value.root as unknown;
+  if (root === false) return undefined;
+  return (root as string | HTMLElement | undefined) ?? ui.overlaysRoot.value;
+});
+const isInline = computed(() => d.value.root === false);
+const resolvedAnchorElement = computed(
+  () => d.value.anchorElement ?? d.value.anchorRef,
+);
 
 function setSurface(value: unknown): void {
   surface.value = resolveOverlayElement(value);
@@ -241,12 +269,13 @@ const triggerNode = computed(() =>
   }),
 );
 
-// An explicit `anchorElement` wins, then our own `trigger` slot, then the element a sibling
+// An explicit `anchorElement`/`anchorRef` wins, then our own `trigger` slot, then the element a sibling
 // `PopoverTrigger` registered on the surrounding `PopoverRoot` — upstream's
 // `anchorRef ?? ctx?.anchorRef`.
 watch(
   () =>
-    d.value.anchorElement ?? (slots.trigger ? undefined : root?.anchor.value),
+    resolvedAnchorElement.value ??
+    (slots.trigger ? undefined : root?.anchor.value),
   (element) => {
     if (element) setAnchorElement(element);
   },
@@ -265,7 +294,7 @@ provideSurfaceColorReset();
   >
     <slot name="trigger" />
   </span>
-  <Teleport :to="teleportTarget">
+  <Teleport v-if="!isInline" :to="teleportTarget">
     <div v-if="mounted" ref="container" :class="containerClass">
       <Backdrop
         v-if="d.backdrop"
@@ -294,4 +323,31 @@ provideSurfaceColorReset();
       </Surface>
     </div>
   </Teleport>
+  <div v-if="isInline && mounted" ref="container" :class="containerClass">
+    <Backdrop
+      v-if="d.backdrop"
+      :class="backdropClass"
+      @click="onBackdropClick"
+    />
+    <div v-if="anchorRectStyle" aria-hidden="true" :style="anchorRectStyle" />
+    <Surface
+      v-bind="surfaceAttrs"
+      :ref="setSurface"
+      :color="currentAccent"
+      :class="surfaceClass"
+      :content-class-name="contentClass"
+      data-part="content"
+      :data-open="opened || undefined"
+      :data-position="d.position"
+      :level="currentSurfaceLevel"
+      :outline="currentOutline"
+      :style="surfaceStyle"
+      :variant="currentVariant"
+    >
+      <SurfaceContextProvider v-if="flattenSurfaceLevel" :level="0">
+        <slot :close="close" />
+      </SurfaceContextProvider>
+      <slot v-else :close="close" />
+    </Surface>
+  </div>
 </template>

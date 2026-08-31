@@ -51,6 +51,13 @@ defineOptions({ inheritAttrs: false });
 
 const props = withDefaults(defineProps<DialogProps>(), {
   backdropTransparent: undefined,
+  'aria-label': undefined,
+  'aria-labelledby': undefined,
+  'aria-describedby': undefined,
+  ariaLabel: undefined,
+  ariaDescribedby: undefined,
+  ariaLabelledby: undefined,
+  buttons: undefined,
   contentClassName: undefined,
   cancelButtonColor: undefined,
   cancelButtonText: undefined,
@@ -73,6 +80,7 @@ const props = withDefaults(defineProps<DialogProps>(), {
 
 defineSlots<{
   actions?: (props: { close: () => void }) => unknown;
+  buttons?: (props: { close: () => void }) => unknown;
   default?: (props: { close: () => void }) => unknown;
   text?: () => unknown;
   title?: () => unknown;
@@ -142,7 +150,25 @@ const confirmationValid = computed(
     confirmationValue.value === d.value.requireConfirmText,
 );
 const containerClass = dialogContainerClasses;
-const teleportTarget = computed(() => d.value.root ?? ui.overlaysRoot.value);
+const teleportTarget = computed(() => {
+  const root = d.value.root;
+  if (root === false) return undefined;
+  return (root as string | HTMLElement | undefined) ?? ui.overlaysRoot.value;
+});
+const isInline = computed(() => d.value.root === false);
+const ariaLabelledby = computed(
+  () =>
+    d.value.ariaLabelledby ??
+    d.value['aria-labelledby'] ??
+    (d.value.title || slots.title ? titleId : undefined),
+);
+const ariaDescribedby = computed(
+  () =>
+    d.value.ariaDescribedby ??
+    d.value['aria-describedby'] ??
+    (d.value.text || slots.text ? descriptionId : undefined),
+);
+const ariaLabel = computed(() => d.value.ariaLabel ?? d.value['aria-label']);
 
 function setSurface(value: unknown): void {
   surface.value = resolveOverlayElement(value);
@@ -263,13 +289,14 @@ provideSurfaceColorReset();
   <span v-else-if="slots.trigger" :class="overlayTriggerClasses" @click="open">
     <slot name="trigger" />
   </span>
-  <Teleport :to="teleportTarget">
+  <Teleport v-if="!isInline" :to="teleportTarget">
     <div
       v-if="mounted"
       v-bind="containerAttrs"
       ref="container"
-      :aria-describedby="d.text || $slots.text ? descriptionId : undefined"
-      :aria-labelledby="d.title || $slots.title ? titleId : undefined"
+      :aria-describedby="ariaDescribedby"
+      :aria-label="ariaLabel || undefined"
+      :aria-labelledby="ariaLabelledby"
       aria-modal="true"
       :class="containerClass"
       role="dialog"
@@ -313,11 +340,48 @@ provideSurfaceColorReset();
           size="lg"
         />
         <div
-          v-if="$slots.actions || d.cancelButtonText || d.confirmButtonText"
+          v-if="
+            $slots.buttons ||
+            $slots.actions ||
+            d.buttons ||
+            d.cancelButtonText ||
+            d.confirmButtonText
+          "
           :class="dialogButtonsClasses"
           data-part="buttons"
         >
-          <slot name="actions" :close="close">
+          <slot v-if="$slots.buttons" name="buttons" :close="close" />
+          <slot v-else-if="$slots.actions" name="actions" :close="close">
+            <template v-if="d.buttons">{{ d.buttons }}</template>
+            <template v-else>
+              <Button
+                v-if="d.cancelButtonText"
+                :color="d.cancelButtonColor"
+                :content-class-name="dialogButtonContentClasses"
+                data-part="cancel"
+                rounded
+                size="lg"
+                variant="transparent"
+                @click="cancel"
+              >
+                {{ d.cancelButtonText }}
+              </Button>
+              <Button
+                v-if="d.confirmButtonText"
+                :color="confirmationValid ? currentAccent : undefined"
+                :content-class-name="dialogButtonContentClasses"
+                data-part="confirm"
+                :disabled="!confirmationValid"
+                rounded
+                size="lg"
+                @click="confirm"
+              >
+                {{ d.confirmButtonText }}
+              </Button>
+            </template>
+          </slot>
+          <template v-else-if="d.buttons">{{ d.buttons }}</template>
+          <template v-else>
             <Button
               v-if="d.cancelButtonText"
               :color="d.cancelButtonColor"
@@ -342,9 +406,129 @@ provideSurfaceColorReset();
             >
               {{ d.confirmButtonText }}
             </Button>
-          </slot>
+          </template>
         </div>
       </Surface>
     </div>
   </Teleport>
+  <div
+    v-if="isInline && mounted"
+    v-bind="containerAttrs"
+    ref="container"
+    :aria-describedby="ariaDescribedby"
+    :aria-label="ariaLabel || undefined"
+    :aria-labelledby="ariaLabelledby"
+    aria-modal="true"
+    :class="containerClass"
+    role="dialog"
+  >
+    <Backdrop :class="backdropClass" @click="onBackdropClick" />
+    <Surface
+      :ref="setSurface"
+      :class="surfaceClass"
+      :content-class-name="contentClass"
+      data-part="content"
+      :data-open="opened || undefined"
+      :level="d.surfaceLevel"
+      :outline="currentOutline"
+      :variant="d.variant"
+      @click="onSurfaceClick"
+    >
+      <div
+        v-if="d.title || $slots.title"
+        :id="titleId"
+        :class="dialogTitleClasses"
+        data-part="title"
+      >
+        <slot name="title">{{ d.title }}</slot>
+      </div>
+      <div
+        v-if="d.text || $slots.text"
+        :id="descriptionId"
+        :class="dialogTextClasses"
+        data-part="text"
+      >
+        <slot name="text">{{ d.text }}</slot>
+      </div>
+      <slot :close="close" />
+      <Input
+        v-if="d.requireConfirmText && d.confirmButtonText"
+        v-model="confirmationValue"
+        :color="currentAccent"
+        data-part="input"
+        :info-message="`Type ${d.requireConfirmText} to confirm`"
+        :placeholder="`Type ${d.requireConfirmText} to confirm`"
+        size="lg"
+      />
+      <div
+        v-if="
+          $slots.buttons ||
+          $slots.actions ||
+          d.buttons ||
+          d.cancelButtonText ||
+          d.confirmButtonText
+        "
+        :class="dialogButtonsClasses"
+        data-part="buttons"
+      >
+        <slot v-if="$slots.buttons" name="buttons" :close="close" />
+        <slot v-else-if="$slots.actions" name="actions" :close="close">
+          <template v-if="d.buttons">{{ d.buttons }}</template>
+          <template v-else>
+            <Button
+              v-if="d.cancelButtonText"
+              :color="d.cancelButtonColor"
+              :content-class-name="dialogButtonContentClasses"
+              data-part="cancel"
+              rounded
+              size="lg"
+              variant="transparent"
+              @click="cancel"
+            >
+              {{ d.cancelButtonText }}
+            </Button>
+            <Button
+              v-if="d.confirmButtonText"
+              :color="confirmationValid ? currentAccent : undefined"
+              :content-class-name="dialogButtonContentClasses"
+              data-part="confirm"
+              :disabled="!confirmationValid"
+              rounded
+              size="lg"
+              @click="confirm"
+            >
+              {{ d.confirmButtonText }}
+            </Button>
+          </template>
+        </slot>
+        <template v-else-if="d.buttons">{{ d.buttons }}</template>
+        <template v-else>
+          <Button
+            v-if="d.cancelButtonText"
+            :color="d.cancelButtonColor"
+            :content-class-name="dialogButtonContentClasses"
+            data-part="cancel"
+            rounded
+            size="lg"
+            variant="transparent"
+            @click="cancel"
+          >
+            {{ d.cancelButtonText }}
+          </Button>
+          <Button
+            v-if="d.confirmButtonText"
+            :color="confirmationValid ? currentAccent : undefined"
+            :content-class-name="dialogButtonContentClasses"
+            data-part="confirm"
+            :disabled="!confirmationValid"
+            rounded
+            size="lg"
+            @click="confirm"
+          >
+            {{ d.confirmButtonText }}
+          </Button>
+        </template>
+      </div>
+    </Surface>
+  </div>
 </template>

@@ -28,6 +28,7 @@ defineOptions({ inheritAttrs: false });
 
 const props = withDefaults(defineProps<TooltipPrimitiveProps>(), {
   anchorElement: undefined,
+  anchorRef: undefined,
   color: undefined,
   contentClassName: undefined,
   offset: undefined,
@@ -110,7 +111,7 @@ const contentClass = computed(() =>
 );
 
 watch(
-  () => d.value.anchorElement,
+  () => d.value.anchorElement ?? d.value.anchorRef,
   (element) => {
     if (element) setAnchorElement(element);
   },
