@@ -1,6 +1,7 @@
 import { onUnmounted, shallowRef, watch, watchEffect, type Ref } from 'vue';
 
 import type { OverlayPhase } from '../foundations/contracts.ts';
+import { nextTick } from '../shared/nextTick.ts';
 
 export interface OverlayLifecycleOptions {
   closeOnEscape?: () => boolean;
@@ -22,15 +23,17 @@ export interface OverlayLifecycle {
 
 function noop(): void {}
 
+// Wraps the upstream-ported `nextTick` (double-rAF) with cancellation, which
+// Vue's `watchEffect`/`onCleanup` needs and React's effect model doesn't -
+// React never fires a stale rAF callback into a torn-down effect closure the
+// way an uncancelled Vue effect can.
 function runAfterTwoFrames(callback: () => void): () => void {
-  let inner = 0;
-  const outer = requestAnimationFrame(() => {
-    inner = requestAnimationFrame(callback);
+  let cancelled = false;
+  nextTick(() => {
+    if (!cancelled) callback();
   });
-
   return () => {
-    cancelAnimationFrame(outer);
-    if (inner) cancelAnimationFrame(inner);
+    cancelled = true;
   };
 }
 

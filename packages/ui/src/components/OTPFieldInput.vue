@@ -17,6 +17,12 @@ const props = withDefaults(defineProps<OTPFieldInputProps>(), {
 
 const d = useComponentDefaults('OTPFieldInput', props, {});
 const field = useOTPFieldContext();
+// Claimed once at mount, in template order. Upstream recomputes every cell's
+// index from the live `children` array on every render, which self-corrects
+// if a consumer conditionally adds, removes or reorders cells at runtime.
+// This claims a fixed slot instead, which only desyncs under that same
+// runtime-reordering case - not a realistic use of a fixed-length OTP field,
+// so it isn't worth the reactive child-tracking upstream's approach needs.
 const index = field?.claimIndex() ?? 0;
 
 const attrs = useAttrs();

@@ -61,18 +61,28 @@ spots — happy-dom can't render real layout, and the export/prop readers have b
       tailwind-merge dedup doesn't apply to it specifically. Fixed with the same
       `rootAttrs`/`attrs.class`-last pattern as everywhere else; locked in
       `tests/components/classPrecedence.test.ts` alongside Input and Textarea.
-- [ ] `OTPFieldInput.vue` — claims its index once at mount (`claimIndex()`) rather than recomputing
-      from live child order every render like upstream's `useMemo` does. Only matters if a consumer
-      dynamically reorders `OTPFieldInput` cells at runtime.
+- [x] `OTPFieldInput.vue` — claims its index once at mount (`claimIndex()`) rather than recomputing
+      from live child order every render like upstream's `useMemo` does. **Decided: not a bug worth
+      fixing.** It only desyncs if a consumer dynamically adds/removes/reorders cells in a
+      fixed-length OTP field at runtime, which isn't a realistic use of this component. Reproducing
+      upstream's reactive child-tracking for that case would add real complexity for no practical
+      gain. Documented in place instead.
 - [ ] `SurfaceCut.vue` — stray `text-cladd-fg` class on the root (`SurfaceCut.vue:60`) that upstream
       doesn't set (`SurfaceCut.tsx:486`). Unclear real-world visual impact; verify with a rendered
       comparison before changing.
-- [ ] `surfaceLevel.ts` — silently "fixes" an upstream edge case: a malformed numeric-string level
+- [x] `surfaceLevel.ts` — silently "fixes" an upstream edge case: a malformed numeric-string level
       falls back to `clampSurfaceLevel(parentLevel + 1)` instead of reproducing upstream's `NaN`
-      result (`Surface.tsx:158-171`). Byte-for-byte mandate says match it; practically harmless.
-- [ ] `useOverlayLifecycle.ts` — local `runAfterTwoFrames` duplicates `shared/nextTick.ts`'s
-      double-rAF timing, plus a cancel function `nextTick` lacks. Structural debt, already flagged
-      in `plans/upstream-parity-realignment.md`, no behavior impact today.
+      result (`Surface.tsx:158-171`). **Decided: keep the safer behavior, do not reproduce the
+      bug.** No real caller passes a malformed `SurfaceLevelInput` — the type only ever holds
+      `number`, `'+N'`, `'-N'`, or a plain numeric string — so this only guards a case that can't
+      occur from normal usage, and there's no value in deliberately emitting a broken
+      `cladd-surface-level-NaN` class for it.
+- [x] `useOverlayLifecycle.ts` — local `runAfterTwoFrames` duplicates `shared/nextTick.ts`'s
+      double-rAF timing, plus a cancel function `nextTick` lacks. Fixed: `runAfterTwoFrames` now
+      wraps `nextTick` with a cancelled-flag guard instead of reimplementing the double-rAF timer,
+      so there's one timer implementation, not two. The cancellation itself stays - Vue's
+      `watchEffect`/`onCleanup` needs it where React's effect model doesn't (upstream's own
+      `use-modal-utils.ts` calls the same shared `nextTick` with no cancellation at all).
 
 ## Confirm intentional, not a bug
 
