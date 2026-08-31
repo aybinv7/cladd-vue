@@ -172,13 +172,33 @@ function dayClass(date: Date): string {
  */
 interface MonthYearHeader {
   handleMonthYearChange: (isNext: boolean, fromNav?: boolean) => void;
+  instance: number;
   isDisabled: (next: boolean) => boolean;
   month: number;
   year: number;
 }
 
+/**
+ * Multi-month grids render one `month-year` slot call per instance. The
+ * dependency's own outer nav always drives instance `0` regardless of which
+ * side is visible — moving a later instance's header directly would shift
+ * only that pane and break the adjacency between panes — so the single
+ * visible nav button (kept on the right, per the calendar's layout) still
+ * has to act through instance `0`'s handlers. Slots for every instance run
+ * synchronously in the same render pass, in instance order, so by the time
+ * the rightmost instance's slot renders, instance `0`'s handlers are already
+ * captured here.
+ */
+const headerByInstance = new Map<number, MonthYearHeader>();
+
 function asHeader(slotProps: unknown): MonthYearHeader {
-  return slotProps as MonthYearHeader;
+  const header = slotProps as MonthYearHeader;
+  headerByInstance.set(header.instance, header);
+  return header;
+}
+
+function primaryHeader(slotProps: unknown): MonthYearHeader {
+  return headerByInstance.get(0) ?? asHeader(slotProps);
 }
 
 const monthFormatter = new Intl.DateTimeFormat(undefined, { month: 'long' });
@@ -264,20 +284,28 @@ const ui = computed(() => {
             {{ monthLabel(asHeader(slotProps).month) }}
             {{ asHeader(slotProps).year }}
           </span>
-          <Toolbar class="ml-auto" :size="d.controlSize">
+          <Toolbar
+            v-if="asHeader(slotProps).instance === d.numberOfMonths - 1"
+            class="ml-auto"
+            :size="d.controlSize"
+          >
             <ToolbarButton
               aria-label="Previous month"
-              :disabled="asHeader(slotProps).isDisabled(false)"
+              :disabled="primaryHeader(slotProps).isDisabled(false)"
               square
-              @click="asHeader(slotProps).handleMonthYearChange(false, true)"
+              @click="
+                primaryHeader(slotProps).handleMonthYearChange(false, true)
+              "
             >
               <ChevronLeftIcon />
             </ToolbarButton>
             <ToolbarButton
               aria-label="Next month"
-              :disabled="asHeader(slotProps).isDisabled(true)"
+              :disabled="primaryHeader(slotProps).isDisabled(true)"
               square
-              @click="asHeader(slotProps).handleMonthYearChange(true, true)"
+              @click="
+                primaryHeader(slotProps).handleMonthYearChange(true, true)
+              "
             >
               <ChevronLeftIcon class="rotate-180" />
             </ToolbarButton>
