@@ -14,8 +14,12 @@
 > API and visual verification. Do not treat findings marked fixed or superseded below as open work.
 > `tests/foundations/overlayLifecycle.test.ts` now locks unmount-while-closing completion, callback
 > cancellation, listener cleanup, the Popover drag-out guard, Dialog/Popover/Tooltip portal removal on
-> unmount, and inert hold/clearance (Dialog `inertContainer` + `dialogInertHoldSelector`). Popup
-> stack inert remains the last dedicated leak case.
+> unmount, and inert hold/clearance (Dialog `inertContainer` + `dialogInertHoldSelector`), plus
+> focus restoration and 13-position viewport/origin + reduced-motion synthetic completion. Popup
+> stack inert remains the last dedicated leak case. `docs/port/Dialog.md`, `Popover.md`, `Tooltip.md`,
+> `Popup.md`, `Toast.md` now exist; `Surface`/`Button` remain the last manifest gaps.
+> `tests/parity/browserEvidence.test.ts` now locks dark/light selectors, overlay durations, and
+> radius/spacing ladders as unit side of browser evidence.
 
 ## The three buckets
 

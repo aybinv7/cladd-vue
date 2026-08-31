@@ -47,9 +47,9 @@ Current family status:
 
 ## Active gap-closure order
 
-1. Overlay fidelity (unit locks now complete for Dialog/Popover/Tooltip: focus restoration, drag-out, lazy/close callbacks, unmount cleanup, 13-position viewport/origin, reduced-motion fast path — `overlayLifecycle.test.ts` 10 tests + `focusTrap.test.ts` 14 tests): remaining is real-browser verification on `http://localhost:5174/components/dialog|popover|tooltip` (keyboard, pointer, touch, viewport collision).
-2. Browser evidence: capture dark/light, reduced-motion, keyboard, pointer, touch, narrow-viewport, and computed-style evidence for every shipped family (Surface/Button families still need reduced-motion + contrast evidence).
-3. Port records: create or complete a manifest for every component family — Dialog/Popover/Tooltip now have `docs/port/*.md`; remaining: Popup, Toast, Surface, Button, Form families.
+1. Overlay fidelity (unit locks now complete for Dialog/Popover/Tooltip: focus restoration, drag-out, lazy/close callbacks, unmount cleanup, 13-position viewport/origin, reduced-motion fast path — `overlayLifecycle.test.ts` 10 tests + `focusTrap.test.ts` 14 tests + `browserEvidence.test.ts` durations): remaining is real-browser verification on `http://localhost:5174/components/dialog|popover|tooltip` (keyboard, pointer, touch, viewport collision).
+2. Browser evidence: unit side now locked in `tests/parity/browserEvidence.test.ts` (dark/light selectors, overlay durations, radius/spacing ladders); remaining is real-browser computed-style + interaction capture for every family (Surface/Button still need narrow-viewport + contrast screenshots).
+3. Port records: Dialog/Popover/Tooltip/Popup/Toast now have `docs/port/*.md`; remaining: Surface, Button (existing but dated 2026-08-03), Form families (Input/Textarea/Checkbox/Radio/Switch/Slider).
 4. Consumer and publication evidence: run the playground through public exports, validate an external
    consumer/package artifact, then start the pilot-adoption phase.
 
