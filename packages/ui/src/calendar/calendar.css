@@ -128,6 +128,17 @@
   font-weight: 600;
 }
 
+/* `--dp-primary-color`/`--dp-primary-text-color` at the root inherit as
+   already-resolved values, so a `cladd-color-*` class added per cell by
+   `dayClass` (Calendar.vue) recomputes `--cladd-primary` on that cell but
+   never reaches the dependency's own `.dp--active`/`.dp--today` rules, which
+   read `--dp-primary-color` and stay frozen at the root's ambient accent.
+   Re-map both variables on the same element that carries the color class. */
+.cladd-calendar .dp--cell-inner[class*="cladd-color-"] {
+  --dp-primary-color: var(--cladd-primary);
+  --dp-primary-text-color: var(--cladd-on-primary);
+}
+
 /* Today is a ring, not a fill, and upstream insets it (`ring-1 ring-inset`). */
 .cladd-calendar .dp--today:not(.dp--active) {
   box-shadow: inset 0 0 0 1px var(--cladd-primary);
