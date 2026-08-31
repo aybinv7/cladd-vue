@@ -5,6 +5,7 @@ import { computed, ref } from 'vue';
 
 import CatalogSection from '../components/CatalogSection.vue';
 import ComponentPlayground from '../components/ComponentPlayground.vue';
+import OverlayEventLog from '../components/OverlayEventLog.vue';
 import PlaygroundColorControl from '../components/PlaygroundColorControl.vue';
 import PlaygroundSwitchControl from '../components/PlaygroundSwitchControl.vue';
 import PlaygroundToolbar from '../components/PlaygroundToolbar.vue';
@@ -17,14 +18,25 @@ const props = defineProps<{
 const color = ref<Color>('neutral');
 const open = ref(false);
 const confirm = ref(false);
+const lazy = ref(false);
+const transparentBackdrop = ref(false);
+const stopPropagationOnClick = ref(false);
+const events = ref<string[]>([]);
+
+function record(event: string): void {
+  events.value = [...events.value.slice(-3), event];
+}
 
 const code = computed(
   () => `<Dialog
   v-model:open="open"
   color="${color.value}"
-  ${confirm.value ? 'confirm-text="Disconnect"' : ':confirm-text="undefined"'}
+  ${confirm.value ? 'require-confirm-text="Disconnect"' : ':require-confirm-text="undefined"'}
+  :backdrop-transparent="${transparentBackdrop.value}"
+  :lazy="${lazy.value}"
+  :stop-propagation-on-click="${stopPropagationOnClick.value}"
   title="Disconnect WebView?"
-  description="The target can be attached again without losing its stored inspection state."
+  text="The target can be attached again without losing its stored inspection state."
 >
   <template #trigger>
     <Button>Open dialog</Button>
@@ -44,22 +56,44 @@ const code = computed(
       <template #preview>
         <Dialog
           v-model:open="open"
-          cancel-text="Keep attached"
+          cancel-button-text="Keep attached"
           :color="color"
-          :confirm-text="confirm ? 'Disconnect' : undefined"
-          description="The target can be attached again without losing its stored inspection state."
+          confirm-button-text="Disconnect"
+          :backdrop-transparent="transparentBackdrop"
+          :lazy="lazy"
+          :require-confirm-text="confirm ? 'Disconnect' : undefined"
+          :stop-propagation-on-click="stopPropagationOnClick"
+          text="The target can be attached again without losing its stored inspection state."
           title="Disconnect WebView?"
+          @closed="record('closed')"
+          @closing="record('closing')"
+          @opened="record('opened')"
+          @opening="record('opening')"
         >
           <template #trigger>
             <Button :disabled="!props.interactionsEnabled">Open dialog</Button>
           </template>
         </Dialog>
+        <OverlayEventLog :events="events" @clear="events = []" />
       </template>
       <template #controls>
         <PlaygroundToolbar>
           <PlaygroundSwitchControl
             v-model="confirm"
             label="confirmation action"
+          />
+        </PlaygroundToolbar>
+        <PlaygroundToolbar>
+          <PlaygroundSwitchControl v-model="lazy" label="lazy" />
+          <PlaygroundSwitchControl
+            v-model="transparentBackdrop"
+            label="transparent backdrop"
+          />
+        </PlaygroundToolbar>
+        <PlaygroundToolbar>
+          <PlaygroundSwitchControl
+            v-model="stopPropagationOnClick"
+            label="stop propagation"
           />
         </PlaygroundToolbar>
         <PlaygroundToolbar>

@@ -4,15 +4,15 @@
 
 ## Architectural decisions
 
-> Current parity status: the package exports 19 components. Cladd 0.18.5 documents 37 application components plus compound parts and hooks. Completed phase checkboxes below prove implemented semantic slices, not full public-API or pixel parity.
+> Current implementation status (reviewed 2026-08-31): every pinned Cladd value and type export has a Vue counterpart, including compound parts, the Calendar subpath, and hooks. The 37 documentation tiles are all represented. This proves export coverage only; it does not prove full behavioral, visual, motion, or browser parity.
 >
-> Reviewed 2026-08-03. Checkbox corrections and their evidence are recorded in `ui-package-review.md`; port-fidelity findings in `port-fidelity-audit.md`; the styling decision in `tailwind-realignment.md`. `vp run @cladd-vue/ui#test` and `vp run @cladd-vue/ui#check` pass. `vp run @cladd-vue/ui#build` fails, so no phase depending on published output can be closed.
+> Focused package validation on 2026-08-31: 193 tests pass across 22 files, and `vp run @cladd-vue/ui#check --fix` reports no formatting, lint, or type errors. Audit outcomes are in `component-audit-fixes.md`; remaining fidelity work is tracked below and in `port-fidelity-audit.md`.
 
 - **Package**: `@cladd-vue/ui` is a publishable workspace package and the only owner of reusable UI primitives.
 - **Framework**: Vue 3.5 with Composition API, `<script setup lang="ts">`, and strict TypeScript.
 - **Behavior layer**: Native HTML and focused Vue composables implement pinned Cladd DOM, form, focus, positioning, dismissal, and lifecycle contracts.
 - **Prohibited dependencies**: React, React DOM, shadcn-vue, Radix Vue, Pinia, Tauri, application packages, and feature modules.
-- **Styling**: Tailwind v4 with `clsx` and `tailwind-merge`, mirroring the pinned Cladd baseline, with `cui-` namespacing and an explicit `styles.css` export. See `tailwind-realignment.md`.
+- **Styling**: Tailwind v4 with `clsx` and `tailwind-merge`, mirroring the pinned Cladd baseline, with `cladd-` namespacing and an explicit `./css` export. See `tailwind-realignment.md`.
 - **Theming**: Dark-first, light supported, eleven scoped accents, consumer-overridable CSS custom properties.
 - **Surfaces**: Five contextual levels using typed provide/inject inheritance and recessed cuts.
 - **Sizing**: Seven root sizes with nested content exactly eight pixels smaller.
@@ -38,12 +38,24 @@ Current family status:
 
 | Family                                           | Implemented                                                                                               | Full Cladd API parity                                           | Pixel and motion parity                                                                   |
 | ------------------------------------------------ | --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
-| Foundations and surfaces                         | Yes                                                                                                       | Partial                                                         | Partial. Tokens copied faithfully; `(hover: hover)` guard and `SurfaceColorReset` missing |
-| Button, Spinner, Chip, Shortcut                  | Yes                                                                                                       | Partial                                                         | Partial. Button, Spinner, and focus-ring geometry verified against upstream               |
-| Input, Textarea, Checkbox, Radio, Switch, Slider | Yes                                                                                                       | Partial                                                         | Partial. Slider verified; Textarea DOM deviates from upstream `contenteditable`           |
-| Dialog, Popover, Tooltip                         | Yes                                                                                                       | No. Popover props re-designed; overlay phase machine not ported | No                                                                                        |
-| Dense navigation                                 | Only `Select`, ported without its upstream `List`, `ListButton`, `SearchField`, `SectionTitle` primitives | No                                                              | No                                                                                        |
-| Advanced controls and feedback                   | No                                                                                                        | No                                                              | No                                                                                        |
+| Foundations and surfaces                         | Yes                                                                                                       | Partial                                                         | Partial. Browser-level contrast and rendering evidence remain                              |
+| Button, Spinner, Chip, Shortcut                  | Yes                                                                                                       | Partial                                                         | Partial. Reduced-motion and full visual evidence remain                                    |
+| Input, Textarea, Checkbox, Radio, Switch, Slider | Yes                                                                                                       | Partial                                                         | Partial. Full prop/state/motion evidence remains                                           |
+| Dialog, Popover, Tooltip                         | Yes, including compound exports                                                                            | Partial                                                         | Partial. Focus, lifecycle, collision, and browser evidence remain                          |
+| Dense navigation                                 | Yes: Toolbar, Tabs, Segmented, Accordion, Collapsible, List, SearchField, Select, and Toggle Group      | Partial                                                         | Partial. Full interaction and composition evidence remains                                 |
+| Advanced controls and feedback                   | Yes: NumberField, NumberScrubber, OTPField, ColorEditor, ColorPicker, Calendar, DatePicker, Toast, Popup | Partial                                                         | Partial. Family-level fidelity evidence remains                                             |
+
+## Active gap-closure order
+
+1. Overlay fidelity: verify focus restoration, drag-out dismissal, lazy and close callbacks,
+   unmount cleanup, viewport boundaries, and transform origins against the pinned source and a real
+   browser.
+2. Browser evidence: capture dark/light, reduced-motion, keyboard, pointer, touch, narrow-viewport,
+   and computed-style evidence for every shipped family.
+3. Port records: create or complete a manifest for every component family, including copied literals,
+   Vue transpositions, and deliberate deviations.
+4. Consumer and publication evidence: run the playground through public exports, validate an external
+   consumer/package artifact, then start the pilot-adoption phase.
 
 ---
 
@@ -93,7 +105,7 @@ Deliver `Button`, `Spinner`, `Chip`, and `Shortcut` together because they prove 
 
 ### What to build
 
-Deliver `Input`, `Textarea`, `Checkbox`, `RadioGroup`, `Switch`, and `Slider` with native form controls and pinned Cladd state structure. Cover labels, descriptions, errors, disabled/read-only state, controlled values, and form integration.
+Deliver `Input`, `Textarea`, `Checkbox`, `Radio`, `Switch`, and `Slider` with native form controls and pinned Cladd state structure. Cover labels, descriptions, errors, disabled/read-only state, controlled values, and form integration.
 
 `Select` is excluded from form integration: upstream renders a button plus popover with no `name` and no hidden input, so it never participates in submission. Matching that is correct.
 
@@ -105,7 +117,7 @@ Deliver `Input`, `Textarea`, `Checkbox`, `RadioGroup`, `Switch`, and `Slider` wi
 - [x] Keyboard and touch interactions match component semantics.
 - [x] Slider drag removes transition latency during active movement.
 - [x] Focus remains visible across every surface and accent combination.
-- [x] Consumer fixture verifies form submission and reset behavior. `fixtures/forms/FormFixture.vue` plus six tests lock native submission, omission of unchecked and disabled controls, reset, and post-reset state agreement. Scope of the claim: reset re-derives each control from its bound model, which is what Vue's attribute mirroring makes possible — it does not restore a pristine initial value after interaction. `Textarea` is excluded pending `ui-package-review.md` R3, and `Select` is not form-associated, matching upstream.
+- [x] Consumer fixture verifies form submission and reset behavior. `fixtures/forms/FormFixture.vue` plus six tests lock native submission, omission of unchecked and disabled controls, reset, and post-reset state agreement. Scope of the claim: reset re-derives each control from its bound model, which is what Vue's attribute mirroring makes possible — it does not restore a pristine initial value after interaction. `Textarea` reset is covered; `Select` is not form-associated, matching upstream.
 - [ ] Every documented Cladd form prop, icon path, size, state, and transition is mapped and verified.
 
 ---
@@ -120,12 +132,12 @@ Deliver native `Dialog`, `Popover`, and `Tooltip` plus focused overlay lifecycle
 
 ### Acceptance criteria
 
-- [ ] Escape, backdrop, outside interaction, and focus restoration follow documented contracts. Escape, backdrop, and outside interaction work; focus restoration is defective and the upstream drag-out guard is missing. See `ui-package-review.md` H4.
+- [ ] Escape, backdrop, outside interaction, focus restoration, and the drag-out guard have complete browser interaction evidence. Unit coverage exists; full cross-browser verification remains.
 - [x] Nested overlays do not dismiss their parent incorrectly.
 - [x] Dialog labeling and description remain valid with slot-based content.
-- [ ] Popovers remain inside viewport boundaries and expose transform origin. No per-position transform origin is emitted, upstream `viewportMargin` is absent, and happy-dom cannot evidence viewport behavior.
-- [ ] Exit callbacks run after visual completion and also complete under reduced motion. Vue `<Transition>` hooks stand in for the upstream phase machine, so an overlay unmounted mid-close never fires `closed`. See `port-fidelity-audit.md` finding 2.
-- [ ] No orphan portals, listeners, timers, or inert containers remain after unmount. No unmount-leak test exists.
+- [ ] Popovers remain inside viewport boundaries and expose transform origin with browser evidence.
+- [ ] Exit callbacks run after visual completion and under reduced motion, including unmount while closing, with regression coverage.
+- [ ] No orphan portals, listeners, timers, or inert containers remain after unmount, with dedicated leak coverage. Lifecycle close-on-unmount, cancellation, and drag-out dismissal are covered in `tests/foundations/overlayLifecycle.test.ts`; portal and inert-container leak coverage remains.
 - [x] Consumer fixture covers keyboard-only and nested-overlay journeys.
 - [ ] Dialog, Popover, and Tooltip match every Cladd public prop, compound API, visual state, and lifecycle frame.
 
@@ -139,7 +151,7 @@ Deliver native `Dialog`, `Popover`, and `Tooltip` plus focused overlay lifecycle
 
 Deliver `Toolbar`, `Tabs`, `Segmented`, `Accordion`, `Collapsible`, `List`, `SearchField`, and menu/select families as a coherent application-shell vocabulary.
 
-`Select` already shipped ahead of this phase with its option list, search field, and section titles inlined, because these primitives did not exist. Re-cut it onto them here, and replace the playground's hand-rolled `PlaygroundSegmented` and `PlaygroundSwitchControl` with the real components.
+**Implementation status:** all named families, plus `ToggleGroup`, ship from the public package. `Select` composes the shipped `List`, `ListButton`, `SearchField`, and `SectionTitle` primitives. The acceptance criteria remain the evidence needed to call the slice complete.
 
 ### Acceptance criteria
 
@@ -159,6 +171,8 @@ Deliver `Toolbar`, `Tabs`, `Segmented`, `Accordion`, `Collapsible`, `List`, `Sea
 ### What to build
 
 Deliver `NumberField`, `NumberScrubber`, `Calendar`, `DatePicker`, `OTPField`, `ColorPicker`, `ColorEditor`, `Toast`, and `Popup` in small family-level changes while maintaining one demoable advanced-control workspace.
+
+**Implementation status:** all named families ship. `Calendar` and `DatePicker` are public `@cladd-vue/ui/calendar` exports. The acceptance criteria remain the evidence needed to call the slice complete.
 
 ### Acceptance criteria
 

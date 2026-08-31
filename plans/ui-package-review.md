@@ -3,6 +3,11 @@
 > Reviewed 2026-08-03 against `plans/vue-ui-package.md` and `packages/ui/CLAUDE.md`.
 > Port-fidelity findings live in `port-fidelity-audit.md`. Styling decision lives in
 > `tailwind-realignment.md`.
+>
+> Status refresh, 2026-08-31: this review captures an earlier package state. Its build, missing-form
+> fixture, missing-family, Popover API, focus-trap, and Textarea-reset findings were subsequently
+> addressed. Keep remaining browser/accessibility assertions as verification work; use
+> `vue-ui-package.md` as the live roadmap and `component-audit-fixes.md` for completed audit work.
 
 ## Verification performed
 

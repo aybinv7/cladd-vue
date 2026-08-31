@@ -5,6 +5,7 @@ import {
   ListButton,
   ListSeparator,
   ListTitle,
+  NumberField,
   Popover,
   PopoverClose,
   PopoverRoot,
@@ -15,6 +16,7 @@ import { computed, ref } from 'vue';
 
 import CatalogSection from '../components/CatalogSection.vue';
 import ComponentPlayground from '../components/ComponentPlayground.vue';
+import OverlayEventLog from '../components/OverlayEventLog.vue';
 import PlaygroundSegmented from '../components/PlaygroundSegmented.vue';
 import PlaygroundSwitchControl from '../components/PlaygroundSwitchControl.vue';
 import PlaygroundToolbar from '../components/PlaygroundToolbar.vue';
@@ -27,8 +29,30 @@ const props = defineProps<{
 const popoverOpen = ref(false);
 const popoverPosition = ref<PopoverPosition>('bottom');
 const popoverBackdrop = ref(false);
+const popoverBackdropTransparent = ref(false);
+const popoverLazy = ref(false);
+const popoverViewportMargin = ref(4);
+const events = ref<string[]>([]);
 
-const popoverPositions = ['top', 'bottom', 'left', 'right', 'center'] as const;
+const popoverPositions = [
+  'top-start',
+  'top',
+  'top-end',
+  'bottom-start',
+  'bottom',
+  'bottom-end',
+  'left-start',
+  'left',
+  'left-end',
+  'right-start',
+  'right',
+  'right-end',
+  'center',
+] as const;
+
+function record(event: string): void {
+  events.value = [...events.value.slice(-3), event];
+}
 
 const target = {
   host: 'localhost:5175',
@@ -39,7 +63,11 @@ const target = {
 const popoverCode = computed(
   () => `<Popover
   v-model:open="popoverOpen"
-  position="${popoverPosition.value}"${popoverBackdrop.value ? '\n  backdrop' : ''}
+  position="${popoverPosition.value}"
+  :backdrop="${popoverBackdrop.value}"
+  :backdrop-transparent="${popoverBackdropTransparent.value}"
+  :lazy="${popoverLazy.value}"
+  :viewport-margin="${popoverViewportMargin.value}"
   class="w-56"
 >
   <template #trigger>
@@ -89,8 +117,15 @@ const popoverRootCode = `<PopoverRoot>
         <Popover
           v-model:open="popoverOpen"
           :backdrop="popoverBackdrop"
+          :backdrop-transparent="popoverBackdropTransparent"
           class="w-56"
+          :lazy="popoverLazy"
           :position="popoverPosition"
+          :viewport-margin="popoverViewportMargin"
+          @closed="record('closed')"
+          @closing="record('closing')"
+          @opened="record('opened')"
+          @opening="record('opening')"
         >
           <template #trigger>
             <Button :disabled="!props.interactionsEnabled">Open popover</Button>
@@ -113,6 +148,7 @@ const popoverRootCode = `<PopoverRoot>
             </List>
           </template>
         </Popover>
+        <OverlayEventLog :events="events" @clear="events = []" />
       </template>
       <template #controls>
         <PlaygroundToolbar>
@@ -124,6 +160,20 @@ const popoverRootCode = `<PopoverRoot>
         </PlaygroundToolbar>
         <PlaygroundToolbar>
           <PlaygroundSwitchControl v-model="popoverBackdrop" label="backdrop" />
+          <PlaygroundSwitchControl
+            v-model="popoverBackdropTransparent"
+            label="transparent"
+          />
+          <PlaygroundSwitchControl v-model="popoverLazy" label="lazy" />
+        </PlaygroundToolbar>
+        <PlaygroundToolbar>
+          <NumberField
+            v-model="popoverViewportMargin"
+            aria-label="Viewport margin"
+            :max="32"
+            :min="0"
+            :step="1"
+          />
         </PlaygroundToolbar>
       </template>
     </ComponentPlayground>

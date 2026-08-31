@@ -2,6 +2,9 @@
 
 > Rule of record: the package mirrors the pinned Cladd baseline. Where Cladd is framework-agnostic, the
 > package copies. Where Cladd is React-specific, the package transposes to Vue. Nothing is re-designed.
+>
+> Historical record. The `cui-*` namespace described below was superseded by the completed
+> `cladd-*` namespace restoration. The current package stylesheet entry is `@cladd-vue/ui/css`.
 
 ## Evidence
 

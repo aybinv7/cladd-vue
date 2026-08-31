@@ -1,5 +1,11 @@
 # `@cladd-vue/ui` Tailwind port — handoff status
 
+> Historical handoff. Its `cui-*` namespace, missing-component queue, and unexported-Backdrop note
+> are superseded. Every pinned upstream export now ships under the `cladd-*` namespace; `Backdrop`,
+> all compound parts, dense-navigation families, advanced controls, and the Calendar subpath are
+> public. Use `vue-ui-package.md` for live gaps; retain this file only for its porting traps and
+> historical rationale.
+
 > Read this first if you're picking up the Cladd → Vue Tailwind port cold. The governing rule,
 > repeated by the project owner throughout: **port, don't match.** Copy the pinned Cladd
 > (`reference/cladd/`, commit `fadd8efe935111f31d7c933238db5ce5d3a55d71`) utility strings, DOM

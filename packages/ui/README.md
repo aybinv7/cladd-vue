@@ -6,7 +6,10 @@ This package ports Cladd's surface, sizing, accent, motion, DOM, and interaction
 
 ## Status
 
-Surface, action, data-display, feedback, form, and overlay foundations are available. The package includes `CladdProvider`, surface primitives, dense controls, native form families, `Dialog`, `Popover`, and `Tooltip`. Native elements and focused Vue composables own keyboard, pointer, focus, form, positioning, and dismissal behavior.
+Every pinned upstream value and type export has a Vue counterpart: surface, action, data-display,
+feedback, form, overlay, dense-navigation, color, number, OTP, and calendar families. `Calendar` and
+`DatePicker` ship from `@cladd-vue/ui/calendar`. Export coverage does not yet mean full browser-level
+visual, motion, or interaction parity for every family.
 
 ## Boundaries
 
@@ -58,8 +61,8 @@ import '@cladd-vue/ui/css';
 ## Packaging
 
 `vp pack` emits ESM and declarations to `dist/`. The published tarball also contains `src/`, because
-`styles.css` is Tailwind v4 source and its `@source "../"` directive must be able to scan the package's
-own components for the utilities they use.
+the `./css` entry is Tailwind v4 source and its `@source "../"` directive must be able to scan the
+package's own components for the utilities they use.
 
 ## Commands
 

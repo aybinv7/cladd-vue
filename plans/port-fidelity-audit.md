@@ -6,6 +6,15 @@
 > Rule of record: port, do not match. Framework-agnostic upstream code is copied by value.
 > React-specific upstream code is transposed to Vue with its semantics preserved. Nothing is
 > re-designed. Styling follows `tailwind-realignment.md`.
+>
+> Status refresh, 2026-08-31: this is a historical audit, not the active implementation queue.
+> Subsequent ports closed export, prop, component-default, hover-guard, surface-color-reset, Popover
+> compound, Select-composition, Textarea-reset, and copied-asset gaps. Live work is fidelity evidence:
+> overlay focus/lifecycle/positioning cleanup, browser rendering and motion checks, then family-level
+> API and visual verification. Do not treat findings marked fixed or superseded below as open work.
+> `tests/foundations/overlayLifecycle.test.ts` now locks unmount-while-closing completion, callback
+> cancellation, listener cleanup, and the Popover drag-out guard; portal and inert-container leaks
+> still need dedicated coverage.
 
 ## The three buckets
 

@@ -5,6 +5,11 @@ it. The rule this plan serves is in `packages/ui/CLAUDE.md`: port, do not invent
 
 Evidence was gathered by diffing the port against the vendored checkout, not by inspection.
 
+> Status refresh, 2026-08-31: all upstream value exports, type exports, and public props have Vue
+> counterparts. `notYetPorted`, `typesNotYetPorted`, and `notImplemented` are empty. The remaining
+> unchecked items below are code-organisation decisions, not missing documented components. The
+> component-audit batch is complete; see `component-audit-fixes.md`.
+
 ## Done
 
 - [x] CSS namespace restored to upstream: `cui-` → `cladd-`, `--cui-` → `--cladd-`, and the unprefixed
@@ -74,7 +79,9 @@ Comparing _export lists_ instead of filenames leaves a much shorter list:
       what they are. `tests/parity/upstreamProps.test.ts` now fails on any undocumented public prop.
 - [ ] `*.contracts.ts` files have no upstream counterpart. Decide per file whether the constants live
       where upstream puts them (inline, or in `shared/`) and collapse the rest.
-- [ ] `useOverlayLifecycle`'s local `runAfterTwoFrames` duplicates `shared/nextTick`.
+- [x] `useOverlayLifecycle`'s local `runAfterTwoFrames` duplicates `shared/nextTick`. Fixed in
+      `649028e`: it now delegates scheduling to the shared double-rAF helper while retaining the
+      Vue-specific cancellation guard.
 
 ## 4. File layout
 

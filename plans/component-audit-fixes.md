@@ -67,9 +67,9 @@ spots — happy-dom can't render real layout, and the export/prop readers have b
       fixed-length OTP field at runtime, which isn't a realistic use of this component. Reproducing
       upstream's reactive child-tracking for that case would add real complexity for no practical
       gain. Documented in place instead.
-- [ ] `SurfaceCut.vue` — stray `text-cladd-fg` class on the root (`SurfaceCut.vue:60`) that upstream
-      doesn't set (`SurfaceCut.tsx:486`). Unclear real-world visual impact; verify with a rendered
-      comparison before changing.
+- [x] `SurfaceCut.vue` — stray `text-cladd-fg` class on the root (`SurfaceCut.vue:60`) that upstream
+      doesn't set (`SurfaceCut.tsx:486`). Fixed in `abbe985` alongside the corrected `outline`
+      default; the root now matches the upstream class list.
 - [x] `surfaceLevel.ts` — silently "fixes" an upstream edge case: a malformed numeric-string level
       falls back to `clampSurfaceLevel(parentLevel + 1)` instead of reproducing upstream's `NaN`
       result (`Surface.tsx:158-171`). **Decided: keep the safer behavior, do not reproduce the
