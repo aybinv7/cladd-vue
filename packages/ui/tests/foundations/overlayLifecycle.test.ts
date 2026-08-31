@@ -5,7 +5,13 @@ import Dialog from '../../src/components/Dialog.vue';
 import { useOverlayDismiss } from '../../src/composables/useOverlayDismiss.ts';
 import { useOverlayLifecycle } from '../../src/composables/useOverlayLifecycle.ts';
 import type { OverlayPhase } from '../../src/foundations/contracts.ts';
-import { byTestId, mountTree, type MountedTree } from '../support/mountTree.ts';
+import { Button } from '../../src/index.ts';
+import {
+  byTestId,
+  click,
+  mountTree,
+  type MountedTree,
+} from '../support/mountTree.ts';
 
 async function settle(): Promise<void> {
   await nextTick();
@@ -254,5 +260,91 @@ test('removes popover and tooltip portals after unmount', async () => {
   if (tooltipExists) tooltipExists.remove();
   document.body
     .querySelectorAll('.cladd-popover, .cladd-tooltip, .cladd-dialog')
+    .forEach((node) => node.remove());
+});
+
+test('restores focus to the dialog trigger after escape', async () => {
+  const open = ref(false);
+  const harness = defineComponent({
+    setup() {
+      return () =>
+        h(
+          Dialog,
+          {
+            open: open.value,
+            'onUpdate:open': (value: boolean) => (open.value = value),
+            title: 'Focus',
+          },
+          {
+            trigger: () =>
+              h(Button, { 'data-testid': 'dialog-trigger' }, () => 'Open'),
+          },
+        );
+    },
+  });
+  const mounted = mountTree(h(harness));
+  await nextTick();
+  const trigger = byTestId(mounted.root, 'dialog-trigger') as HTMLButtonElement;
+  trigger.focus();
+  expect(document.activeElement).toBe(trigger);
+
+  await click(trigger);
+  await settleWithTimers();
+  expect(document.body.querySelector('[role="dialog"]')).not.toBeNull();
+  const closeBtn = document.body.querySelector<HTMLElement>(
+    '[data-part="cancel"]',
+  );
+  if (closeBtn) expect(document.activeElement).not.toBe(trigger);
+
+  document.dispatchEvent(
+    new KeyboardEvent('keydown', { key: 'Escape', bubbles: true }),
+  );
+  await settleWithTimers();
+  expect(open.value).toBe(false);
+  await nextTick();
+  expect(document.activeElement).toBe(trigger);
+
+  mounted.app.unmount();
+  mounted.root.remove();
+  document.body
+    .querySelectorAll('.cladd-dialog, .cladd-popover')
+    .forEach((node) => node.remove());
+});
+
+test('exposes correct popover origin and viewport style', async () => {
+  const { Popover } = await import('../../src/index.ts');
+  const { buildPopoverPositionStyle, popoverPositionConfigs } =
+    await import('../../src/components/overlay.contracts.ts');
+  const style = buildPopoverPositionStyle({
+    anchorName: '--cladd-anchor-test',
+    offset: 8,
+    position: 'bottom-end',
+    viewportMargin: 4,
+  });
+  expect(style.positionArea).toBe('bottom center');
+  expect(style.justifySelf).toBe('end');
+  expect(popoverPositionConfigs['bottom-end'].origin).toBe('origin-top-right');
+
+  const mounted = mountTree(
+    h(
+      Popover,
+      { open: true, position: 'bottom-end', viewportMargin: 12 },
+      () => 'content',
+    ),
+  );
+  await settleWithTimers();
+  const content = document.body.querySelector<HTMLElement>(
+    '.cladd-popover [data-part="content"]',
+  );
+  expect(content?.classList.contains('origin-top-right')).toBe(true);
+  expect(content?.style.positionArea).toBe('bottom center');
+  expect(content?.style.marginBottom).toBe('12px');
+  expect(content?.style.marginLeft).toBe('12px');
+
+  mounted.app.unmount();
+  await settleWithTimers();
+  mounted.root.remove();
+  document.body
+    .querySelectorAll('.cladd-popover')
     .forEach((node) => node.remove());
 });
