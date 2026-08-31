@@ -11,13 +11,14 @@ import type {
 import Popover from '../components/Popover.vue';
 import { useComponentDefaults } from '../composables/useComponentDefaults.ts';
 import { cn } from '../shared/cn.ts';
-import type {
-  CalendarMode,
-  CalendarSize,
-  CalendarValue,
-  DatePickerProps,
-  DatePickerSize,
-  DateRange,
+import {
+  shouldCloseAfterSelect,
+  type CalendarMode,
+  type CalendarSize,
+  type CalendarValue,
+  type DatePickerProps,
+  type DatePickerSize,
+  type DateRange,
 } from './calendar.contracts.ts';
 import Calendar from './Calendar.vue';
 import CalendarIcon from './CalendarIcon.vue';
@@ -26,6 +27,7 @@ defineOptions({ inheritAttrs: false });
 
 const props = withDefaults(defineProps<DatePickerProps>(), {
   calendarSize: undefined,
+  closeOnSelect: undefined,
   color: undefined,
   contentClassName: undefined,
   disabled: undefined,
@@ -59,6 +61,7 @@ const emit = defineEmits<{
 
 const d = useComponentDefaults('DatePicker', props, {
   calendarSize: 'lg' as CalendarSize,
+  closeOnSelect: true,
   dropdownIcon: true,
   mode: 'single' as CalendarMode,
   placeholder: 'Select date',
@@ -120,6 +123,9 @@ const interactive = computed(() => !d.value.readOnly && !d.value.disabled);
 
 function onCalendarChange(value: CalendarValue): void {
   emit('change', value);
+  if (shouldCloseAfterSelect(d.value.mode, d.value.closeOnSelect)) {
+    open.value = false;
+  }
 }
 
 const rootClass = computed(() => cn('cladd-datepicker w-full', attrs.class));

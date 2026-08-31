@@ -7,7 +7,7 @@ import type {
   CalendarValue,
   DateRange,
 } from '@cladd-vue/ui/calendar';
-import { computed, ref } from 'vue';
+import { computed, ref, watch } from 'vue';
 
 import CatalogSection from '../components/CatalogSection.vue';
 import ComponentPlayground from '../components/ComponentPlayground.vue';
@@ -30,6 +30,15 @@ const mode = ref<CalendarMode>('single');
 const value = ref<CalendarValue>(new Date());
 const pickerValue = ref<CalendarValue>(undefined);
 const rangeValue = ref<CalendarValue>(undefined);
+
+// `value`'s shape has to track `mode`: a bare Date is invalid the moment
+// `mode` becomes `'multiple'`, which is a real crash in the dependency
+// (`vue-datepicker.js` throws synchronously if `multi-dates` is on and it
+// doesn't receive an array), not merely a cosmetic mismatch. Calendar now
+// reshapes defensively too, but the demo shouldn't rely on that safety net.
+watch(mode, () => {
+  value.value = undefined;
+});
 
 const selectionLabel = computed(() => {
   const current = value.value;

@@ -66,14 +66,25 @@
   margin-bottom: 16px;
 }
 
-/* The Cladd surface already draws the panel. */
+/* The Cladd surface already draws the panel. Clipped on the x-axis because the
+   month-to-month transition (`.calendar-next-enter-*` / `.calendar-prev-enter-*`
+   in the dependency's CSS) slides the grid the full `--dp-transition-length`
+   past the edge; without a clip boundary that overshoot pushes the panel wider
+   than its content for the duration of the animation and shows a scrollbar. */
 .cladd-calendar .dp--menu {
+  overflow-x: hidden;
   border: 0;
   background: transparent;
 }
 
 .cladd-calendar .dp--menu-inner {
   padding: 0;
+}
+
+/* Upstream has no divider between the caption and the grid; this belongs to
+   the dependency's own (non-inline) month/year picker chrome. */
+.cladd-calendar .dp--calendar-header-separator {
+  display: none;
 }
 
 .cladd-calendar .dp--calendar-header-cell {

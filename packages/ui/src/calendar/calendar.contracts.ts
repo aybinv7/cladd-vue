@@ -107,6 +107,8 @@ export type CalendarDefaultProps = Partial<CalendarProps>;
 export interface DatePickerProps {
   /** Calendar size inside the popover. Default `'lg'`. */
   calendarSize?: CalendarSize;
+  /** Close the popover after a pick. Default `true`. Single mode only. */
+  closeOnSelect?: boolean;
   /** Extra classes for the trigger's inner content row. */
   contentClassName?: string;
   /** Accent color token. Drives the trigger and the calendar. Default: theme accent. */
@@ -147,3 +149,18 @@ export interface DatePickerProps {
 
 /** Shape of `DatePicker` defaults that can be supplied via `CladdProvider`'s `defaults` prop. */
 export type DatePickerDefaultProps = Partial<DatePickerProps>;
+
+/**
+ * Upstream closes the popover after a pick only in single mode, and only when
+ * the caller hasn't opted out (`DatePicker.tsx:206-209`,
+ * `if (closeOnSelect !== false) setOpen(false)`). Multiple and range stay open
+ * so the user can keep picking. Pulled out as a pure function so the decision
+ * is testable without a real pointer click on the dependency's grid, which
+ * does not render under happy-dom.
+ */
+export function shouldCloseAfterSelect(
+  mode: CalendarMode,
+  closeOnSelect: boolean,
+): boolean {
+  return mode === 'single' && closeOnSelect;
+}

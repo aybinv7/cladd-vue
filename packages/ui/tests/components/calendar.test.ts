@@ -1,9 +1,13 @@
 import { expect, test } from 'vite-plus/test';
-import { h, nextTick } from 'vue';
+import { h, nextTick, ref } from 'vue';
 
+import {
+  shouldCloseAfterSelect,
+  type CalendarValue,
+} from '../../src/calendar/calendar.contracts.ts';
 import Calendar from '../../src/calendar/Calendar.vue';
 import DatePicker from '../../src/calendar/DatePicker.vue';
-import { byTestId, mountTree } from '../support/mountTree.ts';
+import { byTestId, click, mountTree } from '../support/mountTree.ts';
 
 function part(root: HTMLElement, name: string): HTMLElement {
   const found = root.querySelector<HTMLElement>(`[data-part="${name}"]`);
@@ -100,5 +104,61 @@ test('renders the calendar glyph and dropdown indicator on the trigger', async (
   const root = byTestId(mounted.root, 'picker');
   expect(part(root, 'icon').querySelector('svg')).not.toBeNull();
   expect(root.querySelector('[data-part="dropdown-icon"]')).not.toBeNull();
+  mounted.app.unmount();
+});
+
+test('closes the popover after a single-mode pick, not in multiple or range', () => {
+  // Upstream closes only in single mode and only when the caller hasn't opted
+  // out (DatePicker.tsx:206-209). The real decision is exercised here rather
+  // than through a pointer click on the grid, which the dependency does not
+  // render under happy-dom (see the note above).
+  expect(shouldCloseAfterSelect('single', true)).toBe(true);
+  expect(shouldCloseAfterSelect('single', false)).toBe(false);
+  expect(shouldCloseAfterSelect('multiple', true)).toBe(false);
+  expect(shouldCloseAfterSelect('range', true)).toBe(false);
+});
+
+async function settleOverlay(): Promise<void> {
+  await nextTick();
+  await new Promise((resolve) =>
+    requestAnimationFrame(() => resolve(undefined)),
+  );
+  await nextTick();
+}
+
+test('keeps the popover open when closeOnSelect is set to false', async () => {
+  const mounted = mountTree(
+    h(DatePicker, { closeOnSelect: false, 'data-testid': 'picker' }),
+  );
+  document.body.append(mounted.root);
+
+  await click(byTestId(mounted.root, 'picker'));
+  await settleOverlay();
+
+  expect(document.body.querySelector('[data-part="content"]')).not.toBeNull();
+  mounted.app.unmount();
+  mounted.root.remove();
+});
+
+test('reshapes a stale value when mode changes, instead of crashing', async () => {
+  // A bare Date fed in while `mode` is `'multiple'` is what the dependency
+  // rejects outright: "You need to use array as model-value binding in order
+  // to support multi-dates". A consumer switching modes without also
+  // resetting the bound value is the expected case, not an edge case.
+  const value = ref<CalendarValue>(new Date(2026, 0, 15));
+  const mode = ref<'multiple' | 'range' | 'single'>('single');
+  const mounted = mountTree(
+    h(Calendar, {
+      'data-testid': 'calendar',
+      mode: mode.value,
+      modelValue: value.value,
+      'onUpdate:modelValue': (next?: CalendarValue) => (value.value = next),
+    }),
+  );
+
+  expect(() => {
+    mode.value = 'multiple';
+  }).not.toThrow();
+
   mounted.app.unmount();
 });

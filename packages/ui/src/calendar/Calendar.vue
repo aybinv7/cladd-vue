@@ -79,17 +79,31 @@ const currentColor = computed(() => d.value.color ?? accentColor.value);
 /**
  * The Vue picker models a range as `[start, end]`; upstream's public contract is
  * `{ from, to }`. Convert on the way in and out so callers see upstream's shape.
+ *
+ * Also reshapes the value to whatever `mode` currently expects. A consumer
+ * switching `mode` without also resetting the bound value is the common case,
+ * not an edge case — our own playground demo does exactly this — and the
+ * dependency throws synchronously if `multi-dates` is on and it receives
+ * anything but an array: "You need to use array as model-value binding in
+ * order to support multi-dates".
  */
 const pickerValue = computed({
   get(): Date | Date[] | null {
     const value = model.value;
     if (value === undefined) return null;
-    if (d.value.mode !== 'range') return value as Date | Date[];
 
-    const range = value as DateRange;
-    return range.from
-      ? ([range.from, range.to].filter(Boolean) as Date[])
-      : null;
+    if (d.value.mode === 'range') {
+      const range = value as DateRange;
+      return range.from
+        ? ([range.from, range.to].filter(Boolean) as Date[])
+        : null;
+    }
+
+    if (d.value.mode === 'multiple') {
+      return Array.isArray(value) ? value : [value as Date];
+    }
+
+    return Array.isArray(value) ? (value[0] ?? null) : (value as Date);
   },
   set(next: Date | Date[] | null) {
     let value: CalendarValue;
@@ -175,18 +189,28 @@ const captionClass = computed(() =>
   cn('pl-2 font-semibold text-cladd-fg', tokens.value.captionText),
 );
 
-const ui = computed(() => ({
-  menu: cn('cladd-calendar__menu', tokens.value.captionText),
-  calendar: 'cladd-calendar__grid',
-  calendarCell: cn(
-    'cladd-calendar__cell',
-    tokens.value.box,
-    tokens.value.dayText,
-  ),
-  dayClass,
-  navBtnPrev: 'cladd-calendar__nav',
-  navBtnNext: 'cladd-calendar__nav',
-}));
+const ui = computed(() => {
+  // `dayClass` closes over `currentColor`, but a computed only re-runs when a
+  // reactive value is *read inside its own getter* — calling a function that
+  // reads it later doesn't count. Reading it here as well forces this object
+  // to a new reference whenever the accent changes, so the dependency (which
+  // receives `ui` as a prop) actually re-renders instead of keeping stale
+  // per-cell classes from the last render.
+  void currentColor.value;
+
+  return {
+    menu: cn('cladd-calendar__menu', tokens.value.captionText),
+    calendar: 'cladd-calendar__grid',
+    calendarCell: cn(
+      'cladd-calendar__cell',
+      tokens.value.box,
+      tokens.value.dayText,
+    ),
+    dayClass,
+    navBtnPrev: 'cladd-calendar__nav',
+    navBtnNext: 'cladd-calendar__nav',
+  };
+});
 </script>
 
 <template>
@@ -222,6 +246,7 @@ const ui = computed(() => ({
       inline
       :max-date="d.maxDate"
       :min-date="d.minDate"
+      :multi-calendars="false"
       :multi-dates="d.mode === 'multiple'"
       :range="d.mode === 'range'"
       :readonly="d.readOnly"
