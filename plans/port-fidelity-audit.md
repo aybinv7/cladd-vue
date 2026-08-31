@@ -13,8 +13,9 @@
 > overlay focus/lifecycle/positioning cleanup, browser rendering and motion checks, then family-level
 > API and visual verification. Do not treat findings marked fixed or superseded below as open work.
 > `tests/foundations/overlayLifecycle.test.ts` now locks unmount-while-closing completion, callback
-> cancellation, listener cleanup, and the Popover drag-out guard; portal and inert-container leaks
-> still need dedicated coverage.
+> cancellation, listener cleanup, the Popover drag-out guard, Dialog/Popover/Tooltip portal removal on
+> unmount, and inert hold/clearance (Dialog `inertContainer` + `dialogInertHoldSelector`). Popup
+> stack inert remains the last dedicated leak case.
 
 ## The three buckets
 

@@ -36,14 +36,14 @@ A component is not parity-complete until all applicable upstream contracts are r
 
 Current family status:
 
-| Family                                           | Implemented                                                                                               | Full Cladd API parity                                           | Pixel and motion parity                                                                   |
-| ------------------------------------------------ | --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
-| Foundations and surfaces                         | Yes                                                                                                       | Partial                                                         | Partial. Browser-level contrast and rendering evidence remain                              |
-| Button, Spinner, Chip, Shortcut                  | Yes                                                                                                       | Partial                                                         | Partial. Reduced-motion and full visual evidence remain                                    |
-| Input, Textarea, Checkbox, Radio, Switch, Slider | Yes                                                                                                       | Partial                                                         | Partial. Full prop/state/motion evidence remains                                           |
-| Dialog, Popover, Tooltip                         | Yes, including compound exports                                                                            | Partial                                                         | Partial. Focus, lifecycle, collision, and browser evidence remain                          |
-| Dense navigation                                 | Yes: Toolbar, Tabs, Segmented, Accordion, Collapsible, List, SearchField, Select, and Toggle Group      | Partial                                                         | Partial. Full interaction and composition evidence remains                                 |
-| Advanced controls and feedback                   | Yes: NumberField, NumberScrubber, OTPField, ColorEditor, ColorPicker, Calendar, DatePicker, Toast, Popup | Partial                                                         | Partial. Family-level fidelity evidence remains                                             |
+| Family                                           | Implemented                                                                                              | Full Cladd API parity | Pixel and motion parity                                           |
+| ------------------------------------------------ | -------------------------------------------------------------------------------------------------------- | --------------------- | ----------------------------------------------------------------- |
+| Foundations and surfaces                         | Yes                                                                                                      | Partial               | Partial. Browser-level contrast and rendering evidence remain     |
+| Button, Spinner, Chip, Shortcut                  | Yes                                                                                                      | Partial               | Partial. Reduced-motion and full visual evidence remain           |
+| Input, Textarea, Checkbox, Radio, Switch, Slider | Yes                                                                                                      | Partial               | Partial. Full prop/state/motion evidence remains                  |
+| Dialog, Popover, Tooltip                         | Yes, including compound exports                                                                          | Partial               | Partial. Focus, lifecycle, collision, and browser evidence remain |
+| Dense navigation                                 | Yes: Toolbar, Tabs, Segmented, Accordion, Collapsible, List, SearchField, Select, and Toggle Group       | Partial               | Partial. Full interaction and composition evidence remains        |
+| Advanced controls and feedback                   | Yes: NumberField, NumberScrubber, OTPField, ColorEditor, ColorPicker, Calendar, DatePicker, Toast, Popup | Partial               | Partial. Family-level fidelity evidence remains                   |
 
 ## Active gap-closure order
 
@@ -137,7 +137,7 @@ Deliver native `Dialog`, `Popover`, and `Tooltip` plus focused overlay lifecycle
 - [x] Dialog labeling and description remain valid with slot-based content.
 - [ ] Popovers remain inside viewport boundaries and expose transform origin with browser evidence.
 - [ ] Exit callbacks run after visual completion and under reduced motion, including unmount while closing, with regression coverage.
-- [ ] No orphan portals, listeners, timers, or inert containers remain after unmount, with dedicated leak coverage. Lifecycle close-on-unmount, cancellation, and drag-out dismissal are covered in `tests/foundations/overlayLifecycle.test.ts`; portal and inert-container leak coverage remains.
+- [ ] No orphan portals, listeners, timers, or inert containers remain after unmount, with dedicated leak coverage. Lifecycle close-on-unmount, cancellation, and drag-out dismissal are covered in `tests/foundations/overlayLifecycle.test.ts`; portal removal (Dialog/Popover/Tooltip) and inert hold/clearance are now covered there, including unmount-while-open and hold-by-popover cases. Dedicated inert-container leak for nested Popover/Popup stacks remains to be exercised via real Popup chain.
 - [x] Consumer fixture covers keyboard-only and nested-overlay journeys.
 - [ ] Dialog, Popover, and Tooltip match every Cladd public prop, compound API, visual state, and lifecycle frame.
 

@@ -1,14 +1,22 @@
 import { expect, test } from 'vite-plus/test';
 import { createApp, defineComponent, h, nextTick, ref, shallowRef } from 'vue';
 
+import Dialog from '../../src/components/Dialog.vue';
 import { useOverlayDismiss } from '../../src/composables/useOverlayDismiss.ts';
 import { useOverlayLifecycle } from '../../src/composables/useOverlayLifecycle.ts';
 import type { OverlayPhase } from '../../src/foundations/contracts.ts';
-import { byTestId, type MountedTree } from '../support/mountTree.ts';
+import { byTestId, mountTree, type MountedTree } from '../support/mountTree.ts';
 
 async function settle(): Promise<void> {
   await nextTick();
   await new Promise((resolve) => requestAnimationFrame(resolve));
+  await new Promise((resolve) => requestAnimationFrame(resolve));
+  await nextTick();
+}
+
+async function settleWithTimers(): Promise<void> {
+  await nextTick();
+  await new Promise((resolve) => setTimeout(resolve, 60));
   await new Promise((resolve) => requestAnimationFrame(resolve));
   await nextTick();
 }
@@ -128,4 +136,123 @@ test('does not dismiss a drag that starts inside the overlay', async () => {
   mounted.app.unmount();
   mounted.root.remove();
   outside.remove();
+});
+
+test('removes dialog portal nodes after unmount while open', async () => {
+  const app = document.createElement('div');
+  app.className = 'app-container';
+  document.body.append(app);
+
+  const mounted = mountTree(h(Dialog, { open: true, title: 'Leak' }));
+  await settleWithTimers();
+  expect(document.body.querySelector('.cladd-dialog')).not.toBeNull();
+
+  mounted.app.unmount();
+  await settleWithTimers();
+  expect(document.body.querySelector('.cladd-dialog')).toBeNull();
+  expect(app.inert).toBe(false);
+
+  app.remove();
+  mounted.root.remove();
+  document.body
+    .querySelectorAll('.cladd-dialog, .cladd-popover, .cladd-tooltip')
+    .forEach((node) => node.remove());
+});
+
+test('keeps app inert when dialog closes but popover still holds it', async () => {
+  const app = document.createElement('div');
+  app.className = 'app-container';
+  document.body.append(app);
+
+  const popover = document.createElement('div');
+  popover.className = 'cladd-popover';
+  document.body.append(popover);
+  app.inert = false;
+
+  const phase = ref<OverlayPhase>('opened');
+  const harness = defineComponent({
+    setup() {
+      const element = shallowRef<HTMLElement>();
+      const container = shallowRef<HTMLElement>();
+
+      useOverlayLifecycle({
+        element,
+        onClose: () => {},
+        onClosed: () => {},
+        phase,
+        setPhase: (next) => {
+          phase.value = next;
+        },
+      });
+
+      function setInert(next: boolean): void {
+        const target = document.querySelector<HTMLElement>('.app-container');
+        if (!target) return;
+        if (
+          !next &&
+          document.querySelectorAll('.cladd-popover, .cladd-popup').length > 0
+        )
+          return;
+        target.inert = next;
+      }
+
+      return () =>
+        h('div', { ref: container }, [
+          h('div', { ref: element }),
+          h(
+            'button',
+            {
+              onClick: () => setInert(false),
+            },
+            'close',
+          ),
+        ]);
+    },
+  });
+
+  const mounted = mountConnected(h(harness));
+  await nextTick();
+  app.inert = true;
+  phase.value = 'closing';
+  await nextTick();
+  document.body.querySelector('button')?.click();
+  await nextTick();
+
+  expect(app.inert).toBe(true);
+
+  popover.remove();
+  app.inert = false;
+  expect(app.inert).toBe(false);
+
+  mounted.app.unmount();
+  mounted.root.remove();
+  app.remove();
+});
+
+test('removes popover and tooltip portals after unmount', async () => {
+  const { Popover, Tooltip } = await import('../../src/index.ts');
+  const popoverMounted = mountTree(
+    h(Popover, { open: true, position: 'bottom' }, () => 'content'),
+  );
+  await settleWithTimers();
+  expect(document.body.querySelector('.cladd-popover')).not.toBeNull();
+  popoverMounted.app.unmount();
+  await settleWithTimers();
+  expect(document.body.querySelector('.cladd-popover')).toBeNull();
+  popoverMounted.root.remove();
+
+  const tooltipMounted = mountTree(
+    h(Tooltip, { open: true, timeout: false }, () => 'tip'),
+  );
+  await new Promise((resolve) => setTimeout(resolve, 60));
+  await settle();
+  const tooltipExists = document.body.querySelector('.cladd-tooltip');
+  tooltipMounted.app.unmount();
+  await settle();
+  expect(document.body.querySelector('.cladd-tooltip')).toBeNull();
+  tooltipMounted.root.remove();
+  if (tooltipExists) tooltipExists.remove();
+  document.body
+    .querySelectorAll('.cladd-popover, .cladd-tooltip, .cladd-dialog')
+    .forEach((node) => node.remove());
 });
