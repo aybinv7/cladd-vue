@@ -33,6 +33,7 @@ const props = withDefaults(defineProps<CalendarProps>(), {
   maxDate: undefined,
   minDate: undefined,
   mode: undefined,
+  numberOfMonths: undefined,
   readOnly: undefined,
   showToday: undefined,
   size: undefined,
@@ -52,6 +53,7 @@ const d = useComponentDefaults('Calendar', props, {
   disabled: false,
   hideNavigation: false,
   mode: 'single' as CalendarMode,
+  numberOfMonths: 1,
   readOnly: false,
   showToday: true,
   size: 'md' as CalendarSize,
@@ -246,7 +248,7 @@ const ui = computed(() => {
       inline
       :max-date="d.maxDate"
       :min-date="d.minDate"
-      :multi-calendars="false"
+      :multi-calendars="d.numberOfMonths > 1 ? d.numberOfMonths : false"
       :multi-dates="d.mode === 'multiple'"
       :range="d.mode === 'range'"
       :readonly="d.readOnly"

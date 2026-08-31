@@ -81,6 +81,7 @@ const code = computed(
             :color="color"
             :disabled="!props.interactionsEnabled"
             :mode="mode"
+            :number-of-months="mode === 'range' ? 2 : 1"
             :size="size"
           />
         </div>
@@ -118,6 +119,7 @@ const code = computed(
             v-model="rangeValue"
             :disabled="!props.interactionsEnabled"
             mode="range"
+            :number-of-months="2"
             placeholder="Select range"
           />
         </div>

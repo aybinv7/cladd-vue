@@ -36,6 +36,7 @@ const props = withDefaults(defineProps<DatePickerProps>(), {
   maxDate: undefined,
   minDate: undefined,
   mode: undefined,
+  numberOfMonths: undefined,
   outline: undefined,
   placeholder: undefined,
   popoverClassName: undefined,
@@ -64,6 +65,7 @@ const d = useComponentDefaults('DatePicker', props, {
   closeOnSelect: true,
   dropdownIcon: true,
   mode: 'single' as CalendarMode,
+  numberOfMonths: 1,
   placeholder: 'Select date',
   popoverOffset: ['-50%', 4] as PopoverOffset,
   popoverPosition: 'bottom-end' as PopoverPosition,
@@ -193,6 +195,7 @@ const popoverClass = computed(() => cn('w-auto', d.value.popoverClassName));
       :max-date="d.maxDate"
       :min-date="d.minDate"
       :mode="d.mode"
+      :number-of-months="d.numberOfMonths"
       :size="d.calendarSize"
       @change="onCalendarChange"
     />

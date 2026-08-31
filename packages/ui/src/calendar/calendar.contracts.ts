@@ -91,6 +91,8 @@ export interface CalendarProps {
   minDate?: Date;
   /** Selection mode. Default `'single'`. */
   mode?: CalendarMode;
+  /** Number of month grids shown side by side. Upstream forwards this to `react-day-picker` via `calendarProps.numberOfMonths` (`DatePicker.tsx:41`); range pickers typically pass `2`. Default `1`. */
+  numberOfMonths?: number;
   /** Block selection while keeping the grid visible. */
   readOnly?: boolean;
   /** Mark today's date with an accent ring and label. Default `true`. */
@@ -125,6 +127,8 @@ export interface DatePickerProps {
   minDate?: Date;
   /** Selection mode. Default `'single'`. */
   mode?: CalendarMode;
+  /** Number of month grids shown side by side in the popover calendar. Forwarded to `Calendar.numberOfMonths`. Default `1`. */
+  numberOfMonths?: number;
   /** Trigger surface outline ring. Forwarded to `Button.outline`. */
   outline?: boolean;
   /** Shown in the trigger when nothing is selected. Default `'Select date'`. */
