@@ -6,8 +6,12 @@ import { useComponentDefaults } from '../composables/useComponentDefaults.ts';
 import { useOverlayDismiss } from '../composables/useOverlayDismiss.ts';
 import { useOverlayLifecycle } from '../composables/useOverlayLifecycle.ts';
 import { useOverlayPhase } from '../composables/useOverlayPhase.ts';
-import { provideSurfaceColorReset } from '../contexts/surfaceContext.ts';
+import {
+  provideSurfaceColorReset,
+  useSurface,
+} from '../contexts/surfaceContext.ts';
 import { useUiContext } from '../contexts/uiContext.ts';
+import { resolveSurfaceLevel } from '../foundations/surfaceLevel.ts';
 import { cn } from '../shared/cn.ts';
 import Backdrop from './Backdrop.vue';
 import {
@@ -37,6 +41,7 @@ import {
 import { cloneTriggerNode } from './overlayTrigger.ts';
 import { usePopoverChain } from './popoverChain.ts';
 import Surface from './Surface.vue';
+import SurfaceContextProvider from './SurfaceContextProvider.vue';
 import VNodeRenderer from './VNodeRenderer.ts';
 
 // Upstream spreads `...rest` onto the popover Surface and keeps `className` (the Surface root)
@@ -123,6 +128,22 @@ const currentOutline = computed(
 );
 const currentSurfaceLevel = computed(
   () => d.value.surfaceLevel ?? (ui.theme.value === 'light' ? 1 : '+1'),
+);
+
+// Mirrors upstream's `PopoverSurfaceReset` (`Popover.tsx:388-396`): once the
+// content `Surface` resolves its own level, a light-theme popover sitting at
+// level 1 flattens back to level 0 for its own content so nested surfaces
+// don't stack an extra tone. `Surface` computes its published level the same
+// way (`resolveSurfaceLevel` against its own parent context), so replicate
+// the same math here against the ambient level Popover itself sees — that
+// ambient level is what `Surface` will also see as its parent, since
+// `provideSurfaceColorReset` below only touches color, not level.
+const ambientSurface = useSurface();
+const resolvedSurfaceLevel = computed(() =>
+  resolveSurfaceLevel(currentSurfaceLevel.value, ambientSurface.level.value),
+);
+const flattenSurfaceLevel = computed(
+  () => ui.theme.value === 'light' && resolvedSurfaceLevel.value === 1,
 );
 const positionConfig = computed(
   () =>
@@ -266,7 +287,10 @@ provideSurfaceColorReset();
         :style="surfaceStyle"
         :variant="currentVariant"
       >
-        <slot :close="close" />
+        <SurfaceContextProvider v-if="flattenSurfaceLevel" :level="0">
+          <slot :close="close" />
+        </SurfaceContextProvider>
+        <slot v-else :close="close" />
       </Surface>
     </div>
   </Teleport>

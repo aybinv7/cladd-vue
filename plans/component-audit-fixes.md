@@ -6,31 +6,42 @@ spots — happy-dom can't render real layout, and the export/prop readers have b
 
 ## High severity
 
-- [ ] `Input.vue` / `Textarea.vue` — consumer `class` isn't put last in `cn(...)`; it relies on
+- [x] `Input.vue` / `Textarea.vue` — consumer `class` isn't put last in `cn(...)`; it relies on
       Vue's attrs-merge order instead, which puts the consumer's class _first_, so the component's
       own `opacity-50`/rounded classes win over a conflicting consumer utility. Same bug class as
       the earlier Button/Checkbox/Chip sweep, reintroduced through the attrs path instead of a
-      literal `cn()` ordering mistake. (`Input.tsx:286-292`, `Textarea.tsx:238-242`)
-- [ ] `SurfaceCut.vue` — `outline` defaults to `false`; upstream defaults `true`
+      literal `cn()` ordering mistake. (`Input.tsx:286-292`, `Textarea.tsx:238-242`) Fixed: both now
+      strip `class` from the forwarded attrs and append it last in their own `cn()`.
+- [x] `SurfaceCut.vue` — `outline` defaults to `false`; upstream defaults `true`
       (`SurfaceCut.tsx:448`), and the port's own `surface.contracts.ts:54` JSDoc already says
-      `true`. Every `SurfaceCut` is missing its inset ring by default.
-- [ ] `ToggleGroup.vue` — `isControlled` computed as `d.value.value !== undefined` instead of
+      `true`. Every `SurfaceCut` is missing its inset ring by default. Fixed.
+- [x] `ToggleGroup.vue` — `isControlled` computed as `d.value.value !== undefined` instead of
       upstream's `'value' in props` (`ToggleGroup.tsx:79-83`, which has an explicit comment warning
       against the `!== undefined` inference: an empty selection is legitimately `undefined`, so a
-      controlled group that clears flips to uncontrolled and desyncs from the parent's state).
-- [ ] `AccordionRoot.vue` — same bug as `ToggleGroup`: `d.value.value !== undefined` instead of
+      controlled group that clears flips to uncontrolled and desyncs from the parent's state). Fixed
+      via `getCurrentInstance().vnode.props` presence check (`defineModel`'s options can't reference
+      local variables, so its local-fallback default couldn't be seeded from the `defaultValue`
+      prop). Locked with a regression test.
+- [x] `AccordionRoot.vue` — same bug as `ToggleGroup`: `d.value.value !== undefined` instead of
       `'value' in props` (`AccordionRoot.tsx:770-774`, same warning comment). A controlled
-      single-open accordion that closes to `undefined` can pop back open with stale state.
-- [ ] `Dialog.vue` — confirm button keeps `currentAccent` regardless of confirmation state; upstream
+      single-open accordion that closes to `undefined` can pop back open with stale state. Fixed the
+      same way, locked with a regression test.
+- [x] `Dialog.vue` — confirm button keeps `currentAccent` regardless of confirmation state; upstream
       drops the color to `undefined` while the type-to-confirm text doesn't match yet
-      (`Dialog.tsx:474-478`).
-- [ ] `DialogsPortal.vue` — drops `lazy` and `stopPropagationOnClick` when forwarding imperative
+      (`Dialog.tsx:474-478`). Fixed: `:color="confirmationValid ? currentAccent : undefined"`.
+- [x] `DialogsPortal.vue` — drops `lazy` and `stopPropagationOnClick` when forwarding imperative
       dialog data to `<Dialog>` (`DialogsPortal.tsx:12-31`). Both are silently ignored by callers of
-      the imperative API.
-- [ ] `Popover.vue` — uses the wrong reset primitive. Unconditionally resets _color_ context via
-      `provideSurfaceColorReset()`; upstream never resets color for `Popover` (only `Dialog` does)
-      and instead conditionally flattens the surface _level_ to `0` when the popover's own resolved
-      level is `1` and the theme is `light` (`Popover.tsx:388-396`, `PopoverSurfaceReset`).
+      the imperative API. Fixed: both are now bound through.
+- [x] `Popover.vue` — **audit correction**: the original finding ("unconditionally resets color;
+      upstream never resets color for Popover") was wrong — upstream's `Popover.tsx:701` does wrap
+      the whole portaled tree in `SurfaceColorReset`, same as Dialog/Popup, and the port's
+      `provideSurfaceColorReset()` call already matched that correctly. What was actually missing:
+      upstream _additionally_ wraps just the content `Surface`'s children in `PopoverSurfaceReset`
+      (`Popover.tsx:388-396`), which flattens the surface level to `0` (and, since it omits `color`
+      on `SurfaceContextProvider`, resets color again too) when the popover's own resolved level is
+      `1` and the theme is `light`. Fixed by replicating `Surface`'s own level-resolution math in
+      `Popover.vue` and conditionally wrapping the default slot in `SurfaceContextProvider` when
+      that condition holds.
 - [ ] `Button.vue` — `disabled` is only wired to the native `<button>` case; a polymorphic
       `as="SomeComponent"` target never receives it. Upstream always passes
       `disabled={disabled || readOnly}` through to `WrapComponent` regardless of tag

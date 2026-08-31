@@ -29,7 +29,7 @@ import {
   popupWrapperClosedClasses,
   popupWrapperOpenedClasses,
 } from '../../src/components/popup.contracts.ts';
-import { Popover } from '../../src/index.ts';
+import { CladdProvider, Popover, Surface } from '../../src/index.ts';
 import { byTestId, click, mountTree } from '../support/mountTree.ts';
 
 const colorsCss = readFileSync(
@@ -290,6 +290,44 @@ test('keeps top-level popovers mutually exclusive', async () => {
 
   expect(first.value).toBe(false);
   expect(document.body.textContent).toContain('second popover');
+
+  cleanupOverlayFixture(mounted.root, () => mounted.app.unmount());
+});
+
+test('flattens surface level inside a light-theme popover sitting at level 1', async () => {
+  const open = ref(false);
+  const harness = defineComponent({
+    setup() {
+      return () =>
+        h(CladdProvider, { theme: 'light' }, () => [
+          h(
+            Popover,
+            {
+              open: open.value,
+              'onUpdate:open': (value?: boolean) =>
+                (open.value = value ?? false),
+            },
+            {
+              default: () =>
+                h(Surface, { 'data-testid': 'nested' }, () => 'content'),
+            },
+          ),
+        ]);
+    },
+  });
+  const mounted = mountTree(h(harness));
+  document.body.append(mounted.root);
+
+  open.value = true;
+  await settleOverlay();
+
+  // Without the level-1 flatten, the nested `Surface` would inherit the
+  // popover's own content surface as its parent (level 1) and resolve to
+  // level 2. Upstream's `PopoverSurfaceReset` flattens back to level 0 so it
+  // resolves to level 1 instead, matching a nested surface outside a popover.
+  const nested = document.body.querySelector('[data-testid="nested"]');
+  expect(nested?.classList.contains('cladd-surface-level-1')).toBe(true);
+  expect(nested?.classList.contains('cladd-surface-level-2')).toBe(false);
 
   cleanupOverlayFixture(mounted.root, () => mounted.app.unmount());
 });

@@ -332,7 +332,7 @@ provideSurfaceColorReset();
             </Button>
             <Button
               v-if="d.confirmButtonText"
-              :color="currentAccent"
+              :color="confirmationValid ? currentAccent : undefined"
               :content-class-name="dialogButtonContentClasses"
               data-part="confirm"
               :disabled="!confirmationValid"
