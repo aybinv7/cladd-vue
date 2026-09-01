@@ -1,6 +1,6 @@
 {
   "name": "cladd-vue-workspace",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "private": true,
   "description": "Vue 3 port of the Cladd UI contracts, plus its visual acceptance playground.",
   "license": "MIT",
