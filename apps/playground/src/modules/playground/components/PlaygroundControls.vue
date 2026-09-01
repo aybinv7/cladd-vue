@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { Button, Select } from '@cladd-vue/ui';
-import type { Color, SelectValue } from '@cladd-vue/ui';
+import { Button, Select } from 'cladd-vue';
+import type { Color, SelectValue } from 'cladd-vue';
 
 import type { PlaygroundTheme } from '../playground.types.ts';
 

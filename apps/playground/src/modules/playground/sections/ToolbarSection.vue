@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { Toolbar, ToolbarButton, ToolbarSeparator } from '@cladd-vue/ui';
-import type { Color, ButtonSize } from '@cladd-vue/ui';
+import { Toolbar, ToolbarButton, ToolbarSeparator } from 'cladd-vue';
+import type { Color, ButtonSize } from 'cladd-vue';
 import { computed, ref } from 'vue';
 
 import CatalogSection from '../components/CatalogSection.vue';

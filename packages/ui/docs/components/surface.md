@@ -4,7 +4,7 @@
 
 ```vue
 <script setup lang="ts">
-import { Surface } from '@cladd-vue/ui';
+import { Surface } from 'cladd-vue';
 </script>
 
 <template>
@@ -79,7 +79,7 @@ The effective accent is `color`, then `accent`, then the accent published by the
 
 ```vue
 <script setup lang="ts">
-import { Surface, CladdProvider } from '@cladd-vue/ui';
+import { Surface, CladdProvider } from 'cladd-vue';
 </script>
 
 <template>

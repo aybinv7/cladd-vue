@@ -1,6 +1,6 @@
 # Port manifests
 
-A port manifest is the diff-checkable record of how one `@cladd-vue/ui` component was derived from
+A port manifest is the diff-checkable record of how one `cladd-vue` component was derived from
 its pinned Cladd counterpart. `THIRD_PARTY_NOTICES.md` records which upstream files were used; a
 manifest records what happened to each prop and each literal inside them, with line references on
 both sides.

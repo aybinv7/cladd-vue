@@ -9,7 +9,7 @@
 - License: MIT
 - Copyright: Copyright (c) 2026 cladd-ui
 
-Cladd is the reference for surface depth, sizing relationships, accent scoping, DOM structure, motion, and interaction behavior. `@cladd-vue/ui` is an independent Vue implementation and is not an official Cladd package.
+Cladd is the reference for surface depth, sizing relationships, accent scoping, DOM structure, motion, and interaction behavior. `cladd-vue` is an independent Vue implementation and is not an official Cladd package.
 
 The first Vue surface slice substantially adapts behavior and visual rules from:
 
@@ -46,7 +46,7 @@ When Cladd source is copied or substantially adapted, retain its MIT notice in t
 
 ## Calendar adapter boundary
 
-`src/calendar/Calendar.tsx` and `src/calendar/DatePicker.tsx` adapt `react-day-picker` (`^10.0.1`, MIT) behind Cladd's `Calendar`/`DatePicker` props. `@cladd-vue/ui` does **not** port `react-day-picker` directly — `src/calendar/Calendar.vue` and `src/calendar/DatePicker.vue` are a `@vuepic/vue-datepicker` adapter. The compatibility boundary (prop mapping, copied `SIZES`/`calendarSizes`, and deviations for `disabled`, `locale`, `format`, and `calendarProps`) is documented in `packages/ui/docs/port/Calendar.md`.
+`src/calendar/Calendar.tsx` and `src/calendar/DatePicker.tsx` adapt `react-day-picker` (`^10.0.1`, MIT) behind Cladd's `Calendar`/`DatePicker` props. `cladd-vue` does **not** port `react-day-picker` directly — `src/calendar/Calendar.vue` and `src/calendar/DatePicker.vue` are a `@vuepic/vue-datepicker` adapter. The compatibility boundary (prop mapping, copied `SIZES`/`calendarSizes`, and deviations for `disabled`, `locale`, `format`, and `calendarProps`) is documented in `packages/ui/docs/port/Calendar.md`.
 
 ## Dependencies
 

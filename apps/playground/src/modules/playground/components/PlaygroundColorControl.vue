@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Button, type Color } from '@cladd-vue/ui';
+import { Button, type Color } from 'cladd-vue';
 
 const colors: readonly Color[] = [
   'neutral',

@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { Backdrop, Button, Dialog, Spinner, Surface } from '@cladd-vue/ui';
-import type { Color } from '@cladd-vue/ui';
+import { Backdrop, Button, Dialog, Spinner, Surface } from 'cladd-vue';
+import type { Color } from 'cladd-vue';
 import { computed, ref } from 'vue';
 
 import CatalogSection from '../components/CatalogSection.vue';

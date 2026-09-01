@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { Slider } from '@cladd-vue/ui';
-import type { Color } from '@cladd-vue/ui';
+import { Slider } from 'cladd-vue';
+import type { Color } from 'cladd-vue';
 import { computed, ref } from 'vue';
 
 import { createSliderCode } from '../component-docs';

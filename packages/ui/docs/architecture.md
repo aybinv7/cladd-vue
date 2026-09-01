@@ -6,13 +6,13 @@
 Vue application
       |
       v
-@cladd-vue/ui
+cladd-vue
       |
       v
     Vue 3
 ```
 
-`@cladd-vue/ui` cannot depend on any application, Tauri API, feature store, router, transport, analytics system, or other workspace package.
+`cladd-vue` cannot depend on any application, Tauri API, feature store, router, transport, analytics system, or other workspace package.
 
 ## Ownership
 
@@ -60,7 +60,7 @@ Components preserve native keyboard and form behavior before adding package inte
 
 ## Styling boundary
 
-Package styling mirrors the pinned Cladd baseline: Tailwind v4 utilities, `@theme` token blocks, and custom variants, exposed through `@cladd-vue/ui/css`. All selectors, data attributes, keyframes, and custom properties use the `cladd-` namespace. Consumers may override documented `@theme` custom properties without reaching into component DOM structure.
+Package styling mirrors the pinned Cladd baseline: Tailwind v4 utilities, `@theme` token blocks, and custom variants, exposed through `cladd-vue/css`. All selectors, data attributes, keyframes, and custom properties use the `cladd-` namespace. Consumers may override documented `@theme` custom properties without reaching into component DOM structure.
 
 ## Motion boundary
 

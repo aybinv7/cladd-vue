@@ -5,7 +5,7 @@
 ```vue
 <script setup lang="ts">
 import { ref } from 'vue';
-import { Input } from '@cladd-vue/ui';
+import { Input } from 'cladd-vue';
 
 const filter = ref('');
 </script>
@@ -72,7 +72,7 @@ The component sets `inheritAttrs: false` and forwards every remaining attribute 
 ```vue
 <script setup lang="ts">
 import { ref, onMounted } from 'vue';
-import { Input } from '@cladd-vue/ui';
+import { Input } from 'cladd-vue';
 
 const value = ref('');
 const field = ref<InstanceType<typeof Input>>();
@@ -92,7 +92,7 @@ onMounted(() => field.value?.select());
 ```vue
 <script setup lang="ts">
 import { computed, ref } from 'vue';
-import { Input } from '@cladd-vue/ui';
+import { Input } from 'cladd-vue';
 
 const serial = ref('');
 const valid = computed(() => serial.value.length > 0);

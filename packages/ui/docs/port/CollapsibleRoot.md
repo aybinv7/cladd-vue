@@ -36,7 +36,7 @@ Read upstream paths below as `reference/cladd/<path>`. Vue paths are relative to
 | --------------------------------------- | --------------------------- | -------------------------- |
 | `triggerId` = `` `${baseId}-trigger` `` | `CollapsibleRoot.tsx:72`    | `CollapsibleRoot.vue:46`   |
 | `panelId` = `` `${baseId}-panel` ``     | `CollapsibleRoot.tsx:73`    | `CollapsibleRoot.vue:43`   |
-| Error: `'@cladd-vue/ui: …'`             | `CollapsibleContext.tsx:39` | `collapsibleContext.ts:21` |
+| Error: `'cladd-vue: …'`                 | `CollapsibleContext.tsx:39` | `collapsibleContext.ts:21` |
 
 ## Deviations
 
@@ -44,7 +44,7 @@ Read upstream paths below as `reference/cladd/<path>`. Vue paths are relative to
 - `useState` (`CollapsibleRoot.tsx:55`) → `shallowRef` (`CollapsibleRoot.vue:27`). React's `useState` triggers re-render on state change; Vue's `shallowRef` triggers reactivity through `.value` assignment. The `.value` is read through `open` computed (`CollapsibleRoot.vue:29–31`), which is reactive. No observable difference.
 - `useComponentDefaults` is called (`CollapsibleRoot.vue:22`) but the `uiContext` carries no `CollapsibleRootDefaultProps` — the function returns the original props unchanged for this component.
 - Upstream `CollapsibleRootProps` includes `onOpenChange` as a callback prop (`CollapsibleRoot.tsx:14`). Vue `CollapsibleRootProps` (`collapsible.contracts.ts:3–10`) omits it entirely; the event is declared via `defineEmits` (`CollapsibleRoot.vue:14–16`). The typed public API differs.
-- Error message prefix: upstream says `'Cladd: …'` (`CollapsibleContext.tsx:39`); Vue says `'@cladd-vue/ui: …'` (`collapsibleContext.ts:21`). Same structure, different package name.
+- Error message prefix: upstream says `'Cladd: …'` (`CollapsibleContext.tsx:39`); Vue says `'cladd-vue: …'` (`collapsibleContext.ts:21`). Same structure, different package name.
 
 ## Verification
 

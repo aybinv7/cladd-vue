@@ -1,6 +1,6 @@
 # Cladd Vue Playground
 
-Interactive kitchen sink for reviewing `@cladd-vue/ui` as it is built.
+Interactive kitchen sink for reviewing `cladd-vue` as it is built.
 
 From the repository root:
 

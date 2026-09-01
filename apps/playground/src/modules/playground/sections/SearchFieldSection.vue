@@ -1,12 +1,6 @@
 <script setup lang="ts">
-import {
-  List,
-  ListButton,
-  ListItem,
-  SearchField,
-  Surface,
-} from '@cladd-vue/ui';
-import type { Color } from '@cladd-vue/ui';
+import { List, ListButton, ListItem, SearchField, Surface } from 'cladd-vue';
+import type { Color } from 'cladd-vue';
 import { computed, ref } from 'vue';
 
 import CatalogSection from '../components/CatalogSection.vue';

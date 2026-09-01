@@ -3,10 +3,10 @@
 A Vue 3 port of [Cladd](https://github.com/cladd-ui/cladd)'s surface, sizing, accent, motion, DOM, and
 interaction contracts. This is an independent implementation and is **not an official Cladd package**.
 
-| Workspace         | Package         | What it is                                           |
-| ----------------- | --------------- | ---------------------------------------------------- |
-| `packages/ui`     | `@cladd-vue/ui` | The component library. ESM, typed, tree-shakeable.   |
-| `apps/playground` | `playground`    | Visual acceptance catalog. Private, never published. |
+| Workspace         | Package      | What it is                                           |
+| ----------------- | ------------ | ---------------------------------------------------- |
+| `packages/ui`     | `cladd-vue`  | The component library. ESM, typed, tree-shakeable.   |
+| `apps/playground` | `playground` | Visual acceptance catalog. Private, never published. |
 
 ## Requirements
 
@@ -27,8 +27,8 @@ vp run ready               # all of the above, in order
 Focused, per-workspace runs:
 
 ```bash
-vp run @cladd-vue/ui#test
-vp run @cladd-vue/ui#build
+vp run cladd-vue#test
+vp run cladd-vue#build
 vp run playground#dev
 ```
 
@@ -52,16 +52,16 @@ Roadmap and audits live in `plans/`.
 ## Consuming the package
 
 ```bash
-bun add @cladd-vue/ui
+bun add cladd-vue
 ```
 
 ```ts
-import '@cladd-vue/ui/css';
+import 'cladd-vue/css';
 ```
 
 ```vue
 <script setup lang="ts">
-import { Button, CladdProvider, Input, Surface } from '@cladd-vue/ui';
+import { Button, CladdProvider, Input, Surface } from 'cladd-vue';
 </script>
 
 <template>
@@ -76,12 +76,12 @@ import { Button, CladdProvider, Input, Surface } from '@cladd-vue/ui';
 
 ### Calendar subpath
 
-Calendar and DatePicker components are isolated under `@cladd-vue/ui/calendar`:
+Calendar and DatePicker components are isolated under `cladd-vue/calendar`:
 
 ```vue
 <script setup lang="ts">
 import { ref } from 'vue';
-import { Calendar, DatePicker } from '@cladd-vue/ui/calendar';
+import { Calendar, DatePicker } from 'cladd-vue/calendar';
 
 const date = ref(new Date());
 </script>

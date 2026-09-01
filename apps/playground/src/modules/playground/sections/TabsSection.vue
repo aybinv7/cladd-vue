@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { Tab, TabPanel, Tabs, TabsList } from '@cladd-vue/ui';
-import type { Color, ButtonSize } from '@cladd-vue/ui';
+import { Tab, TabPanel, Tabs, TabsList } from 'cladd-vue';
+import type { Color, ButtonSize } from 'cladd-vue';
 import { computed, ref } from 'vue';
 
 import CatalogSection from '../components/CatalogSection.vue';

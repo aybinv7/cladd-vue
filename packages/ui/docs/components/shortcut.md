@@ -4,7 +4,7 @@
 
 ```vue
 <script setup lang="ts">
-import { Shortcut } from '@cladd-vue/ui';
+import { Shortcut } from 'cladd-vue';
 </script>
 
 <template>

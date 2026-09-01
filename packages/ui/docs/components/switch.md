@@ -5,7 +5,7 @@
 ```vue
 <script setup lang="ts">
 import { ref } from 'vue';
-import { Switch } from '@cladd-vue/ui';
+import { Switch } from 'cladd-vue';
 
 const notifications = ref(false);
 </script>

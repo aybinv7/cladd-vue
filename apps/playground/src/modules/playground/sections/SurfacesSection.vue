@@ -5,8 +5,8 @@ import {
   SurfaceContextProvider,
   SurfaceCut,
   SurfaceCutContent,
-} from '@cladd-vue/ui';
-import type { Color, SurfaceVariant } from '@cladd-vue/ui';
+} from 'cladd-vue';
+import type { Color, SurfaceVariant } from 'cladd-vue';
 
 import CatalogSection from '../components/CatalogSection.vue';
 

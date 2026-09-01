@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import { ColorEditor, ColorPicker } from '@cladd-vue/ui';
+import { ColorEditor, ColorPicker } from 'cladd-vue';
 import type {
   Color,
   ColorEditorControlSize,
   ColorEditorFormat,
-} from '@cladd-vue/ui';
+} from 'cladd-vue';
 import { computed, ref } from 'vue';
 
 import CatalogSection from '../components/CatalogSection.vue';

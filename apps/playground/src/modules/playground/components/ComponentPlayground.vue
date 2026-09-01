@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Surface } from '@cladd-vue/ui';
+import { Surface } from 'cladd-vue';
 
 import PlaygroundCode from './PlaygroundCode.vue';
 

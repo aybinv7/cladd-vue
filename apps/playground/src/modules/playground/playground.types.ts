@@ -1,4 +1,4 @@
-import type { Color } from '@cladd-vue/ui';
+import type { Color } from 'cladd-vue';
 
 /** The library takes `'dark' | 'light'`; upstream declares no theme union to import. */
 export type PlaygroundTheme = 'dark' | 'light';

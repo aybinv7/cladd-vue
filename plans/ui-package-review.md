@@ -1,4 +1,4 @@
-# Review: `@cladd-vue/ui` and `apps/playground`
+# Review: `cladd-vue` and `apps/playground`
 
 > Reviewed 2026-08-03 against `plans/vue-ui-package.md` and `packages/ui/CLAUDE.md`.
 > Port-fidelity findings live in `port-fidelity-audit.md`. Styling decision lives in
@@ -11,11 +11,11 @@
 
 ## Verification performed
 
-| Command                      | Result                                                         |
-| ---------------------------- | -------------------------------------------------------------- |
-| `vp run @cladd-vue/ui#test`  | pass, 41 tests across 5 files                                  |
-| `vp run @cladd-vue/ui#check` | pass, 76 files formatted, 52 files without lint or type errors |
-| `vp run @cladd-vue/ui#build` | **fail**, parse error on `src/components/Surface.vue:1:1`      |
+| Command                  | Result                                                         |
+| ------------------------ | -------------------------------------------------------------- |
+| `vp run cladd-vue#test`  | pass, 41 tests across 5 files                                  |
+| `vp run cladd-vue#check` | pass, 76 files formatted, 52 files without lint or type errors |
+| `vp run cladd-vue#build` | **fail**, parse error on `src/components/Surface.vue:1:1`      |
 
 Everything else below is source reading, not executed evidence.
 
@@ -118,7 +118,7 @@ what the next real consumer needs.
 ### M3. No in-product consumer
 
 Phase 7 exists so the surface and motion language is tested against a real dense workflow.
-`apps/desktop` has no `@cladd-vue/ui` dependency and zero imports. The design language is currently
+`apps/desktop` has no `cladd-vue` dependency and zero imports. The design language is currently
 validated only against a catalog built to flatter it.
 
 ### M4. Documentation is half-wired

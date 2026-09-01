@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Button, Switch } from '@cladd-vue/ui';
+import { Button, Switch } from 'cladd-vue';
 
 defineProps<{
   label: string;

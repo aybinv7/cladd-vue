@@ -1,4 +1,4 @@
-# @cladd-vue/ui
+# cladd-vue
 
 Reusable Vue 3 UI primitives for dense application interfaces.
 
@@ -8,7 +8,7 @@ This package ports Cladd's surface, sizing, accent, motion, DOM, and interaction
 
 Every pinned upstream value and type export has a Vue counterpart: surface, action, data-display,
 feedback, form, overlay, dense-navigation, color, number, OTP, and calendar families. `Calendar` and
-`DatePicker` ship from `@cladd-vue/ui/calendar`. Export coverage does not yet mean full browser-level
+`DatePicker` ship from `cladd-vue/calendar`. Export coverage does not yet mean full browser-level
 visual, motion, or interaction parity for every family.
 
 ## Boundaries
@@ -28,23 +28,23 @@ This is an independent Vue implementation and is not an official Cladd package.
 ## Install
 
 ```bash
-bun add @cladd-vue/ui
+bun add cladd-vue
 ```
 
 `vue@^3.5` and `tailwindcss@^4.2` are peer dependencies. Inside this repository, workspaces depend on
-it as `"@cladd-vue/ui": "workspace:*"` and resolve the development-only `source` export condition, so
+it as `"cladd-vue": "workspace:*"` and resolve the development-only `source` export condition, so
 no build is required before running the playground.
 
 ## Usage
 
 ```ts
-import '@cladd-vue/ui/css';
+import 'cladd-vue/css';
 ```
 
 ```vue
 <script setup lang="ts">
-import { Button, Checkbox, Input, Surface, CladdProvider } from '@cladd-vue/ui';
-import '@cladd-vue/ui/css';
+import { Button, Checkbox, Input, Surface, CladdProvider } from 'cladd-vue';
+import 'cladd-vue/css';
 </script>
 
 <template>
@@ -69,9 +69,9 @@ package's own components for the utilities they use.
 Use Vite+ from the repository root.
 
 ```bash
-vp run @cladd-vue/ui#check
-vp run @cladd-vue/ui#test
-vp run @cladd-vue/ui#build
+vp run cladd-vue#check
+vp run cladd-vue#test
+vp run cladd-vue#build
 ```
 
 Do not run package-manager binaries or underlying tools directly.

@@ -7,8 +7,8 @@ import {
   PopupClose,
   PopupRoot,
   PopupTrigger,
-} from '@cladd-vue/ui';
-import type { Color } from '@cladd-vue/ui';
+} from 'cladd-vue';
+import type { Color } from 'cladd-vue';
 import { computed, ref } from 'vue';
 
 import CatalogSection from '../components/CatalogSection.vue';

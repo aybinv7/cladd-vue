@@ -1,4 +1,4 @@
-# Port-fidelity audit: `@cladd-vue/ui` against pinned Cladd
+# Port-fidelity audit: `cladd-vue` against pinned Cladd
 
 > Reviewed 2026-08-03 against `@cladd-ui/react` 0.18.5 at commit
 > `fadd8efe935111f31d7c933238db5ce5d3a55d71`, the baseline recorded in `THIRD_PARTY_NOTICES.md`.

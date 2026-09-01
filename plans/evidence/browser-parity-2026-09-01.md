@@ -49,7 +49,7 @@
 
 - Enter/open/close frames captured: `dialog-open.png`, `dialog-closed.png` (and dark/light per route).
 - Focus return after dialog close: PASS — focus returned to trigger
-- Happy-dom lifecycle also covered: `vp run @cladd-vue/ui#test -- --run tests/foundations/overlayLifecycle.test.ts` → 10 tests passed (see terminal output).
+- Happy-dom lifecycle also covered: `vp run cladd-vue#test -- --run tests/foundations/overlayLifecycle.test.ts` → 10 tests passed (see terminal output).
 
 ### Narrow viewport (320px)
 
@@ -91,7 +91,7 @@
 
 - `curl -s -o NUL -w "%{http_code}" http://localhost:5174/components/dialog` → 200 (and for all routes above, via Node spawnSync curl.exe)
 - `chrome --headless --dump-dom http://localhost:5174/components/dialog` → shows `<html class="dark">` and Tailwind tokens; validated via Playwright evaluate getComputedStyle
-- Tests: `vp run @cladd-vue/ui#test -- --run` → 210 tests passed including `overlayLifecycle.test.ts` (10), `browserEvidence.test.ts` (3), `calendar.test.ts` (8)
+- Tests: `vp run cladd-vue#test -- --run` → 210 tests passed including `overlayLifecycle.test.ts` (10), `browserEvidence.test.ts` (3), `calendar.test.ts` (8)
 
 ## Notes / Issues
 

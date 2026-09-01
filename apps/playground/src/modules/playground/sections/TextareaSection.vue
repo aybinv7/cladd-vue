@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { Textarea } from '@cladd-vue/ui';
-import type { Color, TextareaSize } from '@cladd-vue/ui';
+import { Textarea } from 'cladd-vue';
+import type { Color, TextareaSize } from 'cladd-vue';
 import { computed, ref } from 'vue';
 
 import CatalogSection from '../components/CatalogSection.vue';

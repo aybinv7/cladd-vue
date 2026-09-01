@@ -4,7 +4,7 @@
 
 ```vue
 <script setup lang="ts">
-import { Spinner } from '@cladd-vue/ui';
+import { Spinner } from 'cladd-vue';
 </script>
 
 <template>

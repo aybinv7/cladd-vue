@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { CladdProvider } from '@cladd-vue/ui';
-import type { Color } from '@cladd-vue/ui';
+import { CladdProvider } from 'cladd-vue';
+import type { Color } from 'cladd-vue';
 import { ref, watchEffect } from 'vue';
 import { RouterView } from 'vue-router';
 

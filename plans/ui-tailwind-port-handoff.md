@@ -1,4 +1,4 @@
-# `@cladd-vue/ui` Tailwind port — handoff status
+# `cladd-vue` Tailwind port — handoff status
 
 > Historical handoff. Its `cui-*` namespace, missing-component queue, and unexported-Backdrop note
 > are superseded. Every pinned upstream export now ships under the `cladd-*` namespace; `Backdrop`,
@@ -249,7 +249,7 @@ mode collapses the wrapper to `display: contents` at level 4 with the field at `
 
 Every item below is a pure port — read the upstream file, copy it, delete whatever of ours it
 replaces. Run `vp run reference:cladd` first: the pinned checkout is gitignored and absent on a fresh
-clone. Keep `vp run @cladd-vue/ui#test` green between items.
+clone. Keep `vp run cladd-vue#test` green between items.
 
 ### 1. Finish threading `useComponentDefaults` (mechanical, biggest remaining chunk)
 
@@ -376,8 +376,8 @@ the `Surface`, `Popover`/`Dialog` are `inheritAttrs: false` and route the consum
 
 - [ ] The upstream file was read in full first, and the diff is a copy of it — not a reconstruction
 - [ ] Every prop upstream exposes exists, including the ones nothing in this repo uses yet
-- [ ] `vp run @cladd-vue/ui#test` — all green, no skipped assertions
-- [ ] `vp run @cladd-vue/ui#check --fix` — no lint/format/type errors
+- [ ] `vp run cladd-vue#test` — all green, no skipped assertions
+- [ ] `vp run cladd-vue#check --fix` — no lint/format/type errors
 - [ ] `vp run playground#check` — playground still typechecks against the public export
 - [ ] New literals locked in a contracts file and asserted by value in a test, so they can't drift
 - [ ] Anything hand-authored that the port replaces is deleted in the same commit

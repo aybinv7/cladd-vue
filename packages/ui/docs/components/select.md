@@ -5,7 +5,7 @@
 ```vue
 <script setup lang="ts">
 import { ref } from 'vue';
-import { Select } from '@cladd-vue/ui';
+import { Select } from 'cladd-vue';
 
 const priority = ref('medium');
 const priorities = [

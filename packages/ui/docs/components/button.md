@@ -4,7 +4,7 @@
 
 ```vue
 <script setup lang="ts">
-import { Button } from '@cladd-vue/ui';
+import { Button } from 'cladd-vue';
 </script>
 
 <template>

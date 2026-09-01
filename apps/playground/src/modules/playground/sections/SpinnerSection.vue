@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { Spinner } from '@cladd-vue/ui';
-import type { Color, SpinnerSize } from '@cladd-vue/ui';
+import { Spinner } from 'cladd-vue';
+import type { Color, SpinnerSize } from 'cladd-vue';
 import { computed, ref } from 'vue';
 
 import CatalogSection from '../components/CatalogSection.vue';

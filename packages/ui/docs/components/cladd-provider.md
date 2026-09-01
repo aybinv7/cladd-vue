@@ -4,8 +4,8 @@
 
 ```vue
 <script setup lang="ts">
-import { CladdProvider, Surface } from '@cladd-vue/ui';
-import '@cladd-vue/ui/css';
+import { CladdProvider, Surface } from 'cladd-vue';
+import 'cladd-vue/css';
 </script>
 
 <template>
@@ -37,7 +37,7 @@ The root element carries the class `cladd-theme`, the accent class `cladd-accent
 - Light mode is only selected by `.cladd-theme[data-cladd-theme="light"]`, so a light region requires a provider (or an equivalent hand-written root) — setting `theme` alone on a component does nothing.
 - `color-scheme` is set from `data-cladd-theme`, which is what makes native scrollbars and form chrome match.
 
-Import `@cladd-vue/ui/css` once in the application entry; the provider does not inject styles.
+Import `cladd-vue/css` once in the application entry; the provider does not inject styles.
 
 ## Reading the context
 
@@ -45,7 +45,7 @@ Import `@cladd-vue/ui/css` once in the application entry; the provider does not 
 
 ```vue
 <script setup lang="ts">
-import { useUiContext } from '@cladd-vue/ui';
+import { useUiContext } from 'cladd-vue';
 
 const ui = useUiContext();
 </script>
@@ -63,7 +63,7 @@ Providers nest, and each one re-roots the theme for its subtree. That is the sup
 
 ```vue
 <script setup lang="ts">
-import { CladdProvider, Surface } from '@cladd-vue/ui';
+import { CladdProvider, Surface } from 'cladd-vue';
 </script>
 
 <template>

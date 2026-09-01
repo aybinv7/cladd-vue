@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { Chip, Input, Spinner } from '@cladd-vue/ui';
-import type { Color, InputSize } from '@cladd-vue/ui';
+import { Chip, Input, Spinner } from 'cladd-vue';
+import type { Color, InputSize } from 'cladd-vue';
 import { computed, ref } from 'vue';
 
 import CatalogSection from '../components/CatalogSection.vue';

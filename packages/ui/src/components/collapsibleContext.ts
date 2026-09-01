@@ -18,7 +18,7 @@ export function useCollapsibleContext(): ComputedRef<CollapsibleContextValue> {
 
   if (!context) {
     throw new Error(
-      '@cladd-vue/ui: `CollapsibleTrigger`, `CollapsiblePanel` and `CollapsibleIndicator` must be used inside a `CollapsibleRoot` or `AccordionItem`.',
+      'cladd-vue: `CollapsibleTrigger`, `CollapsiblePanel` and `CollapsibleIndicator` must be used inside a `CollapsibleRoot` or `AccordionItem`.',
     );
   }
 

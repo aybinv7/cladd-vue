@@ -4,7 +4,7 @@
 
 ```vue
 <script setup lang="ts">
-import { Surface, SurfaceCut } from '@cladd-vue/ui';
+import { Surface, SurfaceCut } from 'cladd-vue';
 </script>
 
 <template>
@@ -64,7 +64,7 @@ Accent resolution matches `Surface`: `color`, then `accent`, then the accent pub
 
 ```vue
 <script setup lang="ts">
-import { Input, SurfaceCut, CladdProvider } from '@cladd-vue/ui';
+import { Input, SurfaceCut, CladdProvider } from 'cladd-vue';
 </script>
 
 <template>

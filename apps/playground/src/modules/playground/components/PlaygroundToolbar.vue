@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Surface } from '@cladd-vue/ui';
+import { Surface } from 'cladd-vue';
 
 withDefaults(
   defineProps<{

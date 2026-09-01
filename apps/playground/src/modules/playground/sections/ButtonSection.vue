@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { Button } from '@cladd-vue/ui';
-import type { Color, SurfaceVariant, ButtonSize } from '@cladd-vue/ui';
+import { Button } from 'cladd-vue';
+import type { Color, SurfaceVariant, ButtonSize } from 'cladd-vue';
 import { computed, ref } from 'vue';
 
 import CatalogSection from '../components/CatalogSection.vue';

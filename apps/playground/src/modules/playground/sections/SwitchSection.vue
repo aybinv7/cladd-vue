@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { Switch } from '@cladd-vue/ui';
-import type { Color, SwitchSize } from '@cladd-vue/ui';
+import { Switch } from 'cladd-vue';
+import type { Color, SwitchSize } from 'cladd-vue';
 import { computed, ref } from 'vue';
 
 import CatalogSection from '../components/CatalogSection.vue';

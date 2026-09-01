@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Button, Surface } from '@cladd-vue/ui';
+import { Button, Surface } from 'cladd-vue';
 import { onBeforeUnmount, ref, watch } from 'vue';
 
 import CheckIcon from './icons/CheckIcon.vue';

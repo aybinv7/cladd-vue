@@ -13,7 +13,7 @@ export function useTabsContext(): TabsContextValue {
 
   if (!context) {
     throw new Error(
-      '@cladd-vue/ui: `TabsList`, `Tab` and `TabPanel` must be rendered inside a `Tabs` root.',
+      'cladd-vue: `TabsList`, `Tab` and `TabPanel` must be rendered inside a `Tabs` root.',
     );
   }
 

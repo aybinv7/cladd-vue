@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import type { Color } from '@cladd-vue/ui';
-import { Calendar, DatePicker } from '@cladd-vue/ui/calendar';
+import type { Color } from 'cladd-vue';
+import { Calendar, DatePicker } from 'cladd-vue/calendar';
 import type {
   CalendarMode,
   CalendarSize,
   CalendarValue,
   DateRange,
-} from '@cladd-vue/ui/calendar';
+} from 'cladd-vue/calendar';
 import { computed, ref, watch } from 'vue';
 
 import CatalogSection from '../components/CatalogSection.vue';

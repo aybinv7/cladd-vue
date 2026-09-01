@@ -148,7 +148,7 @@ Read these files before implementation:
 - Test keyboard interaction and focus restoration for overlays.
 - Test reduced-motion behavior for animated components.
 - Test package exports and consumer-style imports.
-- Run `vp run @cladd-vue/ui#check` and `vp run @cladd-vue/ui#test` for focused validation.
+- Run `vp run cladd-vue#check` and `vp run cladd-vue#test` for focused validation.
 - Run `git diff --check` before handoff.
 - Do not claim build, browser, accessibility-tool, or device evidence unless that validation actually ran.
 

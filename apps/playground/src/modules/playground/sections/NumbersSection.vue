@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { NumberField, NumberScrubber } from '@cladd-vue/ui';
-import type { Color, NumberFieldSize } from '@cladd-vue/ui';
+import { NumberField, NumberScrubber } from 'cladd-vue';
+import type { Color, NumberFieldSize } from 'cladd-vue';
 import { computed, ref } from 'vue';
 
 import CatalogSection from '../components/CatalogSection.vue';

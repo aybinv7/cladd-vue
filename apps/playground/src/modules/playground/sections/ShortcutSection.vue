@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { Shortcut } from '@cladd-vue/ui';
-import type { Color, ShortcutSize } from '@cladd-vue/ui';
+import { Shortcut } from 'cladd-vue';
+import type { Color, ShortcutSize } from 'cladd-vue';
 import { computed, ref } from 'vue';
 
 import CatalogSection from '../components/CatalogSection.vue';

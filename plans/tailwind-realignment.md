@@ -1,10 +1,10 @@
-# Decision: `@cladd-vue/ui` adopts Tailwind v4, mirroring Cladd
+# Decision: `cladd-vue` adopts Tailwind v4, mirroring Cladd
 
 > Rule of record: the package mirrors the pinned Cladd baseline. Where Cladd is framework-agnostic, the
 > package copies. Where Cladd is React-specific, the package transposes to Vue. Nothing is re-designed.
 >
 > Historical record. The `cui-*` namespace described below was superseded by the completed
-> `cladd-*` namespace restoration. The current package stylesheet entry is `@cladd-vue/ui/css`.
+> `cladd-*` namespace restoration. The current package stylesheet entry is `cladd-vue/css`.
 
 ## Evidence
 
@@ -93,7 +93,7 @@ Tailwind is out of scope for the same reason it is out of scope upstream.
 
    ```css
    @import 'tailwindcss';
-   @import '@cladd-vue/ui/styles.css';
+   @import 'cladd-vue/styles.css';
    ```
 
    Verified: playground CSS 88.5 kB with zero leaked at-rules, tokens resolving live in the browser

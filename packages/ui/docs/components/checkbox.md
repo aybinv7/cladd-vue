@@ -5,7 +5,7 @@
 ```vue
 <script setup lang="ts">
 import { ref } from 'vue';
-import { Checkbox } from '@cladd-vue/ui';
+import { Checkbox } from 'cladd-vue';
 
 const subscribed = ref(false);
 </script>

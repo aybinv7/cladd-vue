@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { Chip } from '@cladd-vue/ui';
-import type { Color, SurfaceVariant, ChipSize } from '@cladd-vue/ui';
+import { Chip } from 'cladd-vue';
+import type { Color, SurfaceVariant, ChipSize } from 'cladd-vue';
 import { computed, ref } from 'vue';
 
 import CatalogSection from '../components/CatalogSection.vue';

@@ -15,7 +15,7 @@ export function useAccordionContext(): ComputedRef<AccordionContextValue> {
 
   if (!context) {
     throw new Error(
-      '@cladd-vue/ui: `AccordionItem` must be rendered inside an `AccordionRoot`.',
+      'cladd-vue: `AccordionItem` must be rendered inside an `AccordionRoot`.',
     );
   }
 

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Button, Chip, Shortcut } from '@cladd-vue/ui';
+import { Button, Chip, Shortcut } from 'cladd-vue';
 
 import type { PlaygroundTheme } from '../playground.types.ts';
 

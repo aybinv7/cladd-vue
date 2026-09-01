@@ -5,7 +5,7 @@
 ```vue
 <script setup lang="ts">
 import { ref } from 'vue';
-import { Radio } from '@cladd-vue/ui';
+import { Radio } from 'cladd-vue';
 
 const listView = ref(true);
 </script>

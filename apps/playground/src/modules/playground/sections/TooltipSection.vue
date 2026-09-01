@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { Button, NumberField, Tooltip } from '@cladd-vue/ui';
-import type { Color, TooltipPosition } from '@cladd-vue/ui';
+import { Button, NumberField, Tooltip } from 'cladd-vue';
+import type { Color, TooltipPosition } from 'cladd-vue';
 import { computed, ref } from 'vue';
 
 import CatalogSection from '../components/CatalogSection.vue';

@@ -6,9 +6,9 @@
 
 > Current implementation status (reviewed 2026-08-31): every pinned Cladd value and type export has a Vue counterpart, including compound parts, the Calendar subpath, and hooks. The 37 documentation tiles are all represented. This proves export coverage only; it does not prove full behavioral, visual, motion, or browser parity.
 >
-> Focused package validation on 2026-08-31: 193 tests pass across 22 files, and `vp run @cladd-vue/ui#check --fix` reports no formatting, lint, or type errors. Audit outcomes are in `component-audit-fixes.md`; remaining fidelity work is tracked below and in `port-fidelity-audit.md`.
+> Focused package validation on 2026-08-31: 193 tests pass across 22 files, and `vp run cladd-vue#check --fix` reports no formatting, lint, or type errors. Audit outcomes are in `component-audit-fixes.md`; remaining fidelity work is tracked below and in `port-fidelity-audit.md`.
 
-- **Package**: `@cladd-vue/ui` is a publishable workspace package and the only owner of reusable UI primitives.
+- **Package**: `cladd-vue` is a publishable workspace package and the only owner of reusable UI primitives.
 - **Framework**: Vue 3.5 with Composition API, `<script setup lang="ts">`, and strict TypeScript.
 - **Behavior layer**: Native HTML and focused Vue composables implement pinned Cladd DOM, form, focus, positioning, dismissal, and lifecycle contracts.
 - **Prohibited dependencies**: React, React DOM, shadcn-vue, Radix Vue, Pinia, Tauri, application packages, and feature modules.
@@ -168,7 +168,7 @@ Deliver `Toolbar`, `Tabs`, `Segmented`, `Accordion`, `Collapsible`, `List`, `Sea
 
 Deliver `NumberField`, `NumberScrubber`, `Calendar`, `DatePicker`, `OTPField`, `ColorPicker`, `ColorEditor`, `Toast`, and `Popup` in small family-level changes while maintaining one demoable advanced-control workspace.
 
-**Implementation status:** all named families ship. `Calendar` and `DatePicker` are public `@cladd-vue/ui/calendar` exports. The acceptance criteria remain the evidence needed to call the slice complete.
+**Implementation status:** all named families ship. `Calendar` and `DatePicker` are public `cladd-vue/calendar` exports. The acceptance criteria remain the evidence needed to call the slice complete.
 
 ### Acceptance criteria
 
@@ -192,7 +192,7 @@ Adopt package foundation, primary actions, and overlays in one representative de
 
 ### Acceptance criteria
 
-- [ ] The pilot application consumes `@cladd-vue/ui` through a published version or a local link, and imports package CSS once.
+- [ ] The pilot application consumes `cladd-vue` through a published version or a local link, and imports package CSS once.
 - [ ] Pilot workflow preserves every existing action and state.
 - [ ] Theme and accent values bridge through documented public tokens only.
 - [ ] No package import points back into consumer code.
