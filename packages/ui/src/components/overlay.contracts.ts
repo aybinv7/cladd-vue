@@ -1,3 +1,5 @@
+import type { VNodeChild } from 'vue';
+
 import type {
   SurfaceLevelInput,
   SurfaceVariant,
@@ -262,6 +264,22 @@ export interface PopoverProps {
   variant?: SurfaceVariant;
   /** Minimum gap (px) from the viewport edge. Default `4`. */
   viewportMargin?: number;
+  /** Inherited from `SurfaceProps` via `PopoverProps & Omit<SurfaceProps, ...>` — extra classes for the background layer. */
+  bgClassName?: string;
+  /** Inherited from `SurfaceProps` — enables hover background overlay. */
+  hoverable?: boolean;
+  /** Inherited from `SurfaceProps` — enables active/pressed visual states. */
+  clickable?: boolean;
+  /** Inherited from `SurfaceProps` — force the pressed visual state. */
+  pressed?: boolean;
+  /** Inherited from `SurfaceProps` — where to stack the hover/press overlay. Default `'above'`. */
+  overlayPosition?: 'above' | 'below';
+  /** Inherited from `SurfaceProps` — extra classes for the hover/press overlay. */
+  overlayClassName?: string;
+  /** Inherited from `SurfaceProps` — polymorphpic root element for the surface (rarely needed, `Surface` default `'div'`). */
+  as?: string;
+  /** Inherited from `SurfaceProps` — wrap children in `SurfaceContent`. Default `true`. */
+  wrapContent?: boolean;
 }
 
 export type PopoverDefaultProps = Partial<
@@ -287,8 +305,8 @@ export interface DialogProps {
   buttons?: unknown;
   /** Color for the cancel button. Default `'neutral'`. */
   cancelButtonColor?: Color;
-  /** Label for the cancel button. When omitted, the cancel button is not rendered. */
-  cancelButtonText?: string;
+  /** Label for the cancel button. When omitted, the cancel button is not rendered. Upstream `ReactNode` → `string | VNodeChild` + slot fallback. */
+  cancelButtonText?: string | VNodeChild;
   /** Default `true`. */
   closeOnBackdropClick?: boolean;
   /** Default `true`. */
@@ -297,8 +315,8 @@ export interface DialogProps {
   color?: Color;
   /** Color for the confirm button. Default: theme accent color. */
   confirmButtonColor?: Color;
-  /** Label for the confirm button. When omitted, the confirm button is not rendered. */
-  confirmButtonText?: string;
+  /** Label for the confirm button. When omitted, the confirm button is not rendered. Upstream `ReactNode` → `string | VNodeChild` + slot fallback. */
+  confirmButtonText?: string | VNodeChild;
   /** Extra classes applied to the inner content area. Default includes `flex flex-col gap-4 p-4`. */
   contentClassName?: string;
   /**
@@ -311,8 +329,8 @@ export interface DialogProps {
   lazy?: boolean;
   /** Stop click propagation on backdrop and surface. Useful when the dialog is rendered inside a clickable parent. */
   stopPropagationOnClick?: boolean;
-  /** Body text slot. Rendered as `<div>` with `text-cladd-sm leading-relaxed`. Auto-wired to `aria-describedby`. */
-  text?: string;
+  /** Body text slot. Rendered as `<div>` with `text-cladd-sm leading-relaxed`. Auto-wired to `aria-describedby`. Upstream `ReactNode` → `string | VNodeChild` + `text` slot. */
+  text?: string | VNodeChild;
   /** Outline ring on the dialog surface. Default `true` for dark, `false` for light. */
   outline?: boolean;
   /**
@@ -323,8 +341,8 @@ export interface DialogProps {
   root?: string | HTMLElement | false;
   /** Forwarded to the underlying `Surface` as `level`. Default `1`. */
   surfaceLevel?: SurfaceLevelInput;
-  /** Title slot. Rendered as `<div>` with `text-cladd-md font-semibold`. Auto-wired to `aria-labelledby`. */
-  title?: string;
+  /** Title slot. Rendered as `<div>` with `text-cladd-md font-semibold`. Auto-wired to `aria-labelledby`. Upstream `ReactNode` → `string | VNodeChild` + `title` slot. */
+  title?: string | VNodeChild;
   /** Surface variant. Default depends on theme: `'solid'` for light, `'gradient'` for dark. */
   variant?: SurfaceVariant;
 }
@@ -525,8 +543,10 @@ export type PopoverTriggerProps = Record<string, never>;
 /** Takes no own props; upstream's are the native element props plus `children` and `ref`. */
 export type PopoverCloseProps = Record<string, never>;
 
-/** Takes no own props; upstream's are the native element props plus `children` and `ref`. */
-export type BackdropProps = Record<string, never>;
+export interface BackdropProps {
+  /** Extra classes applied to the backdrop. */
+  className?: string;
+}
 
 /** Shape of `Backdrop` defaults that can be supplied via `CladdProvider`'s `defaults` prop. */
 export type BackdropDefaultProps = Partial<BackdropProps>;

@@ -5,7 +5,7 @@ export default defineConfig({
     '*': 'vp check --fix',
   },
   fmt: {
-    ignorePatterns: ['**/dist/**', 'reference/**'],
+    ignorePatterns: ['**/dist/**', 'reference/**', '**/evidence/*.html'],
     arrowParens: 'always',
     bracketSpacing: true,
     htmlWhitespaceSensitivity: 'css',
@@ -27,7 +27,7 @@ export default defineConfig({
     overrides: [{ files: ['*.css'], options: { singleQuote: false } }],
   },
   lint: {
-    ignorePatterns: ['**/dist/**', 'reference/**'],
+    ignorePatterns: ['**/dist/**', 'reference/**', '**/evidence/*.html'],
     jsPlugins: [{ name: 'vite-plus', specifier: 'vite-plus/oxlint-plugin' }],
     rules: { 'vite-plus/prefer-vite-plus-imports': 'error' },
     options: { typeAware: true, typeCheck: true },

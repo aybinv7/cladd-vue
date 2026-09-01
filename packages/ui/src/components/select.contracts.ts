@@ -1,4 +1,8 @@
-import type { SurfaceVariant, UiSize } from '../foundations/contracts.ts';
+import type {
+  SurfaceLevelInput,
+  SurfaceVariant,
+  UiSize,
+} from '../foundations/contracts.ts';
 import type { Color } from '../types.ts';
 import type { ButtonSurface } from './button.contracts.ts';
 import type { PopoverOffset, PopoverPosition } from './overlay.contracts.ts';
@@ -151,6 +155,18 @@ export interface SelectProps {
   valueClassName?: string;
   /** Underlying `Surface` variant - see `SurfaceVariant`. Defaults to `'gradient'`. */
   variant?: SurfaceVariant;
+  /** Inherited from `ButtonProps` via `SelectProps & Omit<ButtonProps, ...>` — polymorphic root element for the trigger. */
+  as?: string;
+  /** Inherited from `ButtonProps` — enables active/pressed visual states. Default `true`. */
+  clickable?: boolean;
+  /** Inherited from `ButtonProps` — whether the trigger can receive focus. Default `true`. */
+  focusable?: boolean;
+  /** Inherited from `ButtonProps` — show a centered `Spinner` overlay and fade content. */
+  loading?: boolean;
+  /** Inherited from `ButtonProps` — render as an icon-only square button. */
+  square?: boolean;
+  /** Inherited from `ButtonProps` — forwarded to the trigger `Surface` as `level`. */
+  surfaceLevel?: SurfaceLevelInput;
 }
 
 export type SelectDefaultProps = Partial<

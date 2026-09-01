@@ -1,4 +1,4 @@
-import type { Component } from 'vue';
+import type { Component, VNodeChild } from 'vue';
 
 import type { Color } from '../types.ts';
 import type { FieldSize } from './form.contracts.ts';
@@ -15,14 +15,14 @@ export interface TextareaProps {
   contentClassName?: string;
   /** Visually dim the textarea and remove `contenteditable`. Default `false`. */
   disabled?: boolean;
-  /** Floating error label. Always visible when `valid === false`. */
-  errorMessage?: string;
+  /** Floating error label. Always visible when `valid === false`. Upstream `ReactNode` → `string | VNodeChild` + `info`/`error` slots. */
+  errorMessage?: string | VNodeChild;
   /** Extra classes for the icon wrapper. */
   iconClassName?: string;
   /** Reserved - currently not applied in the rendered output. */
   inputPadding?: string;
-  /** Floating label shown above the editor on focus. */
-  infoMessage?: string;
+  /** Floating label shown above the editor on focus. Upstream `ReactNode` → `string | VNodeChild` + `info`/`error` slots. */
+  infoMessage?: string | VNodeChild;
   /** Extra classes for the editable `[contenteditable]` `<div>`. */
   inputClassName?: string;
   /** Maximum number of characters the user can type or paste. */
@@ -43,6 +43,22 @@ export interface TextareaProps {
   updateContentOnChange?: boolean;
   /** Validity state. Default `true`. */
   valid?: boolean;
+  /** Inherited from `SurfaceCutProps` via `TextareaProps & Omit<SurfaceCutOwnProps, ...>` — extra classes for the background layer. */
+  bgClassName?: string;
+  /** Inherited from `SurfaceCutProps` — show inset outline ring. Default `true`. */
+  outline?: boolean;
+  /** Inherited from `SurfaceCutProps` — enable hover overlay. */
+  hoverable?: boolean;
+  /** Inherited from `SurfaceCutProps` — enable pressed overlay. */
+  clickable?: boolean;
+  /** Inherited from `SurfaceCutProps` — force pressed. */
+  pressed?: boolean;
+  /** Inherited from `SurfaceCutProps` — overlay stack position. Default `'above'`. */
+  overlayPosition?: 'above' | 'below';
+  /** Inherited from `SurfaceCutProps` — extra classes for overlay. */
+  overlayClassName?: string;
+  /** Inherited from `SurfaceCutProps` — wrap children in SurfaceCutContent. Default `true` (Textarea forces `false`). */
+  wrapContent?: boolean;
 }
 
 export type TextareaDefaultProps = Partial<Omit<TextareaProps, 'as'>>;

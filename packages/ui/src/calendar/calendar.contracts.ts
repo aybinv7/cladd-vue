@@ -1,3 +1,5 @@
+import type { Locale } from 'date-fns';
+
 import type { ButtonSize } from '../components/button.contracts.ts';
 import type {
   PopoverOffset,
@@ -77,14 +79,16 @@ export interface CalendarProps {
   color?: Color;
   /** Size of the nav buttons and caption dropdowns. Default `'sm'`. */
   controlSize?: ButtonSize;
-  /** Dim the calendar and block interaction. */
-  disabled?: boolean;
+  /** Dim the calendar and block interaction, or a matcher function. Accepts a boolean or `(date: Date) => boolean`. Upstream uses a `Matcher` (`disabled`) per `DayPickerProps`. */
+  disabled?: boolean | ((date: Date) => boolean);
   /** Extra classes for the `footer` element. */
   footerClassName?: string;
   /** Extra classes for the `header` wrapper. */
   headerClassName?: string;
   /** Hide the previous/next month buttons. Default `false`. */
   hideNavigation?: boolean;
+  /** date-fns locale for month names and weekday headers (e.g. `fr`, `de`). */
+  locale?: Locale;
   /** Latest selectable date. */
   maxDate?: Date;
   /** Earliest selectable date. */
@@ -97,6 +101,8 @@ export interface CalendarProps {
   readOnly?: boolean;
   /** Mark today's date with an accent ring and label. Default `true`. */
   showToday?: boolean;
+  /** Show days outside the current month. Default `true` (matches upstream `showOutsideDays: true`). */
+  showOutsideDays?: boolean;
   /** Sizing token. Drives day-cell size and font sizes. Default `'md'`. */
   size?: CalendarSize;
   /** First day of the week, `0` for Sunday. Default `0`. */
@@ -109,6 +115,8 @@ export type CalendarDefaultProps = Partial<CalendarProps>;
 export interface DatePickerProps {
   /** Calendar size inside the popover. Default `'lg'`. */
   calendarSize?: CalendarSize;
+  /** Extra props forwarded to the underlying `Calendar` (e.g. `disabled` matcher, `locale`, `showOutsideDays`). Upstream `DatePicker.tsx:41-42` forwards `calendarProps` into `Calendar` via spread. */
+  calendarProps?: Partial<CalendarProps>;
   /** Close the popover after a pick. Default `true`. Single mode only. */
   closeOnSelect?: boolean;
   /** Extra classes for the trigger's inner content row. */
@@ -119,6 +127,8 @@ export interface DatePickerProps {
   disabled?: boolean;
   /** Show the chevron indicator on the right of the trigger. Default `true`. */
   dropdownIcon?: boolean;
+  /** Format the selected value into the trigger label. When set, overrides `toLocaleDateString`. Mirrors upstream `format?: (value: Date) => ReactNode` per mode. */
+  format?: (value: Date | Date[] | DateRange) => string;
   /** Extra classes for the icon wrapper. */
   iconClassName?: string;
   /** Latest selectable date. */

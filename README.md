@@ -61,16 +61,34 @@ import '@cladd-vue/ui/css';
 
 ```vue
 <script setup lang="ts">
-import { Button, Input, Surface, UiProvider } from '@cladd-vue/ui';
+import { Button, CladdProvider, Input, Surface } from '@cladd-vue/ui';
 </script>
 
 <template>
-  <UiProvider theme="dark" accent="brand">
+  <CladdProvider theme="dark" accent-color="brand">
     <Surface :level="1" variant="gradient" outline>
       <Input name="query" placeholder="Filter targets" />
-      <Button accent="green" variant="gradient-fill">Save</Button>
+      <Button color="green" variant="gradient-fill">Save</Button>
     </Surface>
-  </UiProvider>
+  </CladdProvider>
+</template>
+```
+
+### Calendar subpath
+
+Calendar and DatePicker components are isolated under `@cladd-vue/ui/calendar`:
+
+```vue
+<script setup lang="ts">
+import { ref } from 'vue';
+import { Calendar, DatePicker } from '@cladd-vue/ui/calendar';
+
+const date = ref(new Date());
+</script>
+
+<template>
+  <DatePicker v-model="date" placeholder="Select date" />
+  <Calendar v-model="date" color="brand" />
 </template>
 ```
 

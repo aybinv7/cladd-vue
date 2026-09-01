@@ -62,13 +62,16 @@ import Surface from './Surface.vue';
 defineOptions({ inheritAttrs: false });
 
 const props = withDefaults(defineProps<SelectProps>(), {
+  as: undefined,
   anchorElement: undefined,
+  clickable: undefined,
   closeOnSelect: undefined,
   color: undefined,
   contentClassName: undefined,
   disabled: undefined,
   dropdownIcon: undefined,
   focused: undefined,
+  focusable: undefined,
   getOptionValue: undefined,
   hoverable: undefined,
   iconClassName: undefined,
@@ -80,6 +83,7 @@ const props = withDefaults(defineProps<SelectProps>(), {
   keyboardHintsOutline: undefined,
   keyboardHintsSize: undefined,
   keyboardHintsVariant: undefined,
+  loading: undefined,
   multiline: undefined,
   multiple: undefined,
   noneOptionValue: undefined,
@@ -107,6 +111,8 @@ const props = withDefaults(defineProps<SelectProps>(), {
   searchPlaceholder: undefined,
   size: undefined,
   surface: undefined,
+  surfaceLevel: undefined,
+  square: undefined,
   tightFocusRing: undefined,
   title: undefined,
   valueClassName: undefined,
@@ -538,21 +544,27 @@ onBeforeUnmount(() => document.removeEventListener('keydown', onKeydown));
     :aria-expanded="open"
     aria-haspopup="listbox"
     :aria-readonly="d.readOnly || undefined"
+    :as="d.as"
     :class="triggerClass"
+    :clickable="d.clickable"
     :color="d.color"
     :content-class-name="triggerContentClass"
     data-part="trigger"
     :disabled="d.disabled"
     :focused="d.focused"
+    :focusable="d.focusable"
     :hoverable="d.hoverable"
     :multiline="d.multiline"
+    :loading="d.loading"
     :outline="d.outline"
     :pressed="d.pressed"
     :read-only="d.readOnly"
     role="combobox"
     :rounded="d.rounded"
     :size="d.size"
+    :square="d.square"
     :surface="d.surface"
+    :surface-level="d.surfaceLevel"
     :tight-focus-ring="d.tightFocusRing"
     :variant="d.variant"
     @click="onTriggerClick"

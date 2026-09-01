@@ -1,10 +1,12 @@
 import {
   inject,
   provide,
-  ref,
+  shallowRef,
   type Component,
   type InjectionKey,
   type Ref,
+  type ShallowRef,
+  type VNodeChild,
 } from 'vue';
 
 import type { Color } from '../types.ts';
@@ -27,14 +29,14 @@ export interface ToastsPortalData {
   onClosed?: (closed: boolean) => void;
   /** Internal flag set after `onClosed` fires once — prevents double-removal from the queue. */
   removed?: boolean;
-  text: string;
+  text?: string | VNodeChild;
   /** Auto-close timeout in ms (`0` disables). */
   timeout?: number;
-  title: string;
+  title?: string | VNodeChild;
 }
 
 export interface ToastsPortalContext {
-  data: Ref<ToastsPortalData[]>;
+  data: ShallowRef<ToastsPortalData[]>;
   state: Ref<Record<string, boolean>>;
 }
 
@@ -43,14 +45,14 @@ const toastsPortalContextKey: InjectionKey<ToastsPortalContext> = Symbol(
 );
 
 const fallback: ToastsPortalContext = {
-  data: ref<ToastsPortalData[]>([]),
-  state: ref<Record<string, boolean>>({}),
+  data: shallowRef<ToastsPortalData[]>([]),
+  state: shallowRef<Record<string, boolean>>({}),
 };
 
 export function provideToastsPortalContext(): ToastsPortalContext {
   const context: ToastsPortalContext = {
-    data: ref<ToastsPortalData[]>([]),
-    state: ref<Record<string, boolean>>({}),
+    data: shallowRef<ToastsPortalData[]>([]),
+    state: shallowRef<Record<string, boolean>>({}),
   };
   provide(toastsPortalContextKey, context);
   return context;

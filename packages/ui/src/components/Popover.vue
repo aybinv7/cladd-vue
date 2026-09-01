@@ -50,11 +50,14 @@ import VNodeRenderer from './VNodeRenderer.ts';
 defineOptions({ inheritAttrs: false });
 
 const props = withDefaults(defineProps<PopoverProps>(), {
+  as: undefined,
   anchorElement: undefined,
   anchorRef: undefined,
   anchorRect: undefined,
   backdrop: undefined,
   backdropTransparent: undefined,
+  bgClassName: undefined,
+  clickable: undefined,
   closeOnBackdropClick: undefined,
   closeOnEscape: undefined,
   color: undefined,
@@ -63,11 +66,15 @@ const props = withDefaults(defineProps<PopoverProps>(), {
   lazy: undefined,
   offset: undefined,
   outline: undefined,
+  overlayClassName: undefined,
+  overlayPosition: undefined,
   position: undefined,
   root: undefined,
+  pressed: undefined,
   surfaceLevel: undefined,
   variant: undefined,
   viewportMargin: undefined,
+  wrapContent: undefined,
 });
 
 defineSlots<{
@@ -305,16 +312,23 @@ provideSurfaceColorReset();
       <Surface
         v-bind="surfaceAttrs"
         :ref="setSurface"
+        :as="d.as"
+        :bg-class-name="d.bgClassName"
         :color="currentAccent"
         :class="surfaceClass"
+        :clickable="d.clickable"
         :content-class-name="contentClass"
         data-part="content"
         :data-open="opened || undefined"
         :data-position="d.position"
         :level="currentSurfaceLevel"
         :outline="currentOutline"
+        :overlay-class-name="d.overlayClassName"
+        :overlay-position="d.overlayPosition"
+        :pressed="d.pressed"
         :style="surfaceStyle"
         :variant="currentVariant"
+        :wrap-content="d.wrapContent"
       >
         <SurfaceContextProvider v-if="flattenSurfaceLevel" :level="0">
           <slot :close="close" />
@@ -333,16 +347,23 @@ provideSurfaceColorReset();
     <Surface
       v-bind="surfaceAttrs"
       :ref="setSurface"
+      :as="d.as"
+      :bg-class-name="d.bgClassName"
       :color="currentAccent"
       :class="surfaceClass"
+      :clickable="d.clickable"
       :content-class-name="contentClass"
       data-part="content"
       :data-open="opened || undefined"
       :data-position="d.position"
       :level="currentSurfaceLevel"
       :outline="currentOutline"
+      :overlay-class-name="d.overlayClassName"
+      :overlay-position="d.overlayPosition"
+      :pressed="d.pressed"
       :style="surfaceStyle"
       :variant="currentVariant"
+      :wrap-content="d.wrapContent"
     >
       <SurfaceContextProvider v-if="flattenSurfaceLevel" :level="0">
         <slot :close="close" />

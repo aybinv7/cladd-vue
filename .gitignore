@@ -36,3 +36,6 @@ reference/
 .claude/worktrees/
 .codex-*
 .history
+
+# Local disposable browser evidence
+**/evidence/*.html

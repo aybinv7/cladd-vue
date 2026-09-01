@@ -26,12 +26,14 @@ import CalendarIcon from './CalendarIcon.vue';
 defineOptions({ inheritAttrs: false });
 
 const props = withDefaults(defineProps<DatePickerProps>(), {
+  calendarProps: undefined,
   calendarSize: undefined,
   closeOnSelect: undefined,
   color: undefined,
   contentClassName: undefined,
   disabled: undefined,
   dropdownIcon: undefined,
+  format: undefined,
   iconClassName: undefined,
   maxDate: undefined,
   minDate: undefined,
@@ -94,7 +96,7 @@ function setTriggerElement(element: unknown): void {
       : ((element as HTMLElement | null) ?? undefined);
 }
 
-function formatDate(value: Date): string {
+function defaultFormatDate(value: Date): string {
   return value.toLocaleDateString();
 }
 
@@ -102,10 +104,14 @@ const label = computed(() => {
   const value = model.value;
   if (value === undefined) return d.value.placeholder;
 
+  if (d.value.format) {
+    return d.value.format(value as Date | Date[] | DateRange);
+  }
+
   if (d.value.mode === 'multiple') {
     const dates = value as Date[];
     return dates.length > 0
-      ? dates.map(formatDate).join(', ')
+      ? dates.map(defaultFormatDate).join(', ')
       : d.value.placeholder;
   }
 
@@ -113,11 +119,11 @@ const label = computed(() => {
     const range = value as DateRange;
     if (!range.from) return d.value.placeholder;
     return range.to
-      ? `${formatDate(range.from)} – ${formatDate(range.to)}`
-      : formatDate(range.from);
+      ? `${defaultFormatDate(range.from)} – ${defaultFormatDate(range.to)}`
+      : defaultFormatDate(range.from);
   }
 
-  return formatDate(value as Date);
+  return defaultFormatDate(value as Date);
 });
 
 const isEmpty = computed(() => label.value === d.value.placeholder);
@@ -190,13 +196,16 @@ const popoverClass = computed(() => cn('w-auto', d.value.popoverClassName));
     @click.stop
   >
     <Calendar
-      v-model="model"
-      :color="d.color"
-      :max-date="d.maxDate"
-      :min-date="d.minDate"
-      :mode="d.mode"
-      :number-of-months="d.numberOfMonths"
       :size="d.calendarSize"
+      v-bind="d.calendarProps"
+      v-model="model"
+      :color="d.calendarProps?.color ?? d.color"
+      :disabled="d.calendarProps?.disabled ?? d.disabled"
+      :max-date="d.calendarProps?.maxDate ?? d.maxDate"
+      :min-date="d.calendarProps?.minDate ?? d.minDate"
+      :mode="d.mode"
+      :number-of-months="d.calendarProps?.numberOfMonths ?? d.numberOfMonths"
+      :read-only="d.calendarProps?.readOnly ?? d.readOnly"
       @change="onCalendarChange"
     />
   </Popover>

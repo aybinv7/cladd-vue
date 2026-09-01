@@ -1,4 +1,4 @@
-import type { Component } from 'vue';
+import type { Component, VNodeChild } from 'vue';
 
 import type {
   SurfaceLevelInput,
@@ -51,12 +51,12 @@ export interface ToastProps {
   stopPropagationOnClick?: boolean;
   /** Default depends on theme: `3` for dark, `1` for light. */
   surfaceLevel?: SurfaceLevelInput;
-  /** Body text slot. Rendered as a smaller line under `title`. */
-  text?: string;
+  /** Body text slot. Rendered as a smaller line under `title`. Upstream `ReactNode` → `string | VNodeChild` + `text` slot. */
+  text?: string | VNodeChild;
   /** Auto-close after this many ms. Pass `0` to disable auto-close. Default `5000`. */
   timeout?: number;
-  /** Title slot. Rendered as a bold line above `text`. */
-  title?: string;
+  /** Title slot. Rendered as a bold line above `text`. Upstream `string | ReactNode` → `string | VNodeChild` + `title` slot. */
+  title?: string | VNodeChild;
   /** Surface variant. Default `'gradient'`. */
   variant?: SurfaceVariant;
 }

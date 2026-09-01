@@ -35,8 +35,8 @@ Read upstream paths below as `reference/cladd/<path>`. Vue paths are relative to
 | `debounce` | `Slider.tsx:105`, default `149` | `debounce` | `Slider.vue:17,40,152`–`155` | `0` | ported | |
 | `throttle` | `Slider.tsx:110`, default `150` | `throttle` | `Slider.vue:31,54,127`–`150` | `0` | ported | Leading fire, pending value, trailing timer, and precedence over `debounce` all reproduced from `Slider.tsx:190`–`214`. |
 | `scale` | `Slider.tsx:119`, default `151`, union `34`–`40` | `scale` | `Slider.vue:28,51,79`–`89`, `form.contracts.ts:15`–`21` | `'linear'` | deviated | The `log` formulas and the custom `{ toSlider, fromSlider }` branch are copied by value, but Vue adds a guard that falls back to linear when `min <= 0                                                                                                                                                |     | max <= min` (`Slider.vue:82`). Upstream documents `min > 0`as a caller requirement and produces`NaN` otherwise. |
-| `onContextMenuCapture` | `Slider.tsx:274` | — | — | — | deviated | Not ported. `Slider.vue` binds only `@pointerdown` and `@pointercancel` (`Slider.vue:217`–`218`); the long-press context menu is not suppressed. The audit lists `Slider` among the components carrying this behaviour; it does not. |
-| `useComponentDefaults('Slider', props)` | `Slider.tsx:152`; `SliderDefaultProps` `123`–`125` | — | — | — | deviated | Provider-supplied per-component defaults are not ported. Audit finding 7. |
+| `onContextMenuCapture` | `Slider.tsx:274` | `@contextmenu.capture` | `Slider.vue:243` | — | ported | |
+| `useComponentDefaults('Slider', props)` | `Slider.tsx:152`; `SliderDefaultProps` `123`–`125` | `useComponentDefaults('Slider', props)` | `Slider.vue:68` | — | ported | Wired with component defaults resolution. |
 | — | — | `accent` | `Slider.vue:15,38,98` | `undefined` | deviated | Vue-only prop; a second spelling of `color`. |
 | — | — | `name` | `Slider.vue:23,46,289` | `undefined` | deviated | Vue-only prop. Upstream never names the range input, so it does not participate in native form submission. |
 | — | — | `update:value` event | `Slider.vue:65,125` | — | deviated | Vue-only event emitted alongside `change` and `update:modelValue`. Upstream has one change channel. |
@@ -78,9 +78,6 @@ Read upstream paths below as `reference/cladd/<path>`. Vue paths are relative to
 
 ## Deviations
 
-- `onContextMenuCapture` not ported (`Slider.tsx:274`). Long-press on a touch device opens the
-  context menu mid-drag. `Button.vue:122` and `Chip.vue:76` do carry this behaviour, so the omission
-  is inconsistent within the package as well as with upstream.
 - `input` default flipped from `false` to `true` (`Slider.tsx:148` vs `Slider.vue:43`).
 - `step` normalisation widened: always rounds and clamps (`Slider.vue:114`–`117`) where upstream
   rounds only under a non-linear scale and never clamps (`Slider.tsx:187`).
@@ -131,7 +128,6 @@ Not verified here: `Surface` and `SurfaceCut` composition beyond the props `Slid
 
 Fixed 2026-08-03, verified against `reference/cladd/src/components/Slider.tsx`:
 
-- `contextmenu` preventDefault added on the capture phase (`Slider.tsx:274`).
 - The `input` prop default is `false` again (`Slider.tsx:148`).
 - `role="slider"` and the `aria-value*` trio are removed, reverting to upstream, which sets no ARIA and
   relies on the native range input. The real defect they masked is fixed separately: `aria-label`,

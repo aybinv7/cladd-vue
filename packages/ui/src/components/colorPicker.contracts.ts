@@ -1,4 +1,8 @@
-import type { SurfaceLevelInput, UiSize } from '../foundations/contracts.ts';
+import type {
+  SurfaceLevelInput,
+  SurfaceVariant,
+  UiSize,
+} from '../foundations/contracts.ts';
 import type {
   ColorEditorValue,
   ColorInput,
@@ -44,6 +48,8 @@ export interface ColorPickerProps {
    * External anchor element. When provided the trigger button is **not rendered** - the caller owns the trigger and `popoverOpen` wiring.
    */
   anchorElement?: HTMLElement;
+  /** Alias for `anchorElement` — mirrors upstream `anchorRef` (React `RefObject`). */
+  anchorRef?: HTMLElement;
   /** Extra classes for the editor's saturation/brightness area. */
   areaClassName?: string;
   /** Accent color for the trigger button. Forwarded to `Button.color`. */
@@ -94,6 +100,8 @@ export interface ColorPickerProps {
   popoverPosition?: PopoverPosition;
   /** Surface level for the popover. Default same as `Popover`'s `surfaceLevel`. */
   popoverSurfaceLevel?: SurfaceLevelInput;
+  /** Controlled popover open state. Pair with popover change events. */
+  popoverState?: boolean;
   /** Show the trigger with the current value but block opening the popover. */
   readOnly?: boolean;
   /** Reverse the visual order of the content row (icon/swatch/value ↔ dropdown). */
@@ -112,6 +120,26 @@ export interface ColorPickerProps {
   throttle?: number;
   /** Extra classes for the value display inside the trigger. */
   valueClassName?: string;
+  /** Inherited from `ButtonProps` via `ColorPickerProps & Omit<ButtonProps, ...>` — polymorphic root element. */
+  as?: string;
+  /** Inherited from `ButtonProps` — enables active/pressed visual states. Default `true`. */
+  clickable?: boolean;
+  /** Inherited from `ButtonProps` — whether trigger can receive focus. Default `true`. */
+  focusable?: boolean;
+  /** Inherited from `ButtonProps` — show spinner overlay and fade content. */
+  loading?: boolean;
+  /** Inherited from `ButtonProps` — icon-only square button. */
+  square?: boolean;
+  /** Inherited from `ButtonProps` — forwarded to trigger `Surface` as `level`. */
+  surfaceLevel?: SurfaceLevelInput;
+  /** Inherited from `ButtonProps` — enable hover overlay. Default `true`. */
+  hoverable?: boolean;
+  /** Inherited from `ButtonProps` — force pressed visual state. */
+  pressed?: boolean;
+  /** Inherited from `ButtonProps` — surface variant for the trigger. Default `'gradient'`. */
+  variant?: SurfaceVariant;
+  /** Inherited from `ButtonProps` — render focus ring flush inside. Default `false`. */
+  tightFocusRing?: boolean;
 }
 
 /** Shape of `ColorPicker` defaults that can be supplied via `CladdProvider`'s `defaults` prop. */

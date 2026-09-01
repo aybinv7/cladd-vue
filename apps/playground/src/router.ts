@@ -111,6 +111,66 @@ export const router = createRouter({
           component: () =>
             import('./modules/playground/sections/OtpSection.vue'),
         },
+        {
+          path: 'backdrop',
+          component: () =>
+            import('./modules/playground/sections/BackdropSection.vue'),
+        },
+        {
+          path: 'collapsible',
+          component: () =>
+            import('./modules/playground/sections/CollapsibleSection.vue'),
+        },
+        {
+          path: 'input',
+          component: () =>
+            import('./modules/playground/sections/InputSection.vue'),
+        },
+        {
+          path: 'list',
+          component: () =>
+            import('./modules/playground/sections/ListSection.vue'),
+        },
+        {
+          path: 'popup',
+          component: () =>
+            import('./modules/playground/sections/PopupSection.vue'),
+        },
+        {
+          path: 'radio',
+          component: () =>
+            import('./modules/playground/sections/RadioSection.vue'),
+        },
+        {
+          path: 'search-field',
+          component: () =>
+            import('./modules/playground/sections/SearchFieldSection.vue'),
+        },
+        {
+          path: 'section-title',
+          component: () =>
+            import('./modules/playground/sections/SectionTitleSection.vue'),
+        },
+        {
+          path: 'shortcut',
+          component: () =>
+            import('./modules/playground/sections/ShortcutSection.vue'),
+        },
+        {
+          path: 'switch',
+          component: () =>
+            import('./modules/playground/sections/SwitchSection.vue'),
+        },
+        {
+          path: 'textarea',
+          component: () =>
+            import('./modules/playground/sections/TextareaSection.vue'),
+        },
+        {
+          path: 'toast',
+          component: () =>
+            import('./modules/playground/sections/ToastSection.vue'),
+        },
       ],
     },
     {

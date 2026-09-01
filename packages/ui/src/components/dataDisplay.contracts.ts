@@ -90,11 +90,11 @@ export interface ListButtonProps {
   contentClassName?: string;
   /** Visually dim the row and disable pointer events. */
   disabled?: boolean;
-  /** Small text rendered below the title. */
+  /** Small text rendered below the title. Upstream `ReactNode` → `string | VNodeChild` + `footer` slot, declared as `string` for convenience. */
   footer?: string;
   /** Extra classes for the `footer` element. */
   footerClassName?: string;
-  /** Small text rendered above the title. */
+  /** Small text rendered above the title. Upstream `ReactNode` → `string | VNodeChild` + `header` slot. */
   header?: string;
   /** Extra classes for the `header` element. */
   headerClassName?: string;
@@ -116,6 +116,20 @@ export interface ListButtonProps {
   titleClassName?: string;
   /** Default `'transparent'` so rows blend into the list surface. */
   variant?: SurfaceVariant;
+  /** Inherited from `ButtonProps` via `ListButtonProps & Omit<ButtonProps, ...>` — enables active states. Default `true`. */
+  clickable?: boolean;
+  /** Inherited from `ButtonProps` — whether row can receive focus. Default `true`. */
+  focusable?: boolean;
+  /** Inherited from `ButtonProps` — enable hover overlay. Default `true`. */
+  hoverable?: boolean;
+  /** Inherited from `ButtonProps` — show spinner overlay. */
+  loading?: boolean;
+  /** Inherited from `ButtonProps` — force pressed visual state. */
+  pressed?: boolean;
+  /** Inherited from `ButtonProps` — render focus ring flush inside. Default `false`. */
+  tightFocusRing?: boolean;
+  /** Inherited from `ButtonProps` — forwarded to underlying `Surface` as `level`. */
+  surfaceLevel?: SurfaceLevelInput;
 }
 
 export type ListButtonDefaultProps = Partial<
@@ -125,15 +139,33 @@ export type ListButtonDefaultProps = Partial<
 /** `List`, `ListItem`, `ListTitle`, `ListSeparator` and `SectionTitle` take no props of their own
  * upstream beyond `className`/`children`, which Vue carries as attrs and the default slot. Their
  * registry entries exist so `defaults` can still target them once they gain props. */
-export type ListDefaultProps = Record<string, never>;
+export interface ListDefaultProps {
+  /** Extra classes applied to the list root. */
+  className?: string;
+}
 
-export type ListItemDefaultProps = Record<string, never>;
+export interface ListItemDefaultProps {
+  /** Extra classes applied to the list item. */
+  className?: string;
+}
 
-export type ListTitleDefaultProps = Record<string, never>;
+export interface ListTitleDefaultProps {
+  /** Extra classes applied to the list title. */
+  className?: string;
+}
 
-export type ListSeparatorDefaultProps = Record<string, never>;
+export interface ListSeparatorDefaultProps {
+  /** Extra classes applied to the list separator. */
+  className?: string;
+}
 
-export type SectionTitleDefaultProps = Record<string, never>;
+export interface SectionTitleDefaultProps {
+  /** Extra classes applied to the section title. */
+  className?: string;
+}
 
-/** Takes no own props; upstream's are the native element props plus `children` and `ref`. */
-export type SectionTitleProps = Record<string, never>;
+/** Props for the section title primitive. */
+export interface SectionTitleProps {
+  /** Extra classes applied to the section title. */
+  className?: string;
+}

@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed, useAttrs } from 'vue';
 
+import { useComponentDefaults } from '../composables/useComponentDefaults.ts';
 import { cn } from '../shared/cn.ts';
 
 defineOptions({ inheritAttrs: false });
@@ -10,6 +11,12 @@ defineSlots<{
   default?: () => unknown;
 }>();
 
+const props = withDefaults(defineProps<{ className?: string }>(), {
+  className: undefined,
+});
+
+const d = useComponentDefaults('OTPFieldSeparator', props, {});
+
 const attrs = useAttrs();
 const rootAttrs = computed(() => {
   const { class: _consumerClass, ...rest } = attrs;
@@ -18,6 +25,7 @@ const rootAttrs = computed(() => {
 const rootClass = computed(() =>
   cn(
     'cladd-otp-field-separator flex items-center text-cladd-outline select-none',
+    d.value.className,
     attrs.class,
   ),
 );

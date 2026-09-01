@@ -319,7 +319,7 @@ provideSurfaceColorReset();
           :class="dialogTitleClasses"
           data-part="title"
         >
-          <slot name="title">{{ d.title }}</slot>
+          <slot name="title"><VNodeRenderer :node="d.title" /></slot>
         </div>
         <div
           v-if="d.text || $slots.text"
@@ -327,7 +327,7 @@ provideSurfaceColorReset();
           :class="dialogTextClasses"
           data-part="text"
         >
-          <slot name="text">{{ d.text }}</slot>
+          <slot name="text"><VNodeRenderer :node="d.text" /></slot>
         </div>
         <slot :close="close" />
         <Input
@@ -364,7 +364,7 @@ provideSurfaceColorReset();
                 variant="transparent"
                 @click="cancel"
               >
-                {{ d.cancelButtonText }}
+                <VNodeRenderer :node="d.cancelButtonText" />
               </Button>
               <Button
                 v-if="d.confirmButtonText"
@@ -376,7 +376,7 @@ provideSurfaceColorReset();
                 size="lg"
                 @click="confirm"
               >
-                {{ d.confirmButtonText }}
+                <VNodeRenderer :node="d.confirmButtonText" />
               </Button>
             </template>
           </slot>
@@ -392,7 +392,7 @@ provideSurfaceColorReset();
               variant="transparent"
               @click="cancel"
             >
-              {{ d.cancelButtonText }}
+              <VNodeRenderer :node="d.cancelButtonText" />
             </Button>
             <Button
               v-if="d.confirmButtonText"
@@ -404,7 +404,7 @@ provideSurfaceColorReset();
               size="lg"
               @click="confirm"
             >
-              {{ d.confirmButtonText }}
+              <VNodeRenderer :node="d.confirmButtonText" />
             </Button>
           </template>
         </div>
@@ -440,7 +440,7 @@ provideSurfaceColorReset();
         :class="dialogTitleClasses"
         data-part="title"
       >
-        <slot name="title">{{ d.title }}</slot>
+        <slot name="title"><VNodeRenderer :node="d.title" /></slot>
       </div>
       <div
         v-if="d.text || $slots.text"
@@ -448,7 +448,7 @@ provideSurfaceColorReset();
         :class="dialogTextClasses"
         data-part="text"
       >
-        <slot name="text">{{ d.text }}</slot>
+        <slot name="text"><VNodeRenderer :node="d.text" /></slot>
       </div>
       <slot :close="close" />
       <Input
@@ -485,7 +485,7 @@ provideSurfaceColorReset();
               variant="transparent"
               @click="cancel"
             >
-              {{ d.cancelButtonText }}
+              <VNodeRenderer :node="d.cancelButtonText" />
             </Button>
             <Button
               v-if="d.confirmButtonText"
@@ -497,7 +497,7 @@ provideSurfaceColorReset();
               size="lg"
               @click="confirm"
             >
-              {{ d.confirmButtonText }}
+              <VNodeRenderer :node="d.confirmButtonText" />
             </Button>
           </template>
         </slot>
@@ -513,7 +513,7 @@ provideSurfaceColorReset();
             variant="transparent"
             @click="cancel"
           >
-            {{ d.cancelButtonText }}
+            <VNodeRenderer :node="d.cancelButtonText" />
           </Button>
           <Button
             v-if="d.confirmButtonText"
@@ -525,7 +525,7 @@ provideSurfaceColorReset();
             size="lg"
             @click="confirm"
           >
-            {{ d.confirmButtonText }}
+            <VNodeRenderer :node="d.confirmButtonText" />
           </Button>
         </template>
       </div>

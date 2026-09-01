@@ -10,11 +10,13 @@ export interface PlaygroundPreferences {
 }
 
 export interface CatalogEntry {
+  component?: string;
   count: number;
   description: string;
   id: string;
   label: string;
   path: string;
+  title?: string;
 }
 
 export interface ComponentApiEntry {

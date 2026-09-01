@@ -1,3 +1,4 @@
+import { readdirSync } from 'node:fs';
 import { join } from 'node:path';
 
 import { expect, test } from 'vite-plus/test';
@@ -123,4 +124,62 @@ test.skipIf(!upstreamHydrated)('keeps the type-export queue honest', () => {
   const done = [...typesNotYetPorted].filter((name) => port.has(name)).sort();
 
   expect(done, 'these are exported now and should leave the queue').toEqual([]);
+});
+
+test('every public component family has an auditable port manifest', () => {
+  const portDir = join(packageRoot, 'docs', 'port');
+  const manifests = new Set(
+    readdirSync(portDir).map((file) => file.replace(/\.md$/u, '')),
+  );
+
+  const publicFamilies = [
+    'Accordion',
+    'Backdrop',
+    'Button',
+    'Calendar',
+    'Checkbox',
+    'Chip',
+    'CladdProvider',
+    'CollapsibleRoot',
+    'ColorEditor',
+    'ColorPicker',
+    'Dialog',
+    'FocusRing',
+    'Icons',
+    'Input',
+    'Link',
+    'List',
+    'ListButton',
+    'ListItem',
+    'ListSeparator',
+    'ListTitle',
+    'NumberField',
+    'NumberScrubber',
+    'OTPField',
+    'Popover',
+    'Popup',
+    'Radio',
+    'SearchField',
+    'SectionTitle',
+    'Segmented',
+    'Select',
+    'Shortcut',
+    'Slider',
+    'Spinner',
+    'Surface',
+    'SurfaceCut',
+    'Switch',
+    'Tabs',
+    'Textarea',
+    'Toast',
+    'ToggleGroup',
+    'Toolbar',
+    'Tooltip',
+  ];
+
+  const missing = publicFamilies.filter((family) => !manifests.has(family));
+  expect(
+    missing,
+    'public component families missing docs/port/*.md manifest',
+  ).toEqual([]);
 });

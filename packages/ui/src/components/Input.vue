@@ -19,6 +19,7 @@ import {
   type InputProps,
 } from './input.contracts.ts';
 import SurfaceCut from './SurfaceCut.vue';
+import VNodeRenderer from './VNodeRenderer.ts';
 
 const interactiveSelector =
   'input, textarea, select, button, a, [role="button"], [tabindex]:not([tabindex="-1"])';
@@ -58,8 +59,11 @@ const props = withDefaults(defineProps<InputProps>(), {
 });
 
 const slots = defineSlots<{
+  beforeContent?: () => unknown;
   displayValue?: () => unknown;
+  error?: () => unknown;
   icon?: () => unknown;
+  info?: () => unknown;
   prefix?: () => unknown;
   suffix?: () => unknown;
 }>();
@@ -228,15 +232,22 @@ defineExpose({
   <SurfaceCut
     v-bind="rootAttrs"
     :as="d.as"
+    :bg-class-name="d.bgClassName"
     :class="rootClass"
+    :clickable="d.clickable"
     :color="d.color"
     :data-disabled="d.disabled || undefined"
     :data-invalid="!d.valid || undefined"
     :data-readonly="d.readOnly || undefined"
     :data-required="d.required || undefined"
     :hoverable="!d.disabled && !d.readOnly"
+    :outline="d.outline"
+    :overlay-class-name="d.overlayClassName"
+    :overlay-position="d.overlayPosition"
+    :pressed="d.pressed"
     :wrap-content="false"
   >
+    <slot name="beforeContent" />
     <FocusRing
       v-if="!d.readOnly && !d.disabled"
       :class="focusRingClass"
@@ -322,18 +333,18 @@ defineExpose({
     </div>
 
     <div
-      v-if="d.infoMessage && d.valid && !d.readOnly"
+      v-if="(d.infoMessage || $slots.info) && d.valid && !d.readOnly"
       :class="infoClass"
       data-part="info"
     >
-      {{ d.infoMessage }}
+      <slot name="info"><VNodeRenderer :node="d.infoMessage" /></slot>
     </div>
     <div
-      v-if="d.errorMessage && !d.valid"
+      v-if="(d.errorMessage || $slots.error) && !d.valid"
       :class="errorClass"
       data-part="error"
     >
-      {{ d.errorMessage }}
+      <slot name="error"><VNodeRenderer :node="d.errorMessage" /></slot>
     </div>
   </SurfaceCut>
 </template>

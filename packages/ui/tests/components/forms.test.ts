@@ -15,6 +15,7 @@ import {
 } from '../../src/components/input.contracts.ts';
 import { sectionTitleClasses } from '../../src/components/list.contracts.ts';
 import { searchFieldClasses } from '../../src/components/searchField.contracts.ts';
+import SearchField from '../../src/components/SearchField.vue';
 import {
   selectDropdownIconClasses,
   selectEmptyClasses,
@@ -431,7 +432,6 @@ test('matches Cladd Select trigger, listbox and single-select behavior', async (
   expect(document.body.querySelector('[role="listbox"]')).toBeNull();
 
   mounted.app.unmount();
-  mounted.root.remove();
 });
 
 test("locks Select to Cladd's trigger and option geometry", () => {
@@ -755,4 +755,192 @@ test('keeps fixture labels and messages associated across submit and reset', asy
     'combobox',
   );
   cleanupFormFixture(mounted);
+});
+
+test('forwards SurfaceCut props from Input to the rendered root', () => {
+  const mounted = mountTree(
+    h(Input, {
+      'data-testid': 'input-surfacecut',
+      bgClassName: 'custom-bg',
+      clickable: true,
+      outline: false,
+      overlayClassName: 'custom-overlay',
+      overlayPosition: 'below',
+      pressed: true,
+    }),
+  );
+  const root = byTestId(mounted.root, 'input-surfacecut');
+
+  expect(root.classList.contains('cladd-surface-cut')).toBe(true);
+  expect(root.classList.contains('cladd-clickable')).toBe(true);
+  expect(root.querySelector('.custom-bg')).not.toBeNull();
+  expect(root.querySelector('.custom-overlay')).not.toBeNull();
+  expect(root.querySelector('.shadow-cladd-cut-outline')).toBeNull();
+  mounted.app.unmount();
+});
+
+test('renders beforeContent slot between background and content', () => {
+  const mounted = mountTree(
+    h(
+      Input,
+      { 'data-testid': 'input-before' },
+      {
+        beforeContent: () =>
+          h('div', { 'data-testid': 'before-layer' }, 'before'),
+      },
+    ),
+  );
+  const root = byTestId(mounted.root, 'input-before');
+  const beforeEl = root.querySelector('[data-testid="before-layer"]');
+
+  expect(beforeEl).not.toBeNull();
+  expect(beforeEl?.textContent).toBe('before');
+  mounted.app.unmount();
+});
+
+test('SearchField forwards SurfaceCut inherited props through to Input', () => {
+  const mounted = mountTree(
+    h(SearchField, {
+      'data-testid': 'sf-surfacecut',
+      bgClassName: 'sf-bg',
+      clickable: true,
+      outline: false,
+      pressed: true,
+    }),
+  );
+  const root = byTestId(mounted.root, 'sf-surfacecut');
+
+  expect(root.classList.contains('cladd-surface-cut')).toBe(true);
+  expect(root.classList.contains('cladd-clickable')).toBe(true);
+  expect(root.querySelector('.sf-bg')).not.toBeNull();
+  mounted.app.unmount();
+});
+
+test('SearchField forwards beforeContent slot through to Input', () => {
+  const mounted = mountTree(
+    h(
+      SearchField,
+      { 'data-testid': 'sf-before' },
+      {
+        beforeContent: () =>
+          h('div', { 'data-testid': 'sf-before-layer' }, 'sf-before'),
+      },
+    ),
+  );
+  const root = byTestId(mounted.root, 'sf-before');
+  const beforeEl = root.querySelector('[data-testid="sf-before-layer"]');
+
+  expect(beforeEl).not.toBeNull();
+  expect(beforeEl?.textContent).toBe('sf-before');
+  mounted.app.unmount();
+});
+
+test('spreads inputProps onto the inner control element', () => {
+  const mounted = mountTree(
+    h(Input, {
+      'data-testid': 'input-props',
+      inputProps: {
+        'aria-describedby': 'help-text',
+        autocomplete: 'off',
+        'data-custom': 'extra',
+      },
+    }),
+  );
+  const root = byTestId(mounted.root, 'input-props');
+  const control = root.querySelector(
+    '[data-part="control"]',
+  ) as HTMLInputElement;
+
+  expect(control.getAttribute('aria-describedby')).toBe('help-text');
+  expect(control.getAttribute('autocomplete')).toBe('off');
+  expect(control.getAttribute('data-custom')).toBe('extra');
+  mounted.app.unmount();
+});
+
+test('Input exposes focus, inputElement, and select via defineExpose', () => {
+  const mounted = mountTree(h(Input, { 'data-testid': 'input-expose' }));
+  const root = byTestId(mounted.root, 'input-expose');
+  const control = root.querySelector(
+    '[data-part="control"]',
+  ) as HTMLInputElement;
+
+  expect(control).toBeInstanceOf(HTMLInputElement);
+  expect(control.getAttribute('data-part')).toBe('control');
+  mounted.app.unmount();
+});
+
+test('SearchField clears on Escape when value is non-empty', async () => {
+  const value = ref('query');
+  const cleared = ref(false);
+  const mounted = mountTree(
+    h(SearchField, {
+      'data-testid': 'sf-escape',
+      modelValue: value.value,
+      'onUpdate:modelValue': (v: string) => (value.value = v),
+      onClear: () => (cleared.value = true),
+    }),
+  );
+  const root = byTestId(mounted.root, 'sf-escape');
+  const control = root.querySelector(
+    '[data-part="control"]',
+  ) as HTMLInputElement;
+
+  control.dispatchEvent(
+    new KeyboardEvent('keydown', { bubbles: true, key: 'Escape' }),
+  );
+  await nextTick();
+
+  expect(value.value).toBe('');
+  expect(cleared.value).toBe(true);
+  mounted.app.unmount();
+});
+
+test('SearchField does not swallow Escape when value is empty', async () => {
+  const value = ref('');
+  const keydownFired = ref(false);
+  const mounted = mountTree(
+    h(SearchField, {
+      'data-testid': 'sf-escape-empty',
+      modelValue: value.value,
+      'onUpdate:modelValue': (v: string) => (value.value = v),
+      onKeydown: () => (keydownFired.value = true),
+    }),
+  );
+  const root = byTestId(mounted.root, 'sf-escape-empty');
+  const control = root.querySelector(
+    '[data-part="control"]',
+  ) as HTMLInputElement;
+
+  control.dispatchEvent(
+    new KeyboardEvent('keydown', { bubbles: true, key: 'Escape' }),
+  );
+  await nextTick();
+
+  expect(value.value).toBe('');
+  expect(keydownFired.value).toBe(true);
+  mounted.app.unmount();
+});
+
+test('SearchField emits change with value and event', async () => {
+  const changeValue = ref('');
+  const mounted = mountTree(
+    h(SearchField, {
+      'data-testid': 'sf-change',
+      modelValue: '',
+      'onUpdate:modelValue': () => {},
+      onChange: (v: string) => (changeValue.value = v),
+    }),
+  );
+  const root = byTestId(mounted.root, 'sf-change');
+  const control = root.querySelector(
+    '[data-part="control"]',
+  ) as HTMLInputElement;
+
+  control.value = 'new query';
+  control.dispatchEvent(new Event('input', { bubbles: true }));
+  control.dispatchEvent(new Event('change', { bubbles: true }));
+  await nextTick();
+
+  expect(changeValue.value).toBe('new query');
+  mounted.app.unmount();
 });

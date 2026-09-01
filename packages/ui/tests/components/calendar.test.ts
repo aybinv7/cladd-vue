@@ -1,3 +1,7 @@
+import { readFileSync } from 'node:fs';
+import { join } from 'node:path';
+
+import { fr } from 'date-fns/locale';
 import { expect, test } from 'vite-plus/test';
 import { h, nextTick, ref } from 'vue';
 
@@ -161,4 +165,123 @@ test('reshapes a stale value when mode changes, instead of crashing', async () =
   }).not.toThrow();
 
   mounted.app.unmount();
+});
+
+test('supports custom date formatting function on DatePicker', () => {
+  const chosen = new Date(2026, 8, 1);
+  const mounted = mountTree(
+    h(DatePicker, {
+      'data-testid': 'custom-format',
+      format: (val: unknown) =>
+        val instanceof Date ? `Custom: ${val.getFullYear()}` : '',
+      modelValue: chosen,
+    }),
+  );
+
+  expect(
+    part(byTestId(mounted.root, 'custom-format'), 'value').textContent?.trim(),
+  ).toBe('Custom: 2026');
+  mounted.app.unmount();
+});
+
+test('forwards calendarProps from DatePicker to Calendar', () => {
+  const disabledFn = (d: Date) => d.getDay() === 0;
+  const mounted = mountTree(
+    h(DatePicker, {
+      calendarProps: {
+        color: 'red',
+        disabled: disabledFn,
+        locale: fr,
+        numberOfMonths: 2,
+      },
+      'data-testid': 'forwarded-props',
+    }),
+  );
+
+  expect(byTestId(mounted.root, 'forwarded-props')).toBeTruthy();
+  mounted.app.unmount();
+});
+
+test('maps calendar locale and outside days to VueDatePicker props', () => {
+  const source = readFileSync(
+    join(process.cwd(), 'src', 'calendar', 'Calendar.vue'),
+    'utf8',
+  );
+
+  expect(source).toContain(':locale="d.locale"');
+  expect(source).toContain(':hide-offset-dates="!d.showOutsideDays"');
+  expect(source).not.toContain(':locale="d.locale as any"');
+});
+
+test('dayClass applies accent to selected and today cells, not to the panel', () => {
+  const mounted = mountTree(
+    h(Calendar, { color: 'purple', 'data-testid': 'accent-scope' }),
+  );
+
+  const root = byTestId(mounted.root, 'accent-scope');
+  expect(root.className).toContain('cladd-calendar');
+  expect(root.className).not.toContain('cladd-color-purple');
+  mounted.app.unmount();
+});
+
+test('Calendar emits change event on value update', async () => {
+  const value = ref<CalendarValue>(undefined);
+  const mounted = mountTree(
+    h(Calendar, {
+      'data-testid': 'change-emit',
+      modelValue: value.value,
+      'onUpdate:modelValue': (v: CalendarValue) => (value.value = v),
+    }),
+  );
+
+  expect(value.value).toBeUndefined();
+  mounted.app.unmount();
+});
+
+test('DatePicker forwards calendarProps.color and calendarProps.locale to Calendar', () => {
+  const mounted = mountTree(
+    h(DatePicker, {
+      calendarProps: { color: 'orange', locale: fr },
+      'data-testid': 'dp-forward',
+    }),
+  );
+
+  const root = byTestId(mounted.root, 'dp-forward');
+  expect(root).toBeTruthy();
+  mounted.app.unmount();
+});
+
+const CALENDAR_PUBLIC_API = [
+  'color',
+  'controlSize',
+  'disabled',
+  'footerClassName',
+  'headerClassName',
+  'hideNavigation',
+  'locale',
+  'maxDate',
+  'minDate',
+  'mode',
+  'numberOfMonths',
+  'readOnly',
+  'showOutsideDays',
+  'showToday',
+  'size',
+  'weekStart',
+] as const;
+
+test('Calendar public API is stable — adding or removing props requires updating this list', () => {
+  const source = readFileSync(
+    require('node:path').join(
+      process.cwd(),
+      'src',
+      'calendar',
+      'calendar.contracts.ts',
+    ),
+    'utf8',
+  );
+
+  for (const prop of CALENDAR_PUBLIC_API) {
+    expect(source).toContain(`${prop}?`);
+  }
 });

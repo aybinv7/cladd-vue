@@ -38,5 +38,17 @@ The first Vue surface slice substantially adapts behavior and visual rules from:
 - `src/styles/radius.css`
 - `src/styles/spacing.css`
 - `src/styles/spinner.css`
+- `src/calendar/Calendar.tsx`
+- `src/calendar/DatePicker.tsx`
+- `src/calendar/CalendarIcon.tsx`
 
 When Cladd source is copied or substantially adapted, retain its MIT notice in this file and record the upstream source path and commit in the implementing change.
+
+## Calendar adapter boundary
+
+`src/calendar/Calendar.tsx` and `src/calendar/DatePicker.tsx` adapt `react-day-picker` (`^10.0.1`, MIT) behind Cladd's `Calendar`/`DatePicker` props. `@cladd-vue/ui` does **not** port `react-day-picker` directly — `src/calendar/Calendar.vue` and `src/calendar/DatePicker.vue` are a `@vuepic/vue-datepicker` adapter. The compatibility boundary (prop mapping, copied `SIZES`/`calendarSizes`, and deviations for `disabled`, `locale`, `format`, and `calendarProps`) is documented in `packages/ui/docs/port/Calendar.md`.
+
+## Dependencies
+
+- `@vuepic/vue-datepicker` `^14.0.0` — MIT — https://github.com/Vuepic/vue-datepicker — used as the calendar grid implementation for `Calendar`/`DatePicker`.
+- `react-day-picker` `^10.0.1` — MIT — https://github.com/gpbl/react-day-picker — upstream calendar dependency that the Vue adapter replaces (see `Calendar.md`).

@@ -272,7 +272,8 @@ test('restores focus to the dialog trigger after escape', async () => {
           Dialog,
           {
             open: open.value,
-            'onUpdate:open': (value: boolean) => (open.value = value),
+            'onUpdate:open': (value: boolean | undefined) =>
+              (open.value = Boolean(value)),
             title: 'Focus',
           },
           {

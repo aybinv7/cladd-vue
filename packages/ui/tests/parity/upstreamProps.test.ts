@@ -8,7 +8,11 @@ import {
   upstreamHydrated,
   upstreamPath,
 } from '../support/paths.ts';
-import { interfaceProps } from '../support/upstream.ts';
+import {
+  interfaceProps,
+  propsContracts,
+  typeAliasProps,
+} from '../support/upstream.ts';
 
 /**
  * React-only props. None of these survive a Vue port: `children` becomes the
@@ -34,6 +38,9 @@ const transposed: Record<string, Record<string, string>> = {
     'aria-label': 'Vue normalises hyphenated attrs onto camelCase props',
     'aria-labelledby': 'Vue normalises hyphenated attrs onto camelCase props',
     'aria-describedby': 'Vue normalises hyphenated attrs onto camelCase props',
+    ariaLabel: 'extra: the Vue camelCase spelling of aria-label',
+    ariaLabelledby: 'extra: the Vue camelCase spelling of aria-labelledby',
+    ariaDescribedby: 'extra: the Vue camelCase spelling of aria-describedby',
     buttons: 'the actions slot',
     backdropTransparent: 'extra: forwarded to Backdrop',
     color: 'extra: declared explicitly instead of via native props',
@@ -47,8 +54,41 @@ const transposed: Record<string, Record<string, string>> = {
     displayValue: 'the displayValue slot',
     inputComponentProps: 'inputProps',
     inputProps: 'extra: the Vue spelling of inputComponentProps',
+    bgClassName:
+      'extra: inherited from SurfaceCutProps via InputProps & Omit<SurfaceCutProps,…>',
+    clickable:
+      'extra: inherited from SurfaceCutProps via InputProps & Omit<SurfaceCutProps,…>',
+    hoverable:
+      'extra: inherited from SurfaceCutProps via InputProps & Omit<SurfaceCutProps,…>',
+    outline:
+      'extra: inherited from SurfaceCutProps via InputProps & Omit<SurfaceCutProps,…>',
+    overlayClassName:
+      'extra: inherited from SurfaceCutProps via InputProps & Omit<SurfaceCutProps,…>',
+    overlayPosition:
+      'extra: inherited from SurfaceCutProps via InputProps & Omit<SurfaceCutProps,…>',
+    pressed:
+      'extra: inherited from SurfaceCutProps via InputProps & Omit<SurfaceCutProps,…>',
+    wrapContent:
+      'extra: inherited from SurfaceCutProps via InputProps & Omit<SurfaceCutProps,…>',
   },
-  ListButtonProps: { icon: 'the icon slot', after: 'the after slot' },
+  ListButtonProps: {
+    icon: 'the icon slot',
+    after: 'the after slot',
+    clickable:
+      'extra: inherited from ButtonProps via ListButtonProps & Omit<ButtonProps,…>',
+    focusable:
+      'extra: inherited from ButtonProps via ListButtonProps & Omit<ButtonProps,…>',
+    hoverable:
+      'extra: inherited from ButtonProps via ListButtonProps & Omit<ButtonProps,…>',
+    loading:
+      'extra: inherited from ButtonProps via ListButtonProps & Omit<ButtonProps,…>',
+    pressed:
+      'extra: inherited from ButtonProps via ListButtonProps & Omit<ButtonProps,…>',
+    surfaceLevel:
+      'extra: inherited from ButtonProps via ListButtonProps & Omit<ButtonProps,…>',
+    tightFocusRing:
+      'extra: inherited from ButtonProps via ListButtonProps & Omit<ButtonProps,…>',
+  },
   ColorEditorProps: {
     header: 'the header slot',
     footer: 'the footer slot',
@@ -64,6 +104,25 @@ const transposed: Record<string, Record<string, string>> = {
     popoverState: 'v-model:popoverOpen',
     defaultValue: 'union member',
     gradient: 'union member',
+    as: 'extra: inherited from ButtonProps via ColorPickerProps & Omit<ButtonProps,…>',
+    clickable:
+      'extra: inherited from ButtonProps via ColorPickerProps & Omit<ButtonProps,…>',
+    focusable:
+      'extra: inherited from ButtonProps via ColorPickerProps & Omit<ButtonProps,…>',
+    hoverable:
+      'extra: inherited from ButtonProps via ColorPickerProps & Omit<ButtonProps,…>',
+    loading:
+      'extra: inherited from ButtonProps via ColorPickerProps & Omit<ButtonProps,…>',
+    pressed:
+      'extra: inherited from ButtonProps via ColorPickerProps & Omit<ButtonProps,…>',
+    square:
+      'extra: inherited from ButtonProps via ColorPickerProps & Omit<ButtonProps,…>',
+    surfaceLevel:
+      'extra: inherited from ButtonProps via ColorPickerProps & Omit<ButtonProps,…>',
+    tightFocusRing:
+      'extra: inherited from ButtonProps via ColorPickerProps & Omit<ButtonProps,…>',
+    variant:
+      'extra: inherited from ButtonProps via ColorPickerProps & Omit<ButtonProps,…>',
   },
   NumberFieldProps: { value: 'v-model' },
   NumberScrubberProps: { value: 'v-model', icon: 'the icon slot' },
@@ -73,6 +132,19 @@ const transposed: Record<string, Record<string, string>> = {
       'claimed from the field context during setup, not injected by the parent',
   },
   SelectProps: {
+    as: 'extra: inherited from ButtonProps via SelectProps & Omit<ButtonProps,…>',
+    clickable:
+      'extra: inherited from ButtonProps via SelectProps & Omit<ButtonProps,…>',
+    focusable:
+      'extra: inherited from ButtonProps via SelectProps & Omit<ButtonProps,…>',
+    loading:
+      'extra: inherited from ButtonProps via SelectProps & Omit<ButtonProps,…>',
+    square:
+      'extra: inherited from ButtonProps via SelectProps & Omit<ButtonProps,…>',
+    surfaceLevel:
+      'extra: inherited from ButtonProps via SelectProps & Omit<ButtonProps,…>',
+    optionIndicatorColor:
+      'extra: explicit indicator color for selected option icon',
     icon: 'the icon slot',
     beforeOptions: 'the beforeOptions slot',
     afterOptions: 'the afterOptions slot',
@@ -96,6 +168,28 @@ const transposed: Record<string, Record<string, string>> = {
     tightFocusRing: 'extra: forwarded to the trigger Button',
     variant: 'extra: forwarded to the trigger Button',
   },
+  PopoverProps: {
+    as: 'extra: inherited from Surface but declared explicitly for Vue typings',
+    open: 'v-model:open',
+    anchorRef: 'anchorElement',
+    anchorElement: 'extra: the Vue spelling of anchorRef',
+    bgClassName:
+      'extra: inherited from Surface but declared explicitly for Vue typings',
+    clickable:
+      'extra: inherited from Surface but declared explicitly for Vue typings',
+    disabled:
+      'extra: explicit disabled guard; upstream has no disabled on Popover',
+    hoverable:
+      'extra: inherited from Surface but declared explicitly for Vue typings',
+    overlayClassName:
+      'extra: inherited from Surface but declared explicitly for Vue typings',
+    overlayPosition:
+      'extra: inherited from Surface but declared explicitly for Vue typings',
+    pressed:
+      'extra: inherited from Surface but declared explicitly for Vue typings',
+    wrapContent:
+      'extra: inherited from Surface but declared explicitly for Vue typings',
+  },
   PopupProps: {
     open: 'v-model:open',
     'aria-label': 'ariaLabel; Vue normalises hyphenated attrs onto props',
@@ -112,11 +206,15 @@ const transposed: Record<string, Record<string, string>> = {
   },
   RadioProps: { id: 'extra: native id, forwarded as the inputId fallback' },
   SearchFieldProps: {
-    clearButton: 'extra: declared explicitly instead of inherited from Input',
-    color: 'extra: declared explicitly instead of inherited from Input',
-    placeholder: 'extra: declared explicitly instead of inherited from Input',
-    rounded: 'extra: declared explicitly instead of inherited from Input',
-    size: 'extra: declared explicitly instead of inherited from Input',
+    value: 'v-model',
+    icon: 'the icon slot',
+    prefix: 'the prefix slot',
+    suffix: 'the suffix slot',
+    displayValue: 'the displayValue slot',
+    beforeContent: 'the beforeContent slot',
+    inputRef: 'a template ref; the element is exposed as inputElement',
+    inputComponentProps: 'inputProps',
+    inputProps: 'extra: the Vue spelling of inputComponentProps',
   },
   SliderProps: { name: 'extra: native name on the range input' },
   SurfaceProps: { beforeContent: 'the beforeContent slot' },
@@ -129,11 +227,30 @@ const transposed: Record<string, Record<string, string>> = {
     name: 'extra: native name on the hidden input',
     required: 'extra: native required on the hidden input',
   },
+  TabProps: {
+    as: 'extra: polymorphic root element, inherited via SegmentedButtonProps in upstream',
+  },
   TextareaProps: {
     value: 'v-model',
     icon: 'the icon slot',
     prefix: 'the prefix slot',
     suffix: 'the suffix slot',
+    bgClassName:
+      'extra: inherited from SurfaceCutProps via TextareaProps & Omit<SurfaceCutProps,…>',
+    clickable:
+      'extra: inherited from SurfaceCutProps via TextareaProps & Omit<SurfaceCutProps,…>',
+    hoverable:
+      'extra: inherited from SurfaceCutProps via TextareaProps & Omit<SurfaceCutProps,…>',
+    outline:
+      'extra: inherited from SurfaceCutProps via TextareaProps & Omit<SurfaceCutProps,…>',
+    overlayClassName:
+      'extra: inherited from SurfaceCutProps via TextareaProps & Omit<SurfaceCutProps,…>',
+    overlayPosition:
+      'extra: inherited from SurfaceCutProps via TextareaProps & Omit<SurfaceCutProps,…>',
+    pressed:
+      'extra: inherited from SurfaceCutProps via TextareaProps & Omit<SurfaceCutProps,…>',
+    wrapContent:
+      'extra: inherited from SurfaceCutProps via TextareaProps & Omit<SurfaceCutProps,…>',
   },
   ToastProps: { open: 'v-model:open' },
   TooltipPrimitiveProps: {
@@ -142,8 +259,9 @@ const transposed: Record<string, Record<string, string>> = {
     anchorElement: 'extra: the Vue spelling of anchorRef',
   },
   TooltipProps: {
+    'aria-label': 'ariaLabel; Vue normalises hyphenated attrs onto props',
     tooltip: 'the tooltip slot',
-    ariaLabel: 'extra: declared explicitly instead of via native props',
+    ariaLabel: 'extra: the Vue camelCase spelling of aria-label',
     color: 'extra: forwarded to TooltipPrimitive',
     contentClassName: 'extra: forwarded to TooltipPrimitive',
     disabled: 'extra: forwarded to TooltipPrimitive',
@@ -152,6 +270,101 @@ const transposed: Record<string, Record<string, string>> = {
     root: 'extra: forwarded to TooltipPrimitive',
     surfaceLevel: 'extra: forwarded to TooltipPrimitive',
     zIndex: 'extra: forwarded to TooltipPrimitive',
+    onClick: 'native click listener attribute',
+  },
+};
+
+const eventTransposed: Record<string, Record<string, string>> = {
+  AccordionRootProps: { onValueChange: 'update:value emit' },
+  CheckboxProps: {
+    onChange: 'change emit',
+    onClick: 'native click listener attribute',
+    onPointerDown: 'native pointerdown listener attribute',
+  },
+  CollapsibleRootProps: { onOpenChange: 'update:open emit' },
+  ColorEditorProps: { onChange: 'change emit' },
+  ColorPickerProps: {
+    onClick: 'native click listener attribute',
+    onChange: 'change emit',
+    onPopoverState: 'update:popoverState emit',
+  },
+  DialogProps: {
+    onCancel: 'cancel emit',
+    onClosed: 'closed emit',
+    onConfirm: 'confirm emit',
+    onOpenChange: 'v-model:open',
+  },
+  InputProps: {
+    onBlur: 'blur emit',
+    onChange: 'change emit',
+    onClear: 'clear emit',
+    onFocus: 'focus emit',
+    onKeyDown: 'keydown emit',
+  },
+  LinkProps: { onClick: 'native click listener attribute' },
+  NumberFieldProps: { onChange: 'change emit' },
+  NumberScrubberProps: {
+    onChange: 'change emit',
+    onTemporaryChange: 'temporaryChange emit',
+  },
+  OTPFieldProps: { onChange: 'v-model emit' },
+  PopoverProps: {
+    onClose: 'closing emit',
+    onClosed: 'closed emit',
+    onOpenChange: 'v-model:open',
+    onOpen: 'opening emit',
+    onOpened: 'opened emit',
+    onPhaseChange: 'internal lifecycle callback; not a public Vue emit',
+  },
+  PopupProps: {
+    onCloseButtonClick: 'closeButtonClick emit',
+    onClose: 'closing emit',
+    onClosed: 'closed emit',
+    onOpenChange: 'v-model:open',
+    onOpen: 'opening emit',
+    onOpened: 'opened emit',
+  },
+  RadioProps: {
+    onChange: 'change emit',
+    onClick: 'native click listener attribute',
+    onPointerDown: 'native pointerdown listener attribute',
+  },
+  SearchFieldProps: {
+    onBlur: 'forwarded blur listener',
+    onChange: 'change emit',
+    onClear: 'clear emit',
+    onFocus: 'forwarded focus listener',
+    onKeyDown: 'keydown emit',
+  },
+  SelectProps: {
+    onClick: 'click emit',
+    onPopoverState: 'overlay lifecycle emits',
+    onSearch: 'search emit',
+  },
+  SliderProps: { onChange: 'change emit' },
+  TabsProps: { onValueChange: 'update:value emit' },
+  TextareaProps: {
+    onBlur: 'blur emit',
+    onChange: 'change emit',
+    onFocus: 'focus emit',
+    onKeyDown: 'keydown emit',
+  },
+  ToastProps: {
+    onClosed: 'closed emit',
+    onOpenChange: 'v-model:open',
+  },
+  ToggleButtonOwnProps: { onChange: 'change emit' },
+  ToggleGroupOwnProps: { onValueChange: 'update:value emit' },
+  TooltipPrimitiveProps: {
+    onClose: 'closing emit',
+    onClosed: 'closed emit',
+    onOpenChange: 'v-model:open',
+    onOpen: 'opening emit',
+    onOpened: 'opened emit',
+    onPhaseChange: 'internal lifecycle callback; not a public Vue emit',
+  },
+  TooltipProps: {
+    onClick: 'native click listener attribute',
   },
 };
 
@@ -162,10 +375,23 @@ const transposed: Record<string, Record<string, string>> = {
  */
 const notImplemented: Record<string, string[]> = {};
 
+const resolvedContractGaps: Record<string, string[]> = {
+  SearchFieldProps: [],
+};
+
 function stripReact(props: Set<string>): string[] {
   return [...props].filter(
     (name) => !REACT_ONLY.has(name) && !/^on[A-Z]/u.test(name),
   );
+}
+
+function contractFiles(root: string): string[] {
+  return ['components', 'calendar'].flatMap((directory) => {
+    const path = join(root, directory);
+    return readdirSync(path)
+      .filter((name) => /\.(?:ts|tsx)$/u.test(name))
+      .map((name) => join(path, name));
+  });
 }
 
 function ourInterfaces(): Map<string, Set<string>> {
@@ -191,7 +417,7 @@ function namesIn(path: string): string[] {
 
 let upstreamIndex: Map<string, Set<string>> | undefined;
 
-/** interface name -> its own prop names, built once across every upstream component file. */
+/** Props name -> its own prop names, built once across every upstream component file. */
 function upstreamInterfaces(): Map<string, Set<string>> {
   if (upstreamIndex) return upstreamIndex;
 
@@ -201,10 +427,19 @@ function upstreamInterfaces(): Map<string, Set<string>> {
   for (const file of readdirSync(dir).filter((name) => name.endsWith('.tsx'))) {
     const path = join(dir, file);
     const source = readFileSync(path, 'utf8');
-    for (const match of source.matchAll(/interface (\w+Props)/gu)) {
+
+    for (const match of source.matchAll(
+      /(?:export\s+)?(?:interface|type)\s+(\w+Props)\b/gu,
+    )) {
       const name = match[1];
       if (upstreamIndex.has(name)) continue;
-      upstreamIndex.set(name, interfaceProps(path, name));
+
+      const props = interfaceProps(path, name);
+      if (props.size > 0) {
+        upstreamIndex.set(name, props);
+      } else {
+        upstreamIndex.set(name, typeAliasProps(path, name));
+      }
     }
   }
 
@@ -225,15 +460,82 @@ function upstreamInterface(base: string): Set<string> | undefined {
 }
 
 test.skipIf(!upstreamHydrated)(
+  'indexes upstream interfaces and type aliases',
+  () => {
+    const index = upstreamInterfaces();
+    expect(index.size).toBeGreaterThan(0);
+
+    for (const name of ['ButtonProps', 'DialogProps', 'ToastProps']) {
+      expect(index.has(name), `${name} should be indexed`).toBe(true);
+    }
+  },
+);
+
+test.skipIf(!upstreamHydrated)(
+  'resolves intersections, unions, inheritance, property types, and calendar contracts',
+  () => {
+    const contracts = propsContracts(contractFiles(upstreamPath()));
+    const button = contracts.get('ButtonProps');
+    const colorPicker = contracts.get('ColorPickerProps');
+    const searchField = contracts.get('SearchFieldProps');
+    const calendar = contracts.get('CalendarProps');
+    const datePicker = contracts.get('DatePickerProps');
+
+    expect(button?.props.has('size')).toBe(true);
+    expect(colorPicker?.props.has('gradient')).toBe(true);
+    expect(searchField?.props.has('placeholder')).toBe(true);
+    expect(calendar?.props.get('header')?.types).toContain('ReactNode');
+    expect(calendar?.unresolved).toContain('DayPickerProps');
+    expect(datePicker?.props.has('format')).toBe(true);
+    expect(datePicker?.props.has('calendarProps')).toBe(true);
+  },
+);
+
+test.skipIf(!upstreamHydrated)(
+  'tracks inherited SearchField gaps explicitly',
+  () => {
+    const upstreamContracts = propsContracts(contractFiles(upstreamPath()));
+    const ourContracts = propsContracts(
+      contractFiles(join(packageRoot, 'src')),
+    );
+    const upstream = upstreamContracts.get('SearchFieldProps');
+    const ours = ourContracts.get('SearchFieldProps');
+    const allowed = {
+      ...transposed.SearchFieldProps,
+      ...eventTransposed.SearchFieldProps,
+    };
+    const missing = [...(upstream?.props.keys() ?? [])].filter(
+      (name) =>
+        !REACT_ONLY.has(name) && !ours?.props.has(name) && !(name in allowed),
+    );
+
+    expect(missing.sort()).toEqual(
+      [...resolvedContractGaps.SearchFieldProps].sort(),
+    );
+  },
+);
+
+test.skipIf(!upstreamHydrated)(
   'declares upstream props for every component',
   () => {
     const drift: string[] = [];
+    let comparableContracts = 0;
+
+    const index = upstreamInterfaces();
+    expect(
+      index.size,
+      'upstreamInterfaces() returned zero entries — reference/cladd may be unhydrated or the reader is broken',
+    ).toBeGreaterThan(0);
 
     for (const [name, ourProps] of ourInterfaces()) {
       const upstream = upstreamInterface(name.slice(0, -'Props'.length));
       if (!upstream) continue;
+      comparableContracts += 1;
 
-      const allowed = transposed[name] ?? {};
+      const allowed = {
+        ...transposed[name],
+        ...eventTransposed[name],
+      };
       const known = new Set(notImplemented[name] ?? []);
 
       for (const prop of stripReact(upstream)) {
@@ -246,6 +548,11 @@ test.skipIf(!upstreamHydrated)(
         drift.push(`${name} declares \`${prop}\`, which upstream does not`);
       }
     }
+
+    expect(
+      comparableContracts,
+      'no comparable prop contracts were found',
+    ).toBeGreaterThan(0);
 
     expect(drift.sort(), 'prop drift against reference/cladd').toEqual([]);
   },
@@ -268,6 +575,90 @@ test.skipIf(!upstreamHydrated)('keeps the not-implemented list honest', () => {
     'these are implemented now and should leave the not-implemented list',
   ).toEqual([]);
 });
+
+test.skipIf(!upstreamHydrated)(
+  'accounts for every upstream event in the transposition map',
+  () => {
+    const unaccounted: string[] = [];
+    let comparableContracts = 0;
+    const INTERNAL =
+      /(?:Own|Default|Inner|Root|Base|Selection|Resolved)\w*Props$|^Gradient|^Solid/u;
+
+    for (const [name, upstreamProps] of upstreamInterfaces()) {
+      if (INTERNAL.test(name)) continue;
+      const events = eventTransposed[name] ?? {};
+      const reactEvents = new Set(
+        [...upstreamProps].filter((p) => /^on[A-Z]/u.test(p) && !(p in events)),
+      );
+
+      if (reactEvents.size === 0 && Object.keys(events).length === 0) continue;
+      comparableContracts += 1;
+
+      for (const prop of reactEvents) {
+        unaccounted.push(
+          `${name}.${prop} — upstream event not in eventTransposed`,
+        );
+      }
+    }
+
+    expect(
+      comparableContracts,
+      'no comparable event contracts were found',
+    ).toBeGreaterThan(0);
+
+    expect(
+      unaccounted.sort(),
+      'every upstream event must be in eventTransposed or explicitly React-only',
+    ).toEqual([]);
+  },
+);
+
+test.skipIf(!upstreamHydrated)(
+  'matches upstream optionality for shared props',
+  () => {
+    const mismatches: string[] = [];
+    let comparableContracts = 0;
+    const INTERNAL =
+      /(?:Own|Default|Inner|Root|Base|Selection|Resolved)\w*Props$|^Gradient|^Solid/u;
+
+    const upstreamContracts = propsContracts(contractFiles(upstreamPath()));
+    const ourContracts = propsContracts(
+      contractFiles(join(packageRoot, 'src')),
+    );
+
+    for (const [name, upstream] of upstreamContracts) {
+      if (INTERNAL.test(name)) continue;
+      const ours = ourContracts.get(name);
+      if (!ours) continue;
+      comparableContracts += 1;
+
+      const allowed = {
+        ...transposed[name],
+        ...eventTransposed[name],
+      };
+
+      for (const [prop, upstreamProp] of upstream.props) {
+        if (REACT_ONLY.has(prop) || prop in allowed) continue;
+        const ourProp = ours.props.get(prop);
+        if (!ourProp) continue;
+
+        if (!upstreamProp.optional && ourProp.optional) {
+          mismatches.push(`${name}.${prop}: upstream required, ours optional`);
+        }
+      }
+    }
+
+    expect(
+      comparableContracts,
+      'no comparable contracts for optionality check',
+    ).toBeGreaterThan(0);
+
+    expect(
+      mismatches.sort(),
+      'upstream required props should remain required in our ports',
+    ).toEqual([]);
+  },
+);
 
 test('documents every public prop', () => {
   const undocumented: string[] = [];

@@ -35,8 +35,10 @@ export type ToolbarDefaultProps = Partial<Omit<ToolbarProps, 'as'>>;
 
 export type ToolbarButtonDefaultProps = Partial<Omit<ButtonProps, 'as'>>;
 
-/** Takes no own props; upstream's are the native element props plus `children` and `ref`. */
-export type ToolbarSeparatorProps = Record<string, never>;
+export interface ToolbarSeparatorProps {
+  /** Extra classes applied to the separator. */
+  className?: string;
+}
 
 /** Shape of `ToolbarSeparator` defaults that can be supplied via `CladdProvider`'s `defaults` prop. */
 export type ToolbarSeparatorDefaultProps = Partial<ToolbarSeparatorProps>;

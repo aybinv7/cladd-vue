@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { VueDatePicker } from '@vuepic/vue-datepicker';
+import type { Locale } from 'date-fns';
 import { computed, useAttrs } from 'vue';
 
 import '@vuepic/vue-datepicker/dist/main.css';
@@ -30,11 +31,13 @@ const props = withDefaults(defineProps<CalendarProps>(), {
   footerClassName: undefined,
   headerClassName: undefined,
   hideNavigation: undefined,
+  locale: undefined,
   maxDate: undefined,
   minDate: undefined,
   mode: undefined,
   numberOfMonths: undefined,
   readOnly: undefined,
+  showOutsideDays: undefined,
   showToday: undefined,
   size: undefined,
   weekStart: undefined,
@@ -50,11 +53,12 @@ const emit = defineEmits<{
 
 const d = useComponentDefaults('Calendar', props, {
   controlSize: 'sm' as ButtonSize,
-  disabled: false,
   hideNavigation: false,
+  locale: undefined as Locale | undefined,
   mode: 'single' as CalendarMode,
   numberOfMonths: 1,
   readOnly: false,
+  showOutsideDays: true,
   showToday: true,
   size: 'md' as CalendarSize,
   weekStart: 0,
@@ -191,6 +195,13 @@ interface MonthYearHeader {
  */
 const headerByInstance = new Map<number, MonthYearHeader>();
 
+const isDateDisabled = computed(() => {
+  const dVal = d.value.disabled;
+  if (typeof dVal === 'function') return dVal;
+  if (dVal === true) return () => true;
+  return undefined;
+});
+
 function asHeader(slotProps: unknown): MonthYearHeader {
   const header = slotProps as MonthYearHeader;
   headerByInstance.set(header.instance, header);
@@ -201,10 +212,18 @@ function primaryHeader(slotProps: unknown): MonthYearHeader {
   return headerByInstance.get(0) ?? asHeader(slotProps);
 }
 
-const monthFormatter = new Intl.DateTimeFormat(undefined, { month: 'long' });
+const localeMonthFormatter = computed(() => {
+  try {
+    return new Intl.DateTimeFormat(d.value.locale ?? undefined, {
+      month: 'long',
+    });
+  } catch {
+    return new Intl.DateTimeFormat(undefined, { month: 'long' });
+  }
+});
 
 function monthLabel(month: number): string {
-  return monthFormatter.format(new Date(2000, month, 1));
+  return localeMonthFormatter.value.format(new Date(2000, month, 1));
 }
 
 const captionClass = computed(() =>
@@ -219,6 +238,7 @@ const ui = computed(() => {
   // receives `ui` as a prop) actually re-renders instead of keeping stale
   // per-cell classes from the last render.
   void currentColor.value;
+  void d.value.locale;
 
   return {
     menu: cn('cladd-calendar__menu', tokens.value.captionText),
@@ -261,17 +281,20 @@ const ui = computed(() => {
       }"
       auto-apply
       :dark="theme === 'dark'"
-      :disabled="d.disabled"
+      :disabled="d.disabled === true"
+      :disabled-dates="isDateDisabled"
       :enable-time-picker="false"
       hide-input-icon
       :hide-navigation="d.hideNavigation ? ['month', 'year'] : []"
       inline
+      :locale="d.locale"
       :max-date="d.maxDate"
       :min-date="d.minDate"
       :multi-calendars="d.numberOfMonths > 1 ? d.numberOfMonths : false"
       :multi-dates="d.mode === 'multiple'"
       :range="d.mode === 'range'"
       :readonly="d.readOnly"
+      :hide-offset-dates="!d.showOutsideDays"
       :ui="ui"
       :week-start="d.weekStart"
     >

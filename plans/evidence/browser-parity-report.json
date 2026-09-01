@@ -1,0 +1,310 @@
+{
+  "browser": "Google Chrome 151.0.7922.174 (Playwright chromium 151.0.7922.34 / chromium-1234)",
+  "playwright": "1.62.1",
+  "chromium": "151.0.7922.34 (Playwright chromium-1234)",
+  "node": "v26.4.0",
+  "base": "http://localhost:5174",
+  "timestamp": "2026-09-01T08:44:21.799Z",
+  "routes": [
+    {
+      "route": "/",
+      "url": "http://localhost:5174/",
+      "status": 200,
+      "title": "Cladd Vue · Visual laboratory",
+      "htmlClass": "dark",
+      "bodyHTMLLen": 26492,
+      "darkScreenshot": "plans/evidence/screenshots/root-dark.png",
+      "lightScreenshot": "plans/evidence/screenshots/root-light.png",
+      "domDump": "plans/evidence/root.html",
+      "tokens": {
+        "bg": "#0f0f0f",
+        "fg": "oklch(from #fff 0.9 0 h)",
+        "surface": "oklch(from #fff 0.21 0 h)",
+        "primary": "oklch(\n    from #fff 0.95 0 h\n  )",
+        "htmlClass": "dark",
+        "bodyBg": "rgb(16, 16, 16)"
+      },
+      "lightTokens": {
+        "bg": "#fff",
+        "fg": "oklch(0.32 0 0)"
+      },
+      "curlStatus": "200"
+    },
+    {
+      "route": "/components/surfaces",
+      "url": "http://localhost:5174/components/surfaces",
+      "status": 200,
+      "title": "Cladd Vue · Visual laboratory",
+      "htmlClass": "dark",
+      "bodyHTMLLen": 26492,
+      "darkScreenshot": "plans/evidence/screenshots/_components_surfaces-dark.png",
+      "lightScreenshot": "plans/evidence/screenshots/_components_surfaces-light.png",
+      "domDump": "plans/evidence/_components_surfaces.html",
+      "tokens": {
+        "bg": "#0f0f0f",
+        "fg": "oklch(from #fff 0.9 0 h)",
+        "surface": "oklch(from #fff 0.21 0 h)",
+        "primary": "oklch(\n    from #fff 0.95 0 h\n  )",
+        "htmlClass": "dark",
+        "bodyBg": "rgb(16, 16, 16)"
+      },
+      "lightTokens": {
+        "bg": "#fff",
+        "fg": "oklch(0.32 0 0)"
+      },
+      "curlStatus": "200"
+    },
+    {
+      "route": "/components/button",
+      "url": "http://localhost:5174/components/button",
+      "status": 200,
+      "title": "Cladd Vue · Visual laboratory",
+      "htmlClass": "dark",
+      "bodyHTMLLen": 64094,
+      "darkScreenshot": "plans/evidence/screenshots/_components_button-dark.png",
+      "lightScreenshot": "plans/evidence/screenshots/_components_button-light.png",
+      "domDump": "plans/evidence/_components_button.html",
+      "tokens": {
+        "bg": "#0f0f0f",
+        "fg": "oklch(from #fff 0.9 0 h)",
+        "surface": "oklch(from #fff 0.21 0 h)",
+        "primary": "oklch(\n    from #fff 0.95 0 h\n  )",
+        "htmlClass": "dark",
+        "bodyBg": "rgb(16, 16, 16)"
+      },
+      "lightTokens": {
+        "bg": "#fff",
+        "fg": "oklch(0.32 0 0)"
+      },
+      "curlStatus": "200"
+    },
+    {
+      "route": "/components/dialog",
+      "url": "http://localhost:5174/components/dialog",
+      "status": 200,
+      "title": "Cladd Vue · Visual laboratory",
+      "htmlClass": "dark",
+      "bodyHTMLLen": 60458,
+      "darkScreenshot": "plans/evidence/screenshots/_components_dialog-dark.png",
+      "lightScreenshot": "plans/evidence/screenshots/_components_dialog-light.png",
+      "domDump": "plans/evidence/_components_dialog.html",
+      "tokens": {
+        "bg": "#0f0f0f",
+        "fg": "oklch(from #fff 0.9 0 h)",
+        "surface": "oklch(from #fff 0.21 0 h)",
+        "primary": "oklch(\n    from #fff 0.95 0 h\n  )",
+        "htmlClass": "dark",
+        "bodyBg": "rgb(16, 16, 16)"
+      },
+      "lightTokens": {
+        "bg": "#fff",
+        "fg": "oklch(0.32 0 0)"
+      },
+      "curlStatus": "200"
+    },
+    {
+      "route": "/components/popover",
+      "url": "http://localhost:5174/components/popover",
+      "status": 200,
+      "title": "Cladd Vue · Visual laboratory",
+      "htmlClass": "dark",
+      "bodyHTMLLen": 70940,
+      "darkScreenshot": "plans/evidence/screenshots/_components_popover-dark.png",
+      "lightScreenshot": "plans/evidence/screenshots/_components_popover-light.png",
+      "domDump": "plans/evidence/_components_popover.html",
+      "tokens": {
+        "bg": "#0f0f0f",
+        "fg": "oklch(from #fff 0.9 0 h)",
+        "surface": "oklch(from #fff 0.21 0 h)",
+        "primary": "oklch(\n    from #fff 0.95 0 h\n  )",
+        "htmlClass": "dark",
+        "bodyBg": "rgb(16, 16, 16)"
+      },
+      "lightTokens": {
+        "bg": "#fff",
+        "fg": "oklch(0.32 0 0)"
+      },
+      "curlStatus": "200"
+    },
+    {
+      "route": "/components/calendar",
+      "url": "http://localhost:5174/components/calendar",
+      "status": 200,
+      "title": "Cladd Vue · Visual laboratory",
+      "htmlClass": "dark",
+      "bodyHTMLLen": 82502,
+      "darkScreenshot": "plans/evidence/screenshots/_components_calendar-dark.png",
+      "lightScreenshot": "plans/evidence/screenshots/_components_calendar-light.png",
+      "domDump": "plans/evidence/_components_calendar.html",
+      "tokens": {
+        "bg": "#0f0f0f",
+        "fg": "oklch(from #fff 0.9 0 h)",
+        "surface": "oklch(from #fff 0.21 0 h)",
+        "primary": "oklch(\n    from #fff 0.95 0 h\n  )",
+        "htmlClass": "dark",
+        "bodyBg": "rgb(16, 16, 16)"
+      },
+      "lightTokens": {
+        "bg": "#fff",
+        "fg": "oklch(0.32 0 0)"
+      },
+      "curlStatus": "200"
+    },
+    {
+      "route": "/components/tooltip",
+      "url": "http://localhost:5174/components/tooltip",
+      "status": 200,
+      "title": "Cladd Vue · Visual laboratory",
+      "htmlClass": "dark",
+      "bodyHTMLLen": 37608,
+      "darkScreenshot": "plans/evidence/screenshots/_components_tooltip-dark.png",
+      "lightScreenshot": "plans/evidence/screenshots/_components_tooltip-light.png",
+      "domDump": "plans/evidence/_components_tooltip.html",
+      "tokens": {
+        "bg": "#0f0f0f",
+        "fg": "oklch(from #fff 0.9 0 h)",
+        "surface": "oklch(from #fff 0.21 0 h)",
+        "primary": "oklch(\n    from #fff 0.95 0 h\n  )",
+        "htmlClass": "dark",
+        "bodyBg": "rgb(16, 16, 16)"
+      },
+      "lightTokens": {
+        "bg": "#fff",
+        "fg": "oklch(0.32 0 0)"
+      },
+      "curlStatus": "200"
+    },
+    {
+      "route": "/components/backdrop",
+      "url": "http://localhost:5174/components/backdrop",
+      "status": 200,
+      "title": "Cladd Vue · Visual laboratory",
+      "htmlClass": "dark",
+      "bodyHTMLLen": 42013,
+      "darkScreenshot": "plans/evidence/screenshots/_components_backdrop-dark.png",
+      "lightScreenshot": "plans/evidence/screenshots/_components_backdrop-light.png",
+      "domDump": "plans/evidence/_components_backdrop.html",
+      "tokens": {
+        "bg": "#0f0f0f",
+        "fg": "oklch(from #fff 0.9 0 h)",
+        "surface": "oklch(from #fff 0.21 0 h)",
+        "primary": "oklch(\n    from #fff 0.95 0 h\n  )",
+        "htmlClass": "dark",
+        "bodyBg": "rgb(16, 16, 16)"
+      },
+      "lightTokens": {
+        "bg": "#fff",
+        "fg": "oklch(0.32 0 0)"
+      },
+      "curlStatus": "200"
+    },
+    {
+      "route": "/components/popup",
+      "url": "http://localhost:5174/components/popup",
+      "status": 200,
+      "title": "Cladd Vue · Visual laboratory",
+      "htmlClass": "dark",
+      "bodyHTMLLen": 45415,
+      "darkScreenshot": "plans/evidence/screenshots/_components_popup-dark.png",
+      "lightScreenshot": "plans/evidence/screenshots/_components_popup-light.png",
+      "domDump": "plans/evidence/_components_popup.html",
+      "tokens": {
+        "bg": "#0f0f0f",
+        "fg": "oklch(from #fff 0.9 0 h)",
+        "surface": "oklch(from #fff 0.21 0 h)",
+        "primary": "oklch(\n    from #fff 0.95 0 h\n  )",
+        "htmlClass": "dark",
+        "bodyBg": "rgb(16, 16, 16)"
+      },
+      "lightTokens": {
+        "bg": "#fff",
+        "fg": "oklch(0.32 0 0)"
+      },
+      "curlStatus": "200"
+    },
+    {
+      "route": "/components/input",
+      "url": "http://localhost:5174/components/input",
+      "status": 200,
+      "title": "Cladd Vue · Visual laboratory",
+      "htmlClass": "dark",
+      "bodyHTMLLen": 98705,
+      "darkScreenshot": "plans/evidence/screenshots/_components_input-dark.png",
+      "lightScreenshot": "plans/evidence/screenshots/_components_input-light.png",
+      "domDump": "plans/evidence/_components_input.html",
+      "tokens": {
+        "bg": "#0f0f0f",
+        "fg": "oklch(from #fff 0.9 0 h)",
+        "surface": "oklch(from #fff 0.21 0 h)",
+        "primary": "oklch(\n    from #fff 0.95 0 h\n  )",
+        "htmlClass": "dark",
+        "bodyBg": "rgb(16, 16, 16)"
+      },
+      "lightTokens": {
+        "bg": "#fff",
+        "fg": "oklch(0.32 0 0)"
+      },
+      "curlStatus": "200"
+    }
+  ],
+  "checks": {
+    "narrow-/components/dialog": {
+      "hasHScroll": false,
+      "minWidth": "320px",
+      "overflow": "visible",
+      "scrollWidth": 320,
+      "innerWidth": 320
+    },
+    "narrow-/components/button": {
+      "hasHScroll": false,
+      "minWidth": "320px",
+      "overflow": "visible",
+      "scrollWidth": 320,
+      "innerWidth": 320
+    },
+    "narrow-/components/calendar": {
+      "hasHScroll": false,
+      "minWidth": "320px",
+      "overflow": "visible",
+      "scrollWidth": 320,
+      "innerWidth": 320
+    },
+    "reducedMotion": {
+      "prefersReduced": true,
+      "cssHasReduce": true
+    },
+    "cssPrefersReducedMotion": true,
+    "dialogLifecycle": {
+      "triggerFound": true,
+      "overlayOpened": true,
+      "focusReturned": true,
+      "enterFrameVisible": true,
+      "closeFrameVisible": true
+    },
+    "calendar": {
+      "gridRendered": true,
+      "selectedAccent": false,
+      "keyboardNav": true,
+      "gridHTML": "<div class=\"cladd-calendar\" data-part=\"calendar\" data-show-today=\"true\" data-size=\"md\"><!--v-if--><div class=\"dp--main dp--theme-dark dp--flex-display\" data-datepicker-instance=\"\" enable-time-picker=\"false\" hide-input-icon=\"\"><div><!----><!----></div><div class=\"dp--outer-menu-wrap\"><div aria-label=\"Datepicker menu\" class=\"dp--menu dp--relative cladd-calendar__menu text-cladd-xs dp--theme-dark\"><!----><!----><div class=\"\" style=\"--dp-menu-width: 196px;\"><!----><!----><div class=\"dp--instance-calendar\"><div class=\"dp--menu-inner\"><div class=\"\"><div class=\"dp--header-wrap\"><div class=\"dp--month-year-wrap\"><div class=\"flex min-h-8 w-full items-center\" data-part=\"caption\"><span class=\"pl-2 font-semibold text-cladd-fg text-cladd-xs\">September 2026</span><div class=\"cladd-surface relative cladd-surface-level-4 text-cladd-fg cladd-toolbar flex rounded-full ml-auto\"><div class=\"cladd-surface__background pointer-events-none absolute inset-0 rounded-[inherit] bg-linear-to-br from-cladd-surface-h"
+    },
+    "cssTokens": {
+      "hasRoot": true,
+      "hasDark": true,
+      "hasLight": true,
+      "hasCladdColor": true,
+      "hasBg": true,
+      "hasFg": true,
+      "hasImportColors": true
+    }
+  },
+  "chrome": {
+    "fileVersion": "151.0.7922.174",
+    "path": "C:/Program Files/Google/Chrome/Application/chrome.exe"
+  },
+  "devServer": {
+    "port": 5174,
+    "pid": 48568,
+    "status": "LISTENING",
+    "url": "http://localhost:5174"
+  }
+}

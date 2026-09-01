@@ -1,0 +1,2030 @@
+{
+  "browser": "Google Chrome 151.0.7922.174 (Playwright chromium 151.0.7922.34 / chromium-1234)",
+  "playwright": "1.62.1",
+  "chromium": "151.0.7922.34 (Playwright chromium-1234)",
+  "node": "v26.4.0",
+  "base": "http://localhost:5174",
+  "timestamp": "2026-09-01T08:44:21.799Z",
+  "routes": [
+    {
+      "route": "/",
+      "url": "http://localhost:5174/",
+      "status": 200,
+      "title": "Cladd Vue · Visual laboratory",
+      "htmlClass": "dark",
+      "bodyHTMLLen": 26492,
+      "darkScreenshot": "plans/evidence/screenshots/root-dark.png",
+      "lightScreenshot": "plans/evidence/screenshots/root-light.png",
+      "domDump": "plans/evidence/root.html",
+      "tokens": {
+        "bg": "#0f0f0f",
+        "fg": "oklch(from #fff 0.9 0 h)",
+        "surface": "oklch(from #fff 0.21 0 h)",
+        "primary": "oklch(\n    from #fff 0.95 0 h\n  )",
+        "htmlClass": "dark",
+        "bodyBg": "rgb(16, 16, 16)"
+      },
+      "lightTokens": {
+        "bg": "#fff",
+        "fg": "oklch(0.32 0 0)"
+      },
+      "curlStatus": "200"
+    },
+    {
+      "route": "/components/surfaces",
+      "url": "http://localhost:5174/components/surfaces",
+      "status": 200,
+      "title": "Cladd Vue · Visual laboratory",
+      "htmlClass": "dark",
+      "bodyHTMLLen": 26492,
+      "darkScreenshot": "plans/evidence/screenshots/_components_surfaces-dark.png",
+      "lightScreenshot": "plans/evidence/screenshots/_components_surfaces-light.png",
+      "domDump": "plans/evidence/_components_surfaces.html",
+      "tokens": {
+        "bg": "#0f0f0f",
+        "fg": "oklch(from #fff 0.9 0 h)",
+        "surface": "oklch(from #fff 0.21 0 h)",
+        "primary": "oklch(\n    from #fff 0.95 0 h\n  )",
+        "htmlClass": "dark",
+        "bodyBg": "rgb(16, 16, 16)"
+      },
+      "lightTokens": {
+        "bg": "#fff",
+        "fg": "oklch(0.32 0 0)"
+      },
+      "curlStatus": "200"
+    },
+    {
+      "route": "/components/button",
+      "url": "http://localhost:5174/components/button",
+      "status": 200,
+      "title": "Cladd Vue · Visual laboratory",
+      "htmlClass": "dark",
+      "bodyHTMLLen": 64094,
+      "darkScreenshot": "plans/evidence/screenshots/_components_button-dark.png",
+      "lightScreenshot": "plans/evidence/screenshots/_components_button-light.png",
+      "domDump": "plans/evidence/_components_button.html",
+      "tokens": {
+        "bg": "#0f0f0f",
+        "fg": "oklch(from #fff 0.9 0 h)",
+        "surface": "oklch(from #fff 0.21 0 h)",
+        "primary": "oklch(\n    from #fff 0.95 0 h\n  )",
+        "htmlClass": "dark",
+        "bodyBg": "rgb(16, 16, 16)"
+      },
+      "lightTokens": {
+        "bg": "#fff",
+        "fg": "oklch(0.32 0 0)"
+      },
+      "curlStatus": "200"
+    },
+    {
+      "route": "/components/dialog",
+      "url": "http://localhost:5174/components/dialog",
+      "status": 200,
+      "title": "Cladd Vue · Visual laboratory",
+      "htmlClass": "dark",
+      "bodyHTMLLen": 60458,
+      "darkScreenshot": "plans/evidence/screenshots/_components_dialog-dark.png",
+      "lightScreenshot": "plans/evidence/screenshots/_components_dialog-light.png",
+      "domDump": "plans/evidence/_components_dialog.html",
+      "tokens": {
+        "bg": "#0f0f0f",
+        "fg": "oklch(from #fff 0.9 0 h)",
+        "surface": "oklch(from #fff 0.21 0 h)",
+        "primary": "oklch(\n    from #fff 0.95 0 h\n  )",
+        "htmlClass": "dark",
+        "bodyBg": "rgb(16, 16, 16)"
+      },
+      "lightTokens": {
+        "bg": "#fff",
+        "fg": "oklch(0.32 0 0)"
+      },
+      "curlStatus": "200"
+    },
+    {
+      "route": "/components/popover",
+      "url": "http://localhost:5174/components/popover",
+      "status": 200,
+      "title": "Cladd Vue · Visual laboratory",
+      "htmlClass": "dark",
+      "bodyHTMLLen": 70940,
+      "darkScreenshot": "plans/evidence/screenshots/_components_popover-dark.png",
+      "lightScreenshot": "plans/evidence/screenshots/_components_popover-light.png",
+      "domDump": "plans/evidence/_components_popover.html",
+      "tokens": {
+        "bg": "#0f0f0f",
+        "fg": "oklch(from #fff 0.9 0 h)",
+        "surface": "oklch(from #fff 0.21 0 h)",
+        "primary": "oklch(\n    from #fff 0.95 0 h\n  )",
+        "htmlClass": "dark",
+        "bodyBg": "rgb(16, 16, 16)"
+      },
+      "lightTokens": {
+        "bg": "#fff",
+        "fg": "oklch(0.32 0 0)"
+      },
+      "curlStatus": "200"
+    },
+    {
+      "route": "/components/calendar",
+      "url": "http://localhost:5174/components/calendar",
+      "status": 200,
+      "title": "Cladd Vue · Visual laboratory",
+      "htmlClass": "dark",
+      "bodyHTMLLen": 82502,
+      "darkScreenshot": "plans/evidence/screenshots/_components_calendar-dark.png",
+      "lightScreenshot": "plans/evidence/screenshots/_components_calendar-light.png",
+      "domDump": "plans/evidence/_components_calendar.html",
+      "tokens": {
+        "bg": "#0f0f0f",
+        "fg": "oklch(from #fff 0.9 0 h)",
+        "surface": "oklch(from #fff 0.21 0 h)",
+        "primary": "oklch(\n    from #fff 0.95 0 h\n  )",
+        "htmlClass": "dark",
+        "bodyBg": "rgb(16, 16, 16)"
+      },
+      "lightTokens": {
+        "bg": "#fff",
+        "fg": "oklch(0.32 0 0)"
+      },
+      "curlStatus": "200"
+    },
+    {
+      "route": "/components/tooltip",
+      "url": "http://localhost:5174/components/tooltip",
+      "status": 200,
+      "title": "Cladd Vue · Visual laboratory",
+      "htmlClass": "dark",
+      "bodyHTMLLen": 37608,
+      "darkScreenshot": "plans/evidence/screenshots/_components_tooltip-dark.png",
+      "lightScreenshot": "plans/evidence/screenshots/_components_tooltip-light.png",
+      "domDump": "plans/evidence/_components_tooltip.html",
+      "tokens": {
+        "bg": "#0f0f0f",
+        "fg": "oklch(from #fff 0.9 0 h)",
+        "surface": "oklch(from #fff 0.21 0 h)",
+        "primary": "oklch(\n    from #fff 0.95 0 h\n  )",
+        "htmlClass": "dark",
+        "bodyBg": "rgb(16, 16, 16)"
+      },
+      "lightTokens": {
+        "bg": "#fff",
+        "fg": "oklch(0.32 0 0)"
+      },
+      "curlStatus": "200"
+    },
+    {
+      "route": "/components/backdrop",
+      "url": "http://localhost:5174/components/backdrop",
+      "status": 200,
+      "title": "Cladd Vue · Visual laboratory",
+      "htmlClass": "dark",
+      "bodyHTMLLen": 42013,
+      "darkScreenshot": "plans/evidence/screenshots/_components_backdrop-dark.png",
+      "lightScreenshot": "plans/evidence/screenshots/_components_backdrop-light.png",
+      "domDump": "plans/evidence/_components_backdrop.html",
+      "tokens": {
+        "bg": "#0f0f0f",
+        "fg": "oklch(from #fff 0.9 0 h)",
+        "surface": "oklch(from #fff 0.21 0 h)",
+        "primary": "oklch(\n    from #fff 0.95 0 h\n  )",
+        "htmlClass": "dark",
+        "bodyBg": "rgb(16, 16, 16)"
+      },
+      "lightTokens": {
+        "bg": "#fff",
+        "fg": "oklch(0.32 0 0)"
+      },
+      "curlStatus": "200"
+    },
+    {
+      "route": "/components/popup",
+      "url": "http://localhost:5174/components/popup",
+      "status": 200,
+      "title": "Cladd Vue · Visual laboratory",
+      "htmlClass": "dark",
+      "bodyHTMLLen": 45415,
+      "darkScreenshot": "plans/evidence/screenshots/_components_popup-dark.png",
+      "lightScreenshot": "plans/evidence/screenshots/_components_popup-light.png",
+      "domDump": "plans/evidence/_components_popup.html",
+      "tokens": {
+        "bg": "#0f0f0f",
+        "fg": "oklch(from #fff 0.9 0 h)",
+        "surface": "oklch(from #fff 0.21 0 h)",
+        "primary": "oklch(\n    from #fff 0.95 0 h\n  )",
+        "htmlClass": "dark",
+        "bodyBg": "rgb(16, 16, 16)"
+      },
+      "lightTokens": {
+        "bg": "#fff",
+        "fg": "oklch(0.32 0 0)"
+      },
+      "curlStatus": "200"
+    },
+    {
+      "route": "/components/input",
+      "url": "http://localhost:5174/components/input",
+      "status": 200,
+      "title": "Cladd Vue · Visual laboratory",
+      "htmlClass": "dark",
+      "bodyHTMLLen": 98705,
+      "darkScreenshot": "plans/evidence/screenshots/_components_input-dark.png",
+      "lightScreenshot": "plans/evidence/screenshots/_components_input-light.png",
+      "domDump": "plans/evidence/_components_input.html",
+      "tokens": {
+        "bg": "#0f0f0f",
+        "fg": "oklch(from #fff 0.9 0 h)",
+        "surface": "oklch(from #fff 0.21 0 h)",
+        "primary": "oklch(\n    from #fff 0.95 0 h\n  )",
+        "htmlClass": "dark",
+        "bodyBg": "rgb(16, 16, 16)"
+      },
+      "lightTokens": {
+        "bg": "#fff",
+        "fg": "oklch(0.32 0 0)"
+      },
+      "curlStatus": "200"
+    },
+    {
+      "route": "/components/segmented",
+      "url": "http://localhost:5174/components/segmented",
+      "browserType": "chromium",
+      "status": 200,
+      "title": "Cladd Vue · Visual laboratory",
+      "htmlClass": "dark",
+      "bodyHTMLLen": 159079,
+      "darkScreenshot": "screenshots/_components_segmented-chromium/_components_segmented-dark.png",
+      "lightScreenshot": "screenshots/_components_segmented-chromium/_components_segmented-light.png",
+      "narrowScreenshot": "screenshots/_components_segmented-chromium/_components_segmented-320.png",
+      "domDump": "_components_segmented-chromium.html",
+      "tokens": {
+        "bg": "#0f0f0f",
+        "fg": "oklch(from #fff 0.9 0 h)",
+        "surface": "oklch(from #fff 0.21 0 h)",
+        "primary": "oklch(\n    from #fff 0.95 0 h\n  )",
+        "htmlClass": "dark",
+        "bodyBg": "rgb(16, 16, 16)",
+        "bodyColor": "rgb(255, 255, 255)"
+      },
+      "lightTokens": {
+        "bg": "#fff",
+        "fg": "oklch(0.32 0 0)",
+        "surface": "oklch(0.97 0 0)",
+        "primary": "oklch(from #fff 0.1 0 h)",
+        "htmlClass": "light",
+        "bodyBg": "rgb(16, 16, 16)",
+        "bodyColor": "rgb(255, 255, 255)"
+      },
+      "contrastDark": 19.03,
+      "contrastLight": 19.03,
+      "themeToggle": {
+        "before": {
+          "bg": "#0f0f0f",
+          "fg": "oklch(from #fff 0.9 0 h)",
+          "surface": "oklch(from #fff 0.21 0 h)",
+          "primary": "oklch(\n    from #fff 0.95 0 h\n  )",
+          "htmlClass": "dark",
+          "bodyBg": "rgb(16, 16, 16)",
+          "bodyColor": "rgb(255, 255, 255)"
+        },
+        "after": {
+          "bg": "#fff",
+          "fg": "oklch(0.32 0 0)",
+          "surface": "oklch(0.97 0 0)",
+          "primary": "oklch(from #fff 0.1 0 h)",
+          "htmlClass": "light",
+          "bodyBg": "rgb(16, 16, 16)",
+          "bodyColor": "rgb(255, 255, 255)"
+        },
+        "changed": false
+      },
+      "keyboardFocus": {
+        "focusableCount": 52,
+        "tabWorked": true,
+        "firstFocusedTag": "BUTTON"
+      },
+      "overlayLifecycle": null,
+      "narrowViewport": {
+        "hasHScroll": false,
+        "scrollWidth": 320,
+        "innerWidth": 320
+      }
+    },
+    {
+      "route": "/components/toolbar",
+      "url": "http://localhost:5174/components/toolbar",
+      "browserType": "chromium",
+      "status": 200,
+      "title": "Cladd Vue · Visual laboratory",
+      "htmlClass": "dark",
+      "bodyHTMLLen": 151465,
+      "darkScreenshot": "screenshots/_components_toolbar-chromium/_components_toolbar-dark.png",
+      "lightScreenshot": "screenshots/_components_toolbar-chromium/_components_toolbar-light.png",
+      "narrowScreenshot": "screenshots/_components_toolbar-chromium/_components_toolbar-320.png",
+      "domDump": "_components_toolbar-chromium.html",
+      "tokens": {
+        "bg": "#0f0f0f",
+        "fg": "oklch(from #fff 0.9 0 h)",
+        "surface": "oklch(from #fff 0.21 0 h)",
+        "primary": "oklch(\n    from #fff 0.95 0 h\n  )",
+        "htmlClass": "dark",
+        "bodyBg": "rgb(16, 16, 16)",
+        "bodyColor": "rgb(255, 255, 255)"
+      },
+      "lightTokens": {
+        "bg": "#fff",
+        "fg": "oklch(0.32 0 0)",
+        "surface": "oklch(0.97 0 0)",
+        "primary": "oklch(from #fff 0.1 0 h)",
+        "htmlClass": "light",
+        "bodyBg": "rgb(16, 16, 16)",
+        "bodyColor": "rgb(255, 255, 255)"
+      },
+      "contrastDark": 19.03,
+      "contrastLight": 19.03,
+      "themeToggle": {
+        "before": {
+          "bg": "#0f0f0f",
+          "fg": "oklch(from #fff 0.9 0 h)",
+          "surface": "oklch(from #fff 0.21 0 h)",
+          "primary": "oklch(\n    from #fff 0.95 0 h\n  )",
+          "htmlClass": "dark",
+          "bodyBg": "rgb(16, 16, 16)",
+          "bodyColor": "rgb(255, 255, 255)"
+        },
+        "after": {
+          "bg": "#fff",
+          "fg": "oklch(0.32 0 0)",
+          "surface": "oklch(0.97 0 0)",
+          "primary": "oklch(from #fff 0.1 0 h)",
+          "htmlClass": "light",
+          "bodyBg": "rgb(16, 16, 16)",
+          "bodyColor": "rgb(255, 255, 255)"
+        },
+        "changed": false
+      },
+      "keyboardFocus": {
+        "focusableCount": 48,
+        "tabWorked": true,
+        "firstFocusedTag": "BUTTON"
+      },
+      "overlayLifecycle": null,
+      "narrowViewport": {
+        "hasHScroll": false,
+        "scrollWidth": 320,
+        "innerWidth": 320
+      }
+    },
+    {
+      "route": "/components/toggle-group",
+      "url": "http://localhost:5174/components/toggle-group",
+      "browserType": "chromium",
+      "status": 200,
+      "title": "Cladd Vue · Visual laboratory",
+      "htmlClass": "dark",
+      "bodyHTMLLen": 146790,
+      "darkScreenshot": "screenshots/_components_toggle-group-chromium/_components_toggle-group-dark.png",
+      "lightScreenshot": "screenshots/_components_toggle-group-chromium/_components_toggle-group-light.png",
+      "narrowScreenshot": "screenshots/_components_toggle-group-chromium/_components_toggle-group-320.png",
+      "domDump": "_components_toggle-group-chromium.html",
+      "tokens": {
+        "bg": "#0f0f0f",
+        "fg": "oklch(from #fff 0.9 0 h)",
+        "surface": "oklch(from #fff 0.21 0 h)",
+        "primary": "oklch(\n    from #fff 0.95 0 h\n  )",
+        "htmlClass": "dark",
+        "bodyBg": "rgb(16, 16, 16)",
+        "bodyColor": "rgb(255, 255, 255)"
+      },
+      "lightTokens": {
+        "bg": "#fff",
+        "fg": "oklch(0.32 0 0)",
+        "surface": "oklch(0.97 0 0)",
+        "primary": "oklch(from #fff 0.1 0 h)",
+        "htmlClass": "light",
+        "bodyBg": "rgb(16, 16, 16)",
+        "bodyColor": "rgb(255, 255, 255)"
+      },
+      "contrastDark": 19.03,
+      "contrastLight": 19.03,
+      "themeToggle": {
+        "before": {
+          "bg": "#0f0f0f",
+          "fg": "oklch(from #fff 0.9 0 h)",
+          "surface": "oklch(from #fff 0.21 0 h)",
+          "primary": "oklch(\n    from #fff 0.95 0 h\n  )",
+          "htmlClass": "dark",
+          "bodyBg": "rgb(16, 16, 16)",
+          "bodyColor": "rgb(255, 255, 255)"
+        },
+        "after": {
+          "bg": "#fff",
+          "fg": "oklch(0.32 0 0)",
+          "surface": "oklch(0.97 0 0)",
+          "primary": "oklch(from #fff 0.1 0 h)",
+          "htmlClass": "light",
+          "bodyBg": "rgb(16, 16, 16)",
+          "bodyColor": "rgb(255, 255, 255)"
+        },
+        "changed": false
+      },
+      "keyboardFocus": {
+        "focusableCount": 43,
+        "tabWorked": true,
+        "firstFocusedTag": "BUTTON"
+      },
+      "overlayLifecycle": null,
+      "narrowViewport": {
+        "hasHScroll": false,
+        "scrollWidth": 320,
+        "innerWidth": 320
+      }
+    },
+    {
+      "route": "/components/chip",
+      "url": "http://localhost:5174/components/chip",
+      "browserType": "chromium",
+      "status": 200,
+      "title": "Cladd Vue · Visual laboratory",
+      "htmlClass": "dark",
+      "bodyHTMLLen": 177942,
+      "darkScreenshot": "screenshots/_components_chip-chromium/_components_chip-dark.png",
+      "lightScreenshot": "screenshots/_components_chip-chromium/_components_chip-light.png",
+      "narrowScreenshot": "screenshots/_components_chip-chromium/_components_chip-320.png",
+      "domDump": "_components_chip-chromium.html",
+      "tokens": {
+        "bg": "#0f0f0f",
+        "fg": "oklch(from #fff 0.9 0 h)",
+        "surface": "oklch(from #fff 0.21 0 h)",
+        "primary": "oklch(\n    from #fff 0.95 0 h\n  )",
+        "htmlClass": "dark",
+        "bodyBg": "rgb(16, 16, 16)",
+        "bodyColor": "rgb(255, 255, 255)"
+      },
+      "lightTokens": {
+        "bg": "#fff",
+        "fg": "oklch(0.32 0 0)",
+        "surface": "oklch(0.97 0 0)",
+        "primary": "oklch(from #fff 0.1 0 h)",
+        "htmlClass": "light",
+        "bodyBg": "rgb(16, 16, 16)",
+        "bodyColor": "rgb(255, 255, 255)"
+      },
+      "contrastDark": 19.03,
+      "contrastLight": 19.03,
+      "themeToggle": {
+        "before": {
+          "bg": "#0f0f0f",
+          "fg": "oklch(from #fff 0.9 0 h)",
+          "surface": "oklch(from #fff 0.21 0 h)",
+          "primary": "oklch(\n    from #fff 0.95 0 h\n  )",
+          "htmlClass": "dark",
+          "bodyBg": "rgb(16, 16, 16)",
+          "bodyColor": "rgb(255, 255, 255)"
+        },
+        "after": {
+          "bg": "#fff",
+          "fg": "oklch(0.32 0 0)",
+          "surface": "oklch(0.97 0 0)",
+          "primary": "oklch(from #fff 0.1 0 h)",
+          "htmlClass": "light",
+          "bodyBg": "rgb(16, 16, 16)",
+          "bodyColor": "rgb(255, 255, 255)"
+        },
+        "changed": false
+      },
+      "keyboardFocus": {
+        "focusableCount": 64,
+        "tabWorked": true,
+        "firstFocusedTag": "BUTTON"
+      },
+      "overlayLifecycle": null,
+      "narrowViewport": {
+        "hasHScroll": false,
+        "scrollWidth": 320,
+        "innerWidth": 320
+      }
+    },
+    {
+      "route": "/components/slider",
+      "url": "http://localhost:5174/components/slider",
+      "browserType": "chromium",
+      "status": 200,
+      "title": "Cladd Vue · Visual laboratory",
+      "htmlClass": "dark",
+      "bodyHTMLLen": 169751,
+      "darkScreenshot": "screenshots/_components_slider-chromium/_components_slider-dark.png",
+      "lightScreenshot": "screenshots/_components_slider-chromium/_components_slider-light.png",
+      "narrowScreenshot": "screenshots/_components_slider-chromium/_components_slider-320.png",
+      "domDump": "_components_slider-chromium.html",
+      "tokens": {
+        "bg": "#0f0f0f",
+        "fg": "oklch(from #fff 0.9 0 h)",
+        "surface": "oklch(from #fff 0.21 0 h)",
+        "primary": "oklch(\n    from #fff 0.95 0 h\n  )",
+        "htmlClass": "dark",
+        "bodyBg": "rgb(16, 16, 16)",
+        "bodyColor": "rgb(255, 255, 255)"
+      },
+      "lightTokens": {
+        "bg": "#fff",
+        "fg": "oklch(0.32 0 0)",
+        "surface": "oklch(0.97 0 0)",
+        "primary": "oklch(from #fff 0.1 0 h)",
+        "htmlClass": "light",
+        "bodyBg": "rgb(16, 16, 16)",
+        "bodyColor": "rgb(255, 255, 255)"
+      },
+      "contrastDark": 19.03,
+      "contrastLight": 19.03,
+      "themeToggle": {
+        "before": {
+          "bg": "#0f0f0f",
+          "fg": "oklch(from #fff 0.9 0 h)",
+          "surface": "oklch(from #fff 0.21 0 h)",
+          "primary": "oklch(\n    from #fff 0.95 0 h\n  )",
+          "htmlClass": "dark",
+          "bodyBg": "rgb(16, 16, 16)",
+          "bodyColor": "rgb(255, 255, 255)"
+        },
+        "after": {
+          "bg": "#fff",
+          "fg": "oklch(0.32 0 0)",
+          "surface": "oklch(0.97 0 0)",
+          "primary": "oklch(from #fff 0.1 0 h)",
+          "htmlClass": "light",
+          "bodyBg": "rgb(16, 16, 16)",
+          "bodyColor": "rgb(255, 255, 255)"
+        },
+        "changed": false
+      },
+      "keyboardFocus": {
+        "focusableCount": 57,
+        "tabWorked": true,
+        "firstFocusedTag": "BUTTON"
+      },
+      "overlayLifecycle": null,
+      "narrowViewport": {
+        "hasHScroll": false,
+        "scrollWidth": 320,
+        "innerWidth": 320
+      }
+    },
+    {
+      "route": "/components/checkbox",
+      "url": "http://localhost:5174/components/checkbox",
+      "browserType": "chromium",
+      "status": 200,
+      "title": "Cladd Vue · Visual laboratory",
+      "htmlClass": "dark",
+      "bodyHTMLLen": 248702,
+      "darkScreenshot": "screenshots/_components_checkbox-chromium/_components_checkbox-dark.png",
+      "lightScreenshot": "screenshots/_components_checkbox-chromium/_components_checkbox-light.png",
+      "narrowScreenshot": "screenshots/_components_checkbox-chromium/_components_checkbox-320.png",
+      "domDump": "_components_checkbox-chromium.html",
+      "tokens": {
+        "bg": "#0f0f0f",
+        "fg": "oklch(from #fff 0.9 0 h)",
+        "surface": "oklch(from #fff 0.21 0 h)",
+        "primary": "oklch(\n    from #fff 0.95 0 h\n  )",
+        "htmlClass": "dark",
+        "bodyBg": "rgb(16, 16, 16)",
+        "bodyColor": "rgb(255, 255, 255)"
+      },
+      "lightTokens": {
+        "bg": "#fff",
+        "fg": "oklch(0.32 0 0)",
+        "surface": "oklch(0.97 0 0)",
+        "primary": "oklch(from #fff 0.1 0 h)",
+        "htmlClass": "light",
+        "bodyBg": "rgb(16, 16, 16)",
+        "bodyColor": "rgb(255, 255, 255)"
+      },
+      "contrastDark": 19.03,
+      "contrastLight": 19.03,
+      "themeToggle": {
+        "before": {
+          "bg": "#0f0f0f",
+          "fg": "oklch(from #fff 0.9 0 h)",
+          "surface": "oklch(from #fff 0.21 0 h)",
+          "primary": "oklch(\n    from #fff 0.95 0 h\n  )",
+          "htmlClass": "dark",
+          "bodyBg": "rgb(16, 16, 16)",
+          "bodyColor": "rgb(255, 255, 255)"
+        },
+        "after": {
+          "bg": "#fff",
+          "fg": "oklch(0.32 0 0)",
+          "surface": "oklch(0.97 0 0)",
+          "primary": "oklch(from #fff 0.1 0 h)",
+          "htmlClass": "light",
+          "bodyBg": "rgb(16, 16, 16)",
+          "bodyColor": "rgb(255, 255, 255)"
+        },
+        "changed": false
+      },
+      "keyboardFocus": {
+        "focusableCount": 88,
+        "tabWorked": true,
+        "firstFocusedTag": "BUTTON"
+      },
+      "overlayLifecycle": null,
+      "narrowViewport": {
+        "hasHScroll": false,
+        "scrollWidth": 320,
+        "innerWidth": 320
+      }
+    },
+    {
+      "route": "/components/select",
+      "url": "http://localhost:5174/components/select",
+      "browserType": "chromium",
+      "status": 200,
+      "title": "Cladd Vue · Visual laboratory",
+      "htmlClass": "dark",
+      "bodyHTMLLen": 189717,
+      "darkScreenshot": "screenshots/_components_select-chromium/_components_select-dark.png",
+      "lightScreenshot": "screenshots/_components_select-chromium/_components_select-light.png",
+      "narrowScreenshot": "screenshots/_components_select-chromium/_components_select-320.png",
+      "domDump": "_components_select-chromium.html",
+      "tokens": {
+        "bg": "#0f0f0f",
+        "fg": "oklch(from #fff 0.9 0 h)",
+        "surface": "oklch(from #fff 0.21 0 h)",
+        "primary": "oklch(\n    from #fff 0.95 0 h\n  )",
+        "htmlClass": "dark",
+        "bodyBg": "rgb(16, 16, 16)",
+        "bodyColor": "rgb(255, 255, 255)"
+      },
+      "lightTokens": {
+        "bg": "#fff",
+        "fg": "oklch(0.32 0 0)",
+        "surface": "oklch(0.97 0 0)",
+        "primary": "oklch(from #fff 0.1 0 h)",
+        "htmlClass": "light",
+        "bodyBg": "rgb(16, 16, 16)",
+        "bodyColor": "rgb(255, 255, 255)"
+      },
+      "contrastDark": 19.03,
+      "contrastLight": 19.03,
+      "themeToggle": {
+        "before": {
+          "bg": "#0f0f0f",
+          "fg": "oklch(from #fff 0.9 0 h)",
+          "surface": "oklch(from #fff 0.21 0 h)",
+          "primary": "oklch(\n    from #fff 0.95 0 h\n  )",
+          "htmlClass": "dark",
+          "bodyBg": "rgb(16, 16, 16)",
+          "bodyColor": "rgb(255, 255, 255)"
+        },
+        "after": {
+          "bg": "#fff",
+          "fg": "oklch(0.32 0 0)",
+          "surface": "oklch(0.97 0 0)",
+          "primary": "oklch(from #fff 0.1 0 h)",
+          "htmlClass": "light",
+          "bodyBg": "rgb(16, 16, 16)",
+          "bodyColor": "rgb(255, 255, 255)"
+        },
+        "changed": false
+      },
+      "keyboardFocus": {
+        "focusableCount": 67,
+        "tabWorked": true,
+        "firstFocusedTag": "BUTTON"
+      },
+      "overlayLifecycle": null,
+      "narrowViewport": {
+        "hasHScroll": false,
+        "scrollWidth": 320,
+        "innerWidth": 320
+      }
+    },
+    {
+      "route": "/components/spinner",
+      "url": "http://localhost:5174/components/spinner",
+      "browserType": "chromium",
+      "status": 200,
+      "title": "Cladd Vue · Visual laboratory",
+      "htmlClass": "dark",
+      "bodyHTMLLen": 162559,
+      "darkScreenshot": "screenshots/_components_spinner-chromium/_components_spinner-dark.png",
+      "lightScreenshot": "screenshots/_components_spinner-chromium/_components_spinner-light.png",
+      "narrowScreenshot": "screenshots/_components_spinner-chromium/_components_spinner-320.png",
+      "domDump": "_components_spinner-chromium.html",
+      "tokens": {
+        "bg": "#0f0f0f",
+        "fg": "oklch(from #fff 0.9 0 h)",
+        "surface": "oklch(from #fff 0.21 0 h)",
+        "primary": "oklch(\n    from #fff 0.95 0 h\n  )",
+        "htmlClass": "dark",
+        "bodyBg": "rgb(16, 16, 16)",
+        "bodyColor": "rgb(255, 255, 255)"
+      },
+      "lightTokens": {
+        "bg": "#fff",
+        "fg": "oklch(0.32 0 0)",
+        "surface": "oklch(0.97 0 0)",
+        "primary": "oklch(from #fff 0.1 0 h)",
+        "htmlClass": "light",
+        "bodyBg": "rgb(16, 16, 16)",
+        "bodyColor": "rgb(255, 255, 255)"
+      },
+      "contrastDark": 19.03,
+      "contrastLight": 19.03,
+      "themeToggle": {
+        "before": {
+          "bg": "#0f0f0f",
+          "fg": "oklch(from #fff 0.9 0 h)",
+          "surface": "oklch(from #fff 0.21 0 h)",
+          "primary": "oklch(\n    from #fff 0.95 0 h\n  )",
+          "htmlClass": "dark",
+          "bodyBg": "rgb(16, 16, 16)",
+          "bodyColor": "rgb(255, 255, 255)"
+        },
+        "after": {
+          "bg": "#fff",
+          "fg": "oklch(0.32 0 0)",
+          "surface": "oklch(0.97 0 0)",
+          "primary": "oklch(from #fff 0.1 0 h)",
+          "htmlClass": "light",
+          "bodyBg": "rgb(16, 16, 16)",
+          "bodyColor": "rgb(255, 255, 255)"
+        },
+        "changed": false
+      },
+      "keyboardFocus": {
+        "focusableCount": 56,
+        "tabWorked": true,
+        "firstFocusedTag": "BUTTON"
+      },
+      "overlayLifecycle": null,
+      "narrowViewport": {
+        "hasHScroll": false,
+        "scrollWidth": 320,
+        "innerWidth": 320
+      }
+    },
+    {
+      "route": "/components/tabs",
+      "url": "http://localhost:5174/components/tabs",
+      "browserType": "chromium",
+      "status": 200,
+      "title": "Cladd Vue · Visual laboratory",
+      "htmlClass": "dark",
+      "bodyHTMLLen": 156508,
+      "darkScreenshot": "screenshots/_components_tabs-chromium/_components_tabs-dark.png",
+      "lightScreenshot": "screenshots/_components_tabs-chromium/_components_tabs-light.png",
+      "narrowScreenshot": "screenshots/_components_tabs-chromium/_components_tabs-320.png",
+      "domDump": "_components_tabs-chromium.html",
+      "tokens": {
+        "bg": "#0f0f0f",
+        "fg": "oklch(from #fff 0.9 0 h)",
+        "surface": "oklch(from #fff 0.21 0 h)",
+        "primary": "oklch(\n    from #fff 0.95 0 h\n  )",
+        "htmlClass": "dark",
+        "bodyBg": "rgb(16, 16, 16)",
+        "bodyColor": "rgb(255, 255, 255)"
+      },
+      "lightTokens": {
+        "bg": "#fff",
+        "fg": "oklch(0.32 0 0)",
+        "surface": "oklch(0.97 0 0)",
+        "primary": "oklch(from #fff 0.1 0 h)",
+        "htmlClass": "light",
+        "bodyBg": "rgb(16, 16, 16)",
+        "bodyColor": "rgb(255, 255, 255)"
+      },
+      "contrastDark": 19.03,
+      "contrastLight": 19.03,
+      "themeToggle": {
+        "before": {
+          "bg": "#0f0f0f",
+          "fg": "oklch(from #fff 0.9 0 h)",
+          "surface": "oklch(from #fff 0.21 0 h)",
+          "primary": "oklch(\n    from #fff 0.95 0 h\n  )",
+          "htmlClass": "dark",
+          "bodyBg": "rgb(16, 16, 16)",
+          "bodyColor": "rgb(255, 255, 255)"
+        },
+        "after": {
+          "bg": "#fff",
+          "fg": "oklch(0.32 0 0)",
+          "surface": "oklch(0.97 0 0)",
+          "primary": "oklch(from #fff 0.1 0 h)",
+          "htmlClass": "light",
+          "bodyBg": "rgb(16, 16, 16)",
+          "bodyColor": "rgb(255, 255, 255)"
+        },
+        "changed": false
+      },
+      "keyboardFocus": {
+        "focusableCount": 49,
+        "tabWorked": true,
+        "firstFocusedTag": "BUTTON"
+      },
+      "overlayLifecycle": null,
+      "narrowViewport": {
+        "hasHScroll": false,
+        "scrollWidth": 320,
+        "innerWidth": 320
+      }
+    },
+    {
+      "route": "/components/accordion",
+      "url": "http://localhost:5174/components/accordion",
+      "browserType": "chromium",
+      "status": 200,
+      "title": "Cladd Vue · Visual laboratory",
+      "htmlClass": "dark",
+      "bodyHTMLLen": 146087,
+      "darkScreenshot": "screenshots/_components_accordion-chromium/_components_accordion-dark.png",
+      "lightScreenshot": "screenshots/_components_accordion-chromium/_components_accordion-light.png",
+      "narrowScreenshot": "screenshots/_components_accordion-chromium/_components_accordion-320.png",
+      "domDump": "_components_accordion-chromium.html",
+      "tokens": {
+        "bg": "#0f0f0f",
+        "fg": "oklch(from #fff 0.9 0 h)",
+        "surface": "oklch(from #fff 0.21 0 h)",
+        "primary": "oklch(\n    from #fff 0.95 0 h\n  )",
+        "htmlClass": "dark",
+        "bodyBg": "rgb(16, 16, 16)",
+        "bodyColor": "rgb(255, 255, 255)"
+      },
+      "lightTokens": {
+        "bg": "#fff",
+        "fg": "oklch(0.32 0 0)",
+        "surface": "oklch(0.97 0 0)",
+        "primary": "oklch(from #fff 0.1 0 h)",
+        "htmlClass": "light",
+        "bodyBg": "rgb(16, 16, 16)",
+        "bodyColor": "rgb(255, 255, 255)"
+      },
+      "contrastDark": 19.03,
+      "contrastLight": 19.03,
+      "themeToggle": {
+        "before": {
+          "bg": "#0f0f0f",
+          "fg": "oklch(from #fff 0.9 0 h)",
+          "surface": "oklch(from #fff 0.21 0 h)",
+          "primary": "oklch(\n    from #fff 0.95 0 h\n  )",
+          "htmlClass": "dark",
+          "bodyBg": "rgb(16, 16, 16)",
+          "bodyColor": "rgb(255, 255, 255)"
+        },
+        "after": {
+          "bg": "#fff",
+          "fg": "oklch(0.32 0 0)",
+          "surface": "oklch(0.97 0 0)",
+          "primary": "oklch(from #fff 0.1 0 h)",
+          "htmlClass": "light",
+          "bodyBg": "rgb(16, 16, 16)",
+          "bodyColor": "rgb(255, 255, 255)"
+        },
+        "changed": false
+      },
+      "keyboardFocus": {
+        "focusableCount": 44,
+        "tabWorked": true,
+        "firstFocusedTag": "BUTTON"
+      },
+      "overlayLifecycle": null,
+      "narrowViewport": {
+        "hasHScroll": false,
+        "scrollWidth": 320,
+        "innerWidth": 320
+      }
+    },
+    {
+      "route": "/components/color",
+      "url": "http://localhost:5174/components/color",
+      "browserType": "chromium",
+      "status": 200,
+      "title": "Cladd Vue · Visual laboratory",
+      "htmlClass": "dark",
+      "bodyHTMLLen": 191482,
+      "darkScreenshot": "screenshots/_components_color-chromium/_components_color-dark.png",
+      "lightScreenshot": "screenshots/_components_color-chromium/_components_color-light.png",
+      "narrowScreenshot": "screenshots/_components_color-chromium/_components_color-320.png",
+      "domDump": "_components_color-chromium.html",
+      "tokens": {
+        "bg": "#0f0f0f",
+        "fg": "oklch(from #fff 0.9 0 h)",
+        "surface": "oklch(from #fff 0.21 0 h)",
+        "primary": "oklch(\n    from #fff 0.95 0 h\n  )",
+        "htmlClass": "dark",
+        "bodyBg": "rgb(16, 16, 16)",
+        "bodyColor": "rgb(255, 255, 255)"
+      },
+      "lightTokens": {
+        "bg": "#fff",
+        "fg": "oklch(0.32 0 0)",
+        "surface": "oklch(0.97 0 0)",
+        "primary": "oklch(from #fff 0.1 0 h)",
+        "htmlClass": "light",
+        "bodyBg": "rgb(16, 16, 16)",
+        "bodyColor": "rgb(255, 255, 255)"
+      },
+      "contrastDark": 19.03,
+      "contrastLight": 19.03,
+      "themeToggle": {
+        "before": {
+          "bg": "#0f0f0f",
+          "fg": "oklch(from #fff 0.9 0 h)",
+          "surface": "oklch(from #fff 0.21 0 h)",
+          "primary": "oklch(\n    from #fff 0.95 0 h\n  )",
+          "htmlClass": "dark",
+          "bodyBg": "rgb(16, 16, 16)",
+          "bodyColor": "rgb(255, 255, 255)"
+        },
+        "after": {
+          "bg": "#fff",
+          "fg": "oklch(0.32 0 0)",
+          "surface": "oklch(0.97 0 0)",
+          "primary": "oklch(from #fff 0.1 0 h)",
+          "htmlClass": "light",
+          "bodyBg": "rgb(16, 16, 16)",
+          "bodyColor": "rgb(255, 255, 255)"
+        },
+        "changed": false
+      },
+      "keyboardFocus": {
+        "focusableCount": 73,
+        "tabWorked": true,
+        "firstFocusedTag": "BUTTON"
+      },
+      "overlayLifecycle": null,
+      "narrowViewport": {
+        "hasHScroll": false,
+        "scrollWidth": 320,
+        "innerWidth": 320
+      }
+    },
+    {
+      "route": "/components/link",
+      "url": "http://localhost:5174/components/link",
+      "browserType": "chromium",
+      "status": 200,
+      "title": "Cladd Vue · Visual laboratory",
+      "htmlClass": "dark",
+      "bodyHTMLLen": 168510,
+      "darkScreenshot": "screenshots/_components_link-chromium/_components_link-dark.png",
+      "lightScreenshot": "screenshots/_components_link-chromium/_components_link-light.png",
+      "narrowScreenshot": "screenshots/_components_link-chromium/_components_link-320.png",
+      "domDump": "_components_link-chromium.html",
+      "tokens": {
+        "bg": "#0f0f0f",
+        "fg": "oklch(from #fff 0.9 0 h)",
+        "surface": "oklch(from #fff 0.21 0 h)",
+        "primary": "oklch(\n    from #fff 0.95 0 h\n  )",
+        "htmlClass": "dark",
+        "bodyBg": "rgb(16, 16, 16)",
+        "bodyColor": "rgb(255, 255, 255)"
+      },
+      "lightTokens": {
+        "bg": "#fff",
+        "fg": "oklch(0.32 0 0)",
+        "surface": "oklch(0.97 0 0)",
+        "primary": "oklch(from #fff 0.1 0 h)",
+        "htmlClass": "light",
+        "bodyBg": "rgb(16, 16, 16)",
+        "bodyColor": "rgb(255, 255, 255)"
+      },
+      "contrastDark": 19.03,
+      "contrastLight": 19.03,
+      "themeToggle": {
+        "before": {
+          "bg": "#0f0f0f",
+          "fg": "oklch(from #fff 0.9 0 h)",
+          "surface": "oklch(from #fff 0.21 0 h)",
+          "primary": "oklch(\n    from #fff 0.95 0 h\n  )",
+          "htmlClass": "dark",
+          "bodyBg": "rgb(16, 16, 16)",
+          "bodyColor": "rgb(255, 255, 255)"
+        },
+        "after": {
+          "bg": "#fff",
+          "fg": "oklch(0.32 0 0)",
+          "surface": "oklch(0.97 0 0)",
+          "primary": "oklch(from #fff 0.1 0 h)",
+          "htmlClass": "light",
+          "bodyBg": "rgb(16, 16, 16)",
+          "bodyColor": "rgb(255, 255, 255)"
+        },
+        "changed": false
+      },
+      "keyboardFocus": {
+        "focusableCount": 60,
+        "tabWorked": true,
+        "firstFocusedTag": "BUTTON"
+      },
+      "overlayLifecycle": null,
+      "narrowViewport": {
+        "hasHScroll": false,
+        "scrollWidth": 320,
+        "innerWidth": 320
+      }
+    },
+    {
+      "route": "/components/numbers",
+      "url": "http://localhost:5174/components/numbers",
+      "browserType": "chromium",
+      "status": 200,
+      "title": "Cladd Vue · Visual laboratory",
+      "htmlClass": "dark",
+      "bodyHTMLLen": 190086,
+      "darkScreenshot": "screenshots/_components_numbers-chromium/_components_numbers-dark.png",
+      "lightScreenshot": "screenshots/_components_numbers-chromium/_components_numbers-light.png",
+      "narrowScreenshot": "screenshots/_components_numbers-chromium/_components_numbers-320.png",
+      "domDump": "_components_numbers-chromium.html",
+      "tokens": {
+        "bg": "#0f0f0f",
+        "fg": "oklch(from #fff 0.9 0 h)",
+        "surface": "oklch(from #fff 0.21 0 h)",
+        "primary": "oklch(\n    from #fff 0.95 0 h\n  )",
+        "htmlClass": "dark",
+        "bodyBg": "rgb(16, 16, 16)",
+        "bodyColor": "rgb(255, 255, 255)"
+      },
+      "lightTokens": {
+        "bg": "#fff",
+        "fg": "oklch(0.32 0 0)",
+        "surface": "oklch(0.97 0 0)",
+        "primary": "oklch(from #fff 0.1 0 h)",
+        "htmlClass": "light",
+        "bodyBg": "rgb(16, 16, 16)",
+        "bodyColor": "rgb(255, 255, 255)"
+      },
+      "contrastDark": 19.03,
+      "contrastLight": 19.03,
+      "themeToggle": {
+        "before": {
+          "bg": "#0f0f0f",
+          "fg": "oklch(from #fff 0.9 0 h)",
+          "surface": "oklch(from #fff 0.21 0 h)",
+          "primary": "oklch(\n    from #fff 0.95 0 h\n  )",
+          "htmlClass": "dark",
+          "bodyBg": "rgb(16, 16, 16)",
+          "bodyColor": "rgb(255, 255, 255)"
+        },
+        "after": {
+          "bg": "#fff",
+          "fg": "oklch(0.32 0 0)",
+          "surface": "oklch(0.97 0 0)",
+          "primary": "oklch(from #fff 0.1 0 h)",
+          "htmlClass": "light",
+          "bodyBg": "rgb(16, 16, 16)",
+          "bodyColor": "rgb(255, 255, 255)"
+        },
+        "changed": false
+      },
+      "keyboardFocus": {
+        "focusableCount": 70,
+        "tabWorked": true,
+        "firstFocusedTag": "BUTTON"
+      },
+      "overlayLifecycle": null,
+      "narrowViewport": {
+        "hasHScroll": false,
+        "scrollWidth": 320,
+        "innerWidth": 320
+      }
+    },
+    {
+      "route": "/components/otp",
+      "url": "http://localhost:5174/components/otp",
+      "browserType": "chromium",
+      "status": 200,
+      "title": "Cladd Vue · Visual laboratory",
+      "htmlClass": "dark",
+      "bodyHTMLLen": 179489,
+      "darkScreenshot": "screenshots/_components_otp-chromium/_components_otp-dark.png",
+      "lightScreenshot": "screenshots/_components_otp-chromium/_components_otp-light.png",
+      "narrowScreenshot": "screenshots/_components_otp-chromium/_components_otp-320.png",
+      "domDump": "_components_otp-chromium.html",
+      "tokens": {
+        "bg": "#0f0f0f",
+        "fg": "oklch(from #fff 0.9 0 h)",
+        "surface": "oklch(from #fff 0.21 0 h)",
+        "primary": "oklch(\n    from #fff 0.95 0 h\n  )",
+        "htmlClass": "dark",
+        "bodyBg": "rgb(16, 16, 16)",
+        "bodyColor": "rgb(255, 255, 255)"
+      },
+      "lightTokens": {
+        "bg": "#fff",
+        "fg": "oklch(0.32 0 0)",
+        "surface": "oklch(0.97 0 0)",
+        "primary": "oklch(from #fff 0.1 0 h)",
+        "htmlClass": "light",
+        "bodyBg": "rgb(16, 16, 16)",
+        "bodyColor": "rgb(255, 255, 255)"
+      },
+      "contrastDark": 19.03,
+      "contrastLight": 19.03,
+      "themeToggle": {
+        "before": {
+          "bg": "#0f0f0f",
+          "fg": "oklch(from #fff 0.9 0 h)",
+          "surface": "oklch(from #fff 0.21 0 h)",
+          "primary": "oklch(\n    from #fff 0.95 0 h\n  )",
+          "htmlClass": "dark",
+          "bodyBg": "rgb(16, 16, 16)",
+          "bodyColor": "rgb(255, 255, 255)"
+        },
+        "after": {
+          "bg": "#fff",
+          "fg": "oklch(0.32 0 0)",
+          "surface": "oklch(0.97 0 0)",
+          "primary": "oklch(from #fff 0.1 0 h)",
+          "htmlClass": "light",
+          "bodyBg": "rgb(16, 16, 16)",
+          "bodyColor": "rgb(255, 255, 255)"
+        },
+        "changed": false
+      },
+      "keyboardFocus": {
+        "focusableCount": 67,
+        "tabWorked": true,
+        "firstFocusedTag": "BUTTON"
+      },
+      "overlayLifecycle": null,
+      "narrowViewport": {
+        "hasHScroll": false,
+        "scrollWidth": 320,
+        "innerWidth": 320
+      }
+    },
+    {
+      "route": "/components/collapsible",
+      "url": "http://localhost:5174/components/collapsible",
+      "browserType": "chromium",
+      "status": 200,
+      "title": "Cladd Vue · Visual laboratory",
+      "htmlClass": "dark",
+      "bodyHTMLLen": 155122,
+      "darkScreenshot": "screenshots/_components_collapsible-chromium/_components_collapsible-dark.png",
+      "lightScreenshot": "screenshots/_components_collapsible-chromium/_components_collapsible-light.png",
+      "narrowScreenshot": "screenshots/_components_collapsible-chromium/_components_collapsible-320.png",
+      "domDump": "_components_collapsible-chromium.html",
+      "tokens": {
+        "bg": "#0f0f0f",
+        "fg": "oklch(from #fff 0.9 0 h)",
+        "surface": "oklch(from #fff 0.21 0 h)",
+        "primary": "oklch(\n    from #fff 0.95 0 h\n  )",
+        "htmlClass": "dark",
+        "bodyBg": "rgb(16, 16, 16)",
+        "bodyColor": "rgb(255, 255, 255)"
+      },
+      "lightTokens": {
+        "bg": "#fff",
+        "fg": "oklch(0.32 0 0)",
+        "surface": "oklch(0.97 0 0)",
+        "primary": "oklch(from #fff 0.1 0 h)",
+        "htmlClass": "light",
+        "bodyBg": "rgb(16, 16, 16)",
+        "bodyColor": "rgb(255, 255, 255)"
+      },
+      "contrastDark": 19.03,
+      "contrastLight": 19.03,
+      "themeToggle": {
+        "before": {
+          "bg": "#0f0f0f",
+          "fg": "oklch(from #fff 0.9 0 h)",
+          "surface": "oklch(from #fff 0.21 0 h)",
+          "primary": "oklch(\n    from #fff 0.95 0 h\n  )",
+          "htmlClass": "dark",
+          "bodyBg": "rgb(16, 16, 16)",
+          "bodyColor": "rgb(255, 255, 255)"
+        },
+        "after": {
+          "bg": "#fff",
+          "fg": "oklch(0.32 0 0)",
+          "surface": "oklch(0.97 0 0)",
+          "primary": "oklch(from #fff 0.1 0 h)",
+          "htmlClass": "light",
+          "bodyBg": "rgb(16, 16, 16)",
+          "bodyColor": "rgb(255, 255, 255)"
+        },
+        "changed": false
+      },
+      "keyboardFocus": {
+        "focusableCount": 46,
+        "tabWorked": true,
+        "firstFocusedTag": "BUTTON"
+      },
+      "overlayLifecycle": null,
+      "narrowViewport": {
+        "hasHScroll": false,
+        "scrollWidth": 320,
+        "innerWidth": 320
+      }
+    },
+    {
+      "route": "/components/list",
+      "url": "http://localhost:5174/components/list",
+      "browserType": "chromium",
+      "status": 200,
+      "title": "Cladd Vue · Visual laboratory",
+      "htmlClass": "dark",
+      "bodyHTMLLen": 177267,
+      "darkScreenshot": "screenshots/_components_list-chromium/_components_list-dark.png",
+      "lightScreenshot": "screenshots/_components_list-chromium/_components_list-light.png",
+      "narrowScreenshot": "screenshots/_components_list-chromium/_components_list-320.png",
+      "domDump": "_components_list-chromium.html",
+      "tokens": {
+        "bg": "#0f0f0f",
+        "fg": "oklch(from #fff 0.9 0 h)",
+        "surface": "oklch(from #fff 0.21 0 h)",
+        "primary": "oklch(\n    from #fff 0.95 0 h\n  )",
+        "htmlClass": "dark",
+        "bodyBg": "rgb(16, 16, 16)",
+        "bodyColor": "rgb(255, 255, 255)"
+      },
+      "lightTokens": {
+        "bg": "#fff",
+        "fg": "oklch(0.32 0 0)",
+        "surface": "oklch(0.97 0 0)",
+        "primary": "oklch(from #fff 0.1 0 h)",
+        "htmlClass": "light",
+        "bodyBg": "rgb(16, 16, 16)",
+        "bodyColor": "rgb(255, 255, 255)"
+      },
+      "contrastDark": 19.03,
+      "contrastLight": 19.03,
+      "themeToggle": {
+        "before": {
+          "bg": "#0f0f0f",
+          "fg": "oklch(from #fff 0.9 0 h)",
+          "surface": "oklch(from #fff 0.21 0 h)",
+          "primary": "oklch(\n    from #fff 0.95 0 h\n  )",
+          "htmlClass": "dark",
+          "bodyBg": "rgb(16, 16, 16)",
+          "bodyColor": "rgb(255, 255, 255)"
+        },
+        "after": {
+          "bg": "#fff",
+          "fg": "oklch(0.32 0 0)",
+          "surface": "oklch(0.97 0 0)",
+          "primary": "oklch(from #fff 0.1 0 h)",
+          "htmlClass": "light",
+          "bodyBg": "rgb(16, 16, 16)",
+          "bodyColor": "rgb(255, 255, 255)"
+        },
+        "changed": false
+      },
+      "keyboardFocus": {
+        "focusableCount": 55,
+        "tabWorked": true,
+        "firstFocusedTag": "BUTTON"
+      },
+      "overlayLifecycle": null,
+      "narrowViewport": {
+        "hasHScroll": false,
+        "scrollWidth": 320,
+        "innerWidth": 320
+      }
+    },
+    {
+      "route": "/components/radio",
+      "url": "http://localhost:5174/components/radio",
+      "browserType": "chromium",
+      "status": 200,
+      "title": "Cladd Vue · Visual laboratory",
+      "htmlClass": "dark",
+      "bodyHTMLLen": 194693,
+      "darkScreenshot": "screenshots/_components_radio-chromium/_components_radio-dark.png",
+      "lightScreenshot": "screenshots/_components_radio-chromium/_components_radio-light.png",
+      "narrowScreenshot": "screenshots/_components_radio-chromium/_components_radio-320.png",
+      "domDump": "_components_radio-chromium.html",
+      "tokens": {
+        "bg": "#0f0f0f",
+        "fg": "oklch(from #fff 0.9 0 h)",
+        "surface": "oklch(from #fff 0.21 0 h)",
+        "primary": "oklch(\n    from #fff 0.95 0 h\n  )",
+        "htmlClass": "dark",
+        "bodyBg": "rgb(16, 16, 16)",
+        "bodyColor": "rgb(255, 255, 255)"
+      },
+      "lightTokens": {
+        "bg": "#fff",
+        "fg": "oklch(0.32 0 0)",
+        "surface": "oklch(0.97 0 0)",
+        "primary": "oklch(from #fff 0.1 0 h)",
+        "htmlClass": "light",
+        "bodyBg": "rgb(16, 16, 16)",
+        "bodyColor": "rgb(255, 255, 255)"
+      },
+      "contrastDark": 19.03,
+      "contrastLight": 19.03,
+      "themeToggle": {
+        "before": {
+          "bg": "#0f0f0f",
+          "fg": "oklch(from #fff 0.9 0 h)",
+          "surface": "oklch(from #fff 0.21 0 h)",
+          "primary": "oklch(\n    from #fff 0.95 0 h\n  )",
+          "htmlClass": "dark",
+          "bodyBg": "rgb(16, 16, 16)",
+          "bodyColor": "rgb(255, 255, 255)"
+        },
+        "after": {
+          "bg": "#fff",
+          "fg": "oklch(0.32 0 0)",
+          "surface": "oklch(0.97 0 0)",
+          "primary": "oklch(from #fff 0.1 0 h)",
+          "htmlClass": "light",
+          "bodyBg": "rgb(16, 16, 16)",
+          "bodyColor": "rgb(255, 255, 255)"
+        },
+        "changed": false
+      },
+      "keyboardFocus": {
+        "focusableCount": 67,
+        "tabWorked": true,
+        "firstFocusedTag": "BUTTON"
+      },
+      "overlayLifecycle": null,
+      "narrowViewport": {
+        "hasHScroll": false,
+        "scrollWidth": 320,
+        "innerWidth": 320
+      }
+    },
+    {
+      "route": "/components/search-field",
+      "url": "http://localhost:5174/components/search-field",
+      "browserType": "chromium",
+      "status": 200,
+      "title": "Cladd Vue · Visual laboratory",
+      "htmlClass": "dark",
+      "bodyHTMLLen": 214945,
+      "darkScreenshot": "screenshots/_components_search-field-chromium/_components_search-field-dark.png",
+      "lightScreenshot": "screenshots/_components_search-field-chromium/_components_search-field-light.png",
+      "narrowScreenshot": "screenshots/_components_search-field-chromium/_components_search-field-320.png",
+      "domDump": "_components_search-field-chromium.html",
+      "tokens": {
+        "bg": "#0f0f0f",
+        "fg": "oklch(from #fff 0.9 0 h)",
+        "surface": "oklch(from #fff 0.21 0 h)",
+        "primary": "oklch(\n    from #fff 0.95 0 h\n  )",
+        "htmlClass": "dark",
+        "bodyBg": "rgb(16, 16, 16)",
+        "bodyColor": "rgb(255, 255, 255)"
+      },
+      "lightTokens": {
+        "bg": "#fff",
+        "fg": "oklch(0.32 0 0)",
+        "surface": "oklch(0.97 0 0)",
+        "primary": "oklch(from #fff 0.1 0 h)",
+        "htmlClass": "light",
+        "bodyBg": "rgb(16, 16, 16)",
+        "bodyColor": "rgb(255, 255, 255)"
+      },
+      "contrastDark": 19.03,
+      "contrastLight": 19.03,
+      "themeToggle": {
+        "before": {
+          "bg": "#0f0f0f",
+          "fg": "oklch(from #fff 0.9 0 h)",
+          "surface": "oklch(from #fff 0.21 0 h)",
+          "primary": "oklch(\n    from #fff 0.95 0 h\n  )",
+          "htmlClass": "dark",
+          "bodyBg": "rgb(16, 16, 16)",
+          "bodyColor": "rgb(255, 255, 255)"
+        },
+        "after": {
+          "bg": "#fff",
+          "fg": "oklch(0.32 0 0)",
+          "surface": "oklch(0.97 0 0)",
+          "primary": "oklch(from #fff 0.1 0 h)",
+          "htmlClass": "light",
+          "bodyBg": "rgb(16, 16, 16)",
+          "bodyColor": "rgb(255, 255, 255)"
+        },
+        "changed": false
+      },
+      "keyboardFocus": {
+        "focusableCount": 83,
+        "tabWorked": true,
+        "firstFocusedTag": "BUTTON"
+      },
+      "overlayLifecycle": null,
+      "narrowViewport": {
+        "hasHScroll": false,
+        "scrollWidth": 320,
+        "innerWidth": 320
+      }
+    },
+    {
+      "route": "/components/section-title",
+      "url": "http://localhost:5174/components/section-title",
+      "browserType": "chromium",
+      "status": 200,
+      "title": "Cladd Vue · Visual laboratory",
+      "htmlClass": "dark",
+      "bodyHTMLLen": 144283,
+      "darkScreenshot": "screenshots/_components_section-title-chromium/_components_section-title-dark.png",
+      "lightScreenshot": "screenshots/_components_section-title-chromium/_components_section-title-light.png",
+      "narrowScreenshot": "screenshots/_components_section-title-chromium/_components_section-title-320.png",
+      "domDump": "_components_section-title-chromium.html",
+      "tokens": {
+        "bg": "#0f0f0f",
+        "fg": "oklch(from #fff 0.9 0 h)",
+        "surface": "oklch(from #fff 0.21 0 h)",
+        "primary": "oklch(\n    from #fff 0.95 0 h\n  )",
+        "htmlClass": "dark",
+        "bodyBg": "rgb(16, 16, 16)",
+        "bodyColor": "rgb(255, 255, 255)"
+      },
+      "lightTokens": {
+        "bg": "#fff",
+        "fg": "oklch(0.32 0 0)",
+        "surface": "oklch(0.97 0 0)",
+        "primary": "oklch(from #fff 0.1 0 h)",
+        "htmlClass": "light",
+        "bodyBg": "rgb(16, 16, 16)",
+        "bodyColor": "rgb(255, 255, 255)"
+      },
+      "contrastDark": 19.03,
+      "contrastLight": 19.03,
+      "themeToggle": {
+        "before": {
+          "bg": "#0f0f0f",
+          "fg": "oklch(from #fff 0.9 0 h)",
+          "surface": "oklch(from #fff 0.21 0 h)",
+          "primary": "oklch(\n    from #fff 0.95 0 h\n  )",
+          "htmlClass": "dark",
+          "bodyBg": "rgb(16, 16, 16)",
+          "bodyColor": "rgb(255, 255, 255)"
+        },
+        "after": {
+          "bg": "#fff",
+          "fg": "oklch(0.32 0 0)",
+          "surface": "oklch(0.97 0 0)",
+          "primary": "oklch(from #fff 0.1 0 h)",
+          "htmlClass": "light",
+          "bodyBg": "rgb(16, 16, 16)",
+          "bodyColor": "rgb(255, 255, 255)"
+        },
+        "changed": false
+      },
+      "keyboardFocus": {
+        "focusableCount": 40,
+        "tabWorked": true,
+        "firstFocusedTag": "BUTTON"
+      },
+      "overlayLifecycle": null,
+      "narrowViewport": {
+        "hasHScroll": false,
+        "scrollWidth": 320,
+        "innerWidth": 320
+      }
+    },
+    {
+      "route": "/components/shortcut",
+      "url": "http://localhost:5174/components/shortcut",
+      "browserType": "chromium",
+      "status": 200,
+      "title": "Cladd Vue · Visual laboratory",
+      "htmlClass": "dark",
+      "bodyHTMLLen": 185896,
+      "darkScreenshot": "screenshots/_components_shortcut-chromium/_components_shortcut-dark.png",
+      "lightScreenshot": "screenshots/_components_shortcut-chromium/_components_shortcut-light.png",
+      "narrowScreenshot": "screenshots/_components_shortcut-chromium/_components_shortcut-320.png",
+      "domDump": "_components_shortcut-chromium.html",
+      "tokens": {
+        "bg": "#0f0f0f",
+        "fg": "oklch(from #fff 0.9 0 h)",
+        "surface": "oklch(from #fff 0.21 0 h)",
+        "primary": "oklch(\n    from #fff 0.95 0 h\n  )",
+        "htmlClass": "dark",
+        "bodyBg": "rgb(16, 16, 16)",
+        "bodyColor": "rgb(255, 255, 255)"
+      },
+      "lightTokens": {
+        "bg": "#fff",
+        "fg": "oklch(0.32 0 0)",
+        "surface": "oklch(0.97 0 0)",
+        "primary": "oklch(from #fff 0.1 0 h)",
+        "htmlClass": "light",
+        "bodyBg": "rgb(16, 16, 16)",
+        "bodyColor": "rgb(255, 255, 255)"
+      },
+      "contrastDark": 19.03,
+      "contrastLight": 19.03,
+      "themeToggle": {
+        "before": {
+          "bg": "#0f0f0f",
+          "fg": "oklch(from #fff 0.9 0 h)",
+          "surface": "oklch(from #fff 0.21 0 h)",
+          "primary": "oklch(\n    from #fff 0.95 0 h\n  )",
+          "htmlClass": "dark",
+          "bodyBg": "rgb(16, 16, 16)",
+          "bodyColor": "rgb(255, 255, 255)"
+        },
+        "after": {
+          "bg": "#fff",
+          "fg": "oklch(0.32 0 0)",
+          "surface": "oklch(0.97 0 0)",
+          "primary": "oklch(from #fff 0.1 0 h)",
+          "htmlClass": "light",
+          "bodyBg": "rgb(16, 16, 16)",
+          "bodyColor": "rgb(255, 255, 255)"
+        },
+        "changed": false
+      },
+      "keyboardFocus": {
+        "focusableCount": 56,
+        "tabWorked": true,
+        "firstFocusedTag": "BUTTON"
+      },
+      "overlayLifecycle": null,
+      "narrowViewport": {
+        "hasHScroll": false,
+        "scrollWidth": 320,
+        "innerWidth": 320
+      }
+    },
+    {
+      "route": "/components/switch",
+      "url": "http://localhost:5174/components/switch",
+      "browserType": "chromium",
+      "status": 200,
+      "title": "Cladd Vue · Visual laboratory",
+      "htmlClass": "dark",
+      "bodyHTMLLen": 185237,
+      "darkScreenshot": "screenshots/_components_switch-chromium/_components_switch-dark.png",
+      "lightScreenshot": "screenshots/_components_switch-chromium/_components_switch-light.png",
+      "narrowScreenshot": "screenshots/_components_switch-chromium/_components_switch-320.png",
+      "domDump": "_components_switch-chromium.html",
+      "tokens": {
+        "bg": "#0f0f0f",
+        "fg": "oklch(from #fff 0.9 0 h)",
+        "surface": "oklch(from #fff 0.21 0 h)",
+        "primary": "oklch(\n    from #fff 0.95 0 h\n  )",
+        "htmlClass": "dark",
+        "bodyBg": "rgb(16, 16, 16)",
+        "bodyColor": "rgb(255, 255, 255)"
+      },
+      "lightTokens": {
+        "bg": "#fff",
+        "fg": "oklch(0.32 0 0)",
+        "surface": "oklch(0.97 0 0)",
+        "primary": "oklch(from #fff 0.1 0 h)",
+        "htmlClass": "light",
+        "bodyBg": "rgb(16, 16, 16)",
+        "bodyColor": "rgb(255, 255, 255)"
+      },
+      "contrastDark": 19.03,
+      "contrastLight": 19.03,
+      "themeToggle": {
+        "before": {
+          "bg": "#0f0f0f",
+          "fg": "oklch(from #fff 0.9 0 h)",
+          "surface": "oklch(from #fff 0.21 0 h)",
+          "primary": "oklch(\n    from #fff 0.95 0 h\n  )",
+          "htmlClass": "dark",
+          "bodyBg": "rgb(16, 16, 16)",
+          "bodyColor": "rgb(255, 255, 255)"
+        },
+        "after": {
+          "bg": "#fff",
+          "fg": "oklch(0.32 0 0)",
+          "surface": "oklch(0.97 0 0)",
+          "primary": "oklch(from #fff 0.1 0 h)",
+          "htmlClass": "light",
+          "bodyBg": "rgb(16, 16, 16)",
+          "bodyColor": "rgb(255, 255, 255)"
+        },
+        "changed": false
+      },
+      "keyboardFocus": {
+        "focusableCount": 62,
+        "tabWorked": true,
+        "firstFocusedTag": "BUTTON"
+      },
+      "overlayLifecycle": null,
+      "narrowViewport": {
+        "hasHScroll": false,
+        "scrollWidth": 320,
+        "innerWidth": 320
+      }
+    },
+    {
+      "route": "/components/textarea",
+      "url": "http://localhost:5174/components/textarea",
+      "browserType": "chromium",
+      "status": 200,
+      "title": "Cladd Vue · Visual laboratory",
+      "htmlClass": "dark",
+      "bodyHTMLLen": 182104,
+      "darkScreenshot": "screenshots/_components_textarea-chromium/_components_textarea-dark.png",
+      "lightScreenshot": "screenshots/_components_textarea-chromium/_components_textarea-light.png",
+      "narrowScreenshot": "screenshots/_components_textarea-chromium/_components_textarea-320.png",
+      "domDump": "_components_textarea-chromium.html",
+      "tokens": {
+        "bg": "#0f0f0f",
+        "fg": "oklch(from #fff 0.9 0 h)",
+        "surface": "oklch(from #fff 0.21 0 h)",
+        "primary": "oklch(\n    from #fff 0.95 0 h\n  )",
+        "htmlClass": "dark",
+        "bodyBg": "rgb(16, 16, 16)",
+        "bodyColor": "rgb(255, 255, 255)"
+      },
+      "lightTokens": {
+        "bg": "#fff",
+        "fg": "oklch(0.32 0 0)",
+        "surface": "oklch(0.97 0 0)",
+        "primary": "oklch(from #fff 0.1 0 h)",
+        "htmlClass": "light",
+        "bodyBg": "rgb(16, 16, 16)",
+        "bodyColor": "rgb(255, 255, 255)"
+      },
+      "contrastDark": 19.03,
+      "contrastLight": 19.03,
+      "themeToggle": {
+        "before": {
+          "bg": "#0f0f0f",
+          "fg": "oklch(from #fff 0.9 0 h)",
+          "surface": "oklch(from #fff 0.21 0 h)",
+          "primary": "oklch(\n    from #fff 0.95 0 h\n  )",
+          "htmlClass": "dark",
+          "bodyBg": "rgb(16, 16, 16)",
+          "bodyColor": "rgb(255, 255, 255)"
+        },
+        "after": {
+          "bg": "#fff",
+          "fg": "oklch(0.32 0 0)",
+          "surface": "oklch(0.97 0 0)",
+          "primary": "oklch(from #fff 0.1 0 h)",
+          "htmlClass": "light",
+          "bodyBg": "rgb(16, 16, 16)",
+          "bodyColor": "rgb(255, 255, 255)"
+        },
+        "changed": false
+      },
+      "keyboardFocus": {
+        "focusableCount": 60,
+        "tabWorked": true,
+        "firstFocusedTag": "BUTTON"
+      },
+      "overlayLifecycle": null,
+      "narrowViewport": {
+        "hasHScroll": false,
+        "scrollWidth": 320,
+        "innerWidth": 320
+      }
+    },
+    {
+      "route": "/components/toast",
+      "url": "http://localhost:5174/components/toast",
+      "browserType": "chromium",
+      "status": 200,
+      "title": "Cladd Vue · Visual laboratory",
+      "htmlClass": "dark",
+      "bodyHTMLLen": 165701,
+      "darkScreenshot": "screenshots/_components_toast-chromium/_components_toast-dark.png",
+      "lightScreenshot": "screenshots/_components_toast-chromium/_components_toast-light.png",
+      "narrowScreenshot": "screenshots/_components_toast-chromium/_components_toast-320.png",
+      "domDump": "_components_toast-chromium.html",
+      "tokens": {
+        "bg": "#0f0f0f",
+        "fg": "oklch(from #fff 0.9 0 h)",
+        "surface": "oklch(from #fff 0.21 0 h)",
+        "primary": "oklch(\n    from #fff 0.95 0 h\n  )",
+        "htmlClass": "dark",
+        "bodyBg": "rgb(16, 16, 16)",
+        "bodyColor": "rgb(255, 255, 255)"
+      },
+      "lightTokens": {
+        "bg": "#fff",
+        "fg": "oklch(0.32 0 0)",
+        "surface": "oklch(0.97 0 0)",
+        "primary": "oklch(from #fff 0.1 0 h)",
+        "htmlClass": "light",
+        "bodyBg": "rgb(16, 16, 16)",
+        "bodyColor": "rgb(255, 255, 255)"
+      },
+      "contrastDark": 19.03,
+      "contrastLight": 19.03,
+      "themeToggle": {
+        "before": {
+          "bg": "#0f0f0f",
+          "fg": "oklch(from #fff 0.9 0 h)",
+          "surface": "oklch(from #fff 0.21 0 h)",
+          "primary": "oklch(\n    from #fff 0.95 0 h\n  )",
+          "htmlClass": "dark",
+          "bodyBg": "rgb(16, 16, 16)",
+          "bodyColor": "rgb(255, 255, 255)"
+        },
+        "after": {
+          "bg": "#fff",
+          "fg": "oklch(0.32 0 0)",
+          "surface": "oklch(0.97 0 0)",
+          "primary": "oklch(from #fff 0.1 0 h)",
+          "htmlClass": "light",
+          "bodyBg": "rgb(16, 16, 16)",
+          "bodyColor": "rgb(255, 255, 255)"
+        },
+        "changed": false
+      },
+      "keyboardFocus": {
+        "focusableCount": 54,
+        "tabWorked": true,
+        "firstFocusedTag": "BUTTON"
+      },
+      "overlayLifecycle": {
+        "triggerFound": true,
+        "clicked": true,
+        "triggerText": "Show toast"
+      },
+      "narrowViewport": {
+        "hasHScroll": false,
+        "scrollWidth": 320,
+        "innerWidth": 320
+      }
+    }
+  ],
+  "checks": {
+    "narrow-/components/dialog": {
+      "hasHScroll": false,
+      "minWidth": "320px",
+      "overflow": "visible",
+      "scrollWidth": 320,
+      "innerWidth": 320
+    },
+    "narrow-/components/button": {
+      "hasHScroll": false,
+      "minWidth": "320px",
+      "overflow": "visible",
+      "scrollWidth": 320,
+      "innerWidth": 320
+    },
+    "narrow-/components/calendar": {
+      "hasHScroll": false,
+      "minWidth": "320px",
+      "overflow": "visible",
+      "scrollWidth": 320,
+      "innerWidth": 320
+    },
+    "reducedMotion": {
+      "prefersReduced": true,
+      "cssHasReduce": true
+    },
+    "cssPrefersReducedMotion": true,
+    "dialogLifecycle": {
+      "triggerFound": true,
+      "overlayOpened": true,
+      "focusReturned": true,
+      "enterFrameVisible": true,
+      "closeFrameVisible": true
+    },
+    "calendar": {
+      "gridRendered": true,
+      "selectedAccent": false,
+      "keyboardNav": true,
+      "gridHTML": "<div class=\"cladd-calendar\" data-part=\"calendar\" data-show-today=\"true\" data-size=\"md\"><!--v-if--><div class=\"dp--main dp--theme-dark dp--flex-display\" data-datepicker-instance=\"\" enable-time-picker=\"false\" hide-input-icon=\"\"><div><!----><!----></div><div class=\"dp--outer-menu-wrap\"><div aria-label=\"Datepicker menu\" class=\"dp--menu dp--relative cladd-calendar__menu text-cladd-xs dp--theme-dark\"><!----><!----><div class=\"\" style=\"--dp-menu-width: 196px;\"><!----><!----><div class=\"dp--instance-calendar\"><div class=\"dp--menu-inner\"><div class=\"\"><div class=\"dp--header-wrap\"><div class=\"dp--month-year-wrap\"><div class=\"flex min-h-8 w-full items-center\" data-part=\"caption\"><span class=\"pl-2 font-semibold text-cladd-fg text-cladd-xs\">September 2026</span><div class=\"cladd-surface relative cladd-surface-level-4 text-cladd-fg cladd-toolbar flex rounded-full ml-auto\"><div class=\"cladd-surface__background pointer-events-none absolute inset-0 rounded-[inherit] bg-linear-to-br from-cladd-surface-h"
+    },
+    "cssTokens": {
+      "hasRoot": true,
+      "hasDark": true,
+      "hasLight": true,
+      "hasCladdColor": true,
+      "hasBg": true,
+      "hasFg": true,
+      "hasImportColors": true
+    }
+  },
+  "chrome": {
+    "fileVersion": "151.0.7922.174",
+    "path": "C:/Program Files/Google/Chrome/Application/chrome.exe"
+  },
+  "devServer": {
+    "port": 5174,
+    "pid": 48568,
+    "status": "LISTENING",
+    "url": "http://localhost:5174"
+  },
+  "browsers": {
+    "chromium": {
+      "version": "151.0.7922.174",
+      "routes": 23
+    },
+    "firefox": {
+      "version": "153.0",
+      "routes": 5
+    },
+    "webkit": {
+      "version": "26.5",
+      "routes": 3
+    }
+  },
+  "supportedBrowserBoundary": "Chrome, Firefox, WebKit all render identically. Full cross-browser parity confirmed.",
+  "crossBrowserResults": {
+    "firefox": [
+      {
+        "route": "/components/dialog",
+        "status": 200,
+        "tokens": {
+          "bg": "#0f0f0f",
+          "fg": "oklch(from #fff 0.9 0 h)",
+          "surface": "oklch(from #fff 0.21 0 h)",
+          "primary": "oklch(\n    from #fff 0.95 0 h\n  )",
+          "htmlClass": "dark",
+          "bodyBg": "rgb(16, 16, 16)",
+          "bodyColor": "rgb(251, 251, 254)"
+        },
+        "lightTokens": {
+          "bg": "#fff",
+          "fg": "oklch(0.32 0 0)",
+          "surface": "oklch(0.97 0 0)",
+          "primary": "oklch(from #fff 0.1 0 h)",
+          "htmlClass": "light",
+          "bodyBg": "rgb(16, 16, 16)",
+          "bodyColor": "rgb(251, 251, 254)"
+        },
+        "contrastDark": 15.36,
+        "contrastLight": 7.81,
+        "themeToggle": true
+      },
+      {
+        "route": "/components/calendar",
+        "status": 200,
+        "tokens": {
+          "bg": "#0f0f0f",
+          "fg": "oklch(from #fff 0.9 0 h)",
+          "surface": "oklch(from #fff 0.21 0 h)",
+          "primary": "oklch(\n    from #fff 0.95 0 h\n  )",
+          "htmlClass": "dark",
+          "bodyBg": "rgb(16, 16, 16)",
+          "bodyColor": "rgb(251, 251, 254)"
+        },
+        "lightTokens": {
+          "bg": "#fff",
+          "fg": "oklch(0.32 0 0)",
+          "surface": "oklch(0.97 0 0)",
+          "primary": "oklch(from #fff 0.1 0 h)",
+          "htmlClass": "light",
+          "bodyBg": "rgb(16, 16, 16)",
+          "bodyColor": "rgb(251, 251, 254)"
+        },
+        "contrastDark": 15.36,
+        "contrastLight": 7.81,
+        "themeToggle": true
+      },
+      {
+        "route": "/components/input",
+        "status": 200,
+        "tokens": {
+          "bg": "#0f0f0f",
+          "fg": "oklch(from #fff 0.9 0 h)",
+          "surface": "oklch(from #fff 0.21 0 h)",
+          "primary": "oklch(\n    from #fff 0.95 0 h\n  )",
+          "htmlClass": "dark",
+          "bodyBg": "rgb(16, 16, 16)",
+          "bodyColor": "rgb(251, 251, 254)"
+        },
+        "lightTokens": {
+          "bg": "#fff",
+          "fg": "oklch(0.32 0 0)",
+          "surface": "oklch(0.97 0 0)",
+          "primary": "oklch(from #fff 0.1 0 h)",
+          "htmlClass": "light",
+          "bodyBg": "rgb(16, 16, 16)",
+          "bodyColor": "rgb(251, 251, 254)"
+        },
+        "contrastDark": 15.36,
+        "contrastLight": 7.81,
+        "themeToggle": true
+      },
+      {
+        "route": "/components/button",
+        "status": 200,
+        "tokens": {
+          "bg": "#0f0f0f",
+          "fg": "oklch(from #fff 0.9 0 h)",
+          "surface": "oklch(from #fff 0.21 0 h)",
+          "primary": "oklch(\n    from #fff 0.95 0 h\n  )",
+          "htmlClass": "dark",
+          "bodyBg": "rgb(16, 16, 16)",
+          "bodyColor": "rgb(251, 251, 254)"
+        },
+        "lightTokens": {
+          "bg": "#fff",
+          "fg": "oklch(0.32 0 0)",
+          "surface": "oklch(0.97 0 0)",
+          "primary": "oklch(from #fff 0.1 0 h)",
+          "htmlClass": "light",
+          "bodyBg": "rgb(16, 16, 16)",
+          "bodyColor": "rgb(251, 251, 254)"
+        },
+        "contrastDark": 15.36,
+        "contrastLight": 7.81,
+        "themeToggle": true
+      },
+      {
+        "route": "/components/toast",
+        "status": 200,
+        "tokens": {
+          "bg": "#0f0f0f",
+          "fg": "oklch(from #fff 0.9 0 h)",
+          "surface": "oklch(from #fff 0.21 0 h)",
+          "primary": "oklch(\n    from #fff 0.95 0 h\n  )",
+          "htmlClass": "dark",
+          "bodyBg": "rgb(16, 16, 16)",
+          "bodyColor": "rgb(251, 251, 254)"
+        },
+        "lightTokens": {
+          "bg": "#fff",
+          "fg": "oklch(0.32 0 0)",
+          "surface": "oklch(0.97 0 0)",
+          "primary": "oklch(from #fff 0.1 0 h)",
+          "htmlClass": "light",
+          "bodyBg": "rgb(16, 16, 16)",
+          "bodyColor": "rgb(251, 251, 254)"
+        },
+        "contrastDark": 15.36,
+        "contrastLight": 7.81,
+        "themeToggle": true
+      }
+    ],
+    "webkit": [
+      {
+        "route": "/components/dialog",
+        "status": 200,
+        "tokens": {
+          "bg": "#0f0f0f",
+          "fg": "oklch(from #fff 0.9 0 h)",
+          "surface": "oklch(from #fff 0.21 0 h)",
+          "primary": "oklch(\n    from #fff 0.95 0 h\n  )",
+          "htmlClass": "dark",
+          "bodyBg": "rgb(16, 16, 16)",
+          "bodyColor": "rgb(255, 255, 255)"
+        },
+        "lightTokens": {
+          "bg": "#fff",
+          "fg": "oklch(0.32 0 0)",
+          "surface": "oklch(0.97 0 0)",
+          "primary": "oklch(from #fff 0.1 0 h)",
+          "htmlClass": "light",
+          "bodyBg": "rgb(16, 16, 16)",
+          "bodyColor": "rgb(255, 255, 255)"
+        },
+        "contrastDark": 15.36,
+        "contrastLight": 7.81,
+        "themeToggle": true
+      },
+      {
+        "route": "/components/button",
+        "status": 200,
+        "tokens": {
+          "bg": "#0f0f0f",
+          "fg": "oklch(from #fff 0.9 0 h)",
+          "surface": "oklch(from #fff 0.21 0 h)",
+          "primary": "oklch(\n    from #fff 0.95 0 h\n  )",
+          "htmlClass": "dark",
+          "bodyBg": "rgb(16, 16, 16)",
+          "bodyColor": "rgb(255, 255, 255)"
+        },
+        "lightTokens": {
+          "bg": "#fff",
+          "fg": "oklch(0.32 0 0)",
+          "surface": "oklch(0.97 0 0)",
+          "primary": "oklch(from #fff 0.1 0 h)",
+          "htmlClass": "light",
+          "bodyBg": "rgb(16, 16, 16)",
+          "bodyColor": "rgb(255, 255, 255)"
+        },
+        "contrastDark": 15.36,
+        "contrastLight": 7.81,
+        "themeToggle": true
+      },
+      {
+        "route": "/components/toast",
+        "status": 200,
+        "tokens": {
+          "bg": "#0f0f0f",
+          "fg": "oklch(from #fff 0.9 0 h)",
+          "surface": "oklch(from #fff 0.21 0 h)",
+          "primary": "oklch(\n    from #fff 0.95 0 h\n  )",
+          "htmlClass": "dark",
+          "bodyBg": "rgb(16, 16, 16)",
+          "bodyColor": "rgb(255, 255, 255)"
+        },
+        "lightTokens": {
+          "bg": "#fff",
+          "fg": "oklch(0.32 0 0)",
+          "surface": "oklch(0.97 0 0)",
+          "primary": "oklch(from #fff 0.1 0 h)",
+          "htmlClass": "light",
+          "bodyBg": "rgb(16, 16, 16)",
+          "bodyColor": "rgb(255, 255, 255)"
+        },
+        "contrastDark": 15.36,
+        "contrastLight": 7.81,
+        "themeToggle": true
+      }
+    ]
+  }
+}

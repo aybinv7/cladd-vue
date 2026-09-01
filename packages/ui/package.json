@@ -11,15 +11,15 @@
     "ui-components",
     "vue"
   ],
-  "homepage": "https://github.com/inventor7/cladd-vue#readme",
+  "homepage": "https://github.com/aybinv7/cladd-vue#readme",
   "bugs": {
-    "url": "https://github.com/inventor7/cladd-vue/issues"
+    "url": "https://github.com/aybinv7/cladd-vue/issues"
   },
   "license": "MIT",
   "author": "Cladd Vue contributors",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/inventor7/cladd-vue.git",
+    "url": "git+https://github.com/aybinv7/cladd-vue.git",
     "directory": "packages/ui"
   },
   "files": [
@@ -60,6 +60,7 @@
   "dependencies": {
     "@vuepic/vue-datepicker": "catalog:",
     "clsx": "catalog:",
+    "date-fns": "catalog:",
     "tailwind-merge": "catalog:"
   },
   "devDependencies": {

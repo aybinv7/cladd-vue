@@ -16,11 +16,14 @@ import {
   textareaPaddingWithIcon,
   type TextareaProps,
 } from './textarea.contracts.ts';
+import VNodeRenderer from './VNodeRenderer.ts';
 
 defineOptions({ inheritAttrs: false });
 
 const props = withDefaults(defineProps<TextareaProps>(), {
   as: undefined,
+  bgClassName: undefined,
+  clickable: undefined,
   color: undefined,
   contentClassName: undefined,
   disabled: undefined,
@@ -32,16 +35,23 @@ const props = withDefaults(defineProps<TextareaProps>(), {
   maxLength: undefined,
   placeholder: undefined,
   placeholderClassName: undefined,
+  outline: undefined,
+  overlayClassName: undefined,
+  overlayPosition: undefined,
+  pressed: undefined,
   readOnly: undefined,
   rounded: undefined,
   size: undefined,
   tightFocusRing: undefined,
   updateContentOnChange: undefined,
   valid: undefined,
+  wrapContent: undefined,
 });
 
 const slots = defineSlots<{
+  error?: () => unknown;
   icon?: () => unknown;
+  info?: () => unknown;
   prefix?: () => unknown;
   suffix?: () => unknown;
 }>();
@@ -194,12 +204,18 @@ defineExpose({ focus: () => controlElement.value?.focus() });
   <SurfaceCut
     v-bind="rootAttrs"
     :as="d.as"
+    :bg-class-name="d.bgClassName"
     :class="rootClass"
+    :clickable="d.clickable"
     :color="d.color"
     :data-disabled="d.disabled || undefined"
     :data-invalid="!d.valid || undefined"
     :data-readonly="d.readOnly || undefined"
     :hoverable="editable"
+    :outline="d.outline"
+    :overlay-class-name="d.overlayClassName"
+    :overlay-position="d.overlayPosition"
+    :pressed="d.pressed"
     :wrap-content="false"
   >
     <FocusRing
@@ -245,18 +261,18 @@ defineExpose({ focus: () => controlElement.value?.focus() });
     </div>
 
     <div
-      v-if="d.infoMessage && d.valid && !d.readOnly"
+      v-if="(d.infoMessage || $slots.info) && d.valid && !d.readOnly"
       :class="infoClass"
       data-part="info"
     >
-      {{ d.infoMessage }}
+      <slot name="info"><VNodeRenderer :node="d.infoMessage" /></slot>
     </div>
     <div
-      v-if="d.errorMessage && !d.valid"
+      v-if="(d.errorMessage || $slots.error) && !d.valid"
       :class="errorClass"
       data-part="error"
     >
-      {{ d.errorMessage }}
+      <slot name="error"><VNodeRenderer :node="d.errorMessage" /></slot>
     </div>
   </SurfaceCut>
 </template>

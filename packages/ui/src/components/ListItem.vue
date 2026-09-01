@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed, useAttrs } from 'vue';
 
+import { useComponentDefaults } from '../composables/useComponentDefaults.ts';
 import { cn } from '../shared/cn.ts';
 import { listItemClasses } from './list.contracts.ts';
 
@@ -10,12 +11,22 @@ defineSlots<{
   default?: () => unknown;
 }>();
 
+const props = withDefaults(defineProps<{ className?: string }>(), {
+  className: undefined,
+});
+
+const d = useComponentDefaults('ListItem', props, {
+  className: '',
+});
+
 const attrs = useAttrs();
 const rootAttrs = computed(() => {
   const { class: _consumerClass, ...rest } = attrs;
   return rest;
 });
-const rootClass = computed(() => cn(listItemClasses, attrs.class));
+const rootClass = computed(() =>
+  cn(listItemClasses, d.value.className, attrs.class),
+);
 </script>
 
 <template>

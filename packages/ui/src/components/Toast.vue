@@ -35,6 +35,7 @@ import {
   toastTextClasses,
   toastTitleClasses,
 } from './toast.contracts.ts';
+import VNodeRenderer from './VNodeRenderer.ts';
 
 defineOptions({ inheritAttrs: false });
 
@@ -182,14 +183,14 @@ provideSurfaceColorReset();
           :class="toastTitleClasses"
           data-part="title"
         >
-          <slot name="title">{{ d.title }}</slot>
+          <slot name="title"><VNodeRenderer :node="d.title" /></slot>
         </div>
         <div
           v-if="d.text || $slots.text"
           :class="toastTextClasses"
           data-part="text"
         >
-          <slot name="text">{{ d.text }}</slot>
+          <slot name="text"><VNodeRenderer :node="d.text" /></slot>
         </div>
       </div>
 

@@ -41,8 +41,10 @@ export interface OTPFieldInputProps {
 /** Shape of `OTPFieldInput` defaults that can be supplied via `CladdProvider`'s `defaults` prop. */
 export type OTPFieldInputDefaultProps = Partial<OTPFieldInputProps>;
 
-/** The separator takes no own props; upstream's are `children`, `className` and `ref`. */
-export type OTPFieldSeparatorProps = Record<string, never>;
+export interface OTPFieldSeparatorProps {
+  /** Extra classes applied to the separator. */
+  className?: string;
+}
 
 /** Shape of `OTPFieldSeparator` defaults that can be supplied via `CladdProvider`'s `defaults` prop. */
 export type OTPFieldSeparatorDefaultProps = Partial<OTPFieldSeparatorProps>;

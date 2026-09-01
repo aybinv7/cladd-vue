@@ -1,4 +1,4 @@
-import type { Component } from 'vue';
+import type { Component, VNodeChild } from 'vue';
 
 import type { UiSize } from '../foundations/contracts.ts';
 import type { Color } from '../types.ts';
@@ -22,12 +22,12 @@ export interface InputProps {
   contentClassName?: string;
   /** Visually dim the input and disable interaction. Default `false`. */
   disabled?: boolean;
-  /** Floating error label. Always visible when `valid === false`. */
-  errorMessage?: string;
+  /** Floating error label. Always visible when `valid === false`. Upstream `ReactNode` → `string | VNodeChild` + `info`/`error` slots. */
+  errorMessage?: string | VNodeChild;
   /** Extra classes for the icon wrapper. */
   iconClassName?: string;
-  /** Floating label shown above the input on focus. */
-  infoMessage?: string;
+  /** Floating label shown above the input on focus. Upstream `ReactNode` → `string | VNodeChild` + `info`/`error` slots. */
+  infoMessage?: string | VNodeChild;
   /** Extra classes for the actual `<input>` element. */
   inputClassName?: string;
   /** `id` for the inner `<input>`. */
@@ -74,6 +74,22 @@ export interface InputProps {
   type?: string;
   /** Validity state. Default `true`. */
   valid?: boolean;
+  /** Inherited from `SurfaceCutProps` via `InputProps & Omit<SurfaceCutOwnProps, ...>` — extra classes for the background layer. */
+  bgClassName?: string;
+  /** Inherited from `SurfaceCutProps` — show inset outline ring. Default `true`. */
+  outline?: boolean;
+  /** Inherited from `SurfaceCutProps` — enable hover overlay. */
+  hoverable?: boolean;
+  /** Inherited from `SurfaceCutProps` — enable pressed overlay. */
+  clickable?: boolean;
+  /** Inherited from `SurfaceCutProps` — force pressed. */
+  pressed?: boolean;
+  /** Inherited from `SurfaceCutProps` — overlay stack position. Default `'above'`. */
+  overlayPosition?: 'above' | 'below';
+  /** Inherited from `SurfaceCutProps` — extra classes for overlay. */
+  overlayClassName?: string;
+  /** Inherited from `SurfaceCutProps` — wrap children in SurfaceCutContent. Default `true` (Input forces `false`). */
+  wrapContent?: boolean;
 }
 
 export type InputDefaultProps = Partial<Omit<InputProps, 'as'>>;

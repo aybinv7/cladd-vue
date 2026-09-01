@@ -33,10 +33,13 @@ import Popover from './Popover.vue';
 defineOptions({ inheritAttrs: false });
 
 const props = withDefaults(defineProps<ColorPickerProps>(), {
+  as: undefined,
   alpha: undefined,
   angleControl: undefined,
   anchorElement: undefined,
+  anchorRef: undefined,
   areaClassName: undefined,
+  clickable: undefined,
   color: undefined,
   contentClassName: undefined,
   controlOutline: undefined,
@@ -47,11 +50,14 @@ const props = withDefaults(defineProps<ColorPickerProps>(), {
   dropdownIcon: undefined,
   editorClassName: undefined,
   format: undefined,
+  focusable: undefined,
   gradient: undefined,
   gradientLabel: undefined,
   hexInput: undefined,
   iconClassName: undefined,
   inputs: undefined,
+  hoverable: undefined,
+  loading: undefined,
   multiline: undefined,
   outline: undefined,
   placeholder: undefined,
@@ -60,16 +66,22 @@ const props = withDefaults(defineProps<ColorPickerProps>(), {
   popoverColor: undefined,
   popoverOffset: undefined,
   popoverPosition: undefined,
+  popoverState: undefined,
   popoverSurfaceLevel: undefined,
+  pressed: undefined,
   readOnly: undefined,
   reverse: undefined,
   rounded: undefined,
   size: undefined,
+  square: undefined,
   surface: undefined,
+  surfaceLevel: undefined,
   swatchClassName: undefined,
   swatches: undefined,
   throttle: undefined,
+  tightFocusRing: undefined,
   valueClassName: undefined,
+  variant: undefined,
 });
 
 /** Controlled value. A CSS color/gradient string, a channel set, or a gradient object. */
@@ -77,12 +89,13 @@ const model = defineModel<ColorInput | GradientInput | undefined>({
   default: undefined,
 });
 
-/** Controlled popover open state. */
+/** Controlled popover open state. `popoverState` prop is the upstream alias; it takes precedence when defined. */
 const popoverOpen = defineModel<boolean>('popoverOpen', { default: false });
 
 const emit = defineEmits<{
   /** Fires on every change with the full color, or a discriminated `solid` / `linear` value in gradient mode. */
   change: [value: ColorEditorEmitValue];
+  'update:popoverState': [value: boolean];
 }>();
 
 const d = useComponentDefaults('ColorPicker', props, {
@@ -117,6 +130,21 @@ const rootAttrs = computed(() => {
 
 const triggerElement = ref<HTMLElement>();
 const stored = ref<ColorPickerStoredValue>(d.value.defaultValue);
+
+const resolvedAnchorElement = computed(
+  () => d.value.anchorRef ?? d.value.anchorElement ?? triggerElement.value,
+);
+const isExternalAnchor = computed(
+  () => !!(d.value.anchorRef ?? d.value.anchorElement),
+);
+
+const effectiveOpen = computed({
+  get: () => d.value.popoverState ?? popoverOpen.value,
+  set: (next: boolean) => {
+    if (d.value.popoverState === undefined) popoverOpen.value = next;
+    emit('update:popoverState', next);
+  },
+});
 
 function setTriggerElement(element: unknown): void {
   triggerElement.value =
@@ -193,7 +221,7 @@ function onEditorChange(next: ColorEditorEmitValue): void {
 }
 
 function toggleOpen(): void {
-  popoverOpen.value = !popoverOpen.value;
+  effectiveOpen.value = !effectiveOpen.value;
 }
 
 const rootClass = computed(() => cn('cladd-colorpicker w-full', attrs.class));
@@ -238,24 +266,34 @@ const popoverClass = computed(() => cn('w-64', d.value.popoverClassName));
 
 <template>
   <Button
-    v-if="!d.anchorElement"
+    v-if="!isExternalAnchor"
     :ref="setTriggerElement"
     v-bind="rootAttrs"
     :aria-disabled="d.disabled || undefined"
-    :aria-expanded="popoverOpen"
+    :aria-expanded="effectiveOpen"
     aria-haspopup="dialog"
     :aria-readonly="d.readOnly || undefined"
+    :as="d.as"
     :class="rootClass"
+    :clickable="d.clickable"
     :color="d.color"
     :content-class-name="triggerContentClass"
     data-part="trigger"
     :disabled="d.disabled"
+    :focusable="d.focusable"
+    :hoverable="d.hoverable"
+    :loading="d.loading"
     :multiline="d.multiline"
     :outline="d.outline"
+    :pressed="d.pressed"
     :read-only="d.readOnly"
     :rounded="d.rounded"
     :size="d.size"
+    :square="d.square"
     :surface="d.surface"
+    :surface-level="d.surfaceLevel"
+    :tight-focus-ring="d.tightFocusRing"
+    :variant="d.variant"
     @click="toggleOpen"
   >
     <div v-if="slots.icon" :class="iconWrapperClass" data-part="icon">
@@ -290,8 +328,8 @@ const popoverClass = computed(() => cn('w-64', d.value.popoverClassName));
 
   <Popover
     v-if="interactive"
-    v-model:open="popoverOpen"
-    :anchor-element="d.anchorElement ?? triggerElement"
+    v-model:open="effectiveOpen"
+    :anchor-element="resolvedAnchorElement"
     :class="popoverClass"
     :color="d.popoverColor"
     content-class-name="p-4"
