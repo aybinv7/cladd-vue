@@ -37,4 +37,4 @@ jobs:
           mkdir -p "$RUNNER_TEMP/cladd-vue-package"
           cp -R packages/ui/. "$RUNNER_TEMP/cladd-vue-package/"
           cd "$RUNNER_TEMP/cladd-vue-package"
-          npm publish --provenance --access public
+          npm publish --provenance --access public --ignore-scripts
