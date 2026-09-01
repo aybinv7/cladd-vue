@@ -33,5 +33,8 @@ jobs:
 
       - run: bunx vp run cladd-vue#build
 
-      - run: npm publish --provenance --access public
-        working-directory: packages/ui
+      - run: |
+          mkdir -p "$RUNNER_TEMP/cladd-vue-package"
+          cp -R packages/ui/. "$RUNNER_TEMP/cladd-vue-package/"
+          cd "$RUNNER_TEMP/cladd-vue-package"
+          npm publish --provenance --access public
