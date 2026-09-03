@@ -169,6 +169,15 @@ export const catalogEntries: CatalogEntry[] = [
     title: 'Input',
   },
   {
+    component: 'Field',
+    count: 4,
+    description: 'Field composition and input groups',
+    id: 'field',
+    label: 'Field',
+    path: '/components/field',
+    title: 'Field',
+  },
+  {
     component: 'List',
     count: 6,
     description: 'Vertical stacks for actions',
@@ -251,7 +260,7 @@ export const catalogEntries: CatalogEntry[] = [
   },
 ];
 
-export const catalogComponentCount = 54;
+export const catalogComponentCount = 55;
 export const catalogStateCount = catalogEntries.reduce(
   (sum, entry) => sum + entry.count,
   0,

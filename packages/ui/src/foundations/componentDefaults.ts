@@ -30,7 +30,23 @@ import type {
   SpinnerDefaultProps,
   ToastDefaultProps,
 } from '../components/feedback.contracts.ts';
+import type {
+  FieldDefaultProps,
+  FieldDescriptionDefaultProps,
+  FieldErrorDefaultProps,
+  FieldGroupDefaultProps,
+  FieldLabelDefaultProps,
+  FieldLegendDefaultProps,
+  FieldSetDefaultProps,
+} from '../components/field.contracts.ts';
 import type { InputDefaultProps } from '../components/input.contracts.ts';
+import type {
+  InputGroupAddonDefaultProps,
+  InputGroupButtonDefaultProps,
+  InputGroupDefaultProps,
+  InputGroupInputDefaultProps,
+  InputGroupTextareaDefaultProps,
+} from '../components/inputGroup.contracts.ts';
 import type { LinkDefaultProps } from '../components/link.contracts.ts';
 import type { NumberFieldDefaultProps } from '../components/numberField.contracts.ts';
 import type { NumberScrubberDefaultProps } from '../components/numberScrubber.contracts.ts';
@@ -104,7 +120,19 @@ export interface ComponentDefaults {
   CollapsibleRoot?: CollapsibleRootDefaultProps;
   Dialog?: DialogDefaultProps;
   FocusRing?: FocusRingDefaultProps;
+  Field?: FieldDefaultProps;
+  FieldDescription?: FieldDescriptionDefaultProps;
+  FieldError?: FieldErrorDefaultProps;
+  FieldGroup?: FieldGroupDefaultProps;
+  FieldLabel?: FieldLabelDefaultProps;
+  FieldLegend?: FieldLegendDefaultProps;
+  FieldSet?: FieldSetDefaultProps;
   Input?: InputDefaultProps;
+  InputGroup?: InputGroupDefaultProps;
+  InputGroupAddon?: InputGroupAddonDefaultProps;
+  InputGroupButton?: InputGroupButtonDefaultProps;
+  InputGroupInput?: InputGroupInputDefaultProps;
+  InputGroupTextarea?: InputGroupTextareaDefaultProps;
   List?: ListDefaultProps;
   ListButton?: ListButtonDefaultProps;
   ListItem?: ListItemDefaultProps;

@@ -157,6 +157,50 @@ export type {
 } from './components/overlay.contracts.ts';
 export type { SliderVariant } from './components/form.contracts.ts';
 
+export { default as Field } from './components/Field.vue';
+export { default as FieldDescription } from './components/FieldDescription.vue';
+export { default as FieldError } from './components/FieldError.vue';
+export { default as FieldGroup } from './components/FieldGroup.vue';
+export { default as FieldLabel } from './components/FieldLabel.vue';
+export { default as FieldLegend } from './components/FieldLegend.vue';
+export { default as FieldSet } from './components/FieldSet.vue';
+export { default as InputGroup } from './components/InputGroup.vue';
+export { default as InputGroupAddon } from './components/InputGroupAddon.vue';
+export { default as InputGroupButton } from './components/InputGroupButton.vue';
+export { default as InputGroupInput } from './components/InputGroupInput.vue';
+export { default as InputGroupTextarea } from './components/InputGroupTextarea.vue';
+export type {
+  FieldDefaultProps,
+  FieldDensity,
+  FieldDescriptionDefaultProps,
+  FieldDescriptionProps,
+  FieldErrorDefaultProps,
+  FieldErrorProps,
+  FieldGroupDefaultProps,
+  FieldGroupProps,
+  FieldLabelDefaultProps,
+  FieldLabelProps,
+  FieldLegendDefaultProps,
+  FieldLegendProps,
+  FieldOrientation,
+  FieldProps,
+  FieldSetDefaultProps,
+  FieldSetProps,
+} from './components/field.contracts.ts';
+export type {
+  InputGroupAddonDefaultProps,
+  InputGroupAddonProps,
+  InputGroupAddonSide,
+  InputGroupButtonDefaultProps,
+  InputGroupButtonProps,
+  InputGroupDefaultProps,
+  InputGroupInputDefaultProps,
+  InputGroupInputProps,
+  InputGroupProps,
+  InputGroupTextareaDefaultProps,
+  InputGroupTextareaProps,
+} from './components/inputGroup.contracts.ts';
+
 // Upstream declares a size union per component rather than a shared one.
 export type { ButtonSize } from './components/button.contracts.ts';
 export type { CheckboxSize } from './components/checkbox.contracts.ts';

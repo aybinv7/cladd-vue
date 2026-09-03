@@ -7,6 +7,7 @@ import { cn } from '../shared/cn.ts';
 import { roundedClasses } from '../shared/roundedClasses.ts';
 import { rootSizeClasses } from '../shared/sizeClasses.ts';
 import Button from './Button.vue';
+import { useFieldContext, useFieldSetContext } from './fieldContext.ts';
 import FocusRing from './FocusRing.vue';
 import CloseIcon from './icons/CloseIcon.vue';
 import {
@@ -99,6 +100,28 @@ const d = useComponentDefaults('Input', props, {
   valid: true,
 });
 const currentAccent = computed(() => d.value.color ?? ui.accentColor.value);
+const field = useFieldContext();
+const fieldSet = useFieldSetContext();
+const fieldControlId = computed(
+  () => d.value.inputId ?? field?.controlId.value,
+);
+const fieldDescribedBy = computed(
+  () =>
+    (d.value.inputProps?.['aria-describedby'] as string | undefined) ??
+    field?.describedBy.value,
+);
+const fieldInvalid = computed(
+  () => !d.value.valid || (field?.invalid.value ?? false),
+);
+const fieldDisabled = computed(
+  () =>
+    d.value.disabled ||
+    (field?.disabled.value ?? false) ||
+    (fieldSet?.disabled.value ?? false),
+);
+const fieldRequired = computed(
+  () => d.value.required || (field?.required.value ?? false),
+);
 const inputElement = ref<HTMLInputElement>();
 const focused = ref(false);
 
@@ -236,11 +259,11 @@ defineExpose({
     :class="rootClass"
     :clickable="d.clickable"
     :color="d.color"
-    :data-disabled="d.disabled || undefined"
-    :data-invalid="!d.valid || undefined"
+    :data-disabled="fieldDisabled || undefined"
+    :data-invalid="fieldInvalid || undefined"
     :data-readonly="d.readOnly || undefined"
-    :data-required="d.required || undefined"
-    :hoverable="!d.disabled && !d.readOnly"
+    :data-required="fieldRequired || undefined"
+    :hoverable="!fieldDisabled && !d.readOnly"
     :outline="d.outline"
     :overlay-class-name="d.overlayClassName"
     :overlay-position="d.overlayPosition"
@@ -249,7 +272,7 @@ defineExpose({
   >
     <slot name="beforeContent" />
     <FocusRing
-      v-if="!d.readOnly && !d.disabled"
+      v-if="!d.readOnly && !fieldDisabled"
       :class="focusRingClass"
       :color="d.valid ? currentAccent : 'red'"
       :force="!d.valid"
@@ -272,13 +295,15 @@ defineExpose({
       <div class="relative flex w-full">
         <component
           :is="d.inputComponent"
-          :id="d.inputId"
+          :id="fieldControlId"
           ref="inputElement"
           v-bind="d.inputProps"
+          :aria-describedby="fieldDescribedBy"
+          :aria-invalid="fieldInvalid || undefined"
           :autofocus="d.autoFocus"
           :class="controlClass"
           data-part="control"
-          :disabled="d.disabled"
+          :disabled="fieldDisabled"
           :inputmode="d.inputMode"
           :max="d.max"
           :maxlength="d.maxLength"
@@ -287,9 +312,9 @@ defineExpose({
           :pattern="d.pattern"
           :placeholder="d.placeholder"
           :readonly="d.readOnly"
-          :required="d.required"
+          :required="fieldRequired"
           :step="d.step"
-          :tabindex="d.disabled || d.readOnly ? -1 : undefined"
+          :tabindex="fieldDisabled || d.readOnly ? -1 : undefined"
           :type="d.type"
           :value="model"
           @blur="onBlur"
@@ -308,7 +333,7 @@ defineExpose({
       </div>
 
       <div
-        v-if="d.clearButton && !d.disabled && !d.readOnly"
+        v-if="d.clearButton && !fieldDisabled && !d.readOnly"
         :class="clearWrapClass"
       >
         <Button

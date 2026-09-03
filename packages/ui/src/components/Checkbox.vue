@@ -9,6 +9,7 @@ import {
   checkboxRootSizes,
   type CheckboxProps,
 } from './checkbox.contracts.ts';
+import { useFieldContext, useFieldSetContext } from './fieldContext.ts';
 import FocusRing from './FocusRing.vue';
 import CheckIcon from './icons/CheckIcon.vue';
 import Surface from './Surface.vue';
@@ -48,6 +49,19 @@ const d = useComponentDefaults('Checkbox', props, {
   size: 'sm' as NonNullable<CheckboxProps['size']>,
   thumbOutline: true,
 });
+const field = useFieldContext();
+const fieldSet = useFieldSetContext();
+const fieldDisabled = computed(
+  () =>
+    d.value.disabled ||
+    (field?.disabled.value ?? false) ||
+    (fieldSet?.disabled.value ?? false),
+);
+const fieldRequired = computed(
+  () => d.value.required || (field?.required.value ?? false),
+);
+const fieldDescribedBy = computed(() => field?.describedBy.value);
+const fieldInvalid = computed(() => field?.invalid.value ?? false);
 const isReadOnly = computed(() => d.value.readOnly ?? false);
 const checked = computed(() => d.value.checked ?? model.value);
 const currentAccent = computed(() => d.value.color ?? ui.accentColor.value);
@@ -55,10 +69,12 @@ const hoverable = computed(() => d.value.hoverable ?? d.value.as === 'label');
 const focusable = computed(
   () => d.value.focusable ?? (d.value.as === 'label' || d.value.input),
 );
-const inputId = computed(() => d.value.inputId ?? d.value.id);
+const inputId = computed(
+  () => d.value.inputId ?? d.value.id ?? field?.controlId.value,
+);
 
 function setChecked(next: boolean, event?: Event): void {
-  if (d.value.disabled || isReadOnly.value) return;
+  if (fieldDisabled.value || isReadOnly.value) return;
 
   model.value = next;
   emit('update:checked', next);
@@ -82,7 +98,7 @@ function handleRootClick(event: MouseEvent): void {
 }
 
 function handleFallbackKeydown(event: KeyboardEvent): void {
-  if (d.value.input || d.value.disabled || isReadOnly.value) return;
+  if (d.value.input || fieldDisabled.value || isReadOnly.value) return;
   if (event.key !== ' ' && event.key !== 'Enter') return;
 
   event.preventDefault();
@@ -99,7 +115,7 @@ const rootClass = computed(() =>
   cn(
     'cladd-checkbox group/cladd-checkbox relative flex shrink-0 items-center justify-center rounded-full select-none',
     checkboxRootSizes[d.value.size],
-    d.value.disabled && 'opacity-50',
+    fieldDisabled.value && 'opacity-50',
     attrs.class,
   ),
 );
@@ -121,11 +137,11 @@ const indicatorClass = computed(() =>
     checkboxIndicatorSizes[d.value.size],
     !checked.value && 'scale-75 text-cladd-fg-soft',
     checked.value &&
-      !d.value.disabled &&
+      !fieldDisabled.value &&
       !isReadOnly.value &&
       'group-active/cladd-checkbox:scale-90',
     !checked.value &&
-      !d.value.disabled &&
+      !fieldDisabled.value &&
       !isReadOnly.value &&
       'group-active/cladd-checkbox:scale-65',
     checked.value && 'text-cladd-on-primary',
@@ -141,17 +157,17 @@ const indicatorClass = computed(() =>
     v-bind="rootAttrs"
     :class="rootClass"
     :aria-checked="!d.input ? checked : undefined"
-    :aria-disabled="!d.input && d.disabled ? 'true' : undefined"
+    :aria-disabled="!d.input && fieldDisabled ? 'true' : undefined"
     :aria-readonly="!d.input && isReadOnly ? 'true' : undefined"
-    :aria-required="!d.input && d.required ? 'true' : undefined"
+    :aria-required="!d.input && fieldRequired ? 'true' : undefined"
     :data-checked="checked || undefined"
-    :data-disabled="d.disabled || undefined"
+    :data-disabled="fieldDisabled || undefined"
     :data-readonly="isReadOnly || undefined"
-    :data-required="d.required || undefined"
+    :data-required="fieldRequired || undefined"
     :data-state="checked ? 'checked' : 'unchecked'"
     :data-unchecked="!checked || undefined"
     :role="!d.input ? 'checkbox' : undefined"
-    :tabindex="!d.input ? (d.disabled ? -1 : 0) : undefined"
+    :tabindex="!d.input ? (fieldDisabled ? -1 : 0) : undefined"
     @click="handleRootClick"
     @contextmenu.capture.prevent
     @keydown="handleFallbackKeydown"
@@ -161,11 +177,13 @@ const indicatorClass = computed(() =>
       :id="inputId"
       class="pointer-events-none absolute inset-1 z-10 opacity-0"
       data-part="input"
+      :aria-describedby="fieldDescribedBy"
+      :aria-invalid="fieldInvalid || undefined"
       :checked="checked"
-      :disabled="d.disabled || isReadOnly"
+      :disabled="fieldDisabled || isReadOnly"
       :name="d.name"
       :readonly="isReadOnly"
-      :required="d.required"
+      :required="fieldRequired"
       type="checkbox"
       :value="d.value"
       @change="handleInputChange"
@@ -174,8 +192,8 @@ const indicatorClass = computed(() =>
       as="span"
       :class="thumbClass"
       data-part="thumb"
-      :clickable="hoverable && !d.disabled && !isReadOnly"
-      :hoverable="hoverable && !d.disabled && !isReadOnly"
+      :clickable="hoverable && !fieldDisabled && !isReadOnly"
+      :hoverable="hoverable && !fieldDisabled && !isReadOnly"
       :outline="d.thumbOutline"
       variant="gradient"
       :wrap-content="false"
@@ -185,8 +203,8 @@ const indicatorClass = computed(() =>
       :color="currentAccent"
       :class="checkedThumbClass"
       data-part="thumb-checked"
-      :clickable="hoverable && !d.disabled && !isReadOnly"
-      :hoverable="hoverable && !d.disabled && !isReadOnly"
+      :clickable="hoverable && !fieldDisabled && !isReadOnly"
+      :hoverable="hoverable && !fieldDisabled && !isReadOnly"
       :outline="d.thumbOutline"
       variant="gradient-fill"
       :wrap-content="false"
@@ -197,7 +215,7 @@ const indicatorClass = computed(() =>
       :data-state="checked ? 'checked' : 'unchecked'"
     />
     <FocusRing
-      v-if="focusable && !d.disabled && !isReadOnly"
+      v-if="focusable && !fieldDisabled && !isReadOnly"
       class="rounded-full"
       group="checkbox"
     />

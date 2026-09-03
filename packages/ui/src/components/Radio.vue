@@ -4,6 +4,7 @@ import { computed, useAttrs } from 'vue';
 import { useComponentDefaults } from '../composables/useComponentDefaults.ts';
 import { useUiContext } from '../contexts/uiContext.ts';
 import { cn } from '../shared/cn.ts';
+import { useFieldContext, useFieldSetContext } from './fieldContext.ts';
 import FocusRing from './FocusRing.vue';
 import {
   radioIndicatorSizes,
@@ -46,17 +47,30 @@ const d = useComponentDefaults('Radio', props, {
   size: 'sm' as NonNullable<RadioProps['size']>,
   thumbOutline: true,
 });
+const field = useFieldContext();
+const fieldSet = useFieldSetContext();
+const fieldDescribedBy = computed(() => field?.describedBy.value);
+const fieldInvalid = computed(() => field?.invalid.value ?? false);
 const isReadOnly = computed(() => d.value.readOnly ?? false);
 const checked = computed(() => d.value.checked ?? model.value);
-const disabled = computed(() => d.value.disabled);
+const disabled = computed(
+  () =>
+    d.value.disabled ||
+    (field?.disabled.value ?? false) ||
+    (fieldSet?.disabled.value ?? false),
+);
 const name = computed(() => d.value.name);
-const required = computed(() => d.value.required);
+const required = computed(
+  () => d.value.required || (field?.required.value ?? false),
+);
 const currentAccent = computed(() => d.value.color ?? ui.accentColor.value);
 const hoverable = computed(() => d.value.hoverable ?? d.value.as === 'label');
 const focusable = computed(
   () => d.value.focusable ?? (d.value.as === 'label' || d.value.input),
 );
-const inputId = computed(() => d.value.inputId ?? d.value.id);
+const inputId = computed(
+  () => d.value.inputId ?? d.value.id ?? field?.controlId.value,
+);
 
 function setChecked(next: boolean, event?: Event): void {
   if (disabled.value || isReadOnly.value) return;
@@ -161,6 +175,8 @@ const indicatorClass = computed(() =>
       :id="inputId"
       class="pointer-events-none absolute inset-1 z-10 opacity-0"
       data-part="input"
+      :aria-describedby="fieldDescribedBy"
+      :aria-invalid="fieldInvalid || undefined"
       :checked="checked"
       :disabled="disabled || isReadOnly"
       :name="name"

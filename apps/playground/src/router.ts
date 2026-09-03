@@ -127,6 +127,11 @@ export const router = createRouter({
             import('./modules/playground/sections/InputSection.vue'),
         },
         {
+          path: 'field',
+          component: () =>
+            import('./modules/playground/sections/FieldSection.vue'),
+        },
+        {
           path: 'list',
           component: () =>
             import('./modules/playground/sections/ListSection.vue'),

@@ -4,6 +4,7 @@ import { computed, useAttrs } from 'vue';
 import { useComponentDefaults } from '../composables/useComponentDefaults.ts';
 import { useUiContext } from '../contexts/uiContext.ts';
 import { cn } from '../shared/cn.ts';
+import { useFieldContext, useFieldSetContext } from './fieldContext.ts';
 import FocusRing from './FocusRing.vue';
 import Surface from './Surface.vue';
 import {
@@ -62,16 +63,31 @@ const d = useComponentDefaults('Switch', props, {
   value: 'on',
   variant: 'solid' as NonNullable<SwitchProps['variant']>,
 });
+const field = useFieldContext();
+const fieldSet = useFieldSetContext();
+const fieldDisabled = computed(
+  () =>
+    d.value.disabled ||
+    (field?.disabled.value ?? false) ||
+    (fieldSet?.disabled.value ?? false),
+);
+const fieldRequired = computed(
+  () => d.value.required || (field?.required.value ?? false),
+);
+const fieldDescribedBy = computed(() => field?.describedBy.value);
+const fieldInvalid = computed(() => field?.invalid.value ?? false);
 const isReadOnly = computed(() => d.value.readOnly ?? false);
 const checked = computed(() => d.value.checked ?? model.value);
 const currentAccent = computed(() => d.value.color ?? ui.accentColor.value);
 const focusable = computed(
   () => d.value.focusable ?? (d.value.as === 'label' || d.value.input),
 );
-const inputId = computed(() => d.value.inputId ?? d.value.id);
+const inputId = computed(
+  () => d.value.inputId ?? d.value.id ?? field?.controlId.value,
+);
 
 function setChecked(next: boolean, event?: Event): void {
-  if (d.value.disabled || isReadOnly.value) return;
+  if (fieldDisabled.value || isReadOnly.value) return;
 
   model.value = next;
   emit('update:checked', next);
@@ -95,7 +111,7 @@ function handleRootClick(event: MouseEvent): void {
 }
 
 function handleFallbackKeydown(event: KeyboardEvent): void {
-  if (d.value.input || d.value.disabled || isReadOnly.value) return;
+  if (d.value.input || fieldDisabled.value || isReadOnly.value) return;
   if (event.key !== ' ' && event.key !== 'Enter') return;
 
   event.preventDefault();
@@ -122,7 +138,7 @@ const thumbClass = computed(() =>
     switchThumbSizes[d.value.size],
     checked.value && switchThumbOffsets[d.value.size],
     checked.value ? 'text-cladd-on-primary' : 'text-cladd-fg-soft',
-    d.value.disabled && 'opacity-50',
+    fieldDisabled.value && 'opacity-50',
   ),
 );
 
@@ -180,15 +196,15 @@ const secondGlyphLineClass = computed(() =>
     v-bind="rootAttrs"
     :class="rootClass"
     :aria-checked="!d.input ? checked : undefined"
-    :aria-disabled="!d.input && d.disabled ? 'true' : undefined"
+    :aria-disabled="!d.input && fieldDisabled ? 'true' : undefined"
     :aria-readonly="!d.input && isReadOnly ? 'true' : undefined"
     :data-checked="checked || undefined"
-    :data-disabled="d.disabled || undefined"
+    :data-disabled="fieldDisabled || undefined"
     :data-readonly="isReadOnly || undefined"
     :data-state="checked ? 'checked' : 'unchecked'"
     :data-unchecked="!checked || undefined"
     :role="!d.input ? 'switch' : undefined"
-    :tabindex="!d.input ? (d.disabled ? -1 : 0) : undefined"
+    :tabindex="!d.input ? (fieldDisabled ? -1 : 0) : undefined"
     @click="handleRootClick"
     @contextmenu.capture.prevent
     @keydown="handleFallbackKeydown"
@@ -199,11 +215,13 @@ const secondGlyphLineClass = computed(() =>
       class="pointer-events-none absolute inset-0 z-10 opacity-0"
       data-part="input"
       :aria-checked="checked"
+      :aria-describedby="fieldDescribedBy"
+      :aria-invalid="fieldInvalid || undefined"
       :checked="checked"
-      :disabled="d.disabled || isReadOnly"
+      :disabled="fieldDisabled || isReadOnly"
       :name="d.name"
       :readonly="isReadOnly"
-      :required="d.required"
+      :required="fieldRequired"
       role="switch"
       type="checkbox"
       :value="d.value"
@@ -221,10 +239,10 @@ const secondGlyphLineClass = computed(() =>
     <Surface
       as="span"
       :class="thumbClass"
-      :clickable="!d.disabled && !isReadOnly"
+      :clickable="!fieldDisabled && !isReadOnly"
       content-class-name="flex items-center justify-center"
       data-part="thumb"
-      :hoverable="!d.disabled && !isReadOnly"
+      :hoverable="!fieldDisabled && !isReadOnly"
       :level="d.thumbSurfaceLevel"
       :outline="d.thumbOutline"
       :variant="d.thumbVariant"
@@ -233,9 +251,9 @@ const secondGlyphLineClass = computed(() =>
         <Surface
           as="span"
           :class="thumbFillClass"
-          :clickable="!d.disabled && !isReadOnly"
+          :clickable="!fieldDisabled && !isReadOnly"
           :color="currentAccent"
-          :hoverable="!d.disabled && !isReadOnly"
+          :hoverable="!fieldDisabled && !isReadOnly"
           level="+0"
           outline
           variant="gradient-fill"
@@ -250,7 +268,7 @@ const secondGlyphLineClass = computed(() =>
         </span>
       </slot>
       <FocusRing
-        v-if="focusable && !d.disabled && !isReadOnly"
+        v-if="focusable && !fieldDisabled && !isReadOnly"
         class="rounded-full"
         group="switch"
       />

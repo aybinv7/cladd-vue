@@ -31,7 +31,20 @@ const allowedExtraExports = new Set<string>();
  * neither upstream nor in this set fails the test below, and a name in this
  * set without a spec also fails.
  */
-const reviewedExtensions = new Set<string>([]);
+const reviewedExtensions = new Set<string>([
+  'Field',
+  'FieldDescription',
+  'FieldError',
+  'FieldGroup',
+  'FieldLabel',
+  'FieldLegend',
+  'FieldSet',
+  'InputGroup',
+  'InputGroupAddon',
+  'InputGroupButton',
+  'InputGroupInput',
+  'InputGroupTextarea',
+]);
 
 function upstreamExports(): Set<string> {
   return valueExports(join(upstreamRoot, 'src', 'index.ts'));
@@ -118,7 +131,35 @@ const allowedExtraTypeExports = new Set([
  * Reviewed extension type exports — mirrors `reviewedExtensions` for type-only
  * names. Empty until a reviewed extension ships type exports.
  */
-const reviewedExtensionTypeExports = new Set<string>([]);
+const reviewedExtensionTypeExports = new Set<string>([
+  'FieldDefaultProps',
+  'FieldDensity',
+  'FieldDescriptionDefaultProps',
+  'FieldDescriptionProps',
+  'FieldErrorDefaultProps',
+  'FieldErrorProps',
+  'FieldGroupDefaultProps',
+  'FieldGroupProps',
+  'FieldLabelDefaultProps',
+  'FieldLabelProps',
+  'FieldLegendDefaultProps',
+  'FieldLegendProps',
+  'FieldOrientation',
+  'FieldProps',
+  'FieldSetDefaultProps',
+  'FieldSetProps',
+  'InputGroupAddonDefaultProps',
+  'InputGroupAddonProps',
+  'InputGroupAddonSide',
+  'InputGroupButtonDefaultProps',
+  'InputGroupButtonProps',
+  'InputGroupDefaultProps',
+  'InputGroupInputDefaultProps',
+  'InputGroupInputProps',
+  'InputGroupProps',
+  'InputGroupTextareaDefaultProps',
+  'InputGroupTextareaProps',
+]);
 
 test.skipIf(!upstreamHydrated)(
   'exports nothing type-side upstream does not',

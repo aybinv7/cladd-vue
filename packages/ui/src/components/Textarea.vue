@@ -6,6 +6,7 @@ import { useUiContext } from '../contexts/uiContext.ts';
 import { cn } from '../shared/cn.ts';
 import { roundedClasses } from '../shared/roundedClasses.ts';
 import { rootSizeClasses } from '../shared/sizeClasses.ts';
+import { useFieldContext, useFieldSetContext } from './fieldContext.ts';
 import FocusRing from './FocusRing.vue';
 import SurfaceCut from './SurfaceCut.vue';
 import {
@@ -81,9 +82,22 @@ const d = useComponentDefaults('Textarea', props, {
   valid: true,
 });
 const currentAccent = computed(() => d.value.color ?? ui.accentColor.value);
+const field = useFieldContext();
+const fieldSet = useFieldSetContext();
+const fieldControlId = computed(() => field?.controlId.value);
+const fieldDescribedBy = computed(() => field?.describedBy.value);
+const fieldInvalid = computed(
+  () => !d.value.valid || (field?.invalid.value ?? false),
+);
+const fieldDisabled = computed(
+  () =>
+    d.value.disabled ||
+    (field?.disabled.value ?? false) ||
+    (fieldSet?.disabled.value ?? false),
+);
 const controlElement = ref<HTMLElement>();
 const text = ref<string>();
-const editable = computed(() => !d.value.disabled && !d.value.readOnly);
+const editable = computed(() => !fieldDisabled.value && !d.value.readOnly);
 
 const radii = computed(() =>
   roundedClasses(d.value.size, d.value.rounded, true),
@@ -208,8 +222,8 @@ defineExpose({ focus: () => controlElement.value?.focus() });
     :class="rootClass"
     :clickable="d.clickable"
     :color="d.color"
-    :data-disabled="d.disabled || undefined"
-    :data-invalid="!d.valid || undefined"
+    :data-disabled="fieldDisabled || undefined"
+    :data-invalid="fieldInvalid || undefined"
     :data-readonly="d.readOnly || undefined"
     :hoverable="editable"
     :outline="d.outline"
@@ -239,6 +253,9 @@ defineExpose({ focus: () => controlElement.value?.focus() });
       <div class="relative flex w-full">
         <div
           ref="controlElement"
+          :id="fieldControlId"
+          :aria-describedby="fieldDescribedBy"
+          :aria-invalid="fieldInvalid || undefined"
           :class="controlClass"
           :contenteditable="editable"
           data-part="control"
