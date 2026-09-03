@@ -201,6 +201,37 @@ export type {
   InputGroupTextareaProps,
 } from './components/inputGroup.contracts.ts';
 
+export { default as Table } from './components/Table.vue';
+export { default as TableBody } from './components/TableBody.vue';
+export { default as TableCaption } from './components/TableCaption.vue';
+export { default as TableCell } from './components/TableCell.vue';
+export { default as TableFooter } from './components/TableFooter.vue';
+export { default as TableHead } from './components/TableHead.vue';
+export { default as TableHeader } from './components/TableHeader.vue';
+export { default as TableRow } from './components/TableRow.vue';
+export type {
+  TableBodyDefaultProps,
+  TableBodyProps,
+  TableCaptionDefaultProps,
+  TableCaptionProps,
+  TableCellDefaultProps,
+  TableCellProps,
+  TableColumn,
+  TableDefaultProps,
+  TableDensity,
+  TableFooterDefaultProps,
+  TableFooterProps,
+  TableHeadDefaultProps,
+  TableHeadProps,
+  TableHeaderDefaultProps,
+  TableHeaderProps,
+  TableProps,
+  TableRowDefaultProps,
+  TableRowProps,
+  TableSortDirection,
+  TableSortState,
+} from './components/table.contracts.ts';
+
 // Upstream declares a size union per component rather than a shared one.
 export type { ButtonSize } from './components/button.contracts.ts';
 export type { CheckboxSize } from './components/checkbox.contracts.ts';

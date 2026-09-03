@@ -178,6 +178,15 @@ export const catalogEntries: CatalogEntry[] = [
     title: 'Field',
   },
   {
+    component: 'Table',
+    count: 8,
+    description: 'Semantic table primitives',
+    id: 'table',
+    label: 'Table',
+    path: '/components/table',
+    title: 'Table',
+  },
+  {
     component: 'List',
     count: 6,
     description: 'Vertical stacks for actions',
@@ -260,7 +269,7 @@ export const catalogEntries: CatalogEntry[] = [
   },
 ];
 
-export const catalogComponentCount = 55;
+export const catalogComponentCount = 56;
 export const catalogStateCount = catalogEntries.reduce(
   (sum, entry) => sum + entry.count,
   0,

@@ -82,6 +82,16 @@ import type {
 } from '../components/surface.contracts.ts';
 import type { SwitchDefaultProps } from '../components/switch.contracts.ts';
 import type {
+  TableBodyDefaultProps,
+  TableCaptionDefaultProps,
+  TableCellDefaultProps,
+  TableDefaultProps,
+  TableFooterDefaultProps,
+  TableHeadDefaultProps,
+  TableHeaderDefaultProps,
+  TableRowDefaultProps,
+} from '../components/table.contracts.ts';
+import type {
   TabDefaultProps,
   TabPanelDefaultProps,
   TabsDefaultProps,
@@ -165,6 +175,14 @@ export interface ComponentDefaults {
   SurfaceCut?: SurfaceCutDefaultProps;
   SurfaceCutContent?: SurfaceCutContentDefaultProps;
   Switch?: SwitchDefaultProps;
+  Table?: TableDefaultProps;
+  TableBody?: TableBodyDefaultProps;
+  TableCaption?: TableCaptionDefaultProps;
+  TableCell?: TableCellDefaultProps;
+  TableFooter?: TableFooterDefaultProps;
+  TableHead?: TableHeadDefaultProps;
+  TableHeader?: TableHeaderDefaultProps;
+  TableRow?: TableRowDefaultProps;
   Tab?: TabDefaultProps;
   TabPanel?: TabPanelDefaultProps;
   Tabs?: TabsDefaultProps;

@@ -132,6 +132,11 @@ export const router = createRouter({
             import('./modules/playground/sections/FieldSection.vue'),
         },
         {
+          path: 'table',
+          component: () =>
+            import('./modules/playground/sections/TableSection.vue'),
+        },
+        {
           path: 'list',
           component: () =>
             import('./modules/playground/sections/ListSection.vue'),

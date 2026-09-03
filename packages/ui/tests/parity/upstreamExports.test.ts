@@ -44,6 +44,14 @@ const reviewedExtensions = new Set<string>([
   'InputGroupButton',
   'InputGroupInput',
   'InputGroupTextarea',
+  'Table',
+  'TableBody',
+  'TableCaption',
+  'TableCell',
+  'TableFooter',
+  'TableHead',
+  'TableHeader',
+  'TableRow',
 ]);
 
 function upstreamExports(): Set<string> {
@@ -159,6 +167,26 @@ const reviewedExtensionTypeExports = new Set<string>([
   'InputGroupProps',
   'InputGroupTextareaDefaultProps',
   'InputGroupTextareaProps',
+  'TableBodyDefaultProps',
+  'TableBodyProps',
+  'TableCaptionDefaultProps',
+  'TableCaptionProps',
+  'TableCellDefaultProps',
+  'TableCellProps',
+  'TableColumn',
+  'TableDefaultProps',
+  'TableDensity',
+  'TableFooterDefaultProps',
+  'TableFooterProps',
+  'TableHeadDefaultProps',
+  'TableHeadProps',
+  'TableHeaderDefaultProps',
+  'TableHeaderProps',
+  'TableProps',
+  'TableRowDefaultProps',
+  'TableRowProps',
+  'TableSortDirection',
+  'TableSortState',
 ]);
 
 test.skipIf(!upstreamHydrated)(
