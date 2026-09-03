@@ -1,6 +1,7 @@
 import type { ComponentDefaults } from '../foundations/componentDefaults.ts';
-import type { UiTheme } from '../foundations/contracts.ts';
 import type { Color } from '../types.ts';
+
+export type UiTheme = 'dark' | 'light';
 
 export interface CladdProviderProps {
   /** App-wide accent color. Read by `useAccentColor`. Default `'brand'`. */

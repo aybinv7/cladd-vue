@@ -8,6 +8,15 @@ Reproduce the pinned Cladd package in Vue. Not "inspired by", not "adapted": the
 selectors, the same tokens, the same code shape, the same values. The only permitted change is the
 framework, React to Vue.
 
+## Port vs extension boundary
+
+`cladd-vue` ships two kinds of families, and they are governed differently:
+
+- **Strict ports** — every export that exists in the pinned Cladd checkout at `fadd8efe935111f31d7c933238db5ce5d3a55d71`. A strict port reproduces upstream names, props, selectors, tokens, values, and code shape; framework transposition is the only permitted change. Evidence lives in `docs/port/<Component>.md` and attribution in `THIRD_PARTY_NOTICES.md`. Parity is enforced by `tests/parity/upstreamExports.test.ts` and `tests/parity/upstreamStyles.test.ts` against `reference/cladd/` at the pinned SHA.
+- **Cladd extensions** — new component families that do not exist upstream but are built from Cladd foundations (tokens, surfaces, density, motion, interaction idioms). An extension is **not** described as an upstream port, does not claim upstream provenance, and does not have a `docs/port/` manifest. Evidence lives in `docs/extensions/<Component>.md` and is enforced by the reviewed-extension inventory in `tests/parity/upstreamExports.test.ts`. A name ships as an extension only when it is listed in `reviewedExtensions` **and** has a matching `docs/extensions/*.md` spec.
+
+Do not reclassify a port manifest as an extension, and do not describe an extension as a port.
+
 ## The first test is the upstream diff
 
 Before any other consideration, ask what upstream does and match it. This outranks every convention

@@ -1,4 +1,4 @@
-import { readdirSync } from 'node:fs';
+import { existsSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
 
 import { expect, test } from 'vite-plus/test';
@@ -24,6 +24,15 @@ const notYetPorted = new Set<string>();
  */
 const allowedExtraExports = new Set<string>();
 
+/**
+ * Reviewed Cladd extensions — new families that do not exist upstream but are
+ * built from Cladd tokens, surfaces, density, and motion. Every entry must have
+ * a matching `docs/extensions/<name>.md` specification. An extra export that is
+ * neither upstream nor in this set fails the test below, and a name in this
+ * set without a spec also fails.
+ */
+const reviewedExtensions = new Set<string>([]);
+
 function upstreamExports(): Set<string> {
   return valueExports(join(upstreamRoot, 'src', 'index.ts'));
 }
@@ -47,9 +56,24 @@ test.skipIf(!upstreamHydrated)('exports nothing upstream does not', () => {
   const extra = [...portExports()]
     .filter((name) => !upstreamExports().has(name))
     .filter((name) => !allowedExtraExports.has(name))
+    .filter((name) => !reviewedExtensions.has(name))
     .sort();
 
   expect(extra, 'public exports with no upstream counterpart').toEqual([]);
+});
+
+test('every reviewed extension has a specification', () => {
+  const missing = [...reviewedExtensions]
+    .filter(
+      (name) =>
+        !existsSync(join(packageRoot, 'docs', 'extensions', `${name}.md`)),
+    )
+    .sort();
+
+  expect(
+    missing,
+    'reviewed extensions missing docs/extensions/*.md spec',
+  ).toEqual([]);
 });
 
 test.skipIf(!upstreamHydrated)('keeps the not-yet-ported list honest', () => {
@@ -90,6 +114,12 @@ const allowedExtraTypeExports = new Set([
   'SelectValue',
 ]);
 
+/**
+ * Reviewed extension type exports — mirrors `reviewedExtensions` for type-only
+ * names. Empty until a reviewed extension ships type exports.
+ */
+const reviewedExtensionTypeExports = new Set<string>([]);
+
 test.skipIf(!upstreamHydrated)(
   'exports nothing type-side upstream does not',
   () => {
@@ -99,6 +129,7 @@ test.skipIf(!upstreamHydrated)(
     const extra = [...port]
       .filter((name) => !upstream.has(name))
       .filter((name) => !allowedExtraTypeExports.has(name))
+      .filter((name) => !reviewedExtensionTypeExports.has(name))
       .sort();
 
     expect(extra, 'public type exports with no upstream counterpart').toEqual(

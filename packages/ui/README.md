@@ -76,6 +76,22 @@ vp run cladd-vue#build
 
 Do not run package-manager binaries or underlying tools directly.
 
+## Planned extensions
+
+The following families are **planned, not yet shipped**. They are Cladd extensions — new families built from Cladd tokens, surfaces, density, and motion — not upstream ports. Each will ship only when listed in the `reviewedExtensions` inventory in `tests/parity/upstreamExports.test.ts` and evidenced by `docs/extensions/<Component>.md`.
+
+- Field composition
+- Table
+- Menus
+- Sheet / Drawer
+- Sidebar
+- Command / Combobox
+- Breadcrumb / Pagination
+- Feedback
+- Display utilities
+
+`shadcn` and `shadcn-vue` are inventory and composition research only for these extensions; no `shadcn` source is copied. Any future copying would require a separate attribution review and an entry in `THIRD_PARTY_NOTICES.md`.
+
 ## Governance
 
-Implementation rules live in [`CLAUDE.md`](./CLAUDE.md). Durable architecture lives in [`docs/architecture.md`](./docs/architecture.md). Cladd attribution and upstream baseline live in [`THIRD_PARTY_NOTICES.md`](./THIRD_PARTY_NOTICES.md).
+Implementation rules live in [`CLAUDE.md`](./CLAUDE.md). Durable architecture lives in [`docs/architecture.md`](./docs/architecture.md). Cladd attribution and upstream baseline live in [`THIRD_PARTY_NOTICES.md`](./THIRD_PARTY_NOTICES.md). Extension specifications live in [`docs/extensions/`](./docs/extensions/README.md).

@@ -9,8 +9,9 @@ import {
 } from 'vue';
 
 import type { ComponentDefaults } from '../foundations/componentDefaults.ts';
-import type { UiTheme } from '../foundations/contracts.ts';
 import type { Color } from '../types.ts';
+
+export type UiTheme = 'dark' | 'light';
 
 /** Upstream default: `'#app, #__next, #root'` — the first match wins. */
 export const defaultOverlaysRoot = '#app, #__next, #root';

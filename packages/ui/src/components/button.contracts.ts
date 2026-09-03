@@ -3,14 +3,13 @@ import type { Component } from 'vue';
 import type {
   SurfaceLevelInput,
   SurfaceVariant,
-  UiSize,
 } from '../foundations/contracts.ts';
 import type { Color } from '../types.ts';
 
 /** Button size token, spelled out as upstream declares it. */
 export type ButtonSize = '2xs' | 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl';
 
-export const buttonSpinnerSizes: Record<UiSize, UiSize> = {
+export const buttonSpinnerSizes: Record<ButtonSize, ButtonSize> = {
   '2xs': '2xs',
   xs: '2xs',
   sm: 'xs',
@@ -20,7 +19,7 @@ export const buttonSpinnerSizes: Record<UiSize, UiSize> = {
   '2xl': 'xl',
 };
 
-export const buttonIconSizes: Record<UiSize, string> = {
+export const buttonIconSizes: Record<ButtonSize, string> = {
   '2xs': '[&>svg]:size-3',
   xs: '[&>svg]:size-3',
   sm: '[&>svg]:size-4',
@@ -30,7 +29,7 @@ export const buttonIconSizes: Record<UiSize, string> = {
   '2xl': '[&>svg]:size-4',
 };
 
-export const buttonPaddings: Record<UiSize, string> = {
+export const buttonPaddings: Record<ButtonSize, string> = {
   '2xs': 'px-2.5',
   xs: 'px-2.5',
   sm: 'px-2.5',
@@ -40,7 +39,7 @@ export const buttonPaddings: Record<UiSize, string> = {
   '2xl': 'px-3.5',
 };
 
-export const buttonFontSizes: Record<UiSize, string> = {
+export const buttonFontSizes: Record<ButtonSize, string> = {
   '2xs': 'text-cladd-xs',
   xs: 'text-cladd-xs',
   sm: 'text-cladd-xs',
@@ -50,7 +49,7 @@ export const buttonFontSizes: Record<UiSize, string> = {
   '2xl': 'text-cladd-xs',
 };
 
-export const buttonVerticalPaddings: Record<UiSize, string> = {
+export const buttonVerticalPaddings: Record<ButtonSize, string> = {
   '2xs': 'py-0',
   xs: 'py-0.5',
   sm: 'py-1',
@@ -95,7 +94,7 @@ export interface ButtonProps {
    */
   rounded?: boolean;
   /** Default `'md'`. */
-  size?: UiSize;
+  size?: ButtonSize;
   /** Render as an icon-only square button: forces `aspect-square` and drops horizontal padding. */
   square?: boolean;
   /** `'surface'` (default) for a regular button, `'cut'` for an inset look. */

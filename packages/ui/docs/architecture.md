@@ -70,6 +70,13 @@ CSS handles standard enter, exit, hover, press, selection, spinner, and transfor
 
 Vue is the only UI peer dependency and build external. Public JavaScript is ESM. Type declarations ship with the package. CSS is an explicit subpath export. Components are individually exported so consumers can tree-shake unused families.
 
-## Compatibility policy
+## Compatibility and extension policy
 
 Public contract additions may ship in feature releases. Prop, event, slot, selector, token, or behavior removals require a migration note and coordinated consumer update. Upstream Cladd changes are references to evaluate, never automatic updates to copy blindly.
+
+### Strict ports vs Cladd extensions
+
+- **Strict ports** reproduce the pinned Cladd checkout at `fadd8efe935111f31d7c933238db5ce5d3a55d71` — same names, same selectors, same tokens, same code shape. Only React-to-Vue transposition is permitted. Each port is evidenced by `docs/port/<Component>.md` and attributed in `THIRD_PARTY_NOTICES.md`, and parity is enforced by `tests/parity/upstreamExports.test.ts` and `tests/parity/upstreamStyles.test.ts` against `reference/cladd/` at the pinned SHA.
+- **Cladd extensions** are new families that do not exist upstream. They must still use Cladd foundations — `@theme` tokens, surface levels and variants, density (28 px default control height, nested controls 8 px smaller), accent and size scoping, and motion roles with reduced-motion support — and the same interaction and styling boundaries as ports. Extensions are not described as upstream ports, do not claim upstream provenance, and do not have `docs/port/` manifests. Each extension is evidenced by `docs/extensions/<Component>.md` and must be explicitly listed in the `reviewedExtensions` inventory in `tests/parity/upstreamExports.test.ts`; an extra public export that is neither an upstream export nor a reviewed extension fails the test, and a reviewed extension without a `docs/extensions/*.md` spec also fails.
+
+Ports and extensions share the same foundations and boundaries, but their provenance and evidence paths never mix.
