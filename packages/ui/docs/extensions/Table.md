@@ -16,16 +16,16 @@ internal reactive state and never deeply watch row collections.
 
 ## Public API
 
-| Name           | Kind                    | Props                                                    | Defaults                                               |
-| -------------- | ----------------------- | -------------------------------------------------------- | ------------------------------------------------------ |
-| `Table`        | component               | `dense`, `hoverable`, `stickyHeader`, `wrapperClassName` | `dense false`, `hoverable false`, `stickyHeader false` |
-| `TableHeader`  | component               | `sticky`                                                 | `sticky false`                                         |
-| `TableBody`    | component               | `empty`                                                  | `empty false`                                          |
-| `TableFooter`  | component               | `sticky`                                                 | `sticky false`                                         |
-| `TableRow`     | component               | `selected`, `hoverable`                                  | `selected false`                                       |
-| `TableHead`    | component, emits `sort` | `scope`, `numeric`, `sortDirection`                      | `scope 'col'`, `numeric false`, `sortDirection 'none'` |
-| `TableCell`    | component               | `numeric`                                                | `numeric false`                                        |
-| `TableCaption` | component               | `visuallyHidden`                                         | `visuallyHidden false`                                 |
+| Name           | Kind                    | Props                                                      | Defaults                                                                 |
+| -------------- | ----------------------- | ---------------------------------------------------------- | ------------------------------------------------------------------------ |
+| `Table`        | component               | `density`, `hoverable`, `stickyHeader`, `wrapperClassName` | `density 'comfortable'`, `hoverable false`, `stickyHeader false`         |
+| `TableHeader`  | component               | `sticky`                                                   | `sticky false`                                                           |
+| `TableBody`    | component               | `empty`                                                    | `empty false`                                                            |
+| `TableFooter`  | component               | `sticky`                                                   | `sticky false`                                                           |
+| `TableRow`     | component               | `selected`, `hoverable`                                    | `selected false`                                                         |
+| `TableHead`    | component, emits `sort` | `scope`, `numeric`, `sortable`, `sortDirection`            | `scope 'col'`, `numeric false`, `sortable false`, `sortDirection 'none'` |
+| `TableCell`    | component               | `numeric`                                                  | `numeric false`                                                          |
+| `TableCaption` | component               | `visuallyHidden`                                           | `visuallyHidden false`                                                   |
 
 Slots: `default` everywhere, plus `empty` on `TableBody`. Recipe types: `TableColumn`,
 `TableSortState`, `TableSortDirection`, `TableDensity`, matching `*DefaultProps`. Sorting state
@@ -34,13 +34,19 @@ idioms.
 
 ## Semantics
 
-`Table` renders `div[data-slot="table-container"]` owning horizontal overflow plus
+`Table` wraps a `Surface` (`data-slot="table-container"`, outlined, same engine `Card` uses — no
+separate visual-token system) whose content region owns horizontal overflow, containing
 `table[data-slot="table"]`. Header, body, footer, rows, header cells, cells, and captions render
 their native elements with matching `data-slot` hooks. Header cells preserve native `scope`.
-`TableRow[selected]` exposes `data-selected` and `data-state="selected"`. Sortable headers
-render a native `button[data-slot="table-sort-button"]` inside the `th` with `aria-sort` on the
-cell and an `aria-hidden` glyph. The `empty` body row renders a full-width cell with the `empty`
-slot. No `grid` roles are claimed: this is a semantic table, not an interactive ARIA grid.
+`TableRow[selected]` exposes `data-selected` and `data-state="selected"`. `TableHead[sortable]`
+renders the header content through the package `Button` (`variant="transparent"`, `size="xs"`,
+`data-slot="table-sort-button"`) instead of a bare native button, so it gets the same focus ring,
+hover, and press treatment as every other interactive control. A sortable-but-unsorted column
+still renders the button with a dimmed, symmetric glyph (`sortDirection: 'none'`) rather than
+disappearing — `sortable` and `sortDirection` are independent so "this column can be sorted" and
+"this column is currently sorted" are two different, both-visible states. `aria-sort` is set on
+the `th` only once a direction is chosen. The `empty` body row renders a full-width cell with the
+`empty` slot. No `grid` roles are claimed: this is a semantic table, not an interactive ARIA grid.
 
 ## Keyboard behavior
 
@@ -67,12 +73,18 @@ documented in the playground without adding it to the package.
 
 ## Styling
 
-Container owns `overflow-x-auto` so wide tables never expand the page, with `rounded-cladd-md`
-and `border-cladd-outline`. Header uses `text-cladd-2xs uppercase` over `bg-cladd-surface`.
-Dense rows use compact cell padding, comfortable rows the standard padding. Hoverable rows use
-`hover:bg-cladd-surface-hover`; selected rows use `bg-cladd-surface` with `data-state` for
-consumer styling. Numeric cells use right alignment with tabular numbers. Header/cell motion is
-limited to the 200ms color role with reduced-motion collapse.
+The container is a `Surface` (`outline`, default `variant="solid"`), the same primitive `Card`
+composes, rather than a hand-rolled bordered `div` — its content region owns `overflow-x-auto` so
+wide tables never expand the page. Header uses `text-cladd-2xs uppercase` over `bg-cladd-surface`
+(kept opaque and explicit so content scrolling under a sticky header never shows through).
+`density: 'compact'` uses tighter cell padding, `'comfortable'` (default) the standard padding,
+matching the same two-value vocabulary `Field`'s `density` prop already uses. Hoverable rows use
+plain `hover:bg-cladd-surface-hover`, matching the same pattern `DropdownMenuItem` and
+`BreadcrumbLink` already use for row/item hover (not the `cladd-surface-hover:` custom variant,
+which is wired to `Surface`'s own background/overlay child structure, not a generic hover
+utility). Selected rows use `bg-cladd-surface` with `data-state` for consumer styling. Numeric
+cells use right alignment with tabular numbers. Header/cell motion is limited to the 200ms color
+role with reduced-motion collapse.
 
 ## Performance
 
@@ -82,8 +94,9 @@ timers. Large datasets stay consumer-owned; the recipe paginates or windows befo
 ## Tests
 
 `tests/components/table.test.ts` covers ancestry, caption announcement, scope, numeric
-alignment, overflow containment, sticky headers, dense/selected/hover styling hooks, sort
-button emission with `aria-sort`, empty rows, and linear rendering without state cloning.
+alignment, overflow containment, sticky headers, density/selected/hover styling hooks, sort
+button emission with `aria-sort`, the sortable-but-unsorted neutral state, the non-sortable
+plain-header state, empty rows, and linear rendering without state cloning.
 
 ## Evidence
 

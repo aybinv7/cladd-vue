@@ -1,0 +1,24 @@
+<script setup lang="ts">
+import { computed, useAttrs } from 'vue';
+
+import { cn } from '../shared/cn.ts';
+
+defineOptions({ inheritAttrs: false });
+defineSlots<{ action?: () => unknown; default?: () => unknown }>();
+const attrs = useAttrs();
+const rootAttrs = computed(() => {
+  const { class: _class, ...rest } = attrs;
+  return rest;
+});
+const rootClass = computed(() =>
+  cn('cladd-card-header flex items-start justify-between gap-3', attrs.class),
+);
+</script>
+<template>
+  <div v-bind="rootAttrs" :class="rootClass" data-slot="card-header">
+    <div class="flex flex-1 flex-col gap-1">
+      <slot />
+    </div>
+    <slot name="action" />
+  </div>
+</template>

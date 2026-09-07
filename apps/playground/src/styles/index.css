@@ -246,6 +246,27 @@ kbd {
   font-size: 10px;
 }
 
+.section-nav__group + .section-nav__group {
+  margin-top: 20px;
+}
+
+.section-nav__group-heading {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 0 8px 6px;
+  color: var(--playground-muted);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.section-nav__group-count {
+  margin-left: auto;
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+}
+
 .section-nav nav {
   display: grid;
   gap: 4px;
@@ -253,7 +274,7 @@ kbd {
 
 .section-nav a {
   display: grid;
-  grid-template-columns: 24px minmax(0, 1fr) auto;
+  grid-template-columns: 6px 24px minmax(0, 1fr) auto;
   gap: 10px;
   align-items: center;
   min-height: 58px;
@@ -266,6 +287,21 @@ kbd {
     color 160ms ease,
     border-color 160ms ease,
     background 160ms ease;
+}
+
+.section-nav__dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 999px;
+}
+
+.section-nav__dot--port {
+  background: #22c55e;
+}
+
+.section-nav__dot--extension {
+  background: transparent;
+  border: 1px solid var(--playground-muted);
 }
 
 .section-nav a:hover,

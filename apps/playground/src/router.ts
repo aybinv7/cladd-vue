@@ -57,6 +57,41 @@ export const router = createRouter({
             import('./modules/playground/sections/SelectSection.vue'),
         },
         {
+          path: 'combobox',
+          component: () =>
+            import('./modules/playground/sections/ComboboxSection.vue'),
+        },
+        {
+          path: 'command',
+          component: () =>
+            import('./modules/playground/sections/CommandSection.vue'),
+        },
+        {
+          path: 'sheet',
+          component: () =>
+            import('./modules/playground/sections/SheetSection.vue'),
+        },
+        {
+          path: 'drawer',
+          component: () =>
+            import('./modules/playground/sections/DrawerSection.vue'),
+        },
+        {
+          path: 'alert-dialog',
+          component: () =>
+            import('./modules/playground/sections/AlertDialogSection.vue'),
+        },
+        {
+          path: 'dropdown-menu',
+          component: () =>
+            import('./modules/playground/sections/DropdownMenuSection.vue'),
+        },
+        {
+          path: 'context-menu',
+          component: () =>
+            import('./modules/playground/sections/ContextMenuSection.vue'),
+        },
+        {
           path: 'dialog',
           component: () =>
             import('./modules/playground/sections/DialogSection.vue'),
@@ -132,9 +167,19 @@ export const router = createRouter({
             import('./modules/playground/sections/FieldSection.vue'),
         },
         {
+          path: 'input-group',
+          component: () =>
+            import('./modules/playground/sections/InputGroupSection.vue'),
+        },
+        {
           path: 'table',
           component: () =>
             import('./modules/playground/sections/TableSection.vue'),
+        },
+        {
+          path: 'data-table',
+          component: () =>
+            import('./modules/playground/sections/DataTableSection.vue'),
         },
         {
           path: 'list',
@@ -180,6 +225,66 @@ export const router = createRouter({
           path: 'toast',
           component: () =>
             import('./modules/playground/sections/ToastSection.vue'),
+        },
+        {
+          path: 'breadcrumb',
+          component: () =>
+            import('./modules/playground/sections/BreadcrumbSection.vue'),
+        },
+        {
+          path: 'pagination',
+          component: () =>
+            import('./modules/playground/sections/PaginationSection.vue'),
+        },
+        {
+          path: 'sidebar',
+          component: () =>
+            import('./modules/playground/sections/SidebarSection.vue'),
+        },
+        {
+          path: 'alert',
+          component: () =>
+            import('./modules/playground/sections/AlertSection.vue'),
+        },
+        {
+          path: 'empty',
+          component: () =>
+            import('./modules/playground/sections/EmptySection.vue'),
+        },
+        {
+          path: 'skeleton',
+          component: () =>
+            import('./modules/playground/sections/SkeletonSection.vue'),
+        },
+        {
+          path: 'progress',
+          component: () =>
+            import('./modules/playground/sections/ProgressSection.vue'),
+        },
+        {
+          path: 'card',
+          component: () =>
+            import('./modules/playground/sections/CardSection.vue'),
+        },
+        {
+          path: 'avatar',
+          component: () =>
+            import('./modules/playground/sections/AvatarSection.vue'),
+        },
+        {
+          path: 'separator',
+          component: () =>
+            import('./modules/playground/sections/SeparatorSection.vue'),
+        },
+        {
+          path: 'scroll-area',
+          component: () =>
+            import('./modules/playground/sections/ScrollAreaSection.vue'),
+        },
+        {
+          path: 'native-select',
+          component: () =>
+            import('./modules/playground/sections/NativeSelectSection.vue'),
         },
       ],
     },

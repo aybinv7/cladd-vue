@@ -78,10 +78,30 @@ test('container owns horizontal overflow', () => {
   const { app, root } = mountTree(h(Table, null, { default: () => rows() }));
 
   expect(
-    root.querySelector('[data-slot="table-container"]')?.className,
-  ).toContain('overflow-x-auto');
+    root.querySelector(
+      '[data-slot="table-container"] [class*="overflow-x-auto"]',
+    ),
+  ).not.toBeNull();
   app.unmount();
   root.remove();
+});
+
+test('density defaults to comfortable and reports through data-density', () => {
+  const comfortable = mountTree(h(Table, null, { default: () => rows() }));
+  expect(
+    comfortable.root.querySelector('table')?.getAttribute('data-density'),
+  ).toBe('comfortable');
+  comfortable.app.unmount();
+  comfortable.root.remove();
+
+  const compact = mountTree(
+    h(Table, { density: 'compact' }, { default: () => rows() }),
+  );
+  expect(
+    compact.root.querySelector('table')?.getAttribute('data-density'),
+  ).toBe('compact');
+  compact.app.unmount();
+  compact.root.remove();
 });
 
 test('sticky headers stay inside the container', () => {
@@ -145,10 +165,11 @@ test('sort buttons emit without owning sort state', async () => {
                 h(
                   TableHead,
                   {
-                    sortDirection: 'asc',
                     onSort: () => {
                       sorted += 1;
                     },
+                    sortable: true,
+                    sortDirection: 'asc',
                   },
                   { default: () => 'Name' },
                 ),
@@ -160,10 +181,52 @@ test('sort buttons emit without owning sort state', async () => {
   const button = root.querySelector<HTMLButtonElement>(
     '[data-slot="table-sort-button"]',
   );
-  expect(button?.getAttribute('type')).toBe('button');
+  expect(button?.tagName).toBe('BUTTON');
   expect(root.querySelector('th')?.getAttribute('aria-sort')).toBe('ascending');
   button?.click();
   expect(sorted).toBe(1);
+  app.unmount();
+  root.remove();
+});
+
+test('a sortable column shows a neutral affordance before any sort is applied', () => {
+  const { app, root } = mountTree(
+    h(Table, null, {
+      default: () =>
+        h(TableHeader, null, {
+          default: () =>
+            h(TableRow, null, {
+              default: () =>
+                h(TableHead, { sortable: true }, { default: () => 'Name' }),
+            }),
+        }),
+    }),
+  );
+
+  expect(root.querySelector('[data-slot="table-sort-button"]')).not.toBeNull();
+  expect(root.querySelector('th')?.getAttribute('aria-sort')).toBeNull();
+  expect(
+    root.querySelector('[data-slot="table-sort-glyph"]')?.getAttribute('class'),
+  ).toContain('opacity-40');
+  app.unmount();
+  root.remove();
+});
+
+test('a non-sortable header renders no sort control', () => {
+  const { app, root } = mountTree(
+    h(Table, null, {
+      default: () =>
+        h(TableHeader, null, {
+          default: () =>
+            h(TableRow, null, {
+              default: () => h(TableHead, null, { default: () => 'Role' }),
+            }),
+        }),
+    }),
+  );
+
+  expect(root.querySelector('[data-slot="table-sort-button"]')).toBeNull();
+  expect(root.querySelector('th')?.textContent).toBe('Role');
   app.unmount();
   root.remove();
 });

@@ -2,8 +2,8 @@
 export type TableDensity = 'comfortable' | 'compact';
 
 export interface TableProps {
-  /** Compact row height. Default `false`. */
-  dense?: boolean;
+  /** Row and cell density, matching `Field`'s `density` prop. Default `'comfortable'`. */
+  density?: TableDensity;
   /** Highlight rows on hover. Default `false`. */
   hoverable?: boolean;
   /** Keep the header visible inside the table container. Default `false`. */
@@ -49,8 +49,12 @@ export interface TableHeadProps {
   scope?: 'col' | 'row' | 'colgroup' | 'rowgroup';
   /** Right-align tabular numbers. Default `false`. */
   numeric?: boolean;
-  /** Column sort direction for the header sort button. */
-  sortDirection?: 'asc' | 'desc' | 'none';
+  /** Renders the header as a sort toggle. Default `false`. Independent of `sortDirection` so a
+   * sortable-but-unsorted column can still show a neutral affordance instead of collapsing to a
+   * plain header. */
+  sortable?: boolean;
+  /** Column sort direction for the header sort button. Default `'none'`. */
+  sortDirection?: TableSortDirection;
 }
 
 export type TableHeadDefaultProps = Partial<TableHeadProps>;

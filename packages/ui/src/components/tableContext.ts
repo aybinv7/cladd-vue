@@ -1,7 +1,9 @@
 import { inject, provide, type ComputedRef, type InjectionKey } from 'vue';
 
+import type { TableDensity } from './table.contracts.ts';
+
 export interface TableContextValue {
-  dense: ComputedRef<boolean>;
+  density: ComputedRef<TableDensity>;
   hoverable: ComputedRef<boolean>;
 }
 

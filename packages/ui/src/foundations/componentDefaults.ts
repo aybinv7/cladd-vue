@@ -16,6 +16,22 @@ import type {
 import type { ColorEditorDefaultProps } from '../components/colorEditor.contracts.ts';
 import type { ColorPickerDefaultProps } from '../components/colorPicker.contracts.ts';
 import type {
+  ComboboxEmptyDefaultProps,
+  ComboboxGroupDefaultProps,
+  ComboboxInputDefaultProps,
+  ComboboxItemDefaultProps,
+  ComboboxRootDefaultProps,
+  ComboboxSeparatorDefaultProps,
+} from '../components/combobox.contracts.ts';
+import type {
+  CommandEmptyDefaultProps,
+  CommandGroupDefaultProps,
+  CommandInputDefaultProps,
+  CommandItemDefaultProps,
+  CommandRootDefaultProps,
+  CommandSeparatorDefaultProps,
+} from '../components/command.contracts.ts';
+import type {
   ChipDefaultProps,
   ListButtonDefaultProps,
   ListDefaultProps,
@@ -48,6 +64,25 @@ import type {
   InputGroupTextareaDefaultProps,
 } from '../components/inputGroup.contracts.ts';
 import type { LinkDefaultProps } from '../components/link.contracts.ts';
+import type {
+  ContextMenuContentDefaultProps,
+  ContextMenuRootDefaultProps,
+  ContextMenuTriggerDefaultProps,
+  DropdownMenuCheckboxItemDefaultProps,
+  DropdownMenuContentDefaultProps,
+  DropdownMenuGroupDefaultProps,
+  DropdownMenuItemDefaultProps,
+  DropdownMenuLabelDefaultProps,
+  DropdownMenuRadioGroupDefaultProps,
+  DropdownMenuRadioItemDefaultProps,
+  DropdownMenuRootDefaultProps,
+  DropdownMenuSeparatorDefaultProps,
+  DropdownMenuShortcutDefaultProps,
+  DropdownMenuSubContentDefaultProps,
+  DropdownMenuSubDefaultProps,
+  DropdownMenuSubTriggerDefaultProps,
+  DropdownMenuTriggerDefaultProps,
+} from '../components/menu.contracts.ts';
 import type { NumberFieldDefaultProps } from '../components/numberField.contracts.ts';
 import type { NumberScrubberDefaultProps } from '../components/numberScrubber.contracts.ts';
 import type {
@@ -73,6 +108,7 @@ import type {
   SegmentedDefaultProps,
 } from '../components/segmented.contracts.ts';
 import type { SelectDefaultProps } from '../components/select.contracts.ts';
+import type { SheetDefaultProps } from '../components/sheet.contracts.ts';
 import type { SliderDefaultProps } from '../components/slider.contracts.ts';
 import type {
   SurfaceContentDefaultProps,
@@ -129,6 +165,20 @@ export interface ComponentDefaults {
   CollapsiblePanel?: CollapsiblePanelDefaultProps;
   CollapsibleRoot?: CollapsibleRootDefaultProps;
   Dialog?: DialogDefaultProps;
+  DropdownMenuCheckboxItem?: DropdownMenuCheckboxItemDefaultProps;
+  DropdownMenuContent?: DropdownMenuContentDefaultProps;
+  DropdownMenuGroup?: DropdownMenuGroupDefaultProps;
+  DropdownMenuItem?: DropdownMenuItemDefaultProps;
+  DropdownMenuLabel?: DropdownMenuLabelDefaultProps;
+  DropdownMenuRadioGroup?: DropdownMenuRadioGroupDefaultProps;
+  DropdownMenuRadioItem?: DropdownMenuRadioItemDefaultProps;
+  DropdownMenuRoot?: DropdownMenuRootDefaultProps;
+  DropdownMenuSeparator?: DropdownMenuSeparatorDefaultProps;
+  DropdownMenuShortcut?: DropdownMenuShortcutDefaultProps;
+  DropdownMenuSub?: DropdownMenuSubDefaultProps;
+  DropdownMenuSubContent?: DropdownMenuSubContentDefaultProps;
+  DropdownMenuSubTrigger?: DropdownMenuSubTriggerDefaultProps;
+  DropdownMenuTrigger?: DropdownMenuTriggerDefaultProps;
   FocusRing?: FocusRingDefaultProps;
   Field?: FieldDefaultProps;
   FieldDescription?: FieldDescriptionDefaultProps;
@@ -153,6 +203,7 @@ export interface ComponentDefaults {
   PopupContent?: PopupContentDefaultProps;
   Radio?: RadioDefaultProps;
   SearchField?: SearchFieldDefaultProps;
+  Sheet?: SheetDefaultProps;
   SectionTitle?: SectionTitleDefaultProps;
   Segmented?: SegmentedDefaultProps;
   SegmentedButton?: SegmentedButtonDefaultProps;
@@ -164,6 +215,21 @@ export interface ComponentDefaults {
   ColorEditor?: ColorEditorDefaultProps;
   DatePicker?: DatePickerDefaultProps;
   ColorPicker?: ColorPickerDefaultProps;
+  CommandEmpty?: CommandEmptyDefaultProps;
+  CommandGroup?: CommandGroupDefaultProps;
+  CommandInput?: CommandInputDefaultProps;
+  CommandItem?: CommandItemDefaultProps;
+  CommandRoot?: CommandRootDefaultProps;
+  CommandSeparator?: CommandSeparatorDefaultProps;
+  ComboboxEmpty?: ComboboxEmptyDefaultProps;
+  ComboboxGroup?: ComboboxGroupDefaultProps;
+  ComboboxInput?: ComboboxInputDefaultProps;
+  ComboboxItem?: ComboboxItemDefaultProps;
+  ComboboxRoot?: ComboboxRootDefaultProps;
+  ComboboxSeparator?: ComboboxSeparatorDefaultProps;
+  ContextMenuContent?: ContextMenuContentDefaultProps;
+  ContextMenuRoot?: ContextMenuRootDefaultProps;
+  ContextMenuTrigger?: ContextMenuTriggerDefaultProps;
   Link?: LinkDefaultProps;
   NumberField?: NumberFieldDefaultProps;
   NumberScrubber?: NumberScrubberDefaultProps;

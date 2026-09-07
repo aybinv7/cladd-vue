@@ -28,6 +28,9 @@ export const dialogRootContextKey: InjectionKey<OverlayRootContext> =
 export const popupRootContextKey: InjectionKey<OverlayRootContext> =
   Symbol('cladd-popup-root');
 
+export const sheetRootContextKey: InjectionKey<OverlayRootContext> =
+  Symbol('cladd-sheet-root');
+
 export const toastRootContextKey: InjectionKey<OverlayRootContext> =
   Symbol('cladd-toast-root');
 

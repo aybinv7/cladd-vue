@@ -11,6 +11,7 @@
     "preview": "vp preview"
   },
   "dependencies": {
+    "@tanstack/vue-table": "catalog:",
     "cladd-vue": "workspace:*",
     "shiki": "catalog:",
     "vue": "catalog:",

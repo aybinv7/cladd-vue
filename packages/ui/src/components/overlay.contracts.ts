@@ -155,7 +155,8 @@ export const popoverFallbackPosition: PopoverPosition = 'right-start';
 export const popoverChildOverlaySelector = '.cladd-popover, .cladd-dialog';
 
 /** Overlays that keep the app container inert once the dialog itself closes. */
-export const dialogInertHoldSelector = '.cladd-popover, .cladd-popup';
+export const dialogInertHoldSelector =
+  '.cladd-popover, .cladd-popup, .cladd-sheet';
 
 export const dialogChildOverlaySelector =
   '.cladd-popover, .cladd-dialog, .cladd-popup';

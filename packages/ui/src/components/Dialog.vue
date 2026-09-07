@@ -105,6 +105,9 @@ const containerAttrs = computed(() => {
   const { class: _consumerClass, ...rest } = attrs;
   return rest;
 });
+const dialogRole = computed(() =>
+  attrs.role === 'alertdialog' ? 'alertdialog' : 'dialog',
+);
 const confirmationValue = shallowRef('');
 const container = shallowRef<HTMLElement>();
 const surface = shallowRef<HTMLElement>();
@@ -194,9 +197,12 @@ function confirm(): void {
 }
 
 function initialFocus(): HTMLElement | null | undefined {
-  const selector = d.value.requireConfirmText
-    ? '[data-part="input"] input'
-    : '[data-part="confirm"]';
+  const selector =
+    attrs['data-initial-focus'] === 'cancel'
+      ? '[data-part="cancel"]'
+      : d.value.requireConfirmText
+        ? '[data-part="input"] input'
+        : '[data-part="confirm"]';
   return container.value?.querySelector<HTMLElement>(selector);
 }
 
@@ -299,7 +305,7 @@ provideSurfaceColorReset();
       :aria-labelledby="ariaLabelledby"
       aria-modal="true"
       :class="containerClass"
-      role="dialog"
+      :role="dialogRole"
     >
       <Backdrop :class="backdropClass" @click="onBackdropClick" />
       <Surface
@@ -420,7 +426,7 @@ provideSurfaceColorReset();
     :aria-labelledby="ariaLabelledby"
     aria-modal="true"
     :class="containerClass"
-    role="dialog"
+    :role="dialogRole"
   >
     <Backdrop :class="backdropClass" @click="onBackdropClick" />
     <Surface

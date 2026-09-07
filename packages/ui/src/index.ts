@@ -90,6 +90,80 @@ export type {
   SurfaceCutContentDefaultProps,
 } from './components/surface.contracts.ts';
 export { default as Button } from './components/Button.vue';
+export { default as Card } from './components/Card.vue';
+export { default as CardAction } from './components/CardAction.vue';
+export { default as CardContent } from './components/CardContent.vue';
+export { default as CardDescription } from './components/CardDescription.vue';
+export { default as CardFooter } from './components/CardFooter.vue';
+export { default as CardHeader } from './components/CardHeader.vue';
+export { default as CardTitle } from './components/CardTitle.vue';
+export { default as Avatar } from './components/Avatar.vue';
+export { default as AvatarFallback } from './components/AvatarFallback.vue';
+export { default as AvatarGroup } from './components/AvatarGroup.vue';
+export { default as AvatarImage } from './components/AvatarImage.vue';
+export type {
+  AvatarGroupDefaultProps,
+  AvatarGroupProps,
+} from './components/avatar.contracts.ts';
+export { default as Separator } from './components/Separator.vue';
+export type {
+  SeparatorDefaultProps,
+  SeparatorProps,
+} from './components/separator.contracts.ts';
+export { default as ScrollArea } from './components/ScrollArea.vue';
+export type {
+  ScrollAreaDefaultProps,
+  ScrollAreaProps,
+} from './components/scrollArea.contracts.ts';
+export { default as NativeSelect } from './components/NativeSelect.vue';
+export { default as NativeSelectGroup } from './components/NativeSelectGroup.vue';
+export { default as NativeSelectOption } from './components/NativeSelectOption.vue';
+export type {
+  NativeSelectDefaultProps,
+  NativeSelectProps,
+} from './components/nativeSelect.contracts.ts';
+export { default as Alert } from './components/Alert.vue';
+export { default as AlertActions } from './components/AlertActions.vue';
+export { default as AlertDescription } from './components/AlertDescription.vue';
+export { default as AlertTitle } from './components/AlertTitle.vue';
+export type {
+  AlertDefaultProps,
+  AlertProps,
+} from './components/alert.contracts.ts';
+export { default as Empty } from './components/Empty.vue';
+export { default as EmptyContent } from './components/EmptyContent.vue';
+export { default as EmptyDescription } from './components/EmptyDescription.vue';
+export { default as EmptyHeader } from './components/EmptyHeader.vue';
+export { default as EmptyMedia } from './components/EmptyMedia.vue';
+export { default as EmptyTitle } from './components/EmptyTitle.vue';
+export { default as Skeleton } from './components/Skeleton.vue';
+export { default as Progress } from './components/Progress.vue';
+export { default as ProgressLabel } from './components/ProgressLabel.vue';
+export { default as ProgressValue } from './components/ProgressValue.vue';
+export type {
+  ProgressDefaultProps,
+  ProgressProps,
+} from './components/progress.contracts.ts';
+export { default as Breadcrumb } from './components/Breadcrumb.vue';
+export { default as BreadcrumbEllipsis } from './components/BreadcrumbEllipsis.vue';
+export { default as BreadcrumbItem } from './components/BreadcrumbItem.vue';
+export { default as BreadcrumbLink } from './components/BreadcrumbLink.vue';
+export { default as BreadcrumbPage } from './components/BreadcrumbPage.vue';
+export { default as BreadcrumbSeparator } from './components/BreadcrumbSeparator.vue';
+export { default as Pagination } from './components/Pagination.vue';
+export { default as PaginationContent } from './components/PaginationContent.vue';
+export { default as PaginationEllipsis } from './components/PaginationEllipsis.vue';
+export { default as PaginationItem } from './components/PaginationItem.vue';
+export { default as PaginationLink } from './components/PaginationLink.vue';
+export { default as PaginationNext } from './components/PaginationNext.vue';
+export { default as PaginationPrevious } from './components/PaginationPrevious.vue';
+export type {
+  PaginationLinkDefaultProps,
+  PaginationLinkProps,
+} from './components/pagination.contracts.ts';
+export { default as AlertDialog } from './components/AlertDialog.vue';
+export { default as AlertDialogRoot } from './components/DialogRoot.vue';
+export { default as AlertDialogTrigger } from './components/DialogTrigger.vue';
 export { default as Segmented } from './components/Segmented.vue';
 export { default as SegmentedButton } from './components/SegmentedButton.vue';
 export { default as Toolbar } from './components/Toolbar.vue';
@@ -120,7 +194,81 @@ export { default as ListTitle } from './components/ListTitle.vue';
 export { default as SectionTitle } from './components/SectionTitle.vue';
 export { default as Shortcut } from './components/Shortcut.vue';
 export { default as Spinner } from './components/Spinner.vue';
+export { default as Sheet } from './components/Sheet.vue';
+export { default as SheetClose } from './components/SheetClose.vue';
+export { default as SheetRoot } from './components/SheetRoot.vue';
+export { default as SheetTrigger } from './components/SheetTrigger.vue';
+export { default as Sidebar } from './components/Sidebar.vue';
+export { default as SidebarContent } from './components/SidebarContent.vue';
+export { default as SidebarFooter } from './components/SidebarFooter.vue';
+export { default as SidebarGroup } from './components/SidebarGroup.vue';
+export { default as SidebarGroupAction } from './components/SidebarGroupAction.vue';
+export { default as SidebarGroupContent } from './components/SidebarGroupContent.vue';
+export { default as SidebarGroupLabel } from './components/SidebarGroupLabel.vue';
+export { default as SidebarHeader } from './components/SidebarHeader.vue';
+export { default as SidebarInset } from './components/SidebarInset.vue';
+export { default as SidebarMenu } from './components/SidebarMenu.vue';
+export { default as SidebarMenuAction } from './components/SidebarMenuAction.vue';
+export { default as SidebarMenuBadge } from './components/SidebarMenuBadge.vue';
+export { default as SidebarMenuButton } from './components/SidebarMenuButton.vue';
+export { default as SidebarMenuItem } from './components/SidebarMenuItem.vue';
+export { default as SidebarMenuSub } from './components/SidebarMenuSub.vue';
+export { default as SidebarMenuSubButton } from './components/SidebarMenuSubButton.vue';
+export { default as SidebarMenuSubItem } from './components/SidebarMenuSubItem.vue';
+export { default as SidebarProvider } from './components/SidebarProvider.vue';
+export { default as SidebarRail } from './components/SidebarRail.vue';
+export { default as SidebarSeparator } from './components/SidebarSeparator.vue';
+export { default as SidebarTrigger } from './components/SidebarTrigger.vue';
+export { useSidebar } from './components/sidebarContext.ts';
+export { default as Drawer } from './components/Drawer.vue';
+export { default as DrawerClose } from './components/SheetClose.vue';
+export { default as DrawerRoot } from './components/SheetRoot.vue';
+export { default as DrawerTrigger } from './components/SheetTrigger.vue';
 export { default as Checkbox } from './components/Checkbox.vue';
+export { default as CommandDialog } from './components/CommandDialog.vue';
+export { default as CommandEmpty } from './components/CommandEmpty.vue';
+export { default as CommandGroup } from './components/CommandGroup.vue';
+export { default as CommandInput } from './components/CommandInput.vue';
+export { default as CommandItem } from './components/CommandItem.vue';
+export { default as CommandList } from './components/CommandList.vue';
+export { default as CommandRoot } from './components/CommandRoot.vue';
+export { default as CommandSeparator } from './components/CommandSeparator.vue';
+export { default as CommandShortcut } from './components/CommandShortcut.vue';
+export { default as ComboboxChip } from './components/ComboboxChip.vue';
+export { default as ComboboxClear } from './components/ComboboxClear.vue';
+export { default as ComboboxContent } from './components/ComboboxContent.vue';
+export { default as ComboboxEmpty } from './components/ComboboxEmpty.vue';
+export { default as ComboboxGroup } from './components/ComboboxGroup.vue';
+export { default as ComboboxInput } from './components/ComboboxInput.vue';
+export { default as ComboboxItem } from './components/ComboboxItem.vue';
+export { default as ComboboxList } from './components/ComboboxList.vue';
+export { default as ComboboxRoot } from './components/ComboboxRoot.vue';
+export { default as ComboboxSeparator } from './components/ComboboxSeparator.vue';
+export { default as ContextMenuContent } from './components/ContextMenuContent.vue';
+export { default as ContextMenuCheckboxItem } from './components/DropdownMenuCheckboxItem.vue';
+export { default as ContextMenuGroup } from './components/DropdownMenuGroup.vue';
+export { default as ContextMenuItem } from './components/DropdownMenuItem.vue';
+export { default as ContextMenuLabel } from './components/DropdownMenuLabel.vue';
+export { default as ContextMenuRadioGroup } from './components/DropdownMenuRadioGroup.vue';
+export { default as ContextMenuRadioItem } from './components/DropdownMenuRadioItem.vue';
+export { default as ContextMenuRoot } from './components/ContextMenuRoot.vue';
+export { default as ContextMenuSeparator } from './components/DropdownMenuSeparator.vue';
+export { default as ContextMenuShortcut } from './components/DropdownMenuShortcut.vue';
+export { default as ContextMenuTrigger } from './components/ContextMenuTrigger.vue';
+export { default as DropdownMenuCheckboxItem } from './components/DropdownMenuCheckboxItem.vue';
+export { default as DropdownMenuContent } from './components/DropdownMenuContent.vue';
+export { default as DropdownMenuGroup } from './components/DropdownMenuGroup.vue';
+export { default as DropdownMenuItem } from './components/DropdownMenuItem.vue';
+export { default as DropdownMenuLabel } from './components/DropdownMenuLabel.vue';
+export { default as DropdownMenuRadioGroup } from './components/DropdownMenuRadioGroup.vue';
+export { default as DropdownMenuRadioItem } from './components/DropdownMenuRadioItem.vue';
+export { default as DropdownMenuRoot } from './components/DropdownMenuRoot.vue';
+export { default as DropdownMenuSeparator } from './components/DropdownMenuSeparator.vue';
+export { default as DropdownMenuShortcut } from './components/DropdownMenuShortcut.vue';
+export { default as DropdownMenuSub } from './components/DropdownMenuSub.vue';
+export { default as DropdownMenuSubContent } from './components/DropdownMenuSubContent.vue';
+export { default as DropdownMenuSubTrigger } from './components/DropdownMenuSubTrigger.vue';
+export { default as DropdownMenuTrigger } from './components/DropdownMenuTrigger.vue';
 export { default as Input } from './components/Input.vue';
 export { default as Radio } from './components/Radio.vue';
 export { default as SearchField } from './components/SearchField.vue';
@@ -235,6 +383,113 @@ export type {
 // Upstream declares a size union per component rather than a shared one.
 export type { ButtonSize } from './components/button.contracts.ts';
 export type { CheckboxSize } from './components/checkbox.contracts.ts';
+export type {
+  CommandEmptyDefaultProps,
+  CommandEmptyProps,
+  CommandGroupDefaultProps,
+  CommandGroupProps,
+  CommandInputDefaultProps,
+  CommandInputProps,
+  CommandItemDefaultProps,
+  CommandItemProps,
+  CommandRootDefaultProps,
+  CommandRootProps,
+  CommandSeparatorDefaultProps,
+  CommandSeparatorProps,
+} from './components/command.contracts.ts';
+export type {
+  ComboboxChipDefaultProps,
+  ComboboxChipProps,
+  ComboboxEmptyDefaultProps,
+  ComboboxEmptyProps,
+  ComboboxGroupDefaultProps,
+  ComboboxGroupProps,
+  ComboboxInputDefaultProps,
+  ComboboxInputProps,
+  ComboboxItemDefaultProps,
+  ComboboxItemProps,
+  ComboboxRootDefaultProps,
+  ComboboxRootProps,
+  ComboboxSeparatorDefaultProps,
+  ComboboxSeparatorProps,
+  ComboboxValue,
+} from './components/combobox.contracts.ts';
+export type {
+  AlertDialogDefaultProps,
+  AlertDialogProps,
+  AlertDialogRootProps,
+  AlertDialogTriggerProps,
+} from './components/alertDialog.contracts.ts';
+export type {
+  SheetCloseProps,
+  SheetDefaultProps,
+  SheetProps,
+  SheetRootProps,
+  SheetSide,
+  SheetTriggerProps,
+} from './components/sheet.contracts.ts';
+export type {
+  SidebarDefaultProps,
+  SidebarMenuButtonDefaultProps,
+  SidebarMenuButtonProps,
+  SidebarProps,
+  SidebarProviderDefaultProps,
+  SidebarProviderProps,
+  SidebarSide,
+  SidebarVariant,
+} from './components/sidebar.contracts.ts';
+export type {
+  ContextMenuContentDefaultProps,
+  ContextMenuContentProps,
+  ContextMenuCheckboxItemDefaultProps,
+  ContextMenuCheckboxItemProps,
+  ContextMenuGroupDefaultProps,
+  ContextMenuGroupProps,
+  ContextMenuItemDefaultProps,
+  ContextMenuItemProps,
+  ContextMenuLabelDefaultProps,
+  ContextMenuLabelProps,
+  ContextMenuRadioGroupDefaultProps,
+  ContextMenuRadioGroupProps,
+  ContextMenuRadioItemDefaultProps,
+  ContextMenuRadioItemProps,
+  ContextMenuRootDefaultProps,
+  ContextMenuRootProps,
+  ContextMenuSeparatorDefaultProps,
+  ContextMenuSeparatorProps,
+  ContextMenuShortcutDefaultProps,
+  ContextMenuShortcutProps,
+  ContextMenuTriggerDefaultProps,
+  ContextMenuTriggerProps,
+  DropdownMenuCheckboxItemDefaultProps,
+  DropdownMenuCheckboxItemProps,
+  DropdownMenuContentDefaultProps,
+  DropdownMenuContentProps,
+  DropdownMenuGroupDefaultProps,
+  DropdownMenuGroupProps,
+  DropdownMenuItemDefaultProps,
+  DropdownMenuItemProps,
+  DropdownMenuLabelDefaultProps,
+  DropdownMenuLabelProps,
+  DropdownMenuRadioGroupDefaultProps,
+  DropdownMenuRadioGroupProps,
+  DropdownMenuRadioItemDefaultProps,
+  DropdownMenuRadioItemProps,
+  DropdownMenuRootDefaultProps,
+  DropdownMenuRootProps,
+  DropdownMenuSeparatorDefaultProps,
+  DropdownMenuSeparatorProps,
+  DropdownMenuShortcutDefaultProps,
+  DropdownMenuShortcutProps,
+  DropdownMenuSubContentDefaultProps,
+  DropdownMenuSubContentProps,
+  DropdownMenuSubDefaultProps,
+  DropdownMenuSubProps,
+  DropdownMenuSubTriggerDefaultProps,
+  DropdownMenuSubTriggerProps,
+  DropdownMenuTriggerDefaultProps,
+  DropdownMenuTriggerProps,
+} from './components/menu.contracts.ts';
 export type {
   ChipSize,
   ShortcutSize,
