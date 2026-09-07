@@ -33,6 +33,7 @@ const showError = ref(true);
   <CatalogSection
     description="Accessible field composition with generated IDs, joined descriptions, and input groups."
     eyebrow="04 · Forms"
+    id="field"
     title="Field"
   >
     <FieldGroup label="Account">

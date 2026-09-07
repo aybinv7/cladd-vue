@@ -214,7 +214,7 @@ function primaryHeader(slotProps: unknown): MonthYearHeader {
 
 const localeMonthFormatter = computed(() => {
   try {
-    return new Intl.DateTimeFormat(d.value.locale ?? undefined, {
+    return new Intl.DateTimeFormat(d.value.locale?.code, {
       month: 'long',
     });
   } catch {

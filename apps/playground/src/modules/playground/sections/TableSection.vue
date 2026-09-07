@@ -73,6 +73,7 @@ function toggleSelect(id: number): void {
   <CatalogSection
     description="Semantic table primitives with a consumer-owned sorting and selection recipe."
     eyebrow="05 · Data"
+    id="table"
     title="Table"
   >
     <Table :dense="dense" hoverable sticky-header>
