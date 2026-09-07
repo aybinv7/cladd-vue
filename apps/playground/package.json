@@ -11,6 +11,8 @@
     "preview": "vp preview"
   },
   "dependencies": {
+    "@shikijs/langs": "catalog:",
+    "@shikijs/themes": "catalog:",
     "cladd-vue": "workspace:*",
     "shiki": "catalog:",
     "vue": "catalog:",

@@ -16,6 +16,8 @@
       "name": "playground",
       "version": "0.1.0",
       "dependencies": {
+        "@shikijs/langs": "catalog:",
+        "@shikijs/themes": "catalog:",
         "cladd-vue": "workspace:*",
         "shiki": "catalog:",
         "vue": "catalog:",
@@ -62,6 +64,8 @@
     "vite": "catalog:",
   },
   "catalog": {
+    "@shikijs/langs": "^3.23.0",
+    "@shikijs/themes": "^3.23.0",
     "@tailwindcss/vite": "4.2.2",
     "@types/node": "^24.10.1",
     "@vitejs/plugin-vue": "6.0.8",

@@ -35,6 +35,8 @@
     "node": ">=22.18.0"
   },
   "catalog": {
+    "@shikijs/langs": "^3.23.0",
+    "@shikijs/themes": "^3.23.0",
     "@tailwindcss/vite": "4.2.2",
     "@vuepic/vue-datepicker": "^14.0.0",
     "date-fns": "^4.4.0",

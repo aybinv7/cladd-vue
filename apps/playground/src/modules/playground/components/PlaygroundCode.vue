@@ -2,6 +2,7 @@
 import { Button, Surface } from 'cladd-vue';
 import { onBeforeUnmount, ref, watch } from 'vue';
 
+import { loadCodeHighlighter } from '../code-highlighter';
 import CheckIcon from './icons/CheckIcon.vue';
 import CopyIcon from './icons/CopyIcon.vue';
 import PlaygroundToolbar from './PlaygroundToolbar.vue';
@@ -22,8 +23,8 @@ watch(
     const request = ++highlightRequest;
     highlighted.value = undefined;
     try {
-      const { codeToHtml } = await import('shiki');
-      const html = await codeToHtml(code, {
+      const highlighter = await loadCodeHighlighter();
+      const html = highlighter.codeToHtml(code, {
         defaultColor: false,
         lang: 'vue',
         themes: { dark: 'github-dark', light: 'github-light' },
